@@ -14,6 +14,8 @@
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
 		B6E6569C2C939A7100350D98 /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B6FED42D2C70B72900339B7C /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */; };
+		B6EB6D0C2CA404860055FD67 /* EnvProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D0B2CA404860055FD67 /* EnvProperties.swift */; };
 		B6FED3BC2C70B3BB00339B7C /* NeoLinguaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FED3BB2C70B3BB00339B7C /* NeoLinguaApp.swift */; };
 		B6FED3C02C70B3C200339B7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FED3BF2C70B3C200339B7C /* Assets.xcassets */; };
 		B6FED3C32C70B3C200339B7C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FED3C22C70B3C200339B7C /* Preview Assets.xcassets */; };
@@ -87,6 +89,8 @@
 		B6E6568C2C937CED00350D98 /* OnboardingNetworkAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNetworkAdapter.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
+		B6EB6D0B2CA404860055FD67 /* EnvProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvProperties.swift; sourceTree = "<group>"; };
 		B6FED3B82C70B3BB00339B7C /* NeoLingua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeoLingua.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FED3BB2C70B3BB00339B7C /* NeoLinguaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeoLinguaApp.swift; sourceTree = "<group>"; };
 		B6FED3BF2C70B3C200339B7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				B6FED4212C70B70700339B7C /* Utilities */,
 				B6FED4822C70BC4800339B7C /* Components */,
 				B6FED3C12C70B3C200339B7C /* Preview Content */,
+				B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */,
 			);
 			path = NeoLingua;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				B6FED4232C70B70700339B7C /* Styleguide.swift */,
 				B6FED4242C70B70700339B7C /* ViewExtension.swift */,
 				B6FED4252C70B70700339B7C /* Router.swift */,
+				B6EB6D0B2CA404860055FD67 /* EnvProperties.swift */,
 			);
 			name = Utilities;
 			path = "../../../Downloads/SneakerverseV2-main/SneakerverseV2/Utilities";
@@ -407,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FED3C32C70B3C200339B7C /* Preview Assets.xcassets in Resources */,
+				B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */,
 				B6FED3C02C70B3C200339B7C /* Assets.xcassets in Resources */,
 				B6FED48E2C70C04700339B7C /* GoogleService-Info.plist in Resources */,
 			);
@@ -423,6 +430,7 @@
 				B6E656942C937D5700350D98 /* OnboardingContent.swift in Sources */,
 				B6E656952C937D5700350D98 /* OnboardingPageViewModel.swift in Sources */,
 				B6FED48A2C70BC4800339B7C /* SecondaryButton.swift in Sources */,
+				B6EB6D0C2CA404860055FD67 /* EnvProperties.swift in Sources */,
 				B6FED4912C71F11B00339B7C /* LearningOverviewPage.swift in Sources */,
 				B6FED41E2C70B6F700339B7C /* MockedLoginSignupNetworkAdapter.swift in Sources */,
 				B6FED4412C70B8B600339B7C /* AccountPageViewModel.swift in Sources */,
