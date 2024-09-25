@@ -15,8 +15,8 @@ protocol LoginPageViewModel: ObservableObject {
 }
 
 class LoginPageViewModelImpl: LoginPageViewModel {
-    @Published var email = ""
-    @Published var password = ""
+    @Published var email = ProdENV().USER_NAME
+    @Published var password = ProdENV().USER_PASSWORD
     @Published var errorMessage: String?
     
     private let loginAdapter: LoginSignupNetworkAdapter

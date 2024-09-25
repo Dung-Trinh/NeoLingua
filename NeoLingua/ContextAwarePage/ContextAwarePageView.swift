@@ -16,7 +16,7 @@ protocol ContextAwarePageViewModel: ObservableObject {
 
 class ContextAwarePageViewModelImpl: ContextAwarePageViewModel {
     private var router: RouterImpl?
-    private let openAI = SwiftOpenAI(apiKey: "")
+    private let openAI = SwiftOpenAI(apiKey: ProdENV().OPENAI_KEY)
     private var uploadedImageLink = ""
     
     func setupRouter(_ router: RouterImpl) {

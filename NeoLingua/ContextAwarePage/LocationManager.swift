@@ -49,7 +49,7 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     }
     
     func fetchNearbyPlaces(location: CLLocation?) async throws -> [Place] {
-        let apiKey = ""
+        let apiKey = ProdENV().GOOGLE_MAPS_KEY
         let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
         
         let parameters: [String: Any] = [

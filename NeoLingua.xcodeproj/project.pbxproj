@@ -100,8 +100,8 @@
 		B6FA77CB2CA419AA00C52F73 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPage.swift; path = ../../OnboardingPage/LoginPage/LoginPage.swift; sourceTree = "<group>"; };
 		B6FA77CD2CA419BC00C52F73 /* LoginPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginPageViewModel.swift; path = ../../OnboardingPage/LoginPage/LoginPageViewModel.swift; sourceTree = "<group>"; };
 		B6FA77CF2CA419D300C52F73 /* LoginSignupNetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginSignupNetworkAdapter.swift; path = ../../OnboardingPage/LoginPage/LoginSignupNetworkAdapter.swift; sourceTree = "<group>"; };
-		B6FA77D22CA419F000C52F73 /* SignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignupPage.swift; path = ../../OnboardingPage/SignupPage/SignupPage.swift; sourceTree = "<group>"; };
-		B6FA77D42CA419FF00C52F73 /* SignupPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignupPageViewModel.swift; path = ../../OnboardingPage/SignupPage/SignupPageViewModel.swift; sourceTree = "<group>"; };
+		B6FA77D22CA419F000C52F73 /* SignupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPage.swift; sourceTree = "<group>"; };
+		B6FA77D42CA419FF00C52F73 /* SignupPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPageViewModel.swift; sourceTree = "<group>"; };
 		B6FA77D62CA41A4500C52F73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6FA77D82CA41A7B00C52F73 /* PageHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHeader.swift; sourceTree = "<group>"; };
 		B6FA77DB2CA41AAD00C52F73 /* Styleguide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styleguide.swift; sourceTree = "<group>"; };
@@ -194,8 +194,7 @@
 				B6FA77C62CA4196500C52F73 /* OnboardingNetworkAdapter.swift */,
 				B6FA77C82CA4197800C52F73 /* OnboardingContent.swift */,
 			);
-			name = OnboardingPage;
-			path = "New Group";
+			path = OnboardingPage;
 			sourceTree = "<group>";
 		};
 		B6FA77CA2CA4199900C52F73 /* LoginPage */ = {
@@ -223,9 +222,16 @@
 				B6FA77DB2CA41AAD00C52F73 /* Styleguide.swift */,
 				B6FA77DD2CA41AC600C52F73 /* ViewExtension.swift */,
 				B6FA77DF2CA41ADB00C52F73 /* Router.swift */,
-				B6FA77E12CA41AEA00C52F73 /* EnvProperties.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B6FA77E72CA45DA000C52F73 /* EnvironmentProperties */ = {
+			isa = PBXGroup;
+			children = (
+				B6FA77E12CA41AEA00C52F73 /* EnvProperties.swift */,
+			);
+			path = EnvironmentProperties;
 			sourceTree = "<group>";
 		};
 		B6FED3AF2C70B3BB00339B7C = {
@@ -258,6 +264,7 @@
 				B6FED3BF2C70B3C200339B7C /* Assets.xcassets */,
 				B6EB6D302CA416520055FD67 /* Components */,
 				B6FED3C12C70B3C200339B7C /* Preview Content */,
+				B6FA77E72CA45DA000C52F73 /* EnvironmentProperties */,
 				B6FA77DA2CA41A9E00C52F73 /* Utilities */,
 				B6FA77D62CA41A4500C52F73 /* AppDelegate.swift */,
 				B6FED3BB2C70B3BB00339B7C /* NeoLinguaApp.swift */,
