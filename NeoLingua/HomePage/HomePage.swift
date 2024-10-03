@@ -17,6 +17,10 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                 .tabItem {
                     Label("Account", systemImage: "person.crop.circle.fill")
                 }
+            SignupUserDataPage(viewModel: SignupUserDataPageViewModelImpl())
+                .tabItem {
+                    Label("Account", systemImage: "person.crop.circle.fill")
+                }
         }.navigationBarHidden(true)
     }
 }

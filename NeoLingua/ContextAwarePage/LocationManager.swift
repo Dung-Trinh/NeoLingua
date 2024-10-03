@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import Alamofire
+
 final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     @Published var lastKnownLocation: CLLocationCoordinate2D?
@@ -40,7 +41,8 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         }
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {//Trigged every time authorization status changes
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+
         checkLocationAuthorization()
     }
     

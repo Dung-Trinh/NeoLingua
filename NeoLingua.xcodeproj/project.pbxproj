@@ -34,6 +34,9 @@
 		B6FA77E42CA44CFB00C52F73 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77CB2CA419AA00C52F73 /* LoginPage.swift */; };
 		B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77CD2CA419BC00C52F73 /* LoginPageViewModel.swift */; };
 		B6FA77E62CA44D0500C52F73 /* LoginSignupNetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77CF2CA419D300C52F73 /* LoginSignupNetworkAdapter.swift */; };
+		B6FA77EA2CA49E7D00C52F73 /* SignupUserDataPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77E92CA49E7D00C52F73 /* SignupUserDataPage.swift */; };
+		B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77EB2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift */; };
+		B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77ED2CA4A0A000C52F73 /* UserDataManager.swift */; };
 		B6FED3BC2C70B3BB00339B7C /* NeoLinguaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FED3BB2C70B3BB00339B7C /* NeoLinguaApp.swift */; };
 		B6FED3C02C70B3C200339B7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FED3BF2C70B3C200339B7C /* Assets.xcassets */; };
 		B6FED3C32C70B3C200339B7C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FED3C22C70B3C200339B7C /* Preview Assets.xcassets */; };
@@ -108,6 +111,9 @@
 		B6FA77DD2CA41AC600C52F73 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		B6FA77DF2CA41ADB00C52F73 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B6FA77E12CA41AEA00C52F73 /* EnvProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvProperties.swift; sourceTree = "<group>"; };
+		B6FA77E92CA49E7D00C52F73 /* SignupUserDataPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupUserDataPage.swift; sourceTree = "<group>"; };
+		B6FA77EB2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupUserDataPageViewModel.swift; sourceTree = "<group>"; };
+		B6FA77ED2CA4A0A000C52F73 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		B6FED3B82C70B3BB00339B7C /* NeoLingua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NeoLingua.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6FED3BB2C70B3BB00339B7C /* NeoLinguaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeoLinguaApp.swift; sourceTree = "<group>"; };
 		B6FED3BF2C70B3C200339B7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -210,6 +216,7 @@
 		B6FA77D12CA419E600C52F73 /* SignupPage */ = {
 			isa = PBXGroup;
 			children = (
+				B6FA77E82CA49E5A00C52F73 /* SignupUserDataPage */,
 				B6FA77D22CA419F000C52F73 /* SignupPage.swift */,
 				B6FA77D42CA419FF00C52F73 /* SignupPageViewModel.swift */,
 			);
@@ -232,6 +239,16 @@
 				B6FA77E12CA41AEA00C52F73 /* EnvProperties.swift */,
 			);
 			path = EnvironmentProperties;
+			sourceTree = "<group>";
+		};
+		B6FA77E82CA49E5A00C52F73 /* SignupUserDataPage */ = {
+			isa = PBXGroup;
+			children = (
+				B6FA77E92CA49E7D00C52F73 /* SignupUserDataPage.swift */,
+				B6FA77EB2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift */,
+				B6FA77ED2CA4A0A000C52F73 /* UserDataManager.swift */,
+			);
+			path = SignupUserDataPage;
 			sourceTree = "<group>";
 		};
 		B6FED3AF2C70B3BB00339B7C = {
@@ -409,6 +426,7 @@
 				B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */,
 				B6FA77E42CA44CFB00C52F73 /* LoginPage.swift in Sources */,
 				B6EB6D382CA416A70055FD67 /* SecondaryButton.swift in Sources */,
+				B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */,
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
 				B6FED4912C71F11B00339B7C /* LearningOverviewPage.swift in Sources */,
 				B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */,
@@ -419,11 +437,13 @@
 				B6FA77D32CA419F000C52F73 /* SignupPage.swift in Sources */,
 				B6EB6D2C2CA415240055FD67 /* AccountPageViewModel.swift in Sources */,
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
+				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */,
 				B6FA77D72CA41A4500C52F73 /* AppDelegate.swift in Sources */,
 				B6FA77C52CA4192600C52F73 /* OnboardingPageViewModel.swift in Sources */,
 				B6FA77E22CA41AEA00C52F73 /* EnvProperties.swift in Sources */,
+				B6FA77EA2CA49E7D00C52F73 /* SignupUserDataPage.swift in Sources */,
 				B6FA77E02CA41ADB00C52F73 /* Router.swift in Sources */,
 				B6FA77D92CA41A7B00C52F73 /* PageHeader.swift in Sources */,
 				B6FED4932C71F12600339B7C /* LearningOverviewPageView.swift in Sources */,

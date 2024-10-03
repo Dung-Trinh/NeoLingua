@@ -23,6 +23,8 @@ protocol LoginSignupNetworkAdapter {
 class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
     func signupWithGoogle(viewController: UIViewController) async throws {
         let result = try await handleGoogleCredentials(viewController: viewController)
+        UserDefaults.standard.set(result?.user.uid, forKey: "userUid")
+        
         if result?.additionalUserInfo?.isNewUser == false {
             throw SignupError.userAlreadyExist("userAlreadyExist")
             // TODO: handling registered accounts
@@ -30,8 +32,9 @@ class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
     }
     
     func loginWithGoogle(viewController: UIViewController) async throws {
-        _ = try await handleGoogleCredentials(viewController: viewController)
+        let result = try await handleGoogleCredentials(viewController: viewController)
         UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+        UserDefaults.standard.set(result?.user.uid, forKey: "userUid")
     }
     
     func login(email: String, password: String) async throws {
@@ -59,9 +62,10 @@ class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
     }
     
     func createUser(email: String, password: String) async throws {
-        try await Auth.auth().createUser(
+        let result = try await Auth.auth().createUser(
             withEmail: email,
             password: password
         )
+        UserDefaults.standard.set(result.user.uid, forKey: "userUid")
     }
 }
