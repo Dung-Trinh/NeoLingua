@@ -10,6 +10,19 @@ struct LearningOverviewPage<ViewModel>: View where ViewModel: LearningOverviewPa
                     try await viewModel.fetchLocation()
                 }
             }
+            
+            Button("structed data") {
+                Task {
+                    await viewModel.startChat()
+                }
+            }
+            
+            Button("start assistent") {
+                Task {
+                    await viewModel.startChatWithAssistant()
+                }
+            }
+
         }
  
     }

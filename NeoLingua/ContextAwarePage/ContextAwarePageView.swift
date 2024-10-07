@@ -2,7 +2,7 @@ import Foundation
 import FirebaseStorage
 import _PhotosUI_SwiftUI
 import UIKit
-import SwiftOpenAI
+import SwiftOpenAI //  https://github.com/MacPaw/OpenAI
 
 protocol ContextAwarePageViewModel: ObservableObject {
     var selectedImage: UIImage? {get set}
@@ -16,7 +16,7 @@ protocol ContextAwarePageViewModel: ObservableObject {
 
 class ContextAwarePageViewModelImpl: ContextAwarePageViewModel {
     private var router: RouterImpl?
-    private let openAI = SwiftOpenAI(apiKey: ProdENV().OPENAI_KEY)
+//    private let openAI = SwiftOpenAI(apiKey: ProdENV().OPENAI_KEY)
     private var uploadedImageLink = ""
     
     func setupRouter(_ router: RouterImpl) {
@@ -84,38 +84,38 @@ class ContextAwarePageViewModelImpl: ContextAwarePageViewModel {
                     return
                 }
                 
-                let myMessage = MessageChatImageInput(
-                    text: message,
-                    imageURL: base64DataURL,
-                    role: .user
-                )
+//                let myMessage = MessageChatImageInput(
+//                    text: message,
+//                    imageURL: base64DataURL,
+//                    role: .user
+//                )
                 
-                let optionalParameters: ChatCompletionsOptionalParameters = .init(
-                    temperature: 0.5,
-                    stop: ["stopstring"],
-                    stream: false,
-                    maxTokens: 1200
-                )
+//                let optionalParameters: ChatCompletionsOptionalParameters = .init(
+//                    temperature: 0.5,
+//                    stop: ["stopstring"],
+//                    stream: false,
+//                    maxTokens: 1200
+//                )
                 print("requestVisionAPI")
                 
-                Task {
-                    do {
-                        let result = try await self.openAI.createChatCompletionsWithImageInput(
-                            model: .gpt4o(.base),
-                            messages: [myMessage],
-                            optionalParameters: optionalParameters
-                        )
-                        
-                        print("Result \(result?.choices.first?.message)")
-                        
-                        let message = result?.choices.first?.message.content ?? "No value"
-                        
-                        print(message)
-                        
-                    } catch {
-                        print("Error: \(error)")
-                    }
-                }
+//                Task {
+//                    do {
+//                        let result = try await self.openAI.createChatCompletionsWithImageInput(
+//                            model: .gpt4o(.base),
+//                            messages: [myMessage],
+//                            optionalParameters: optionalParameters
+//                        )
+//                        
+//                        print("Result \(result?.choices.first?.message)")
+//                        
+//                        let message = result?.choices.first?.message.content ?? "No value"
+//                        
+//                        print(message)
+//                        
+//                    } catch {
+//                        print("Error: \(error)")
+//                    }
+//                }
             }
         }
         

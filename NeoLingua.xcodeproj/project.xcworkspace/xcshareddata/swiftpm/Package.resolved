@@ -165,10 +165,10 @@
     {
       "identity" : "swiftopenai",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftBeta/SwiftOpenAI",
+      "location" : "https://github.com/jamesrochabrun/SwiftOpenAI",
       "state" : {
-        "revision" : "b316788cf0e6584cc730d8231112dd2c76458713",
-        "version" : "1.9.0"
+        "branch" : "main",
+        "revision" : "bc84564bd72d2adff9f9c3372dad3af827cb1d08"
       }
     }
   ],

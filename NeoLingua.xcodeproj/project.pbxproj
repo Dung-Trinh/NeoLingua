@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FA2CB0581A006B3364 /* SwiftOpenAI */; };
+		B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FC2CB059B7006B3364 /* SwiftOpenAI */; };
+		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
+		B63875022CB09A22006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875012CB09A22006B3364 /* SwiftOpenAI */; };
+		B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875042CB09A3F006B3364 /* SwiftOpenAI */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
 		B6E6569C2C939A7100350D98 /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B6FED42D2C70B72900339B7C /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -67,7 +72,6 @@
 		B6FED4932C71F12600339B7C /* LearningOverviewPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FED4922C71F12600339B7C /* LearningOverviewPageView.swift */; };
 		B6FED4962C71F3BD00339B7C /* ContextAwarePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FED4952C71F3BD00339B7C /* ContextAwarePage.swift */; };
 		B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FED4972C71F3D200339B7C /* ContextAwarePageView.swift */; };
-		B6FED49B2C71F54F00339B7C /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B6FED49A2C71F54F00339B7C /* SwiftOpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,13 +135,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FED4562C70B96500339B7C /* FirebaseAppDistribution-Beta in Frameworks */,
+				B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */,
 				B6FED4622C70B96500339B7C /* FirebaseFirestore in Frameworks */,
 				B6FED45A2C70B96500339B7C /* FirebaseAuthCombine-Community in Frameworks */,
 				B6FED47F2C70BB3C00339B7C /* GoogleSignIn in Frameworks */,
 				B6FED46C2C70B96500339B7C /* FirebaseInstallations in Frameworks */,
 				B6FED42C2C70B72900339B7C /* Alamofire in Frameworks */,
 				B6FED47A2C70B96500339B7C /* FirebaseVertexAI-Preview in Frameworks */,
+				B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */,
 				B6E656982C93837700350D98 /* GooglePlaces in Frameworks */,
+				B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */,
 				B6FED4812C70BB3C00339B7C /* GoogleSignInSwift in Frameworks */,
 				B6FED42E2C70B72900339B7C /* AlamofireDynamic in Frameworks */,
 				B6FED44E2C70B96500339B7C /* FirebaseAnalytics in Frameworks */,
@@ -151,7 +158,8 @@
 				B6FED4722C70B96500339B7C /* FirebasePerformance in Frameworks */,
 				B6FED45E2C70B96500339B7C /* FirebaseDatabase in Frameworks */,
 				B6FED4582C70B96500339B7C /* FirebaseAuth in Frameworks */,
-				B6FED49B2C71F54F00339B7C /* SwiftOpenAI in Frameworks */,
+				B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */,
+				B63875022CB09A22006B3364 /* SwiftOpenAI in Frameworks */,
 				B6FED4662C70B96500339B7C /* FirebaseFunctions in Frameworks */,
 				B6FED4602C70B96500339B7C /* FirebaseDynamicLinks in Frameworks */,
 			);
@@ -160,6 +168,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B63874FE2CB06800006B3364 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B6EB6D242CA414A90055FD67 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +271,7 @@
 			children = (
 				B6FED3BA2C70B3BB00339B7C /* NeoLingua */,
 				B6FED3B92C70B3BB00339B7C /* Products */,
+				B63874FE2CB06800006B3364 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -356,8 +372,12 @@
 				B6FED4792C70B96500339B7C /* FirebaseVertexAI-Preview */,
 				B6FED47E2C70BB3C00339B7C /* GoogleSignIn */,
 				B6FED4802C70BB3C00339B7C /* GoogleSignInSwift */,
-				B6FED49A2C71F54F00339B7C /* SwiftOpenAI */,
 				B6E656972C93837700350D98 /* GooglePlaces */,
+				B63874FA2CB0581A006B3364 /* SwiftOpenAI */,
+				B63874FC2CB059B7006B3364 /* SwiftOpenAI */,
+				B63874FF2CB06838006B3364 /* SwiftOpenAI */,
+				B63875012CB09A22006B3364 /* SwiftOpenAI */,
+				B63875042CB09A3F006B3364 /* SwiftOpenAI */,
 			);
 			productName = NeoLingua;
 			productReference = B6FED3B82C70B3BB00339B7C /* NeoLingua.app */;
@@ -391,8 +411,8 @@
 				B6FED42A2C70B72900339B7C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B6FED44C2C70B96500339B7C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B6FED47D2C70BB3C00339B7C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				B6FED4992C71F54E00339B7C /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 				B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
+				B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 			);
 			productRefGroup = B6FED3B92C70B3BB00339B7C /* Products */;
 			projectDirPath = "";
@@ -665,6 +685,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jamesrochabrun/SwiftOpenAI";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
@@ -697,17 +725,30 @@
 				minimumVersion = 8.0.0;
 			};
 		};
-		B6FED4992C71F54E00339B7C /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftBeta/SwiftOpenAI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B63874FA2CB0581A006B3364 /* SwiftOpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftOpenAI;
+		};
+		B63874FC2CB059B7006B3364 /* SwiftOpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftOpenAI;
+		};
+		B63874FF2CB06838006B3364 /* SwiftOpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftOpenAI;
+		};
+		B63875012CB09A22006B3364 /* SwiftOpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftOpenAI;
+		};
+		B63875042CB09A3F006B3364 /* SwiftOpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
+			productName = SwiftOpenAI;
+		};
 		B6E656972C93837700350D98 /* GooglePlaces */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
@@ -822,11 +863,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B6FED47D2C70BB3C00339B7C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
-		};
-		B6FED49A2C71F54F00339B7C /* SwiftOpenAI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B6FED4992C71F54E00339B7C /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
-			productName = SwiftOpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
