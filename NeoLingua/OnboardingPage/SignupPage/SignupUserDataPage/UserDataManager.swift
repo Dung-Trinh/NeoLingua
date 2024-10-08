@@ -36,7 +36,7 @@ class UserDataManagerImpl: UserDataManager {
             print("userUid not found")
             return nil
         }
-        
+                
         let snapshots = try await db.collection("users").whereField("uid", isEqualTo: userUid).getDocuments()
         guard let document = snapshots.documents.first else {
             return nil
@@ -49,7 +49,6 @@ class UserDataManagerImpl: UserDataManager {
            let learningGoals = data["learningGoals"] as? [String],
            let estimationOfDailyUse = data["estimationOfDailyUse"] as? Int {
             
-            // `ProfileData`-Struct erstellen
             let profileData = ProfileData(name: name, learningGoals: learningGoals, estimationOfDailyUse: estimationOfDailyUse)
             return profileData
         } else {

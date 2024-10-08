@@ -28,7 +28,12 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
             Button("Logout") {
                 viewModel.didTappedLogout()
             }
-        }.navigationDestination(for: Route.self) { route in
+        }.onAppear {
+            Task {
+                await viewModel.fetchProfileData()
+            }
+        }
+        .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
     }
