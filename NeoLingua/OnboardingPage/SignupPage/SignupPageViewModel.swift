@@ -6,7 +6,6 @@ protocol SignupPageViewModel: ObservableObject {
     var email: String { get set }
     var password: String { get set }
     
-    func setupRouter(_ router: RouterImpl)
     func didTapSignup() async
     func didTapLogin()
     func handleSignupWithGoogle(viewController: UIViewController) async
@@ -16,25 +15,30 @@ class SignupPageViewModelImpl: SignupPageViewModel {
     @Published var name: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
-    
+    @Published var router: Router
+
     private let loginAdapter: LoginSignupNetworkAdapter
-    private var router: RouterImpl?
     
-    init(loginAdapter: LoginSignupNetworkAdapter) {
+    init(
+        router: Router,
+        loginAdapter: LoginSignupNetworkAdapter
+    ) {
         self.loginAdapter = loginAdapter
-    }
-    
-    convenience init() {
-        self.init(loginAdapter: LoginSignupNetworkAdapterImpl())
-    }
-    
-    func setupRouter(_ router: RouterImpl) {
         self.router = router
+    }
+    
+    convenience init(router: Router) {
+        self.init(
+            router: router,
+            loginAdapter: LoginSignupNetworkAdapterImpl()
+        )
     }
     
     func didTapSignup() async {
         do {
             try await loginAdapter.createUser(email: email, password: password)
+            router.push(.loginSignup(.login))
+            
         } catch let err {
             // TODO: adding error handling
             print(err.localizedDescription)
@@ -43,7 +47,7 @@ class SignupPageViewModelImpl: SignupPageViewModel {
     
     @MainActor
     func didTapLogin() {
-        router?.pushView(view: .loginPage)
+        router.push(.loginSignup(.login))
     }
     
     func handleSignupWithGoogle(viewController: UIViewController) async {

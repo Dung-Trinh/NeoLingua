@@ -10,18 +10,12 @@ protocol ContextAwarePageViewModel: ObservableObject {
     
     func convertDataToImage()
     func uploadImage() async
-    func setupRouter(_ router: RouterImpl)
     func requestVisionAPI() async
 }
 
 class ContextAwarePageViewModelImpl: ContextAwarePageViewModel {
-    private var router: RouterImpl?
 //    private let openAI = SwiftOpenAI(apiKey: ProdENV().OPENAI_KEY)
     private var uploadedImageLink = ""
-    
-    func setupRouter(_ router: RouterImpl) {
-        self.router = router
-    }
     
     @Published var selectedImage: UIImage? = nil
     @Published var selectedPhotos = [PhotosPickerItem]()

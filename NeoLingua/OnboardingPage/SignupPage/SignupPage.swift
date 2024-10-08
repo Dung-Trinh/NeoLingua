@@ -3,8 +3,8 @@ import SwiftUI
 
 struct SignupPage<ViewModel>: View where ViewModel: SignupPageViewModel {
     @StateObject var viewModel: ViewModel
-    @EnvironmentObject var router: RouterImpl
-    
+    @EnvironmentObject private var router: Router
+
     var body: some View {
         VStack {
             PageHeader(
@@ -49,11 +49,7 @@ struct SignupPage<ViewModel>: View where ViewModel: SignupPageViewModel {
                     Text("Log in").foregroundColor(.black)
                 }
             }
-        }
-        .padding()
-        .onAppear{
-            viewModel.setupRouter(router)
-        }
+        }.padding()
     }
     
     @ViewBuilder
@@ -94,10 +90,4 @@ struct SignupPage<ViewModel>: View where ViewModel: SignupPageViewModel {
             Divider().background(.gray)
         }
     }
-}
-
-#Preview {
-    SignupPage(
-        viewModel: SignupPageViewModelImpl()
-    )
 }

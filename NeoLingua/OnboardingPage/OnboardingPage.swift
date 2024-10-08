@@ -2,11 +2,11 @@ import SwiftUI
 
 struct OnboardingPage<ViewModel>: View where ViewModel: OnboardingPageViewModel {
     @StateObject var viewModel: ViewModel
-    @EnvironmentObject var router: RouterImpl
+    @EnvironmentObject private var router: Router
     
     var body: some View {
         NavigationStack(
-            path: $router.navPath
+            path: $router.routes
         ) {
             VStack(alignment: .center) {
                 TabView {
@@ -21,19 +21,10 @@ struct OnboardingPage<ViewModel>: View where ViewModel: OnboardingPageViewModel 
             .padding()
             .task {
                 await viewModel.loadContent()
+            }.navigationDestination(for: Route.self) { route in
+                router.destination(for: route)
             }
-            .navigationDestination(for: String.self) { page in
-                switch page {
-                case "LoginPage":
-                    LoginPage(viewModel: LoginPageViewModelImpl())
-                case "SignupPage":
-                    SignupPage(viewModel: SignupPageViewModelImpl())
-                case "HomePage":
-                    HomePage(viewModel: HomePageViewModelImpl())
-                default:
-                    Text("DefaultPage")
-                }
-            }
+            .navigationBarHidden(true)
         }
     }
     
@@ -43,22 +34,16 @@ struct OnboardingPage<ViewModel>: View where ViewModel: OnboardingPageViewModel 
                 title: "Sign up",
                 color: Styleguide.PrimaryColor.purple,
                 action: {
-                    router.pushView(view: .signupPage)
+                    router.push(.loginSignup(.signup))
                 }
             )
             PrimaryButton(
                 title: "Login",
                 color: Styleguide.PrimaryColor.purple,
                 action: {
-                    router.pushView(view: .loginPage)
+                    router.push(.loginSignup(.login))
                 }
             )
         }
     }
-}
-
-#Preview {
-    OnboardingPage(
-        viewModel: OnboardingPageViewModelImpl()
-    )
 }

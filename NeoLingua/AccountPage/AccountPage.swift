@@ -2,7 +2,8 @@ import SwiftUI
 
 struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
     @StateObject var viewModel: ViewModel
-    
+    @EnvironmentObject private var router: Router
+
     var body: some View {
         VStack {
             Text("AccountPage")
@@ -27,10 +28,8 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
             Button("Logout") {
                 viewModel.didTappedLogout()
             }
-        }.onAppear(perform: {
-            Task {
-                await viewModel.fetchProfileData()
-            }
-        })
+        }.navigationDestination(for: Route.self) { route in
+            router.destination(for: route)
+        }
     }
 }

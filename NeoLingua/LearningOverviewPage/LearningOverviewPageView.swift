@@ -8,7 +8,6 @@ import Alamofire
 import SwiftOpenAI
 
 protocol LearningOverviewPageView: ObservableObject {
-    func setupRouter(_ router: RouterImpl)
     func getLocation()
     func fetchLocation() async throws
     func startChat() async
@@ -16,16 +15,11 @@ protocol LearningOverviewPageView: ObservableObject {
 }
 
 class LearningOverviewPageViewImpl: LearningOverviewPageView {
-    private var router: RouterImpl?
     private var listenerRegistration: ListenerRegistration?
     private var placesClient = GMSPlacesClient.shared()
     var messageText = ""
     var functionCallOutput = ""
     var toolOuptutMessage = ""
-
-    func setupRouter(_ router: RouterImpl) {
-        self.router = router
-    }
     
     func getLocation() {
         let locationManager = LocationManager()

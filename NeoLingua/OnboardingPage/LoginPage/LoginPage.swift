@@ -2,8 +2,8 @@ import SwiftUI
 
 struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
     @StateObject var viewModel: ViewModel
-    @EnvironmentObject var router: RouterImpl
-    
+    @EnvironmentObject private var router: Router
+
     var body: some View {
         VStack {
             PageHeader(
@@ -48,15 +48,15 @@ struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
             HStack {
                 Text("Don't have an account?").foregroundColor(.gray)
                 Button {
-                    router.pushView(view: .signupPage)
+                    router.push(.loginSignup(.signup))
                 } label: {
                     Text("Sign up").foregroundColor(.black)
                 }
             }
         }
         .padding()
-        .onAppear{
-            viewModel.setupRouter(router)
+        .navigationDestination(for: Route.self) { route in
+            router.destination(for: route)
         }
     }
     
@@ -87,10 +87,4 @@ struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
             Divider().background(.gray)
         }
     }
-}
-
-#Preview {
-    LoginPage(
-        viewModel: LoginPageViewModelImpl(loginAdapter: LoginSignupNetworkAdapterImpl())
-    )
 }

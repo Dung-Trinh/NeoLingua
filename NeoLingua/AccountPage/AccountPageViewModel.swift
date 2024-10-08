@@ -2,16 +2,15 @@ import Foundation
 protocol AccountPageViewModel: ObservableObject {
     var profileData: ProfileData? { get }
     
-    func setupRouter(_ router: RouterImpl)
     func didTappedLogout()
     func fetchProfileData() async
 }
 
 class AccountPageViewModelImpl: AccountPageViewModel {
-    private var router: RouterImpl?
     @Published var profileData: ProfileData?
+    @Published var router: Router
     
-    func setupRouter(_ router: RouterImpl) {
+    init(router: Router) {
         self.router = router
     }
     
@@ -31,5 +30,6 @@ class AccountPageViewModelImpl: AccountPageViewModel {
     
     func didTappedLogout() {
         UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+        router.push(.onboardingPage)
     }
 }

@@ -2,6 +2,8 @@ import SwiftUI
 
 struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
     @StateObject var viewModel: ViewModel
+    @EnvironmentObject private var router: Router
+
     
     var body: some View {
         TabView {
@@ -13,7 +15,7 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                 .tabItem {
                     Label("Learning", systemImage: "person.crop.circle.fill")
                 }
-            AccountPage(viewModel: AccountPageViewModelImpl())
+            AccountPage(viewModel: AccountPageViewModelImpl(router: router))
                 .tabItem {
                     Label("Account", systemImage: "person.crop.circle.fill")
                 }

@@ -9,7 +9,6 @@ protocol LoginPageViewModel: ObservableObject {
     var password: String { get set }
     var errorMessage: String? { get }
     
-    func setupRouter(_ router: RouterImpl)
     func didTappedLogin() async
     func handleSignInButton(viewController: UIViewController) async
 }
@@ -19,15 +18,23 @@ class LoginPageViewModelImpl: LoginPageViewModel {
     @Published var password = ProdENV().USER_PASSWORD
     @Published var errorMessage: String?
     
-    private let loginAdapter: LoginSignupNetworkAdapter
-    private var router: RouterImpl?
+    @Published var router: Router
     
-    init(loginAdapter: LoginSignupNetworkAdapter) {
+    private let loginAdapter: LoginSignupNetworkAdapter
+    
+    init(
+        router: Router,
+        loginAdapter: LoginSignupNetworkAdapter
+    ) {
         self.loginAdapter = loginAdapter
+        self.router = router
     }
     
-    convenience init() {
-        self.init(loginAdapter: LoginSignupNetworkAdapterImpl())
+    convenience init(router: Router) {
+        self.init(
+            router: router,
+            loginAdapter: LoginSignupNetworkAdapterImpl()
+        )
     }
     
     @MainActor
@@ -36,7 +43,7 @@ class LoginPageViewModelImpl: LoginPageViewModel {
         
         do {
             try await loginAdapter.login(email: email, password: password)
-            router?.pushView(view: .homePage)
+            router.push(.homePage)
         } catch let err {
             print(err)
             errorMessage = err.localizedDescription
@@ -46,14 +53,10 @@ class LoginPageViewModelImpl: LoginPageViewModel {
     func handleSignInButton(viewController: UIViewController) async {
         do {
             try await loginAdapter.loginWithGoogle(viewController: viewController)
-            await router?.pushView(view: .homePage)
+            router.push(.homePage)
         } catch {
             // TODO: error handling
         }
-    }
-    
-    func setupRouter(_ router: RouterImpl) {
-        self.router = router
     }
     
     private func validateInput() {

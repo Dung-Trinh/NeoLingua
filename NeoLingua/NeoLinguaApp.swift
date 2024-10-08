@@ -3,19 +3,21 @@ import SwiftUI
 @main
 struct NeoLinguaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject private var router = RouterImpl()
+    @State private var router = Router()
     @State var isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
     
     var body: some Scene {
         WindowGroup {
             if isUserLoggedIn {
-                HomePage(viewModel: HomePageViewModelImpl()).environmentObject(router)
+                HomePage(viewModel: HomePageViewModelImpl())
+                    .environmentObject(Router())
             } else {
                 OnboardingPage(viewModel: OnboardingPageViewModelImpl())
-                    .onOpenURL { url in
-//                        GIDSignIn.sharedInstance.handle(url)
-                    }
-                    .environmentObject(router)
+                    .environmentObject(Router())
+
+//                    .onOpenURL { url in
+////                        GIDSignIn.sharedInstance.handle(url)
+//                    }
             }
         }
     }
