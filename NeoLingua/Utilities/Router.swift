@@ -9,6 +9,8 @@ enum Route: Hashable {
     enum LoginSignupRoute: Hashable {
         case login
         case signup
+        case signupData
+        case successfullyRegistered
     }
 }
 
@@ -48,6 +50,10 @@ class Router: ObservableObject  {
                 LoginPage(viewModel: LoginPageViewModelImpl(router: self))
             case .signup:
                 SignupPage(viewModel: SignupPageViewModelImpl(router: self))
+            case .signupData:
+                SignupUserDataPage(viewModel: SignupUserDataPageViewModelImpl(router: self))
+            case .successfullyRegistered:
+                SignupSuccessPage()
         }
     }
 }

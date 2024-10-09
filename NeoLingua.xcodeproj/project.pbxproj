@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */; };
+		B60F8AA32CB5D55300268D75 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B60F8AA22CB5D55300268D75 /* Lottie */; };
+		B60F8AA92CB5DDF000268D75 /* checkAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */; };
 		B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FA2CB0581A006B3364 /* SwiftOpenAI */; };
 		B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FC2CB059B7006B3364 /* SwiftOpenAI */; };
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
@@ -89,6 +92,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSuccessPage.swift; sourceTree = "<group>"; };
+		B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkAnimation.json; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 				B6FED42C2C70B72900339B7C /* Alamofire in Frameworks */,
 				B6FED47A2C70B96500339B7C /* FirebaseVertexAI-Preview in Frameworks */,
 				B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */,
+				B60F8AA32CB5D55300268D75 /* Lottie in Frameworks */,
 				B6E656982C93837700350D98 /* GooglePlaces in Frameworks */,
 				B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */,
 				B6FED4812C70BB3C00339B7C /* GoogleSignInSwift in Frameworks */,
@@ -259,9 +265,11 @@
 		B6FA77E82CA49E5A00C52F73 /* SignupUserDataPage */ = {
 			isa = PBXGroup;
 			children = (
+				B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */,
 				B6FA77E92CA49E7D00C52F73 /* SignupUserDataPage.swift */,
 				B6FA77EB2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift */,
 				B6FA77ED2CA4A0A000C52F73 /* UserDataManager.swift */,
+				B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */,
 			);
 			path = SignupUserDataPage;
 			sourceTree = "<group>";
@@ -378,6 +386,7 @@
 				B63874FF2CB06838006B3364 /* SwiftOpenAI */,
 				B63875012CB09A22006B3364 /* SwiftOpenAI */,
 				B63875042CB09A3F006B3364 /* SwiftOpenAI */,
+				B60F8AA22CB5D55300268D75 /* Lottie */,
 			);
 			productName = NeoLingua;
 			productReference = B6FED3B82C70B3BB00339B7C /* NeoLingua.app */;
@@ -413,6 +422,7 @@
 				B6FED47D2C70BB3C00339B7C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 				B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
+				B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = B6FED3B92C70B3BB00339B7C /* Products */;
 			projectDirPath = "";
@@ -431,6 +441,7 @@
 				B6FED3C32C70B3C200339B7C /* Preview Assets.xcassets in Resources */,
 				B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */,
 				B6FED3C02C70B3C200339B7C /* Assets.xcassets in Resources */,
+				B60F8AA92CB5DDF000268D75 /* checkAnimation.json in Resources */,
 				B6FED48E2C70C04700339B7C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +481,7 @@
 				B6FA77C92CA4197800C52F73 /* OnboardingContent.swift in Sources */,
 				B6FED4962C71F3BD00339B7C /* ContextAwarePage.swift in Sources */,
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
+				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
 				B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */,
 				B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */,
 				B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */,
@@ -685,6 +697,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jamesrochabrun/SwiftOpenAI";
@@ -728,6 +748,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B60F8AA22CB5D55300268D75 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		B63874FA2CB0581A006B3364 /* SwiftOpenAI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftOpenAI;

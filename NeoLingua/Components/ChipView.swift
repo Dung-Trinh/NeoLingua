@@ -1,17 +1,40 @@
 import SwiftUI
 
 struct ChipView: View {
+    @StateObject var viewModel: ChipViewModel
+    let action: () -> Void
+    
     var body: some View {
         HStack(spacing: Styleguide.Margin.small) {
-            Text("test")
+            Text(viewModel.text)
                 .font(.system(size: 12))
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundColor(getForegroundColor())
                 .padding(Styleguide.Margin.extraSmall)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(.blue).opacity(0.5)
-                )
+                        .foregroundColor(getBackgroundColor()).opacity(0.5)
+                ).onTapGesture {
+                    action()
+                }
         }
+    }
+    
+    func getBackgroundColor() -> Color {
+        return viewModel.isSelected ? .green : .gray
+    }
+    
+    func getForegroundColor() -> Color {
+        return viewModel.isSelected ? .gray : .red
+    }
+}
+
+class ChipViewModel: Identifiable, ObservableObject {
+    let id: String = UUID().uuidString
+    var text: String
+    @Published var isSelected: Bool = false
+    
+    init(text: String) {
+        self.text = text
     }
 }

@@ -12,8 +12,8 @@ protocol SignupPageViewModel: ObservableObject {
 }
 
 class SignupPageViewModelImpl: SignupPageViewModel {
-    @Published var name: String = ""
-    @Published var email: String = ""
+    @Published var name: String = "tester"
+    @Published var email: String = "test@test.de"
     @Published var password: String = ""
     @Published var router: Router
 
@@ -37,7 +37,7 @@ class SignupPageViewModelImpl: SignupPageViewModel {
     func didTapSignup() async {
         do {
             try await loginAdapter.createUser(email: email, password: password)
-            router.push(.loginSignup(.login))
+            router.push(.loginSignup(.signupData))
             
         } catch let err {
             // TODO: adding error handling

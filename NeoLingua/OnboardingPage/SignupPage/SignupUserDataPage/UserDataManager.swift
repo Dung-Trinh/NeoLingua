@@ -9,6 +9,7 @@ protocol UserDataManager {
 struct ProfileData {
     let name: String
     let learningGoals: [String]
+    let interests: [String]
     let estimationOfDailyUse: Int
 }
 
@@ -25,6 +26,7 @@ class UserDataManagerImpl: UserDataManager {
             "uid": userUid,
             "name": userData.name,
             "learningGoals": userData.learningGoals,
+            "interests": userData.interests,
             "estimationOfDailyUse": userData.estimationOfDailyUse
         ]
         
@@ -47,9 +49,15 @@ class UserDataManagerImpl: UserDataManager {
         
         if let name = data["name"] as? String,
            let learningGoals = data["learningGoals"] as? [String],
+           let interests = data["interests"] as? [String],
            let estimationOfDailyUse = data["estimationOfDailyUse"] as? Int {
             
-            let profileData = ProfileData(name: name, learningGoals: learningGoals, estimationOfDailyUse: estimationOfDailyUse)
+            let profileData = ProfileData(
+                name: name,
+                learningGoals: learningGoals,
+                interests: interests,
+                estimationOfDailyUse: estimationOfDailyUse
+            )
             return profileData
         } else {
             return nil

@@ -21,6 +21,10 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
                         Text("Lernziele:").bold()
                         Text(profileData.learningGoals.description)
                     }
+                    HStack {
+                        Text("Lernziele:").bold()
+                        Text(profileData.interests.description)
+                    }
                     
                 }
             }
