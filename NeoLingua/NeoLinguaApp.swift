@@ -10,10 +10,10 @@ struct NeoLinguaApp: App {
         WindowGroup {
             if isUserLoggedIn {
                 HomePage(viewModel: HomePageViewModelImpl())
-                    .environmentObject(Router())
+                    .environmentObject(router)
             } else {
                 OnboardingPage(viewModel: OnboardingPageViewModelImpl())
-                    .environmentObject(Router())
+                    .environmentObject(router)
 
 //                    .onOpenURL { url in
 ////                        GIDSignIn.sharedInstance.handle(url)

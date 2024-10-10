@@ -3,6 +3,7 @@ import SwiftUI
 enum Route: Hashable {
     
     case loginSignup(LoginSignupRoute)
+    case scavengerHunt(ScavengerHuntRoute)
     case homePage
     case onboardingPage
     
@@ -11,6 +12,11 @@ enum Route: Hashable {
         case signup
         case signupData
         case successfullyRegistered
+    }
+    
+    enum ScavengerHuntRoute: Hashable {
+        case overview
+        case map
     }
 }
 
@@ -33,6 +39,8 @@ class Router: ObservableObject  {
                 HomePage(viewModel: HomePageViewModelImpl())
             case .onboardingPage:
                 OnboardingPage(viewModel: OnboardingPageViewModelImpl())
+        case .scavengerHunt(let scavengerHuntRoute):
+                handleScavengerHuntRoutes(scavengerHuntRoute)
         }
     }
     
@@ -54,6 +62,16 @@ class Router: ObservableObject  {
                 SignupUserDataPage(viewModel: SignupUserDataPageViewModelImpl(router: self))
             case .successfullyRegistered:
                 SignupSuccessPage()
+        }
+    }
+    
+    @ViewBuilder
+    private func handleScavengerHuntRoutes(_ scavengerHuntRoute: Route.ScavengerHuntRoute) -> some View {
+        switch scavengerHuntRoute {
+            case .overview:
+                ScavengerHuntOverviewPage()
+            case .map:
+                ScavengerHuntMap()
         }
     }
 }

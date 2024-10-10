@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Privacy — Location When In Use Usage Description</key>
-	<string>Show your location on the map</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Wir benötigen Ihren Standort, um ihn auf der Karte anzuzeigen.</string>
 </dict>
 </plist>

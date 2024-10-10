@@ -10,6 +10,12 @@
 		B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */; };
 		B60F8AA32CB5D55300268D75 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B60F8AA22CB5D55300268D75 /* Lottie */; };
 		B60F8AA92CB5DDF000268D75 /* checkAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */; };
+		B60F8AAC2CB7D77900268D75 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AAB2CB7D77900268D75 /* MapViewController.swift */; };
+		B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AAD2CB7D7BB00268D75 /* MapViewControllerBridge.swift */; };
+		B60F8AB02CB7D8E200268D75 /* ScavengerHuntMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AAF2CB7D8E200268D75 /* ScavengerHuntMap.swift */; };
+		B60F8AB32CB7DAE800268D75 /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = B60F8AB22CB7DAE800268D75 /* GoogleMaps */; };
+		B60F8AB52CB7E85A00268D75 /* PointOfInterest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AB42CB7E85900268D75 /* PointOfInterest.swift */; };
+		B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */; };
 		B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FA2CB0581A006B3364 /* SwiftOpenAI */; };
 		B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FC2CB059B7006B3364 /* SwiftOpenAI */; };
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
@@ -94,6 +100,12 @@
 /* Begin PBXFileReference section */
 		B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSuccessPage.swift; sourceTree = "<group>"; };
 		B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkAnimation.json; sourceTree = "<group>"; };
+		B60F8AAB2CB7D77900268D75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B60F8AAD2CB7D7BB00268D75 /* MapViewControllerBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerBridge.swift; sourceTree = "<group>"; };
+		B60F8AAF2CB7D8E200268D75 /* ScavengerHuntMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntMap.swift; sourceTree = "<group>"; };
+		B60F8AB42CB7E85900268D75 /* PointOfInterest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointOfInterest.swift; sourceTree = "<group>"; };
+		B60F8AB62CB80F2000268D75 /* WiesbadenLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WiesbadenLocation.gpx; sourceTree = "<group>"; };
+		B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntOverviewPage.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -141,6 +153,7 @@
 			files = (
 				B6FED4562C70B96500339B7C /* FirebaseAppDistribution-Beta in Frameworks */,
 				B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */,
+				B60F8AB32CB7DAE800268D75 /* GoogleMaps in Frameworks */,
 				B6FED4622C70B96500339B7C /* FirebaseFirestore in Frameworks */,
 				B6FED45A2C70B96500339B7C /* FirebaseAuthCombine-Community in Frameworks */,
 				B6FED47F2C70BB3C00339B7C /* GoogleSignIn in Frameworks */,
@@ -174,6 +187,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B60F8AAA2CB7D76600268D75 /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				B60F8AAB2CB7D77900268D75 /* MapViewController.swift */,
+				B60F8AAD2CB7D7BB00268D75 /* MapViewControllerBridge.swift */,
+				B60F8AB42CB7E85900268D75 /* PointOfInterest.swift */,
+			);
+			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
+		B60F8AB72CB8194600268D75 /* ScavengerHunt */ = {
+			isa = PBXGroup;
+			children = (
+				B60F8AAF2CB7D8E200268D75 /* ScavengerHuntMap.swift */,
+				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
+			);
+			path = ScavengerHunt;
+			sourceTree = "<group>";
+		};
 		B63874FE2CB06800006B3364 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +309,7 @@
 		B6FED3AF2C70B3BB00339B7C = {
 			isa = PBXGroup;
 			children = (
+				B60F8AB62CB80F2000268D75 /* WiesbadenLocation.gpx */,
 				B6FED3BA2C70B3BB00339B7C /* NeoLingua */,
 				B6FED3B92C70B3BB00339B7C /* Products */,
 				B63874FE2CB06800006B3364 /* Frameworks */,
@@ -297,6 +330,8 @@
 				B6E6569B2C938ACD00350D98 /* Info.plist */,
 				B6FED48D2C70C04700339B7C /* GoogleService-Info.plist */,
 				B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */,
+				B60F8AB72CB8194600268D75 /* ScavengerHunt */,
+				B60F8AAA2CB7D76600268D75 /* GoogleMaps */,
 				B6FA77C12CA418E700C52F73 /* OnboardingPage */,
 				B6EB6D2D2CA415380055FD67 /* AccountPage */,
 				B6EB6D242CA414A90055FD67 /* HomePage */,
@@ -387,6 +422,7 @@
 				B63875012CB09A22006B3364 /* SwiftOpenAI */,
 				B63875042CB09A3F006B3364 /* SwiftOpenAI */,
 				B60F8AA22CB5D55300268D75 /* Lottie */,
+				B60F8AB22CB7DAE800268D75 /* GoogleMaps */,
 			);
 			productName = NeoLingua;
 			productReference = B6FED3B82C70B3BB00339B7C /* NeoLingua.app */;
@@ -423,6 +459,7 @@
 				B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 				B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 				B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				B60F8AB12CB7DAE700268D75 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 			);
 			productRefGroup = B6FED3B92C70B3BB00339B7C /* Products */;
 			projectDirPath = "";
@@ -457,6 +494,7 @@
 				B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */,
 				B6FA77E42CA44CFB00C52F73 /* LoginPage.swift in Sources */,
 				B6EB6D382CA416A70055FD67 /* SecondaryButton.swift in Sources */,
+				B60F8AB02CB7D8E200268D75 /* ScavengerHuntMap.swift in Sources */,
 				B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */,
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
 				B6FED4912C71F11B00339B7C /* LearningOverviewPage.swift in Sources */,
@@ -466,10 +504,12 @@
 				B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */,
 				B6FED3BC2C70B3BB00339B7C /* NeoLinguaApp.swift in Sources */,
 				B6FA77D32CA419F000C52F73 /* SignupPage.swift in Sources */,
+				B60F8AB52CB7E85A00268D75 /* PointOfInterest.swift in Sources */,
 				B6EB6D2C2CA415240055FD67 /* AccountPageViewModel.swift in Sources */,
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
+				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
 				B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */,
 				B6FA77D72CA41A4500C52F73 /* AppDelegate.swift in Sources */,
 				B6FA77C52CA4192600C52F73 /* OnboardingPageViewModel.swift in Sources */,
@@ -483,9 +523,11 @@
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
 				B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */,
+				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,
 				B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */,
 				B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */,
 				B6EB6D322CA416670055FD67 /* ChipView.swift in Sources */,
+				B60F8AAC2CB7D77900268D75 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +747,14 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		B60F8AB12CB7DAE700268D75 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 9.1.1;
+			};
+		};
 		B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jamesrochabrun/SwiftOpenAI";
@@ -752,6 +802,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		B60F8AB22CB7DAE800268D75 /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B60F8AB12CB7DAE700268D75 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
 		};
 		B63874FA2CB0581A006B3364 /* SwiftOpenAI */ = {
 			isa = XCSwiftPackageProductDependency;

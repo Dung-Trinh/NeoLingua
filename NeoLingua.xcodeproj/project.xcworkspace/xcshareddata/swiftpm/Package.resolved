@@ -118,6 +118,15 @@
       }
     },
     {
+      "identity" : "ios-maps-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googlemaps/ios-maps-sdk",
+      "state" : {
+        "revision" : "3786e5028d868482ef88140117d33efd60828300",
+        "version" : "9.1.1"
+      }
+    },
+    {
       "identity" : "ios-places-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googlemaps/ios-places-sdk",
