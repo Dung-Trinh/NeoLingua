@@ -4,6 +4,7 @@ enum Route: Hashable {
     
     case loginSignup(LoginSignupRoute)
     case scavengerHunt(ScavengerHuntRoute)
+    case learningTask(LearningTaskRoute)
     case homePage
     case onboardingPage
     
@@ -17,6 +18,10 @@ enum Route: Hashable {
     enum ScavengerHuntRoute: Hashable {
         case overview
         case map
+    }
+    
+    enum LearningTaskRoute: Hashable {
+        case writeVocabulary
     }
 }
 
@@ -41,6 +46,8 @@ class Router: ObservableObject  {
                 OnboardingPage(viewModel: OnboardingPageViewModelImpl())
         case .scavengerHunt(let scavengerHuntRoute):
                 handleScavengerHuntRoutes(scavengerHuntRoute)
+        case .learningTask(let learningTaskRoute):
+            handleLearningTaskRoute(learningTaskRoute)
         }
     }
     
@@ -72,6 +79,14 @@ class Router: ObservableObject  {
                 ScavengerHuntOverviewPage()
             case .map:
                 ScavengerHuntMap()
+        }
+    }
+    
+    @ViewBuilder
+    private func handleLearningTaskRoute(_ learningTaskRoute: Route.LearningTaskRoute) -> some View {
+        switch learningTaskRoute {
+        case .writeVocabulary:
+            WriteVocabularyView()
         }
     }
 }
