@@ -3,35 +3,56 @@ import Combine
 protocol WriteVocabularyViewModel: ObservableObject {}
 
 class WriteVocabularyViewModelImpl: WriteVocabularyViewModel {
-    let questions: [VocabularyQuestion] = [
-        VocabularyQuestion(text: "The Spielbank Wiesbaden is a well-known ______ where people go to gamble.", answer: "casino", translation: "Kasino"),
-        VocabularyQuestion(text: "A ______ is a place where you can borrow and read books.", answer: "library", translation: "Bibliothek")
-    ]
-    
-    @Published var currentQuestion: VocabularyQuestion
+
+    var exercises: [VocabularyTrainingProtocol]
+    var exercise: VocabularyTrainingProtocol
+
     @Published var userInputText: String = ""
 
     @Published var currentQuestionIndex = 0
     @Published var isSheetPresented: Bool = false
     @Published var sheetViewModel: ResultSheetViewModel?
 
+    let exercise1 = WriteWordExercise(
+        question: "Was ist das englische Wort für 'Hund'?",
+        answer: "dog",
+        translation: "Hund"
+    )
+    let exercise2 = SentenceBuildingExercise(
+        question: "Ordne die Wörter in der richtigen Reihenfolge.",
+        sentenceComponents: ["This", "is", "a", "house"],
+        answer: "This is a house", translation: "Das ist ein Haus"
+    )
+    let exercise3 = ChooseWordExercise(
+        question: "Wähle das richtige Wort.",
+        words: ["dog", "cat", "mouse"],
+        answer: "dog",
+        translation: "Hund"
+    )// TODO: View dafür entwickeln
+    
     init() {
-        currentQuestion = questions[0]
+        exercises = [exercise1, exercise2, exercise3]
+        exercise = exercises[0]
     }
     
     func checkAnswerTapped() {
         guard !userInputText.isEmpty else {
+            print("userInputText leer")
             return
         }
         var userFeedbackText = ""
         var isAnswerCorrect = false
 
-        if userInputText.lowercased() == currentQuestion.answer.lowercased() {
+        print("Vergleich")
+        print(userInputText)
+        print(exercise.answer)
+
+        if exercise.checkAnswer(userInputText) {
             isAnswerCorrect = true
-            userFeedbackText = "Richtig! Die deutsche Übersetzung ist: \(currentQuestion.translation)"
+            userFeedbackText = "Richtig! Die deutsche Übersetzung ist: \(exercise.translation)"
         } else {
             isAnswerCorrect = false
-            userFeedbackText = "Falsch. Die richtige Antwort ist: \(currentQuestion.answer), auf Deutsch: \(currentQuestion.translation)"
+            userFeedbackText = "Falsch. Die richtige Antwort ist: \(exercise.answer), auf Deutsch: \(exercise.translation)"
         }
 
         sheetViewModel = ResultSheetViewModel(
@@ -46,9 +67,9 @@ class WriteVocabularyViewModelImpl: WriteVocabularyViewModel {
     
     func continueTask() {
         isSheetPresented = false
-        if currentQuestionIndex < questions.count - 1 {
+        if currentQuestionIndex < exercises.count - 1 {
             currentQuestionIndex += 1
-            currentQuestion = questions[currentQuestionIndex]
+            exercise = exercises[currentQuestionIndex]
             userInputText = ""
         } else {
             // keine Fragen mehr

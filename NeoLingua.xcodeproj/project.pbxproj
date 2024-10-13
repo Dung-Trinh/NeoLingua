@@ -21,6 +21,8 @@
 		B60F8AC12CBAB82100268D75 /* ResultSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AC02CBAB82100268D75 /* ResultSheetView.swift */; };
 		B60F8AC32CBAB84F00268D75 /* ResultSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AC22CBAB84F00268D75 /* ResultSheetViewModel.swift */; };
 		B60F8AC52CBABC1B00268D75 /* WriteVocabularyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AC42CBABC1B00268D75 /* WriteVocabularyViewModel.swift */; };
+		B60F8ACB2CBC854000268D75 /* SentenceBuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */; };
+		B60F8ACD2CBC8AF800268D75 /* VocabularyTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */; };
 		B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FA2CB0581A006B3364 /* SwiftOpenAI */; };
 		B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FC2CB059B7006B3364 /* SwiftOpenAI */; };
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
@@ -116,6 +118,8 @@
 		B60F8AC02CBAB82100268D75 /* ResultSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSheetView.swift; sourceTree = "<group>"; };
 		B60F8AC22CBAB84F00268D75 /* ResultSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSheetViewModel.swift; sourceTree = "<group>"; };
 		B60F8AC42CBABC1B00268D75 /* WriteVocabularyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVocabularyViewModel.swift; sourceTree = "<group>"; };
+		B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceBuildingView.swift; sourceTree = "<group>"; };
+		B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyTraining.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				B60F8AAF2CB7D8E200268D75 /* ScavengerHuntMap.swift */,
 				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
 				B60F8ABA2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift */,
+				B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */,
 			);
 			path = ScavengerHunt;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			children = (
 				B60F8ABD2CBAB7ED00268D75 /* WriteVocabularyView.swift */,
 				B60F8AC42CBABC1B00268D75 /* WriteVocabularyViewModel.swift */,
+				B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */,
 			);
 			path = VocabularyTask;
 			sourceTree = "<group>";
@@ -557,9 +563,11 @@
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
 				B60F8AC32CBAB84F00268D75 /* ResultSheetViewModel.swift in Sources */,
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
+				B60F8ACD2CBC8AF800268D75 /* VocabularyTraining.swift in Sources */,
 				B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */,
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,
 				B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */,
+				B60F8ACB2CBC854000268D75 /* SentenceBuildingView.swift in Sources */,
 				B60F8ABE2CBAB7ED00268D75 /* WriteVocabularyView.swift in Sources */,
 				B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */,
 				B6EB6D322CA416670055FD67 /* ChipView.swift in Sources */,
