@@ -1,18 +1,17 @@
 import Combine
 
-protocol WriteVocabularyViewModel: ObservableObject {}
+protocol VocabularyTrainingPageViewModel: ObservableObject {}
 
-class WriteVocabularyViewModelImpl: WriteVocabularyViewModel {
-
-    var exercises: [VocabularyTrainingProtocol]
-    var exercise: VocabularyTrainingProtocol
+class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
+    @Published var exercises: [VocabularyTrainingProtocol]
+    @Published var exercise: VocabularyTrainingProtocol
 
     @Published var userInputText: String = ""
 
     @Published var currentQuestionIndex = 0
     @Published var isSheetPresented: Bool = false
     @Published var sheetViewModel: ResultSheetViewModel?
-
+    
     let exercise1 = WriteWordExercise(
         question: "Was ist das englische Wort für 'Hund'?",
         answer: "dog",
@@ -32,7 +31,7 @@ class WriteVocabularyViewModelImpl: WriteVocabularyViewModel {
     
     init() {
         exercises = [exercise1, exercise2, exercise3]
-        exercise = exercises[0]
+        exercise = exercise1
     }
     
     func checkAnswerTapped() {

@@ -11,7 +11,7 @@ struct ScavengerHuntOverviewPage: View {
             }
             
             Button("Vokabelübung starten") {
-                router.push(.learningTask(.writeVocabulary))
+                router.push(.learningTask(.vocabularyTrainingPage))
             }
 
         }.navigationDestination(for: Route.self) { route in

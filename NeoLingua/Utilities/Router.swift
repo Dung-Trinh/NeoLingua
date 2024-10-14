@@ -21,7 +21,7 @@ enum Route: Hashable {
     }
     
     enum LearningTaskRoute: Hashable {
-        case writeVocabulary
+        case vocabularyTrainingPage
     }
 }
 
@@ -85,8 +85,8 @@ class Router: ObservableObject  {
     @ViewBuilder
     private func handleLearningTaskRoute(_ learningTaskRoute: Route.LearningTaskRoute) -> some View {
         switch learningTaskRoute {
-        case .writeVocabulary:
-            WriteVocabularyView()
+        case .vocabularyTrainingPage:
+            VocabularyTrainingPage()
         }
     }
 }

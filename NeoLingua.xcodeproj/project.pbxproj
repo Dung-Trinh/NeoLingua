@@ -20,9 +20,10 @@
 		B60F8ABE2CBAB7ED00268D75 /* WriteVocabularyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ABD2CBAB7ED00268D75 /* WriteVocabularyView.swift */; };
 		B60F8AC12CBAB82100268D75 /* ResultSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AC02CBAB82100268D75 /* ResultSheetView.swift */; };
 		B60F8AC32CBAB84F00268D75 /* ResultSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AC22CBAB84F00268D75 /* ResultSheetViewModel.swift */; };
-		B60F8AC52CBABC1B00268D75 /* WriteVocabularyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AC42CBABC1B00268D75 /* WriteVocabularyViewModel.swift */; };
 		B60F8ACB2CBC854000268D75 /* SentenceBuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */; };
 		B60F8ACD2CBC8AF800268D75 /* VocabularyTraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */; };
+		B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ACE2CBD09DB00268D75 /* VocabularyTrainingPage.swift */; };
+		B60F8AD12CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AD02CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift */; };
 		B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FA2CB0581A006B3364 /* SwiftOpenAI */; };
 		B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FC2CB059B7006B3364 /* SwiftOpenAI */; };
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
@@ -117,9 +118,10 @@
 		B60F8ABD2CBAB7ED00268D75 /* WriteVocabularyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVocabularyView.swift; sourceTree = "<group>"; };
 		B60F8AC02CBAB82100268D75 /* ResultSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSheetView.swift; sourceTree = "<group>"; };
 		B60F8AC22CBAB84F00268D75 /* ResultSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSheetViewModel.swift; sourceTree = "<group>"; };
-		B60F8AC42CBABC1B00268D75 /* WriteVocabularyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVocabularyViewModel.swift; sourceTree = "<group>"; };
 		B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceBuildingView.swift; sourceTree = "<group>"; };
 		B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyTraining.swift; sourceTree = "<group>"; };
+		B60F8ACE2CBD09DB00268D75 /* VocabularyTrainingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyTrainingPage.swift; sourceTree = "<group>"; };
+		B60F8AD02CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyTrainingPageViewModel.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -219,7 +221,6 @@
 				B60F8AAF2CB7D8E200268D75 /* ScavengerHuntMap.swift */,
 				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
 				B60F8ABA2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift */,
-				B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */,
 			);
 			path = ScavengerHunt;
 			sourceTree = "<group>";
@@ -227,9 +228,11 @@
 		B60F8ABC2CBAB7CF00268D75 /* VocabularyTask */ = {
 			isa = PBXGroup;
 			children = (
+				B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */,
 				B60F8ABD2CBAB7ED00268D75 /* WriteVocabularyView.swift */,
-				B60F8AC42CBABC1B00268D75 /* WriteVocabularyViewModel.swift */,
 				B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */,
+				B60F8ACE2CBD09DB00268D75 /* VocabularyTrainingPage.swift */,
+				B60F8AD02CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift */,
 			);
 			path = VocabularyTask;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B60F8AD12CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift in Sources */,
 				B60F8AC12CBAB82100268D75 /* ResultSheetView.swift in Sources */,
 				B6FA77E62CA44D0500C52F73 /* LoginSignupNetworkAdapter.swift in Sources */,
 				B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */,
@@ -536,7 +540,6 @@
 				B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */,
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
 				B6FED4912C71F11B00339B7C /* LearningOverviewPage.swift in Sources */,
-				B60F8AC52CBABC1B00268D75 /* WriteVocabularyViewModel.swift in Sources */,
 				B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */,
 				B6FA77DE2CA41AC600C52F73 /* ViewExtension.swift in Sources */,
 				B6EB6D262CA414B80055FD67 /* HomePage.swift in Sources */,
@@ -563,6 +566,7 @@
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
 				B60F8AC32CBAB84F00268D75 /* ResultSheetViewModel.swift in Sources */,
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
+				B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */,
 				B60F8ACD2CBC8AF800268D75 /* VocabularyTraining.swift in Sources */,
 				B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */,
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,
