@@ -7,6 +7,7 @@ struct ListeningComprehensionPage: View {
     
     var body: some View {
         VStack {
+            Text("Aufgabenstellung")
             if let player = viewModel.audioPlayer {
                 AudioPlayerView(player: player)
             }

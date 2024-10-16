@@ -37,6 +37,9 @@ class ProdENV: BaseENV, APIKeyable {
     var USER_PASSWORD: String {
         dict.object(forKey: "USER_PASSWORD") as? String ?? ""
     }
+    var CONVERSATION_ASSISTANT_ID: String {
+        dict.object(forKey: "CONVERSATION_ASSISTANT_ID") as? String ?? ""
+    }
     
     init() {
         super.init(resourceName: "Env-Properties")

@@ -27,6 +27,14 @@
 		B60F8AD32CBD108F00268D75 /* ListeningComprehensionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AD22CBD108F00268D75 /* ListeningComprehensionPage.swift */; };
 		B60F8AD62CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AD52CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift */; };
 		B60F8AD82CBD55CF00268D75 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AD72CBD55CE00268D75 /* AudioPlayerView.swift */; };
+		B60F8ADB2CBDA9F700268D75 /* ConversationSimulationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ADA2CBDA9F700268D75 /* ConversationSimulationPage.swift */; };
+		B60F8ADD2CBDAA0C00268D75 /* ConversationSimulationPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ADC2CBDAA0C00268D75 /* ConversationSimulationPageViewModel.swift */; };
+		B60F8ADF2CBDCDDD00268D75 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8ADE2CBDCDDD00268D75 /* SpeechRecognizer.swift */; };
+		B60F8AE12CBE6B9200268D75 /* OpenAIServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE02CBE6B9200268D75 /* OpenAIServiceProvider.swift */; };
+		B60F8AE32CBFC36E00268D75 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE22CBFC36E00268D75 /* AudioPlayer.swift */; };
+		B60F8AE52CBFE76200268D75 /* ConversationSimulationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */; };
+		B60F8AE82CBFE7B300268D75 /* RoleOptionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */; };
+		B60F8AEA2CBFE85300268D75 /* ConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */; };
 		B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FA2CB0581A006B3364 /* SwiftOpenAI */; };
 		B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FC2CB059B7006B3364 /* SwiftOpenAI */; };
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
@@ -128,6 +136,14 @@
 		B60F8AD22CBD108F00268D75 /* ListeningComprehensionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionPage.swift; sourceTree = "<group>"; };
 		B60F8AD52CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionPageViewModel.swift; sourceTree = "<group>"; };
 		B60F8AD72CBD55CE00268D75 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
+		B60F8ADA2CBDA9F700268D75 /* ConversationSimulationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSimulationPage.swift; sourceTree = "<group>"; };
+		B60F8ADC2CBDAA0C00268D75 /* ConversationSimulationPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSimulationPageViewModel.swift; sourceTree = "<group>"; };
+		B60F8ADE2CBDCDDD00268D75 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
+		B60F8AE02CBE6B9200268D75 /* OpenAIServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIServiceProvider.swift; sourceTree = "<group>"; };
+		B60F8AE22CBFC36E00268D75 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSimulationManager.swift; sourceTree = "<group>"; };
+		B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleOptionsResponse.swift; sourceTree = "<group>"; };
+		B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -222,6 +238,7 @@
 		B60F8AB72CB8194600268D75 /* ScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
+				B60F8AD92CBDA9DD00268D75 /* ConversationSimulation */,
 				B60F8AD42CBD10A500268D75 /* ListeningComprehension */,
 				B60F8ABF2CBAB81300268D75 /* ResultSheet */,
 				B60F8ABC2CBAB7CF00268D75 /* VocabularyTask */,
@@ -259,8 +276,30 @@
 				B60F8AD22CBD108F00268D75 /* ListeningComprehensionPage.swift */,
 				B60F8AD52CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift */,
 				B60F8AD72CBD55CE00268D75 /* AudioPlayerView.swift */,
+				B60F8AE22CBFC36E00268D75 /* AudioPlayer.swift */,
 			);
 			path = ListeningComprehension;
+			sourceTree = "<group>";
+		};
+		B60F8AD92CBDA9DD00268D75 /* ConversationSimulation */ = {
+			isa = PBXGroup;
+			children = (
+				B60F8AE62CBFE7A600268D75 /* Model */,
+				B60F8ADA2CBDA9F700268D75 /* ConversationSimulationPage.swift */,
+				B60F8ADC2CBDAA0C00268D75 /* ConversationSimulationPageViewModel.swift */,
+				B60F8ADE2CBDCDDD00268D75 /* SpeechRecognizer.swift */,
+				B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */,
+			);
+			path = ConversationSimulation;
+			sourceTree = "<group>";
+		};
+		B60F8AE62CBFE7A600268D75 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */,
+				B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		B63874FE2CB06800006B3364 /* Frameworks */ = {
@@ -339,6 +378,7 @@
 				B6FA77DB2CA41AAD00C52F73 /* Styleguide.swift */,
 				B6FA77DD2CA41AC600C52F73 /* ViewExtension.swift */,
 				B6FA77DF2CA41ADB00C52F73 /* Router.swift */,
+				B60F8AE02CBE6B9200268D75 /* OpenAIServiceProvider.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -551,6 +591,7 @@
 				B60F8AC12CBAB82100268D75 /* ResultSheetView.swift in Sources */,
 				B6FA77E62CA44D0500C52F73 /* LoginSignupNetworkAdapter.swift in Sources */,
 				B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */,
+				B60F8ADB2CBDA9F700268D75 /* ConversationSimulationPage.swift in Sources */,
 				B60F8AD62CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift in Sources */,
 				B60F8AD32CBD108F00268D75 /* ListeningComprehensionPage.swift in Sources */,
 				B6FA77E42CA44CFB00C52F73 /* LoginPage.swift in Sources */,
@@ -562,23 +603,28 @@
 				B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */,
 				B6FA77DE2CA41AC600C52F73 /* ViewExtension.swift in Sources */,
 				B6EB6D262CA414B80055FD67 /* HomePage.swift in Sources */,
+				B60F8AEA2CBFE85300268D75 /* ConversationResponse.swift in Sources */,
 				B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */,
 				B6FED3BC2C70B3BB00339B7C /* NeoLinguaApp.swift in Sources */,
 				B6FA77D32CA419F000C52F73 /* SignupPage.swift in Sources */,
 				B60F8AB52CB7E85A00268D75 /* PointOfInterest.swift in Sources */,
 				B6EB6D2C2CA415240055FD67 /* AccountPageViewModel.swift in Sources */,
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
+				B60F8AE12CBE6B9200268D75 /* OpenAIServiceProvider.swift in Sources */,
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
 				B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */,
 				B6FA77D72CA41A4500C52F73 /* AppDelegate.swift in Sources */,
 				B6FA77C52CA4192600C52F73 /* OnboardingPageViewModel.swift in Sources */,
+				B60F8AE32CBFC36E00268D75 /* AudioPlayer.swift in Sources */,
 				B6FA77E22CA41AEA00C52F73 /* EnvProperties.swift in Sources */,
 				B60F8AD82CBD55CF00268D75 /* AudioPlayerView.swift in Sources */,
 				B6FA77EA2CA49E7D00C52F73 /* SignupUserDataPage.swift in Sources */,
+				B60F8AE82CBFE7B300268D75 /* RoleOptionsResponse.swift in Sources */,
 				B6FA77E02CA41ADB00C52F73 /* Router.swift in Sources */,
 				B60F8ABB2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift in Sources */,
+				B60F8ADD2CBDAA0C00268D75 /* ConversationSimulationPageViewModel.swift in Sources */,
 				B6FA77D92CA41A7B00C52F73 /* PageHeader.swift in Sources */,
 				B6FED4932C71F12600339B7C /* LearningOverviewPageView.swift in Sources */,
 				B6FA77C92CA4197800C52F73 /* OnboardingContent.swift in Sources */,
@@ -591,9 +637,11 @@
 				B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */,
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,
 				B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */,
+				B60F8AE52CBFE76200268D75 /* ConversationSimulationManager.swift in Sources */,
 				B60F8ACB2CBC854000268D75 /* SentenceBuildingView.swift in Sources */,
 				B60F8ABE2CBAB7ED00268D75 /* WriteVocabularyView.swift in Sources */,
 				B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */,
+				B60F8ADF2CBDCDDD00268D75 /* SpeechRecognizer.swift in Sources */,
 				B6EB6D322CA416670055FD67 /* ChipView.swift in Sources */,
 				B60F8AAC2CB7D77900268D75 /* MapViewController.swift in Sources */,
 			);

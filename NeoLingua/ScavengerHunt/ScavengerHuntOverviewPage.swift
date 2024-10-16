@@ -17,6 +17,10 @@ struct ScavengerHuntOverviewPage: View {
             Button("Hörverständnis Aufgaben starten") {
                 router.push(.learningTask(.listeningComprehensionPage))
             }
+            
+            Button("Gesprächssimulation starten") {
+                router.push(.learningTask(.conversationSimulationPage))
+            }
 
         }.navigationDestination(for: Route.self) { route in
             router.destination(for: route)
