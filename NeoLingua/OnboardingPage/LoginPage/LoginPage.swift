@@ -58,6 +58,7 @@ struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
     }
     
     @ViewBuilder

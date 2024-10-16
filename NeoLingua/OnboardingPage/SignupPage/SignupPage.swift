@@ -49,7 +49,12 @@ struct SignupPage<ViewModel>: View where ViewModel: SignupPageViewModel {
                     Text("Log in").foregroundColor(.black)
                 }
             }
-        }.padding()
+        }
+        .padding()
+        .navigationDestination(for: Route.self) { route in
+            router.destination(for: route)
+        }
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
     }
     
     @ViewBuilder

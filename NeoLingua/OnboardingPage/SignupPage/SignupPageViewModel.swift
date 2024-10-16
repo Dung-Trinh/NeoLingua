@@ -5,6 +5,7 @@ protocol SignupPageViewModel: ObservableObject {
     var name: String { get set }
     var email: String { get set }
     var password: String { get set }
+    var isLoading: Bool { get }
     
     func didTapSignup() async
     func didTapLogin()
@@ -16,6 +17,7 @@ class SignupPageViewModelImpl: SignupPageViewModel {
     @Published var email: String = "test@test.de"
     @Published var password: String = ""
     @Published var router: Router
+    @Published var isLoading: Bool = false
 
     private let loginAdapter: LoginSignupNetworkAdapter
     
@@ -35,10 +37,11 @@ class SignupPageViewModelImpl: SignupPageViewModel {
     }
     
     func didTapSignup() async {
+        isLoading = true
+        defer { isLoading = false }
         do {
             try await loginAdapter.createUser(email: email, password: password)
             router.push(.loginSignup(.signupData))
-            
         } catch let err {
             // TODO: adding error handling
             print(err.localizedDescription)
@@ -51,6 +54,9 @@ class SignupPageViewModelImpl: SignupPageViewModel {
     }
     
     func handleSignupWithGoogle(viewController: UIViewController) async {
+        isLoading = true
+        defer { isLoading = false }
+        
         do {
             try await loginAdapter.signupWithGoogle(viewController: viewController)
         } catch let err {

@@ -12,22 +12,9 @@ struct ListeningComprehensionPage: View {
                 AudioPlayerView(player: player)
             }
         }
-        .onAppear{
-            Task {
-                await viewModel.createSpeech()
-            }
-        }
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
-        .overlay(
-            Group {
-                if viewModel.isLoading {
-                    ProgressView()
-                } else {
-                    EmptyView()
-                }
-            }
-        )
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
     }
 }

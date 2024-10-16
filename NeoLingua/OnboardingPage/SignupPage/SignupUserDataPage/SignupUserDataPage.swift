@@ -2,7 +2,8 @@ import SwiftUI
 
 struct SignupUserDataPage<ViewModel>: View where ViewModel: SignupUserDataPageViewModel {
     @StateObject var viewModel: ViewModel
-    
+    @EnvironmentObject private var router: Router
+
     var body: some View {
         VStack {
             Text("SignupUserDataPage")
@@ -20,6 +21,9 @@ struct SignupUserDataPage<ViewModel>: View where ViewModel: SignupUserDataPageVi
             )
         }
         .padding()
+        .navigationDestination(for: Route.self) { route in
+            router.destination(for: route)
+        }
         .navigationBarHidden(true)
     }
     

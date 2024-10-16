@@ -20,7 +20,7 @@ struct BasicInputField: View {
                             .autocorrectionDisabled()
                             .autocapitalization(.none)
                     } else {
-                        SecureField("Passwoord", text: $input)
+                        SecureField("Password", text: $input)
                     }
                     Spacer()
                     Button {

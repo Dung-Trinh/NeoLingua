@@ -7,7 +7,8 @@ protocol SignupUserDataPageViewModel: ObservableObject {
     var estimationOfDailyUseTime: [Int] { get }
     var vms: [ChipViewModel] { get }
     var complexSkills: [ChipViewModel] { get }
-
+    var isLoading: Bool { get }
+    
     func saveUserData() async
     func didTapChipView(_ tappedChipVM: ChipViewModel)
 }
@@ -24,7 +25,6 @@ class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
         ChipViewModel(text: "Sprechen"),
         ChipViewModel(text: "Hören")
     ]
-    
     @Published var complexSkills: [ChipViewModel] = [
         ChipViewModel(text: "Wortschatz erweitern"),
         ChipViewModel(text: "Aussprache"),
@@ -32,7 +32,8 @@ class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
         ChipViewModel(text: "Konversationssicherheit")
     ]
     @Published var estimationOfDailyUseTime: [Int] = [5,15,30,60]
-    
+    @Published var isLoading = false
+
     private let userDataManager = UserDataManagerImpl()
     
     init(router: Router) {
@@ -44,6 +45,9 @@ class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
     }
     
     func saveUserData() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         var learningGoals = [String]()
         for vm in vms {
             if vm.isSelected {

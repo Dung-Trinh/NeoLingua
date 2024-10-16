@@ -8,6 +8,7 @@ protocol LoginPageViewModel: ObservableObject {
     var email: String { get set }
     var password: String { get set }
     var errorMessage: String? { get }
+    var isLoading: Bool { get }
     
     func didTappedLogin() async
     func handleSignInButton(viewController: UIViewController) async
@@ -17,7 +18,7 @@ class LoginPageViewModelImpl: LoginPageViewModel {
     @Published var email = ProdENV().USER_NAME
     @Published var password = ProdENV().USER_PASSWORD
     @Published var errorMessage: String?
-    
+    @Published var isLoading: Bool = false
     @Published var router: Router
     
     private let loginAdapter: LoginSignupNetworkAdapter
@@ -42,6 +43,8 @@ class LoginPageViewModelImpl: LoginPageViewModel {
         validateInput()
         
         do {
+            isLoading = true
+            defer { isLoading = false }
             try await loginAdapter.login(email: email, password: password)
             router.push(.homePage)
         } catch let err {

@@ -15,6 +15,9 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     
     init() {
         service = OpenAIServiceFactory.service(apiKey: ProdENV().OPENAI_KEY)
+        Task {
+            await createSpeech()
+        }
     }
     
     func createSpeech() async {

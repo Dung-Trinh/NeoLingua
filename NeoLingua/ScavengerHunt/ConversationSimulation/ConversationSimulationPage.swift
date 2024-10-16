@@ -1,4 +1,5 @@
 import SwiftUI
+import ActivityIndicatorView
 
 struct ConversationSimulationPage: View {
     @EnvironmentObject private var router: Router
@@ -30,8 +31,11 @@ struct ConversationSimulationPage: View {
                     viewModel.endRecording()
                 } label: {
                     if viewModel.isRecording {
-                        CircleLoadingAnimation()
-                        
+                        ActivityIndicatorView(
+                            isVisible: .constant(true), type: .gradient([.white, .red], lineWidth: 4)
+                        )
+                             .frame(width: 50.0, height: 50.0)
+                             .foregroundColor(.red)
                     }
                     
                     Image(systemName: "mic.circle")
@@ -72,30 +76,5 @@ struct ConversationSimulationPage: View {
         }.navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
-    }
-}
-
-struct CircleLoadingAnimation: View {
-    @State private var isAnimating = false
-    
-    var body: some View {
-        Circle()
-            .trim(from: 0.1, to: 0.7)
-            .stroke(
-                AngularGradient(
-                    gradient: Gradient(colors: [.blue, .purple]),
-                    center: .center
-                ),
-                style: StrokeStyle(lineWidth: 8, lineCap: .round)
-            )
-            .frame(width: 100, height: 100)
-            .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
-            .animation(
-                Animation.linear(duration: 1).repeatForever(autoreverses: false),
-                value: isAnimating
-            )
-            .onAppear {
-                isAnimating = true
-            }
     }
 }
