@@ -42,6 +42,8 @@
 		B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875042CB09A3F006B3364 /* SwiftOpenAI */; };
 		B66D67822CC059D200F70A56 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = B66D67812CC059D200F70A56 /* ActivityIndicatorView */; };
 		B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */; };
+		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
+		B66D67882CC2A13900F70A56 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67872CC2A13900F70A56 /* TestData.swift */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
 		B6E6569C2C939A7100350D98 /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B6FED42D2C70B72900339B7C /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -147,6 +149,8 @@
 		B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleOptionsResponse.swift; sourceTree = "<group>"; };
 		B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
 		B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
+		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
+		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -261,6 +265,7 @@
 				B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */,
 				B60F8ACE2CBD09DB00268D75 /* VocabularyTrainingPage.swift */,
 				B60F8AD02CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift */,
+				B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */,
 			);
 			path = VocabularyTask;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				B6FA77DF2CA41ADB00C52F73 /* Router.swift */,
 				B60F8AE02CBE6B9200268D75 /* OpenAIServiceProvider.swift */,
 				B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */,
+				B66D67872CC2A13900F70A56 /* TestData.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -597,6 +603,7 @@
 				B60F8AD12CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift in Sources */,
 				B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */,
 				B60F8AC12CBAB82100268D75 /* ResultSheetView.swift in Sources */,
+				B66D67882CC2A13900F70A56 /* TestData.swift in Sources */,
 				B6FA77E62CA44D0500C52F73 /* LoginSignupNetworkAdapter.swift in Sources */,
 				B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */,
 				B60F8ADB2CBDA9F700268D75 /* ConversationSimulationPage.swift in Sources */,
@@ -629,6 +636,7 @@
 				B6FA77E22CA41AEA00C52F73 /* EnvProperties.swift in Sources */,
 				B60F8AD82CBD55CF00268D75 /* AudioPlayerView.swift in Sources */,
 				B6FA77EA2CA49E7D00C52F73 /* SignupUserDataPage.swift in Sources */,
+				B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */,
 				B60F8AE82CBFE7B300268D75 /* RoleOptionsResponse.swift in Sources */,
 				B6FA77E02CA41ADB00C52F73 /* Router.swift in Sources */,
 				B60F8ABB2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift in Sources */,

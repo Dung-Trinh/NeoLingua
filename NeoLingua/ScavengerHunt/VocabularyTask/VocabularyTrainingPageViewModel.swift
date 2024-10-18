@@ -3,36 +3,14 @@ import Combine
 protocol VocabularyTrainingPageViewModel: ObservableObject {}
 
 class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
-    @Published var exercises: [VocabularyTrainingProtocol]
-    @Published var exercise: VocabularyTrainingProtocol
-
+    @Published var tasks: [VocabularyExercise] = []
+    @Published var currentTask: VocabularyExercise?
     @Published var userInputText: String = ""
-
     @Published var currentQuestionIndex = 0
     @Published var isSheetPresented: Bool = false
     @Published var sheetViewModel: ResultSheetViewModel?
     
-    let exercise1 = WriteWordExercise(
-        question: "Was ist das englische Wort für 'Hund'?",
-        answer: "dog",
-        translation: "Hund"
-    )
-    let exercise2 = SentenceBuildingExercise(
-        question: "Ordne die Wörter in der richtigen Reihenfolge.",
-        sentenceComponents: ["This", "is", "a", "house"],
-        answer: "This is a house", translation: "Das ist ein Haus"
-    )
-    let exercise3 = ChooseWordExercise(
-        question: "Wähle das richtige Wort.",
-        words: ["dog", "cat", "mouse"],
-        answer: "dog",
-        translation: "Hund"
-    )// TODO: View dafür entwickeln
-    
-    init() {
-        exercises = [exercise1, exercise2, exercise3]
-        exercise = exercise1
-    }
+    private var vocabularyManager = VocabularyManager()
     
     func checkAnswerTapped() {
         guard !userInputText.isEmpty else {
@@ -42,16 +20,12 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
         var userFeedbackText = ""
         var isAnswerCorrect = false
 
-        print("Vergleich")
-        print(userInputText)
-        print(exercise.answer)
-
-        if exercise.checkAnswer(userInputText) {
+        if let currentTask = currentTask, currentTask.checkAnswer(userInputText) {
             isAnswerCorrect = true
-            userFeedbackText = "Richtig! Die deutsche Übersetzung ist: \(exercise.translation)"
+            userFeedbackText = "Richtig! Die deutsche Übersetzung ist: \(currentTask.translation)"
         } else {
             isAnswerCorrect = false
-            userFeedbackText = "Falsch. Die richtige Antwort ist: \(exercise.answer), auf Deutsch: \(exercise.translation)"
+            userFeedbackText = "Falsch. Die richtige Antwort ist: \(currentTask?.answer), auf Deutsch: \(currentTask?.translation)"
         }
 
         sheetViewModel = ResultSheetViewModel(
@@ -66,12 +40,23 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     
     func continueTask() {
         isSheetPresented = false
-        if currentQuestionIndex < exercises.count - 1 {
+        if currentQuestionIndex < tasks.count - 1 {
             currentQuestionIndex += 1
-            exercise = exercises[currentQuestionIndex]
+            currentTask = tasks[currentQuestionIndex]
             userInputText = ""
         } else {
             // keine Fragen mehr
+        }
+    }
+    
+    func fetchVocabularyTraining() async {
+        do {
+            let result = try await vocabularyManager.fetchVocabularyTraining()
+            tasks = result
+            currentTask = result.first
+            print("fetchVocabularyTraining count: ", result.count)
+        } catch {
+            print("fetchVocabularyTraining error: ", error.localizedDescription)
         }
     }
 }

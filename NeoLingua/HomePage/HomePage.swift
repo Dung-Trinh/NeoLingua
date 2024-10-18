@@ -7,10 +7,9 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
     
     var body: some View {
         // TODO: fix nav bug
-//        NavigationStack(
-//            path: $router.routes
-//        ) {
-//            
+        NavigationStack(
+            path: $router.routes
+        ) {
             TabView {
                 ScavengerHuntOverviewPage()
                     .tabItem {
@@ -29,7 +28,7 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                         Label("Account", systemImage: "person.crop.circle.fill")
                     }
             }
-//        }
+        }
         .navigationBarHidden(true)
     }
 }

@@ -1,11 +1,12 @@
-enum VocabularyTrainingType: String, Codable {
-    case writeVocabulary = "WriteVocabulary"
-    case chooseVocabulary = "ChooseVocabulary"
-    case sentenceBuilding = "SentenceBuilding"
+enum VocabularyTaskType: String, Codable {
+    case fillInTheBlanks = "FILL_IN_THE_BLANKS"
+    case multipleChoice = "MULTIPLE_CHOICE"
+    case sentenceAssembly = "SENTENCE_ASSEMBLY"
 }
 
-protocol VocabularyTrainingProtocol {
-    var type: VocabularyTrainingType { get }
+protocol VocabularyExercise: Codable {
+    var id: String { get }
+    var type: VocabularyTaskType { get }
     var question: String { get }
     var answer: String { get }
     var translation: String { get }
@@ -13,18 +14,63 @@ protocol VocabularyTrainingProtocol {
     func checkAnswer(_ userAnswer: String) -> Bool
 }
 
-class VocabularyTraining: Codable, VocabularyTrainingProtocol {
-    let type: VocabularyTrainingType
+protocol VocabularyTaskProtocol {
+    var type: VocabularyTaskType { get }
+    var question: String { get }
+    var answer: String { get }
+    var translation: String { get }
+    var sentenceComponents: [String]? { get }
+    var selectableWords: [String]? { get }
+}
+
+struct VocabularyTraining: Codable {
+    let vocabularyTraining: [VocabularyTask]
+}
+
+class VocabularyTask: Codable, VocabularyTaskProtocol {
+    var type: VocabularyTaskType
+    
+    let id: String
     let question: String
     let answer: String
     let translation: String
+    var sentenceComponents: [String]?
+    var selectableWords: [String]?
+    
+    init(
+        id: String,
+        type: VocabularyTaskType,
+        question: String,
+        answer: String,
+        translation: String,
+        sentenceComponents: [String]?,
+        selectableWords: [String]?
+    ) {
+        self.id = id
+        self.type = type
+        self.question = question
+        self.answer = answer
+        self.translation = translation
+        self.sentenceComponents = sentenceComponents
+        self.selectableWords = selectableWords
+    }
+}
+
+class WriteWordExercise: VocabularyExercise {
+    var id: String
+    var type: VocabularyTaskType
+    var question: String
+    var answer: String
+    var translation: String
 
     init(
-        type: VocabularyTrainingType,
+        id: String,
+        type: VocabularyTaskType,
         question: String,
         answer: String,
         translation: String
     ) {
+        self.id = id
         self.type = type
         self.question = question
         self.answer = answer
@@ -32,71 +78,64 @@ class VocabularyTraining: Codable, VocabularyTrainingProtocol {
     }
     
     func checkAnswer(_ userAnswer: String) -> Bool {
-        userAnswer.lowercased() == answer.lowercased()
+        return userAnswer.lowercased() == answer.lowercased()
     }
 }
 
-class WriteWordExercise: VocabularyTraining {
-    init(
-        question: String,
-        answer: String,
-        translation: String
-    ) {
-        super.init(
-            type: .writeVocabulary,
-            question: question,
-            answer: answer,
-            translation: translation
-        )
-    }
-    
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
-    }
-}
-
-class SentenceBuildingExercise: VocabularyTraining {
+class SentenceBuildingExercise: VocabularyExercise {
+    var id: String
+    var type: VocabularyTaskType
+    var question: String
+    var answer: String
+    var translation: String
     let sentenceComponents: [String]
     
     init(
+        id: String,
+        type: VocabularyTaskType,
         question: String,
-        sentenceComponents: [String],
         answer: String,
-        translation: String
+        translation: String,
+        sentenceComponents: [String]
     ) {
         self.sentenceComponents = sentenceComponents
-        super.init(
-            type: .sentenceBuilding,
-            question: question,
-            answer: answer,
-            translation: translation
-        )
+        self.id = id
+        self.type = type
+        self.question = question
+        self.answer = answer
+        self.translation = translation
     }
     
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+    func checkAnswer(_ userAnswer: String) -> Bool {
+        return userAnswer.lowercased() == answer.lowercased()
     }
 }
 
-class ChooseWordExercise: VocabularyTraining {
-    let words: [String]
+class ChooseWordExercise: VocabularyExercise {
+    var id: String
+    var type: VocabularyTaskType
+    var question: String
+    var answer: String
+    var translation: String
+    let selectableWords: [String]
     
     init(
+        id: String,
+        type: VocabularyTaskType,
         question: String,
-        words: [String],
         answer: String,
-        translation: String
+        translation: String,
+        selectableWords: [String]
     ) {
-        self.words = words
-        super.init(
-            type: .chooseVocabulary,
-            question: question,
-            answer: answer,
-            translation: translation
-        )
+        self.id = id
+        self.type = type
+        self.question = question
+        self.answer = answer
+        self.translation = translation
+        self.selectableWords = selectableWords
     }
     
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+    func checkAnswer(_ userAnswer: String) -> Bool {
+        return userAnswer.lowercased() == answer.lowercased()
     }
 }
