@@ -24,6 +24,7 @@ enum Route: Hashable {
         case vocabularyTrainingPage
         case listeningComprehensionPage
         case conversationSimulationPage
+        case writingTaskPage
     }
 }
 
@@ -93,6 +94,8 @@ class Router: ObservableObject  {
             ListeningComprehensionPage()
         case .conversationSimulationPage:
             ConversationSimulationPage()
+        case .writingTaskPage:
+            WritingTaskPage()
         }
     }
 }

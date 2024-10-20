@@ -7,32 +7,40 @@ protocol ListeningComprehensionPageViewModel: ObservableObject {
 
 class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewModel {
     @Published var isLoading = false
-    @Published var prompt = ""
+    @Published var userInput = ""
+    @Published var answers: [String] = []
     @Published var audioPlayer: AVAudioPlayer?
-    var service: OpenAIService
+    @Published var exercise: ListeningExercise?
+    @Published var evaluation: ListeningTaskEvaluation?
     
-    let textForSpeech: String = "Nestled in the heart of the town, the Kurpark offers a serene escape from the bustle of daily life, where visitors can rejuvenate both body and mind amidst meticulously landscaped gardens and natural springs.The park's harmonious blend of historic architecture and modern amenities creates a unique environment that fosters relaxation, wellness, and a deep connection to nature."
-    
+    private let service: OpenAIService
+    private let listeningComprehensionManager = ListeningComprehensionManager()
     init() {
         service = OpenAIServiceFactory.service(apiKey: ProdENV().OPENAI_KEY)
-        Task {
-            await createSpeech()
-        }
     }
     
-    func createSpeech() async {
+    func fetchListeningComprehensionTask() async {
         isLoading = true
         defer { isLoading = false }
         
+        do {
+            exercise = try await listeningComprehensionManager.fetchListeningComprehensionTask()
+            if let exercise {
+                for _ in 0..<exercise.listeningQuestions.count {
+                    answers.append("")
+                }
+            }
+
+            await createSpeech()
+        } catch {
+            print("fetchListeningComprehensionTask error: ", error.localizedDescription)
+        }
+    }
+    
+    private func createSpeech() async {
         var speechErrorMessage = ""
         do {
-            let parameters = AudioSpeechParameters(
-                model: .tts1,
-                input: textForSpeech,
-                voice: .shimmer,
-                speed: 0.8
-            )
-            let speech = try await service.createSpeech(parameters: parameters).output
+            let speech = try await listeningComprehensionManager.createSpeech(text: exercise?.textForSpeech ?? "no text for speech")
             audioPlayer = try AVAudioPlayer(data: speech)
             audioPlayer?.prepareToPlay()
         } catch let error as APIError {
@@ -43,13 +51,20 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
         print(speechErrorMessage)
     }
     
-    func playAudio(from data: Data) {
+    func evaluateQuestions() async {
+        var userInputs: [String] = []
+        exercise?.listeningQuestions.enumerated().forEach { (index, question) in
+            if answers.count > index {
+                userInputs.append("task \(question.id) = \(answers[index])")
+            }
+        }
+        print("userResult: ")
+        let finalResult = userInputs.joined(separator: ",")
+        
         do {
-            audioPlayer = try AVAudioPlayer(data: data)
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
+            evaluation = try await listeningComprehensionManager.fetchListeningTaskEvaluation(userAnswer: finalResult)
         } catch {
-            print("Error playing audio: \(error.localizedDescription)")
+            print("evaluateQuestions error: ", error.localizedDescription)
         }
     }
 }

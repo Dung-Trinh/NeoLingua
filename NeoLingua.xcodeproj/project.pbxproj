@@ -44,6 +44,10 @@
 		B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */; };
 		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
 		B66D67882CC2A13900F70A56 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67872CC2A13900F70A56 /* TestData.swift */; };
+		B6A561FD2CC46C520008C05C /* WritingTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */; };
+		B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */; };
+		B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */; };
+		B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562022CC5396A0008C05C /* ListeningExercise.swift */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
 		B6E6569C2C939A7100350D98 /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B6FED42D2C70B72900339B7C /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -151,6 +155,10 @@
 		B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
 		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
 		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPage.swift; sourceTree = "<group>"; };
+		B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPageViewModel.swift; sourceTree = "<group>"; };
+		B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionManager.swift; sourceTree = "<group>"; };
+		B6A562022CC5396A0008C05C /* ListeningExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningExercise.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -246,6 +254,7 @@
 		B60F8AB72CB8194600268D75 /* ScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
+				B6A561FB2CC46C300008C05C /* WritingTask */,
 				B60F8AD92CBDA9DD00268D75 /* ConversationSimulation */,
 				B60F8AD42CBD10A500268D75 /* ListeningComprehension */,
 				B60F8ABF2CBAB81300268D75 /* ResultSheet */,
@@ -286,6 +295,8 @@
 				B60F8AD52CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift */,
 				B60F8AD72CBD55CE00268D75 /* AudioPlayerView.swift */,
 				B60F8AE22CBFC36E00268D75 /* AudioPlayer.swift */,
+				B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */,
+				B6A562022CC5396A0008C05C /* ListeningExercise.swift */,
 			);
 			path = ListeningComprehension;
 			sourceTree = "<group>";
@@ -316,6 +327,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6A561FB2CC46C300008C05C /* WritingTask */ = {
+			isa = PBXGroup;
+			children = (
+				B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */,
+				B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */,
+			);
+			path = WritingTask;
 			sourceTree = "<group>";
 		};
 		B6EB6D242CA414A90055FD67 /* HomePage */ = {
@@ -616,12 +636,14 @@
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
 				B6FED4912C71F11B00339B7C /* LearningOverviewPage.swift in Sources */,
 				B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */,
+				B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */,
 				B6FA77DE2CA41AC600C52F73 /* ViewExtension.swift in Sources */,
 				B6EB6D262CA414B80055FD67 /* HomePage.swift in Sources */,
 				B60F8AEA2CBFE85300268D75 /* ConversationResponse.swift in Sources */,
 				B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */,
 				B6FED3BC2C70B3BB00339B7C /* NeoLinguaApp.swift in Sources */,
 				B6FA77D32CA419F000C52F73 /* SignupPage.swift in Sources */,
+				B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */,
 				B60F8AB52CB7E85A00268D75 /* PointOfInterest.swift in Sources */,
 				B6EB6D2C2CA415240055FD67 /* AccountPageViewModel.swift in Sources */,
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
@@ -636,6 +658,7 @@
 				B6FA77E22CA41AEA00C52F73 /* EnvProperties.swift in Sources */,
 				B60F8AD82CBD55CF00268D75 /* AudioPlayerView.swift in Sources */,
 				B6FA77EA2CA49E7D00C52F73 /* SignupUserDataPage.swift in Sources */,
+				B6A561FD2CC46C520008C05C /* WritingTaskPage.swift in Sources */,
 				B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */,
 				B60F8AE82CBFE7B300268D75 /* RoleOptionsResponse.swift in Sources */,
 				B6FA77E02CA41ADB00C52F73 /* Router.swift in Sources */,
@@ -646,6 +669,7 @@
 				B6FA77C92CA4197800C52F73 /* OnboardingContent.swift in Sources */,
 				B6FED4962C71F3BD00339B7C /* ContextAwarePage.swift in Sources */,
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
+				B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */,
 				B60F8AC32CBAB84F00268D75 /* ResultSheetViewModel.swift in Sources */,
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
 				B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */,

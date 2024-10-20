@@ -46,6 +46,9 @@ class ProdENV: BaseENV, APIKeyable {
         dict.object(forKey: "VOCABULARY_ASSISTANT_ID") as? String ?? ""
     }
     
+    var LISTENING_COMPREHENSION_ASSISTANT_ID: String {
+        dict.object(forKey: "LISTENING_COMPREHENSION_ASSISTANT_ID") as? String ?? ""
+    }
     init() {
         super.init(resourceName: "Env-Properties")
     }
