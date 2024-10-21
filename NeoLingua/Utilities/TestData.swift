@@ -1,4 +1,5 @@
 import Foundation
+import GoogleMaps
 
 class TestData {
     static let vocabularyTasks: [VocabularyExercise] = [
@@ -23,7 +24,7 @@ class TestData {
                 "in",
                 "Park",
                 "the"
-              ]
+            ]
         ),
         ChooseWordExercise(
             id: "3",
@@ -36,7 +37,12 @@ class TestData {
                 "lakes",
                 "buildings",
                 "restaurants"
-              ]
+            ]
         )
+    ]
+    static let pointOfInterestSpots: [PointOfInterest] = [
+        PointOfInterest(name: "Spielbank Wiesbaden", coordinate: CLLocationCoordinate2D(latitude: 50.084722, longitude: 8.247252)),
+        PointOfInterest(name: "Kurpark Wiesbaden", coordinate: CLLocationCoordinate2D(latitude: 50.084510, longitude: 8.251848)),
+        PointOfInterest(name: "Warmer Damm", coordinate: CLLocationCoordinate2D(latitude: 50.082465, longitude: 8.246972))
     ]
 }

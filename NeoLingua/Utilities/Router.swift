@@ -21,14 +21,13 @@ enum Route: Hashable {
     }
     
     enum LearningTaskRoute: Hashable {
+        case map
         case vocabularyTrainingPage
         case listeningComprehensionPage
         case conversationSimulationPage
         case writingTaskPage
     }
 }
-
-
 //@Observable
 class Router: ObservableObject  {
     @Published var routes: [Route] = []
@@ -50,8 +49,17 @@ class Router: ObservableObject  {
         case .scavengerHunt(let scavengerHuntRoute):
                 handleScavengerHuntRoutes(scavengerHuntRoute)
         case .learningTask(let learningTaskRoute):
-            handleLearningTaskRoute(learningTaskRoute)
+            EmptyView()
+//            handleLearningTaskRoute(learningTaskRoute)
         }
+    }
+    
+    @ViewBuilder
+    func scavengerHuntDestination(
+        for route: Route.LearningTaskRoute,
+        scavengerHunt: ScavengerHunt
+    ) -> some View {
+        handleLearningTaskRoute(route, scavengerHunt: scavengerHunt)
     }
     
     func push(_ route: Route) {
@@ -81,12 +89,16 @@ class Router: ObservableObject  {
             case .overview:
                 ScavengerHuntOverviewPage()
             case .map:
-                ScavengerHuntMap()
+            EmptyView()
+//                ScavengerHuntMap()
         }
     }
     
     @ViewBuilder
-    private func handleLearningTaskRoute(_ learningTaskRoute: Route.LearningTaskRoute) -> some View {
+    private func handleLearningTaskRoute(
+        _ learningTaskRoute: Route.LearningTaskRoute,
+        scavengerHunt: ScavengerHunt
+    ) -> some View {
         switch learningTaskRoute {
         case .vocabularyTrainingPage:
             VocabularyTrainingPage()
@@ -96,6 +108,8 @@ class Router: ObservableObject  {
             ConversationSimulationPage()
         case .writingTaskPage:
             WritingTaskPage()
+        case .map:
+            ScavengerHuntMap(viewModel: ScavengerHuntMapViewModelImpl(scavengerHunt: scavengerHunt))
         }
     }
 }

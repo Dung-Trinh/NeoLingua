@@ -1,6 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.1" creator="Xcode">
-  <wpt lat="50.081610" lon="8.24208">
-    <name>Wiesbaden</name>
-  </wpt>
+<?xml version="1.0"?>
+<gpx version="1.1" creator="gpxgenerator.com">
+<wpt lat="50.08449853960496" lon="8.251625561172">
+    <ele>121.81</ele>
+    <time>2024-10-20T21:25:15Z</time>
+</wpt>
+<wpt lat="50.08539348174021" lon="8.251850866729251">
+    <ele>131.70</ele>
+    <time>2024-10-20T21:25:22Z</time>
+</wpt>
+<wpt lat="50.08116018585202" lon="8.246020892208707">
+    <ele>111.04</ele>
+    <time>2024-10-20T21:26:07Z</time>
+</wpt>
+<wpt lat="50.082626607502114" lon="8.245559552258145">
+    <ele>111.87</ele>
+    <time>2024-10-20T21:26:18Z</time>
+</wpt>
 </gpx>

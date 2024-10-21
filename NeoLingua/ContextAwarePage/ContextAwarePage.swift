@@ -35,6 +35,12 @@ struct ContextAwarePage<ViewModel>: View where ViewModel: ContextAwarePageViewMo
                     await viewModel.requestVisionAPI()
                 }
             }
+            
+            Button("requestVisionAPI3") {
+                Task {
+                    try? await viewModel.requestVisionAPI3()
+                }
+            }
         }
     }
 }

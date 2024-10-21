@@ -3,6 +3,7 @@ import FirebaseStorage
 import _PhotosUI_SwiftUI
 import UIKit
 import SwiftOpenAI //  https://github.com/MacPaw/OpenAI
+import SwiftOpenAI
 
 protocol ContextAwarePageViewModel: ObservableObject {
     var selectedImage: UIImage? {get set}
@@ -11,6 +12,7 @@ protocol ContextAwarePageViewModel: ObservableObject {
     func convertDataToImage()
     func uploadImage() async
     func requestVisionAPI() async
+    func requestVisionAPI3() async throws
 }
 
 class ContextAwarePageViewModelImpl: ContextAwarePageViewModel {
@@ -19,7 +21,7 @@ class ContextAwarePageViewModelImpl: ContextAwarePageViewModel {
     
     @Published var selectedImage: UIImage? = nil
     @Published var selectedPhotos = [PhotosPickerItem]()
-    
+    private let openAiService = OpenAIServiceProvider.shared
     func uploadImage() async {
         guard let imageData = selectedImage?.jpegData(compressionQuality: 0.8) else { return }
         let storageRef = Storage.storage().reference()
@@ -113,31 +115,83 @@ class ContextAwarePageViewModelImpl: ContextAwarePageViewModel {
             }
         }
         
-        func convertImageURLToBase64DataURL(imageURL: String, completion: @escaping (String?) -> Void) {
-            guard let url = URL(string: imageURL) else {
+    }
+
+    func requestVisionAPI3() async throws {
+        let service = OpenAIServiceProvider.shared
+        let openAiServiceHelper = OpenAIServiceHelper()
+        var threadID = ""
+        let assistantID = "asst_UGMnDx0fcYMJNFhEhu6PVDrr"
+
+        let prompt = "a planet with some stars"
+        
+        guard let imageURL = URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/M31bobo.jpg/640px-M31bobo.jpg"),
+              let imageData = try? Data(contentsOf: imageURL) else {
+            print("Fehler beim Herunterladen des Bildes")
+            return
+        }
+        let imageContent = """
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "\(imageURL)"
+          }
+        }
+        """
+
+        let textContent = """
+        {
+          "type": "text",
+          "text": "\(prompt)"
+        }
+        """
+
+        let content = "[\(textContent), \(imageContent)]"
+
+        let parameters = MessageParameter(
+            role: .user,
+            content: content
+        )
+        
+        let thread = try await service.createThread(parameters: CreateThreadParameters())
+        threadID = thread.id
+        let _ = try await service.createMessage(
+            threadID: threadID,
+            parameters: parameters
+        )
+        
+        let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
+            assistantID: assistantID,
+            threadID: threadID
+        )
+        print("jsonStringResponse")
+        print(jsonStringResponse)
+    }
+    
+    private func convertImageURLToBase64DataURL(imageURL: String, completion: @escaping (String?) -> Void) {
+        guard let url = URL(string: imageURL) else {
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error downloading image: \(error)")
                 completion(nil)
                 return
             }
             
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let error = error {
-                    print("Error downloading image: \(error)")
-                    completion(nil)
-                    return
-                }
-                
-                guard let data = data else {
-                    completion(nil)
-                    return
-                }
-                
-                // convert data to base64 string
-                let base64String = data.base64EncodedString()
-                let dataURLString = "data:image/jpeg;base64,\(base64String)"
-                completion(dataURLString)
+            guard let data = data else {
+                completion(nil)
+                return
             }
             
-            task.resume()
+            // convert data to base64 string
+            let base64String = data.base64EncodedString()
+            let dataURLString = "data:image/jpeg;base64,\(base64String)"
+            completion(dataURLString)
         }
+        
+        task.resume()
     }
 }

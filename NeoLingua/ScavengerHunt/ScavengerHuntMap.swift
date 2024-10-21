@@ -3,20 +3,9 @@ import SwiftUI
 import GoogleMaps
 
 struct ScavengerHuntMap: View {
-    static let pointOfInterestSpots = [
-        PointOfInterest(name: "Spielbank Wiesbaden", coordinate: CLLocationCoordinate2D(latitude: 50.083091, longitude: 8.243167)),
-        PointOfInterest(name: "Kurpark Wiesbaden", coordinate: CLLocationCoordinate2D(latitude: 50.085472, longitude: 8.254062)),
-        PointOfInterest(name: "Warmer Damm", coordinate: CLLocationCoordinate2D(latitude: 50.081240, longitude: 8.246010))
-        ]
-    
-    @State var markers: [GMSMarker] = pointOfInterestSpots.map {
-        let marker = GMSMarker(position: $0.coordinate)
-        marker.title = $0.name
-        return marker
-    }
+    @StateObject var viewModel: ScavengerHuntMapViewModelImpl
     @State var zoomInCenter: Bool = false
     @State var expandList: Bool = false
-    @State var selectedMarker: GMSMarker?
     @State var yDragTranslation: CGFloat = 0
     let scrollViewHeight: CGFloat = 80
     
@@ -24,8 +13,8 @@ struct ScavengerHuntMap: View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
               MapViewControllerBridge(
-                markers: $markers,
-                selectedMarker: $selectedMarker,
+                markers: $viewModel.markers,
+                selectedMarker: $viewModel.selectedMarker,
                 onAnimationEnded: {
                     self.zoomInCenter = true
                 },
@@ -37,9 +26,9 @@ struct ScavengerHuntMap: View {
               .background(Color(red: 254.0/255.0, green: 1, blue: 220.0/255.0))
 
               // Cities List
-              CitiesList(markers: $markers) { (marker) in
-                guard self.selectedMarker != marker else { return }
-                self.selectedMarker = marker
+              CitiesList(markers: $viewModel.markers) { (marker) in
+                guard self.viewModel.selectedMarker != marker else { return }
+                self.viewModel.selectedMarker = marker
                 self.zoomInCenter = false
                 self.expandList = false
               }  handleAction: {

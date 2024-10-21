@@ -6,8 +6,10 @@ struct ScavengerHuntOverviewPage: View {
     
     var body: some View {
         VStack {
-            Button("Spielfeld anzeigen") {
-                router.push(.scavengerHunt(.map))
+            if let scavengerHunt = viewModel.currentScavengerHunt {
+                Button("Spielfeld anzeigen") {
+                    router.push(.learningTask(.map))
+                }
             }
             
             Button("Vokabelübung starten") {
@@ -25,9 +27,22 @@ struct ScavengerHuntOverviewPage: View {
             Button("Schreibaufgabe starten") {
                 router.push(.learningTask(.writingTaskPage))
             }
+            
+            Button("fetch ScavengerHunt") {
+                Task {
+                    await viewModel.fetchScavengerHunt()
+                }
+            }
 
         }.navigationDestination(for: Route.self) { route in
-            router.destination(for: route)
+            switch route {
+            case .learningTask(let learningTaskRoute):
+                if let scavengerHunt = viewModel.currentScavengerHunt {
+                    router.scavengerHuntDestination(for: learningTaskRoute, scavengerHunt: scavengerHunt)
+                }
+            default:
+                router.destination(for: route)
+            }
         }
     }
 }

@@ -174,15 +174,15 @@ class LearningOverviewPageViewImpl: LearningOverviewPageView {
 }
 
 // Datenmodelle für die API-Antwort
-struct LocationResponse: Codable {
-    let location: Location
-    let accuracy: Double
-}
+//struct LocationResponse: Codable {
+//    let location: Location
+//    let accuracy: Double
+//}
 
-struct Location: Codable {
-    let lat: Double
-    let lng: Double
-}
+//struct Location: Codable {
+//    let lat: Double
+//    let lng: Double
+//}
 
 struct MathStep: Codable {
     let explanation: String

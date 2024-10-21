@@ -2,11 +2,7 @@ import GoogleMaps
 import SwiftUI
 import UIKit
 
-let pointOfInterestSpots = [
-    PointOfInterest(name: "Spielbank Wiesbaden", coordinate: CLLocationCoordinate2D(latitude: 50.083091, longitude: 8.243167)),
-    PointOfInterest(name: "Kurpark Wiesbaden", coordinate: CLLocationCoordinate2D(latitude: 50.085472, longitude: 8.254062)),
-    PointOfInterest(name: "Warmer Damm", coordinate: CLLocationCoordinate2D(latitude: 50.081240, longitude: 8.246010))
-]
+let pointOfInterestSpots = TestData.pointOfInterestSpots
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
@@ -35,9 +31,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.view.addSubview(map)
     }
     
-    func drawRadiusCircle(at center: CLLocationCoordinate2D, radius: CLLocationDistance) {
+    func drawRadiusCircle(at center: CLLocationCoordinate2D, radius: CLLocationDistance, color: UIColor? = nil) {
         let circle = GMSCircle(position: center, radius: radius)
-        circle.fillColor = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.1)
+        if (color != nil) {
+            circle.fillColor = color?.withAlphaComponent(0.1)
+        } else {
+            circle.fillColor = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.1)
+        }
         circle.strokeColor = .blue
         circle.strokeWidth = 2
         circle.map = map
@@ -70,6 +70,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        let targetLocation = CLLocation(latitude: 50.085472, longitude: 8.251848)
+        let distanceInMeters = location.distance(from: targetLocation)
+        
+        let isInRadius = checkIfWithinRadius(currentLocation: location, targetLocation: targetLocation, radius: 50)
+        drawRadiusCircle(at: CLLocationCoordinate2D(latitude: 50.085472, longitude: 8.251848), radius: 50, color: UIColor.red)
+        print("distanceInMeters: ", distanceInMeters)
+        print("isInRadius: ", isInRadius)
         // center camera when user location is available
 //        guard let location = locations.first else { return }
 //        
@@ -85,5 +93,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if status == .authorizedWhenInUse {
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    func checkIfWithinRadius(currentLocation: CLLocation, targetLocation: CLLocation, radius: Double) -> Bool {
+        let distanceInMeters = currentLocation.distance(from: targetLocation)
+        
+        return distanceInMeters <= radius
     }
 }

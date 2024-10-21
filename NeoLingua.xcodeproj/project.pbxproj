@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B609EED12CC6A6A600A029E8 /* ScavengerHuntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */; };
+		B609EED32CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED22CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift */; };
 		B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */; };
 		B60F8AA32CB5D55300268D75 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B60F8AA22CB5D55300268D75 /* Lottie */; };
 		B60F8AA92CB5DDF000268D75 /* checkAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */; };
@@ -125,6 +127,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntManager.swift; sourceTree = "<group>"; };
+		B609EED22CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntMapViewModel.swift; sourceTree = "<group>"; };
 		B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSuccessPage.swift; sourceTree = "<group>"; };
 		B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkAnimation.json; sourceTree = "<group>"; };
 		B60F8AAB2CB7D77900268D75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 		B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPageViewModel.swift; sourceTree = "<group>"; };
 		B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionManager.swift; sourceTree = "<group>"; };
 		B6A562022CC5396A0008C05C /* ListeningExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningExercise.swift; sourceTree = "<group>"; };
+		B6A562042CC56B070008C05C /* Wiesbaden2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wiesbaden2.gpx; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -260,8 +265,10 @@
 				B60F8ABF2CBAB81300268D75 /* ResultSheet */,
 				B60F8ABC2CBAB7CF00268D75 /* VocabularyTask */,
 				B60F8AAF2CB7D8E200268D75 /* ScavengerHuntMap.swift */,
+				B609EED22CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift */,
 				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
 				B60F8ABA2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift */,
+				B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */,
 			);
 			path = ScavengerHunt;
 			sourceTree = "<group>";
@@ -437,6 +444,7 @@
 		B6FED3AF2C70B3BB00339B7C = {
 			isa = PBXGroup;
 			children = (
+				B6A562042CC56B070008C05C /* Wiesbaden2.gpx */,
 				B60F8AB62CB80F2000268D75 /* WiesbadenLocation.gpx */,
 				B6FED3BA2C70B3BB00339B7C /* NeoLingua */,
 				B6FED3B92C70B3BB00339B7C /* Products */,
@@ -651,6 +659,7 @@
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
+				B609EED12CC6A6A600A029E8 /* ScavengerHuntManager.swift in Sources */,
 				B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */,
 				B6FA77D72CA41A4500C52F73 /* AppDelegate.swift in Sources */,
 				B6FA77C52CA4192600C52F73 /* OnboardingPageViewModel.swift in Sources */,
@@ -678,6 +687,7 @@
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,
 				B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */,
 				B60F8AE52CBFE76200268D75 /* ConversationSimulationManager.swift in Sources */,
+				B609EED32CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift in Sources */,
 				B60F8ACB2CBC854000268D75 /* SentenceBuildingView.swift in Sources */,
 				B60F8ABE2CBAB7ED00268D75 /* WriteVocabularyView.swift in Sources */,
 				B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */,
