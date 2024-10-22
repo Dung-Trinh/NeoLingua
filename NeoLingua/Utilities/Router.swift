@@ -7,6 +7,8 @@ enum Route: Hashable {
     case learningTask(LearningTaskRoute)
     case homePage
     case onboardingPage
+    case taskLocation
+    
     
     enum LoginSignupRoute: Hashable {
         case login
@@ -17,20 +19,24 @@ enum Route: Hashable {
     
     enum ScavengerHuntRoute: Hashable {
         case overview
-        case map
+        case taskLocation
     }
     
     enum LearningTaskRoute: Hashable {
         case map
-        case vocabularyTrainingPage
-        case listeningComprehensionPage
-        case conversationSimulationPage
-        case writingTaskPage
+        case vocabularyTrainingPage(prompt: String)
+        case listeningComprehensionPage(prompt: String)
+        case conversationSimulationPage(prompt: String)
+        case writingTaskPage(prompt: String)
     }
 }
 //@Observable
 class Router: ObservableObject  {
     @Published var routes: [Route] = []
+    
+    var taskLocation: TaskLocation? = nil
+    var scavengerHunt: ScavengerHunt? = nil
+
     let startEmptyStackViews: [Route] = [
         .loginSignup(.login),
         .loginSignup(.signup),
@@ -49,8 +55,13 @@ class Router: ObservableObject  {
         case .scavengerHunt(let scavengerHuntRoute):
                 handleScavengerHuntRoutes(scavengerHuntRoute)
         case .learningTask(let learningTaskRoute):
-            EmptyView()
-//            handleLearningTaskRoute(learningTaskRoute)
+            if let scavengerHunt = scavengerHunt {
+                scavengerHuntDestination(for: learningTaskRoute, scavengerHunt: scavengerHunt)
+            }
+        case .taskLocation:
+            if let taskLocation = taskLocation {
+                TaskLocationPage(viewModel: TaskLocationPageViewModelImpl(taskLocation: taskLocation))
+            }
         }
     }
     
@@ -88,9 +99,10 @@ class Router: ObservableObject  {
         switch scavengerHuntRoute {
             case .overview:
                 ScavengerHuntOverviewPage()
-            case .map:
-            EmptyView()
-//                ScavengerHuntMap()
+        case .taskLocation:
+            if let taskLocation = taskLocation {
+                TaskLocationPage(viewModel: TaskLocationPageViewModelImpl(taskLocation: taskLocation))
+            }
         }
     }
     
@@ -100,16 +112,16 @@ class Router: ObservableObject  {
         scavengerHunt: ScavengerHunt
     ) -> some View {
         switch learningTaskRoute {
-        case .vocabularyTrainingPage:
-            VocabularyTrainingPage()
-        case .listeningComprehensionPage:
-            ListeningComprehensionPage()
-        case .conversationSimulationPage:
-            ConversationSimulationPage()
-        case .writingTaskPage:
+        case .vocabularyTrainingPage(let prompt):
+            VocabularyTrainingPage(viewModel: VocabularyTrainingPageViewModelImpl(prompt: prompt))
+        case .listeningComprehensionPage(let prompt):
+            ListeningComprehensionPage(viewModel: ListeningComprehensionPageViewModelImpl(prompt: prompt))
+        case .conversationSimulationPage(let prompt):
+            ConversationSimulationPage(viewModel: ConversationSimulationPageViewModelImpl(prompt: prompt))
+        case .writingTaskPage(let prompt):
             WritingTaskPage()
         case .map:
-            ScavengerHuntMap(viewModel: ScavengerHuntMapViewModelImpl(scavengerHunt: scavengerHunt))
+            ScavengerHuntMap(viewModel: ScavengerHuntMapViewModelImpl(router: self, scavengerHunt: scavengerHunt))
         }
     }
 }

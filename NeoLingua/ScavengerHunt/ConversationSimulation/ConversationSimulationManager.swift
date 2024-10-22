@@ -20,8 +20,8 @@ class ConversationSimulationManager {
         return nil
     }
     
-    func createConversation() async throws -> RoleOptionsResponse? {
-        let prompt = "you are in a turkish restaurant and want to order food and drinks"
+    func createConversation(prompt: String) async throws -> RoleOptionsResponse? {
+//        let prompt = "you are in a turkish restaurant and want to order food and drinks"
         let parameters = MessageParameter(
             role: .user,
             content: prompt

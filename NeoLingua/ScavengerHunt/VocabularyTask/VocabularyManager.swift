@@ -7,8 +7,8 @@ class VocabularyManager {
     let assistantID = ProdENV().VOCABULARY_ASSISTANT_ID
     var threadID = ""
     
-    func fetchVocabularyTraining() async throws -> [VocabularyExercise] {
-        let prompt = "create vocabulary task with the topic 'warmer damm' in Wiesbaden"
+    func fetchVocabularyTraining(prompt: String) async throws -> [VocabularyExercise] {
+//        let prompt = "create vocabulary task with the topic 'warmer damm' in Wiesbaden"
         let parameters = MessageParameter(
             role: .user,
             content: prompt

@@ -3,6 +3,7 @@ import SwiftUI
 import GoogleMaps
 
 struct ScavengerHuntMap: View {
+    @EnvironmentObject private var router: Router
     @StateObject var viewModel: ScavengerHuntMapViewModelImpl
     @State var zoomInCenter: Bool = false
     @State var expandList: Bool = false
@@ -24,17 +25,22 @@ struct ScavengerHuntMap: View {
                 })
               .animation(.easeIn)
               .background(Color(red: 254.0/255.0, green: 1, blue: 220.0/255.0))
-
-              // Cities List
-              CitiesList(markers: $viewModel.markers) { (marker) in
+                
+                // Cities List
+                CitiesList(
+                    markers: $viewModel.markers,
+                    taskLocation: $viewModel.scavengerHunt.taskLocations) { (location) in
+                        viewModel.tappedTaskLocation(location: location)
+                    }
+            setMarker: { (marker) in
                 guard self.viewModel.selectedMarker != marker else { return }
                 self.viewModel.selectedMarker = marker
                 self.zoomInCenter = false
                 self.expandList = false
-              }  handleAction: {
+            }  handleAction: {
                 self.expandList.toggle()
-              }
-              .background(Color.white)
+            }
+            .background(Color.white)
               .clipShape(RoundedRectangle(cornerRadius: 10))
               .offset(
                 x: 0,
@@ -53,13 +59,18 @@ struct ScavengerHuntMap: View {
               .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
             }
         }
+        .navigationDestination(for: Route.self) { route in
+                router.destination(for: route)
+        }
     }
 }
 
 struct CitiesList: View {
-    
     @Binding var markers: [GMSMarker]
-    var buttonAction: (GMSMarker) -> Void
+    @Binding var taskLocation: [TaskLocation]
+
+    var buttonAction: (TaskLocation) -> Void
+    var setMarker: (GMSMarker) -> Void
     var handleAction: () -> Void
     
     var body: some View {
@@ -83,16 +94,20 @@ struct CitiesList: View {
                     Button("Spielfeld anzeigen") {
                         
                     }
-                    ForEach(0..<self.markers.count) { id in
-                        let marker = self.markers[id]
+                    ForEach(taskLocation) { location in
                         Button(action: {
-                            buttonAction(marker)
+                            buttonAction(location)
+                            for marker in markers {
+                                if marker.title == location.name {
+                                    setMarker(marker)
+                                }
+                            }
                         }) {
-                            Text(marker.title ?? "")
+                            Text(location.name)
                         }
                     }
                 }
-//                .frame(maxWidth: .infinity,maxHeight: 200)
+                .frame(maxWidth: .infinity,maxHeight: 200)
             }
         }
     }

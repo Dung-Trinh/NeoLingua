@@ -12,10 +12,13 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     @Published var audioPlayer: AVAudioPlayer?
     @Published var exercise: ListeningExercise?
     @Published var evaluation: ListeningTaskEvaluation?
-    
+    let prompt: String
+
     private let service: OpenAIService
     private let listeningComprehensionManager = ListeningComprehensionManager()
-    init() {
+    
+    init(prompt: String) {
+        self.prompt = prompt
         service = OpenAIServiceFactory.service(apiKey: ProdENV().OPENAI_KEY)
     }
     
@@ -24,7 +27,7 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
         defer { isLoading = false }
         
         do {
-            exercise = try await listeningComprehensionManager.fetchListeningComprehensionTask()
+            exercise = try await listeningComprehensionManager.fetchListeningComprehensionTask(prompt: prompt)
             if let exercise {
                 for _ in 0..<exercise.listeningQuestions.count {
                     answers.append("")

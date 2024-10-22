@@ -2,9 +2,9 @@ import Foundation
 import SwiftOpenAI
 
 struct TaskPrompt: Codable {
-    let vocabularyTraining: String
-    let listeningComprehension: String
-    let conversationSimulation: String
+    let vocabularyTraining: String?
+    let listeningComprehension: String?
+    let conversationSimulation: String?
 }
 
 struct Location: Codable {
@@ -12,19 +12,30 @@ struct Location: Codable {
     let longitude: Double
 }
 
-struct TaskLocation: Codable {
+struct TaskLocation: Codable, Identifiable {
+    let id: String
     let name: String
     let type: String
     let location: Location
     let taskPrompt: TaskPrompt
     let photoClue: String
     let photoObject: String
+    
+    init(name: String, type: String, location: Location, taskPrompt: TaskPrompt, photoClue: String, photoObject: String) {
+        self.id = UUID().uuidString
+        self.name = name
+        self.type = type
+        self.location = location
+        self.taskPrompt = taskPrompt
+        self.photoClue = photoClue
+        self.photoObject = photoObject
+    }
 }
 
 struct ScavengerHunt: Codable {
     let id: String
     let introduction: String
-    let taskLocations: [TaskLocation]
+    var taskLocations: [TaskLocation]
 }
 
 class ScavengerHuntManager: TaskManager {

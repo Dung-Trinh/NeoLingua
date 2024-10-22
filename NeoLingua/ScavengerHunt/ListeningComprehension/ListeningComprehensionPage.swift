@@ -3,7 +3,7 @@ import SwiftOpenAI
 
 struct ListeningComprehensionPage: View {
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel = ListeningComprehensionPageViewModelImpl()
+    @StateObject var viewModel: ListeningComprehensionPageViewModelImpl
     
     var body: some View {
         ScrollView {

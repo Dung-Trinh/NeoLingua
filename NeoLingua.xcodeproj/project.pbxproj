@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B609EED12CC6A6A600A029E8 /* ScavengerHuntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */; };
 		B609EED32CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED22CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift */; };
+		B609EED62CC79A4300A029E8 /* TaskLocationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED52CC79A4200A029E8 /* TaskLocationPage.swift */; };
+		B609EED82CC79C3800A029E8 /* TaskLocationPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED72CC79C3800A029E8 /* TaskLocationPageViewModel.swift */; };
 		B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */; };
 		B60F8AA32CB5D55300268D75 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B60F8AA22CB5D55300268D75 /* Lottie */; };
 		B60F8AA92CB5DDF000268D75 /* checkAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */; };
@@ -129,6 +131,8 @@
 /* Begin PBXFileReference section */
 		B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntManager.swift; sourceTree = "<group>"; };
 		B609EED22CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntMapViewModel.swift; sourceTree = "<group>"; };
+		B609EED52CC79A4200A029E8 /* TaskLocationPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLocationPage.swift; sourceTree = "<group>"; };
+		B609EED72CC79C3800A029E8 /* TaskLocationPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLocationPageViewModel.swift; sourceTree = "<group>"; };
 		B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSuccessPage.swift; sourceTree = "<group>"; };
 		B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkAnimation.json; sourceTree = "<group>"; };
 		B60F8AAB2CB7D77900268D75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +250,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B609EED42CC79A1D00A029E8 /* TaskLocation */ = {
+			isa = PBXGroup;
+			children = (
+				B609EED52CC79A4200A029E8 /* TaskLocationPage.swift */,
+				B609EED72CC79C3800A029E8 /* TaskLocationPageViewModel.swift */,
+			);
+			path = TaskLocation;
+			sourceTree = "<group>";
+		};
 		B60F8AAA2CB7D76600268D75 /* GoogleMaps */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +272,7 @@
 		B60F8AB72CB8194600268D75 /* ScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
+				B609EED42CC79A1D00A029E8 /* TaskLocation */,
 				B6A561FB2CC46C300008C05C /* WritingTask */,
 				B60F8AD92CBDA9DD00268D75 /* ConversationSimulation */,
 				B60F8AD42CBD10A500268D75 /* ListeningComprehension */,
@@ -659,6 +673,7 @@
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
+				B609EED82CC79C3800A029E8 /* TaskLocationPageViewModel.swift in Sources */,
 				B609EED12CC6A6A600A029E8 /* ScavengerHuntManager.swift in Sources */,
 				B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */,
 				B6FA77D72CA41A4500C52F73 /* AppDelegate.swift in Sources */,
@@ -677,6 +692,7 @@
 				B6FED4932C71F12600339B7C /* LearningOverviewPageView.swift in Sources */,
 				B6FA77C92CA4197800C52F73 /* OnboardingContent.swift in Sources */,
 				B6FED4962C71F3BD00339B7C /* ContextAwarePage.swift in Sources */,
+				B609EED62CC79A4300A029E8 /* TaskLocationPage.swift in Sources */,
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
 				B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */,
 				B60F8AC32CBAB84F00268D75 /* ResultSheetViewModel.swift in Sources */,

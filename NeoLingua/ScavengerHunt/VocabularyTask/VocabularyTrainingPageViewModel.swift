@@ -9,8 +9,13 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     @Published var currentQuestionIndex = 0
     @Published var isSheetPresented: Bool = false
     @Published var sheetViewModel: ResultSheetViewModel?
-    
+    var prompt = ""
+
     private var vocabularyManager = VocabularyManager()
+    
+    init(prompt: String) {
+        self.prompt = prompt
+    }
     
     func checkAnswerTapped() {
         guard !userInputText.isEmpty else {
@@ -51,7 +56,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     
     func fetchVocabularyTraining() async {
         do {
-            let result = try await vocabularyManager.fetchVocabularyTraining()
+            let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
             tasks = result
             currentTask = result.first
             print("fetchVocabularyTraining count: ", result.count)

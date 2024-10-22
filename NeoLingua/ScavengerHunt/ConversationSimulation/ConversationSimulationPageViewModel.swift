@@ -26,8 +26,10 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var audioPlayer = AudioPlayer()
     @Published var conversationState: ConversationState = .start
     @Published var conversationEvaluation: ConversationEvaluation?
+    let prompt: String
 
-    init() {
+    init(prompt: String) {
+        self.prompt = prompt
         service = OpenAIServiceProvider.shared
         Task {
             await createConversationSimulation()
@@ -88,7 +90,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     
     func createConversationSimulation() async {
         do {
-            let result = try await conversationSimulationManager.createConversation()
+            let result = try await conversationSimulationManager.createConversation(prompt: prompt)
             roleOptionsResponse = result
             conversationState = .roleSelection
         } catch {

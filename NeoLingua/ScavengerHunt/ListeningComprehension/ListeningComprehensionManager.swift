@@ -11,8 +11,8 @@ class TaskManager {
 class ListeningComprehensionManager: TaskManager {
     let assistantID = ProdENV().LISTENING_COMPREHENSION_ASSISTANT_ID
 
-    func fetchListeningComprehensionTask() async throws -> ListeningExercise? {
-        let prompt = "create a listening comprehension task with the topic 'warmer damm' in Wiesbaden"
+    func fetchListeningComprehensionTask(prompt: String) async throws -> ListeningExercise? {
+//        let prompt = "create a listening comprehension task with the topic 'warmer damm' in Wiesbaden"
         let parameters = MessageParameter(
             role: .user,
             content: prompt

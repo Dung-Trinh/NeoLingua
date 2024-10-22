@@ -3,7 +3,7 @@ import ActivityIndicatorView
 
 struct ConversationSimulationPage: View {
     @EnvironmentObject private var router: Router
-    @StateObject private var viewModel = ConversationSimulationPageViewModelImpl()
+    @StateObject var viewModel: ConversationSimulationPageViewModelImpl
     
     var body: some View {
         VStack {

@@ -45,4 +45,36 @@ class TestData {
         PointOfInterest(name: "Kurpark Wiesbaden", coordinate: CLLocationCoordinate2D(latitude: 50.084510, longitude: 8.251848)),
         PointOfInterest(name: "Warmer Damm", coordinate: CLLocationCoordinate2D(latitude: 50.082465, longitude: 8.246972))
     ]
+    static let scavengerHunt: ScavengerHunt = ScavengerHunt(
+        id: "1",
+        introduction: "Welcome to the Wiesbaden themed English learning scavenger hunt! Explore the city's landmarks while improving your language skills.",
+        taskLocations: [
+            TaskLocation(
+                name: "Spielbank Wiesbaden",
+                type: "casino",
+                location: Location(latitude: 50.0847775, longitude: 8.2471916),
+                taskPrompt: TaskPrompt(
+                    vocabularyTraining: "Create vocabulary exercises related to the Spielbank Wiesbaden incorporating concepts such as 'gambling', 'roulette', 'jackpot', and 'casino'.",
+                    listeningComprehension: "Design a listening exercise that involves a visitor at Spielbank Wiesbaden asking about the rules of a specific game.",
+                    conversationSimulation: "Location: Casino. The conversation could be between a first-time visitor asking the croupier about how to play a specific game."
+                    
+                ),
+                photoClue: "Seek something known for 'luck' in the vicinity. This item shines bright.",
+                photoObject: "Casino Signage"
+            ),
+            TaskLocation(
+                name: "Bowling Green, Wiesbaden",
+                type: "park",
+                location: Location(latitude: 50.0847005, longitude: 8.2457267),
+                taskPrompt: TaskPrompt(
+                    vocabularyTraining: "Develop vocabulary exercises that emphasize the natural environment at Bowling Green, including words such as 'fountain', 'lawn', 'bench', and 'statue'.",
+                    listeningComprehension: "Create a listening comprehension task where someone describes a relaxing afternoon spent at Bowling Green, Wiesbaden.",
+                    conversationSimulation: "Location: Park. A conversation between friends planning a picnic and discussing their favorite spots in the park."
+                    
+                ),
+                photoClue: "Find the symbol of tranquility, where water flows endlessly.",
+                photoObject: "Fountain"
+            )
+        ]
+    )
 }

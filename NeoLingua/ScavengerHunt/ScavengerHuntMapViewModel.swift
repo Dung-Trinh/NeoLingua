@@ -8,10 +8,23 @@ protocol ScavengerHuntMapViewModel: ObservableObject {
 class ScavengerHuntMapViewModelImpl: ScavengerHuntMapViewModel {
     @Published var selectedMarker: GMSMarker?
     @Published var markers: [GMSMarker] = []
+    @Published var scavengerHunt: ScavengerHunt
+    @Published var selectedTaskLocation: TaskLocation?
+    @Published var router: Router
 
-    init(scavengerHunt: ScavengerHunt) {
+    
+    init(router: Router, scavengerHunt: ScavengerHunt) {
+        self.scavengerHunt = scavengerHunt
+        self.router = router
         markers = createMarkers(scavengerHunt: scavengerHunt)
         print(markers)
+    }
+    
+    func tappedTaskLocation(location: TaskLocation) {
+        selectedTaskLocation = location
+        router.taskLocation = location
+        router.push(.scavengerHunt(.taskLocation))
+        print(selectedTaskLocation)
     }
     
     private func createMarkers(scavengerHunt: ScavengerHunt) -> [GMSMarker] {

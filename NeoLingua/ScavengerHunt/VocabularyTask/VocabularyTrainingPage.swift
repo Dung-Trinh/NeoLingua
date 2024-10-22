@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct VocabularyTrainingPage: View {
-    @StateObject var viewModel = VocabularyTrainingPageViewModelImpl()
+    @StateObject var viewModel: VocabularyTrainingPageViewModelImpl
     
     var body: some View {
         VStack {            
