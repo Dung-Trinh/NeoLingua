@@ -23,6 +23,10 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                     .tabItem {
                         Label("Learning", systemImage: "person.crop.circle.fill")
                     }
+                EducationalGamesPage()
+                    .tabItem {
+                        Label("Learning", systemImage: "books.vertical.fill")
+                    }
                 AccountPage(viewModel: AccountPageViewModelImpl(router: router))
                     .tabItem {
                         Label("Account", systemImage: "person.crop.circle.fill")

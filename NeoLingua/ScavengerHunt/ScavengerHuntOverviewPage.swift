@@ -22,28 +22,32 @@ struct ScavengerHuntOverviewPage: View {
                             router.push(.learningTask(.map))
                         }
                         
-                        Button("Vokabelübung starten") {
-//                            router.push(.learningTask(.vocabularyTrainingPage))
-                        }
+//                        Button("Vokabelübung starten") {
+////                            router.push(.learningTask(.vocabularyTrainingPage))
+//                        }
                     }
                     
-                    Button("Hörverständnis Aufgaben starten") {
-//                        router.push(.learningTask(.listeningComprehensionPage))
-                    }
                     
-                    Button("Gesprächssimulation starten") {
-//                        router.push(.learningTask(.conversationSimulationPage))
-                    }
-                    
-                    Button("Schreibaufgabe starten") {
-//                        router.push(.learningTask(.writingTaskPage))
-                    }
+//                    Button("Hörverständnis Aufgaben starten") {
+////                        router.push(.learningTask(.listeningComprehensionPage))
+//                    }
+//                    
+//                    Button("Gesprächssimulation starten") {
+////                        router.push(.learningTask(.conversationSimulationPage))
+//                    }
+//                    
+//                    Button("Schreibaufgabe starten") {
+////                        router.push(.learningTask(.writingTaskPage))
+//                    }
                 }
             }
             Button("fetch ScavengerHunt") {
                 Task {
                     await viewModel.fetchScavengerHunt()
                 }
+            }
+            Button("Foto schießen und Lerninhalte generien lassen") {
+                router.push(.imageBasedLearningPage)
             }
         }.navigationDestination(for: Route.self) { route in
                 router.destination(for: route)

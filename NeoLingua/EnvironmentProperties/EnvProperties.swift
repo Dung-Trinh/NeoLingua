@@ -54,6 +54,10 @@ class ProdENV: BaseENV, APIKeyable {
         dict.object(forKey: "TASK_ASSISTANT_ID") as? String ?? ""
     }
     
+    var CONTEXT_BASED_LEARNING_ASSISTANT_ID: String {
+        dict.object(forKey: "CONTEXT_BASED_LEARNING_ASSISTANT_ID") as? String ?? ""
+    }
+    
     init() {
         super.init(resourceName: "Env-Properties")
     }

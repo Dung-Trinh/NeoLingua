@@ -8,8 +8,10 @@ enum Route: Hashable {
     case homePage
     case onboardingPage
     case taskLocation
-    
-    
+    case imageBasedLearningPage
+    case snapVocabularyPage
+    case linguaQuestPage
+
     enum LoginSignupRoute: Hashable {
         case login
         case signup
@@ -62,6 +64,12 @@ class Router: ObservableObject  {
             if let taskLocation = taskLocation {
                 TaskLocationPage(viewModel: TaskLocationPageViewModelImpl(taskLocation: taskLocation))
             }
+        case .imageBasedLearningPage:
+            ImageBasedLearningPage()
+        case .snapVocabularyPage:
+            SnapVocabularyPage()
+        case .linguaQuestPage:
+            LinguaQuestPage()
         }
     }
     
