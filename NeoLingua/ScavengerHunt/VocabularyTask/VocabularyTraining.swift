@@ -80,6 +80,16 @@ class WriteWordExercise: VocabularyExercise {
     func checkAnswer(_ userAnswer: String) -> Bool {
         return userAnswer.lowercased() == answer.lowercased()
     }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": id,
+            "type": type.rawValue,
+            "question": question,
+            "answer": answer,
+            "translation": translation
+        ]
+    }
 }
 
 class SentenceBuildingExercise: VocabularyExercise {
@@ -109,6 +119,17 @@ class SentenceBuildingExercise: VocabularyExercise {
     func checkAnswer(_ userAnswer: String) -> Bool {
         return userAnswer.lowercased() == answer.lowercased()
     }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": id,
+            "type": type.rawValue,
+            "question": question,
+            "answer": answer,
+            "translation": translation,
+            "sentenceComponents": sentenceComponents
+        ]
+    }
 }
 
 class ChooseWordExercise: VocabularyExercise {
@@ -137,5 +158,16 @@ class ChooseWordExercise: VocabularyExercise {
     
     func checkAnswer(_ userAnswer: String) -> Bool {
         return userAnswer.lowercased() == answer.lowercased()
+    }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": id,
+            "type": type.rawValue,
+            "question": question,
+            "answer": answer,
+            "translation": translation,
+            "selectableWords": selectableWords
+        ]
     }
 }

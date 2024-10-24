@@ -23,7 +23,7 @@ protocol LoginSignupNetworkAdapter {
 class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
     func signupWithGoogle(viewController: UIViewController) async throws {
         let result = try await handleGoogleCredentials(viewController: viewController)
-        UserDefaults.standard.set(result?.user.uid, forKey: "userUid")
+        UserDefaults.standard.set(result?.user.uid, forKey: "userId")
         
         if result?.additionalUserInfo?.isNewUser == false {
             throw SignupError.userAlreadyExist("userAlreadyExist")
@@ -34,13 +34,13 @@ class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
     func loginWithGoogle(viewController: UIViewController) async throws {
         let result = try await handleGoogleCredentials(viewController: viewController)
         UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
-        UserDefaults.standard.set(result?.user.uid, forKey: "userUid")
+        UserDefaults.standard.set(result?.user.uid, forKey: "userId")
     }
     
     func login(email: String, password: String) async throws {
         let result = try await Auth.auth().signIn(withEmail: email, password: password)
         UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
-        UserDefaults.standard.set(result.user.uid, forKey: "userUid")
+        UserDefaults.standard.set(result.user.uid, forKey: "userId")
     }
     
     private func handleGoogleCredentials(viewController: UIViewController) async throws -> AuthDataResult? {
@@ -67,6 +67,6 @@ class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
             withEmail: email,
             password: password
         )
-        UserDefaults.standard.set(result.user.uid, forKey: "userUid")
+        UserDefaults.standard.set(result.user.uid, forKey: "userId")
     }
 }

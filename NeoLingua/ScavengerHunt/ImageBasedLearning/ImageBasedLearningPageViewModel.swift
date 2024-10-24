@@ -2,6 +2,7 @@ import Foundation
 import SwiftOpenAI
 import FirebaseStorage
 import _PhotosUI_SwiftUI
+import SwiftUI
 
 protocol ImageBasedLearningPageViewModel: ObservableObject {
 
@@ -10,8 +11,16 @@ protocol ImageBasedLearningPageViewModel: ObservableObject {
 class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @Published var selectedPhotos = [PhotosPickerItem]()
     @Published var selectedImage: UIImage? = nil
+    @Published var imageBasedTask: ImageBasedTask?
+    @Published var userPerformance: UserTaskPerformance?
+
     private var uploadedImageLink = ""
-    
+    private var taskProcessManager = TaskProcessManager.shared
+
+    @State private var selectedImageURLS: [URL] = []
+    @State private var selectedImages: [Image] = []
+    let service = OpenAIServiceProvider.shared
+
     @MainActor
     func convertDataToImage() {
         selectedImage = nil
@@ -27,8 +36,14 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
                 }
             }
         }
-        
         selectedPhotos.removeAll()
+        
+        // MOCKDATA
+        imageBasedTask = TestData.imageBasedTask
+        taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
+//        Task {
+//            try? await taskProcessManager.saveImageBasedTask(task: TestData.imageBasedTask, imageUrl: "https://firebasestorage.googleapis.com/v0/b/neolingua.appspot.com/o/images%2F9F81734D-46FA-40D0-83B1-E9A8B734DE91.jpg?alt=media&token=07735721-22e5-4688-b681-06a8124dac5a")
+//        }
     }
     
     func requestVisionAPI3() async throws {
@@ -38,7 +53,7 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         let assistantID = ProdENV().CONTEXT_BASED_LEARNING_ASSISTANT_ID
 
         await uploadImage()
-        let prompt = ""
+        let prompt = "was ist auf dem bild"
         
         print("uploadedImageLink")
         print(uploadedImageLink)
@@ -100,23 +115,34 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         let storageRef = Storage.storage().reference()
         let imageRef = storageRef.child("images/\(UUID().uuidString).jpg")
         
-        imageRef.putData(imageData, metadata: nil) { metadata, error in
-            if let error = error {
-                print("Error uploading image: \(error.localizedDescription)")
-                return
+        let metadata = try? await imageRef.putDataAsync(imageData)
+        let downloadURL = try? await imageRef.downloadURL()
+        print(downloadURL?.absoluteString)
+        Task {
+//            try? await taskProcessManager.saveImageBasedTask(task: TestData.imageBasedTask, imageUrl: downloadURL?.absoluteString ?? "")
+            if let task = imageBasedTask {
+                try? await taskProcessManager.createUserResultPerformance(task: task)
             }
-            print("Image uploaded successfully path: \(metadata?.path ?? "")")
-            imageRef.downloadURL { url, error in
-                if let error = error {
-                    print("Error getting download URL: \(error.localizedDescription)")
-                    return
-                }
-                if let downloadURL = url {
-                    print("Image uploaded successfully. Download URL: \(downloadURL.absoluteString)")
-                    self.uploadedImageLink = downloadURL.absoluteString
-                }
-            }
+            
         }
+        
+//        imageRef.putData(imageData, metadata: nil) { metadata, error in
+//            if let error = error {
+//                print("Error uploading image: \(error.localizedDescription)")
+//                return
+//            }
+//            print("Image uploaded successfully path: \(metadata?.path ?? "")")
+//            imageRef.downloadURL { url, error in
+//                if let error = error {
+//                    print("Error getting download URL: \(error.localizedDescription)")
+//                    return
+//                }
+//                if let downloadURL = url {
+//                    print("Image uploaded successfully. Download URL: \(downloadURL.absoluteString)")
+//                    self.uploadedImageLink = downloadURL.absoluteString
+//                }
+//            }
+//        }
     }
     
     private func convertImageURLToBase64DataURL(imageURL: String, completion: @escaping (String?) -> Void) {
@@ -144,5 +170,40 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         }
         
         task.resume()
+    }
+    
+    // bild wird erkannt aber kann nicht genauso an einem bestimmten assistenten geschickt werden TODO: antwort in json transformieren
+    func sendRequest() async {
+        // Make the request
+        let urlMain: URL? = URL(string: "https://assets.ad-magazin.de/photos/6557824498b1772247ba4c33/16:9/w_2560%2Cc_limit/GettyImages-1730743172.jpg")
+        
+        print("sendRequest")
+        print(selectedImageURLS)
+        let prompt = "was sieht man uaf dem bild"
+        let content: [ChatCompletionParameters.Message.ContentType.MessageContent] = [
+            .text(prompt)
+            
+        ] + [.imageUrl(.init(url: urlMain!))]
+        print(content)
+        
+        do {
+            let result = try await service.startStreamedChat(parameters: .init(
+                messages: [.init(role: .user, content: .contentArray(content))],
+                model: .gpt4o, maxTokens: 300))
+            var completeResponse = ""
+
+            for try await partialResponse in result {
+                completeResponse += partialResponse.choices.first?.delta.content ?? ""            }
+            print("Vollständige Antwort: \(completeResponse)")
+
+        } catch {
+            print("sendRequest error: :", error.localizedDescription)
+        }
+    }
+    
+    func fetchPerformance() async {
+        print("fetchPerformance")
+        userPerformance =  try? await taskProcessManager.fetchUserTaskPerformance()
+        print(userPerformance)
     }
 }

@@ -17,13 +17,13 @@ class UserDataManagerImpl: UserDataManager {
     let db = Firestore.firestore()
     
     func saveUserData(userData: ProfileData) async throws {
-        guard let userUid = UserDefaults.standard.string(forKey: "userUid") else {
-            print("userUid not found")
+        guard let userId = UserDefaults.standard.string(forKey: "userId") else {
+            print("userId not found")
             return
         }
         
         let data: [String: Any] = [
-            "uid": userUid,
+            "userId": userId,
             "name": userData.name,
             "learningGoals": userData.learningGoals,
             "interests": userData.interests,
@@ -34,8 +34,8 @@ class UserDataManagerImpl: UserDataManager {
     }
     
     func fetchUserData() async throws -> ProfileData? {
-        guard let userUid = UserDefaults.standard.string(forKey: "userUid") else {
-            print("userUid not found")
+        guard let userUid = UserDefaults.standard.string(forKey: "userId") else {
+            print("userId not found")
             return nil
         }
                 

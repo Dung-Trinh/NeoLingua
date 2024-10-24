@@ -11,6 +11,7 @@ enum Route: Hashable {
     case imageBasedLearningPage
     case snapVocabularyPage
     case linguaQuestPage
+    case imageBasedLearning(LearningTaskRoute)
 
     enum LoginSignupRoute: Hashable {
         case login
@@ -70,6 +71,8 @@ class Router: ObservableObject  {
             SnapVocabularyPage()
         case .linguaQuestPage:
             LinguaQuestPage()
+        case .imageBasedLearning(let taskRoute):
+            handleLearningTaskRoute(taskRoute)
         }
     }
     
@@ -86,6 +89,14 @@ class Router: ObservableObject  {
             routes.removeAll()
         }
         routes.append(route)
+    }
+    
+    func navigateBack() {
+        routes.removeLast()
+    }
+    
+    func navigateToRoot() {
+        routes.removeLast(routes.count)
     }
     
     @ViewBuilder
@@ -121,7 +132,7 @@ class Router: ObservableObject  {
     ) -> some View {
         switch learningTaskRoute {
         case .vocabularyTrainingPage(let prompt):
-            VocabularyTrainingPage(viewModel: VocabularyTrainingPageViewModelImpl(prompt: prompt))
+            VocabularyTrainingPage(viewModel: VocabularyTrainingPageViewModelImpl(prompt: prompt, router: self))
         case .listeningComprehensionPage(let prompt):
             ListeningComprehensionPage(viewModel: ListeningComprehensionPageViewModelImpl(prompt: prompt))
         case .conversationSimulationPage(let prompt):
@@ -130,6 +141,23 @@ class Router: ObservableObject  {
             WritingTaskPage()
         case .map:
             ScavengerHuntMap(viewModel: ScavengerHuntMapViewModelImpl(router: self, scavengerHunt: scavengerHunt))
+        }
+    }
+    
+    @ViewBuilder
+    private func handleLearningTaskRoute(
+        _ learningTaskRoute: Route.LearningTaskRoute) -> some View {
+        switch learningTaskRoute {
+        case .vocabularyTrainingPage(let prompt):
+            VocabularyTrainingPage(viewModel: VocabularyTrainingPageViewModelImpl(prompt: prompt, router: self))
+        case .listeningComprehensionPage(let prompt):
+            ListeningComprehensionPage(viewModel: ListeningComprehensionPageViewModelImpl(prompt: prompt))
+        case .conversationSimulationPage(let prompt):
+            ConversationSimulationPage(viewModel: ConversationSimulationPageViewModelImpl(prompt: prompt))
+        case .writingTaskPage(let prompt):
+            WritingTaskPage()
+        case .map:
+            Text("handleLearningTaskRoute error")
         }
     }
 }

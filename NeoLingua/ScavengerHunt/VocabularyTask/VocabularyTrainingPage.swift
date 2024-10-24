@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct VocabularyTrainingPage: View {
+    @EnvironmentObject private var router: Router
     @StateObject var viewModel: VocabularyTrainingPageViewModelImpl
     
     var body: some View {
-        VStack {            
+        VStack {
             if viewModel.currentTask?.type == .sentenceAssembly {
                 Text("sentenceAssembly")
                 if let exercise = viewModel.currentTask as? SentenceBuildingExercise {
@@ -24,14 +25,31 @@ struct VocabularyTrainingPage: View {
                 }
             }
             if viewModel.currentTask?.type == .multipleChoice {
-                Text("multipleChoice")
-                // TODO: create view for multipleChoice
-//                if let exercise = viewModel.currentTask as? WriteWordExercise {
-//                    
-//                }
+                if let exercise = viewModel.currentTask as? ChooseWordExercise {
+                    MultipleChoiceView(
+                        userInputText: $viewModel.userInputText,
+                        exercise: exercise
+                    ) {
+                        viewModel.checkAnswerTapped()
+                    }
+                }
             }
             Button("check answer") {
                 viewModel.checkAnswerTapped()
+            }.if(
+                viewModel.isCheckAnswerButtonHidden,
+                transform: { view in
+                    view.hidden()
+                })
+            
+            if(viewModel.showResult) {
+                PrimaryButton(
+                    title: "back to tasks",
+                    color: .blue,
+                    action: {
+                        router.navigateBack()
+                    }
+                )
             }
         }
         .padding()
@@ -41,6 +59,14 @@ struct VocabularyTrainingPage: View {
             }
         }
         .sheet(isPresented: $viewModel.isSheetPresented) {
+            if viewModel.showResult {
+                VStack {
+                    Text("ALL DONE")
+                    Button("back to tasks") {
+                        router.navigateBack()
+                    }
+                }
+            }
             if (viewModel.sheetViewModel != nil) {
                 ResultSheetView(viewModel: viewModel.sheetViewModel!)
                     .presentationDetents([.fraction(0.25)])

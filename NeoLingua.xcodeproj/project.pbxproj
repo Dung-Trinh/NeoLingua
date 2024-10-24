@@ -20,6 +20,9 @@
 		B609EEE92CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEE82CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift */; };
 		B609EEEC2CC83F3100A029E8 /* LinguaQuestPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEEB2CC83F3100A029E8 /* LinguaQuestPage.swift */; };
 		B609EEEE2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEED2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift */; };
+		B609EEF02CC8FD0C00A029E8 /* ImageBasedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEEF2CC8FD0C00A029E8 /* ImageBasedTask.swift */; };
+		B609EEF22CC910FD00A029E8 /* MultipleChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEF12CC910FD00A029E8 /* MultipleChoiceView.swift */; };
+		B609EEF42CC93F6E00A029E8 /* TaskProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEF32CC93F6E00A029E8 /* TaskProcessManager.swift */; };
 		B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */; };
 		B60F8AA32CB5D55300268D75 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B60F8AA22CB5D55300268D75 /* Lottie */; };
 		B60F8AA92CB5DDF000268D75 /* checkAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */; };
@@ -151,6 +154,9 @@
 		B609EEE82CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationalGamesPageViewModel.swift; sourceTree = "<group>"; };
 		B609EEEB2CC83F3100A029E8 /* LinguaQuestPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinguaQuestPage.swift; sourceTree = "<group>"; };
 		B609EEED2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinguaQuestPageViewModel.swift; sourceTree = "<group>"; };
+		B609EEEF2CC8FD0C00A029E8 /* ImageBasedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedTask.swift; sourceTree = "<group>"; };
+		B609EEF12CC910FD00A029E8 /* MultipleChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceView.swift; sourceTree = "<group>"; };
+		B609EEF32CC93F6E00A029E8 /* TaskProcessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProcessManager.swift; sourceTree = "<group>"; };
 		B60F8A9F2CB5CC2600268D75 /* SignupSuccessPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSuccessPage.swift; sourceTree = "<group>"; };
 		B60F8AA82CB5DDEF00268D75 /* checkAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = checkAnimation.json; sourceTree = "<group>"; };
 		B60F8AAB2CB7D77900268D75 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 			children = (
 				B609EEDA2CC7E1B700A029E8 /* ImageBasedLearningPage.swift */,
 				B609EEDC2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift */,
+				B609EEEF2CC8FD0C00A029E8 /* ImageBasedTask.swift */,
 			);
 			path = ImageBasedLearning;
 			sourceTree = "<group>";
@@ -302,6 +309,7 @@
 				B609EEE02CC82F1500A029E8 /* SnapVocabulary */,
 				B609EEE62CC83D4400A029E8 /* EducationalGames.swift */,
 				B609EEE82CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift */,
+				B609EEF32CC93F6E00A029E8 /* TaskProcessManager.swift */,
 			);
 			path = EducationalGames;
 			sourceTree = "<group>";
@@ -354,6 +362,7 @@
 				B60F8ACE2CBD09DB00268D75 /* VocabularyTrainingPage.swift */,
 				B60F8AD02CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift */,
 				B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */,
+				B609EEF12CC910FD00A029E8 /* MultipleChoiceView.swift */,
 			);
 			path = VocabularyTask;
 			sourceTree = "<group>";
@@ -733,6 +742,7 @@
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
 				B60F8AE12CBE6B9200268D75 /* OpenAIServiceProvider.swift in Sources */,
 				B609EEEE2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift in Sources */,
+				B609EEF42CC93F6E00A029E8 /* TaskProcessManager.swift in Sources */,
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
@@ -765,12 +775,14 @@
 				B609EEE42CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift in Sources */,
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
 				B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */,
+				B609EEF02CC8FD0C00A029E8 /* ImageBasedTask.swift in Sources */,
 				B60F8ACD2CBC8AF800268D75 /* VocabularyTraining.swift in Sources */,
 				B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */,
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,
 				B609EEE92CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift in Sources */,
 				B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */,
 				B60F8AE52CBFE76200268D75 /* ConversationSimulationManager.swift in Sources */,
+				B609EEF22CC910FD00A029E8 /* MultipleChoiceView.swift in Sources */,
 				B609EED32CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift in Sources */,
 				B60F8ACB2CBC854000268D75 /* SentenceBuildingView.swift in Sources */,
 				B60F8ABE2CBAB7ED00268D75 /* WriteVocabularyView.swift in Sources */,

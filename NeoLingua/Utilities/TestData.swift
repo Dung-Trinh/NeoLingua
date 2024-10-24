@@ -3,29 +3,42 @@ import GoogleMaps
 
 class TestData {
     static let vocabularyTasks: [VocabularyExercise] = [
-        WriteWordExercise(
-            id: "1",
-            type: .fillInTheBlanks,
-            question: "The Warmer Damm park is a popular place for a ________ in Wiesbaden.",
-            answer: "walk",
-            translation: "Der Warmer Damm Park ist ein beliebter Ort für einen Spaziergang in Wiesbaden."
-        ),
-        SentenceBuildingExercise(
-            id: "2",
-            type: .sentenceAssembly,
-            question: "Assemble the sentence: is / Wiesbaden / located / Warmer Damm / in / Park / the",
-            answer: "The Warmer Damm Park is located in Wiesbaden.",
-            translation: "Der Warmer Damm Park befindet sich in Wiesbaden.",
-            sentenceComponents: [
-                "is",
-                "Wiesbaden",
-                "located",
-                "Warmer Damm",
-                "in",
-                "Park",
-                "the"
-            ]
-        ),
+//        ChooseWordExercise(
+//            id: "3",
+//            type: .multipleChoice,
+//            question: "One of the main attractions of the Warmer Damm is its beautiful ________.",
+//            answer: "gardens",
+//            translation: "Eine der Hauptattraktionen des Warmer Damm sind seine schönen Gärten.",
+//            selectableWords: [
+//                "gardens",
+//                "lakes",
+//                "buildings",
+//                "restaurants"
+//            ]
+//        ),
+//        WriteWordExercise(
+//            id: "1",
+//            type: .fillInTheBlanks,
+//            question: "The Warmer Damm park is a popular place for a ________ in Wiesbaden.",
+//            answer: "walk",
+//            translation: "Der Warmer Damm Park ist ein beliebter Ort für einen Spaziergang in Wiesbaden."
+//        ),
+//        SentenceBuildingExercise(
+//            id: "2",
+//            type: .sentenceAssembly,
+//            question: "Assemble the sentence: is / Wiesbaden / located / Warmer Damm / in / Park / the",
+//            answer: "The Warmer Damm Park is located in Wiesbaden.",
+//            translation: "Der Warmer Damm Park befindet sich in Wiesbaden.",
+//            sentenceComponents: [
+//                "is",
+//                "Wiesbaden",
+//                "located",
+//                "Warmer Damm",
+//                "in",
+//                "Park",
+//                "the"
+//            ]
+//        ),
         ChooseWordExercise(
             id: "3",
             type: .multipleChoice,
@@ -76,5 +89,15 @@ class TestData {
                 photoObject: "Fountain"
             )
         ]
+    )
+    static let imageBasedTask: ImageBasedTask = ImageBasedTask(
+        id: "f28acc6b-fd5c-4438-b5bc-ba60e16a426c",
+        title: "Lemon Tree",
+        description: "The image showcases a branch of a lemon tree with green leaves and one yellowing leaf. The focus on foliage suggests a natural setting, potentially in a home garden or a botanical environment.",
+        taskPrompt: TaskPrompt(
+            vocabularyTraining: "Create exercises involving plant vocabulary and lemon tree care, including words like 'leaves', 'branch', 'photosynthesis', 'pruning'.",
+            listeningComprehension: "Create a listening exercise about citrus fruits and the importance of lemon trees in horticulture.",
+            conversationSimulation: "Location: Home garden; the conversation could be between a gardener explaining lemon tree maintenance to a homeowner."
+        )
     )
 }

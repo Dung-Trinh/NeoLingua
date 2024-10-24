@@ -1,4 +1,5 @@
 import Combine
+import SwiftUI
 
 protocol VocabularyTrainingPageViewModel: ObservableObject {}
 
@@ -8,13 +9,29 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     @Published var userInputText: String = ""
     @Published var currentQuestionIndex = 0
     @Published var isSheetPresented: Bool = false
+    @Published var isCheckAnswerButtonHidden: Bool = false
     @Published var sheetViewModel: ResultSheetViewModel?
-    var prompt = ""
+    @Published var router: Router
+    @Published var showResult: Bool = false
 
+    private var prompt = ""
     private var vocabularyManager = VocabularyManager()
-    
-    init(prompt: String) {
+    private var anyCancellables = Set<AnyCancellable>()
+    private var taskProcessManager = TaskProcessManager.shared
+    private var points = 0
+    init(
+        prompt: String,
+        router: Router
+    ) {
         self.prompt = prompt
+        self.router = router
+        $currentTask.sink(receiveValue: { value in
+            if value?.type == .multipleChoice {
+                self.isCheckAnswerButtonHidden = true
+            } else {
+                self.isCheckAnswerButtonHidden = false
+            }
+        }).store(in: &anyCancellables)
     }
     
     func checkAnswerTapped() {
@@ -28,6 +45,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
         if let currentTask = currentTask, currentTask.checkAnswer(userInputText) {
             isAnswerCorrect = true
             userFeedbackText = "Richtig! Die deutsche Übersetzung ist: \(currentTask.translation)"
+            points += 1
         } else {
             isAnswerCorrect = false
             userFeedbackText = "Falsch. Die richtige Antwort ist: \(currentTask?.answer), auf Deutsch: \(currentTask?.translation)"
@@ -44,24 +62,40 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     }
     
     func continueTask() {
+        sheetViewModel = nil
         isSheetPresented = false
         if currentQuestionIndex < tasks.count - 1 {
             currentQuestionIndex += 1
             currentTask = tasks[currentQuestionIndex]
             userInputText = ""
         } else {
-            // keine Fragen mehr
+            Task {
+                try? await taskProcessManager.updateVocabularyPerformance(points: Double(points/tasks.count))
+            }
+            
+            print("keine antworten mehr zurück")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                withAnimation {
+                    self.showResult = true
+                    self.isSheetPresented = true
+                }
+            }
         }
     }
     
+   
     func fetchVocabularyTraining() async {
-        do {
-            let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
-            tasks = result
-            currentTask = result.first
-            print("fetchVocabularyTraining count: ", result.count)
-        } catch {
-            print("fetchVocabularyTraining error: ", error.localizedDescription)
-        }
+        tasks = TestData.vocabularyTasks
+        currentTask = tasks.first
+        
+        // Prod code
+//        do {
+//            let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
+//            tasks = result
+//            currentTask = result.first
+//            print("fetchVocabularyTraining count: ", result.count)
+//        } catch {
+//            print("fetchVocabularyTraining error: ", error.localizedDescription)
+//        }
     }
 }
