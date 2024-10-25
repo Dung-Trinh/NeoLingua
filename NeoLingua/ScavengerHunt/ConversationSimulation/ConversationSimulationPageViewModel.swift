@@ -27,13 +27,17 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var conversationState: ConversationState = .start
     @Published var conversationEvaluation: ConversationEvaluation?
     let prompt: String
+    private var taskProcessManager = TaskProcessManager.shared
 
     init(prompt: String) {
         self.prompt = prompt
         service = OpenAIServiceProvider.shared
-        Task {
-            await createConversationSimulation()
-        }
+//        Task {
+//            await createConversationSimulation()
+//        }
+        
+        conversationState = .evaluation
+        conversationEvaluation = TestData.conversationEvaluation
     }
     
     @MainActor 
@@ -100,10 +104,13 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     
     func getConversationEvaluation() async {
         do {
-            let result = try await conversationSimulationManager.fetchEvaluation()
-            print("getConversationEvaluation()")
-            print(result)
-            conversationEvaluation = result
+//            let result = try await conversationSimulationManager.fetchEvaluation()
+//            print("getConversationEvaluation()")
+//            print(result)
+//            conversationEvaluation = result
+            
+            let parameter = TaskPerformancetParameter(result: Double((conversationEvaluation?.rating ?? 0) / 10))
+            try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .conversationSimulation)
         } catch {
             print("getConversationEvaluation() error: ", error.localizedDescription)
         }

@@ -70,7 +70,8 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             userInputText = ""
         } else {
             Task {
-                try? await taskProcessManager.updateVocabularyPerformance(points: Double(points/tasks.count))
+                let parameter = TaskPerformancetParameter(result: Double(points/tasks.count))
+                try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .vocabularyTraining)
             }
             
             print("keine antworten mehr zurück")

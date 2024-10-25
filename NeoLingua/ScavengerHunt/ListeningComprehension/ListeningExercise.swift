@@ -20,4 +20,8 @@ struct EvaluatedQuestion: Codable {
 
 struct ListeningTaskEvaluation: Codable {
     let evaluatedQuestions: [EvaluatedQuestion]
+    
+    func countCorrectAnswers() -> Int {
+        return evaluatedQuestions.filter { $0.isAnswerRight }.count
+    }
 }

@@ -24,11 +24,29 @@ struct UserTaskPerformance: Codable {
     let taskId: String
     let imageUrl: String?
     let vocabularyTraining: TaskPerformancetParameter?
-    let listeningExercise: TaskPerformancetParameter?
+    let listeningComprehension: TaskPerformancetParameter?
     let conversationSimulation: TaskPerformancetParameter?
+    
+    func isTaskDone() -> Bool {
+        return vocabularyTraining != nil &&
+        listeningComprehension != nil &&
+        conversationSimulation != nil
+    }
 }
 
 struct TaskPerformancetParameter: Codable {
     let result: Double
     let time: Double?
+    
+    init(result: Double, time: Double? = nil) {
+        self.result = result
+        self.time = time
+    }
+}
+
+
+enum TaskType: String {
+    case vocabularyTraining = "vocabularyTraining"
+    case listeningComprehension = "listeningComprehension"
+    case conversationSimulation = "conversationSimulation"
 }

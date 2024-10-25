@@ -89,7 +89,6 @@ class TaskProcessManager {
         print("vocabularyTraining aktualisiert!")
     }
     
-    
     func createUserResultPerformance(task: ImageBasedTask) async throws {
         guard let userId = UserDefaults.standard.string(forKey: "userId") else {
             print("userUid not found")
@@ -103,7 +102,7 @@ class TaskProcessManager {
         try await db.collection("userTaskResult").addDocument(data: data)
     }
     
-    func updateVocabularyPerformance(points: Double, time: Double = 0) async throws {
+    func updateTaskPerformance(parameter: TaskPerformancetParameter, taskType: TaskType) async throws {
         guard let userId = UserDefaults.standard.string(forKey: "userId") else {
             print("userId not found")
             return
@@ -127,12 +126,12 @@ class TaskProcessManager {
         }
         
         let performance: [String: Any] = [
-            "result": points,
-            "time": time
+            "result": parameter.result,
+            "time": parameter.time
         ]
         
         try await documentRef.updateData([
-            "vocabularyTraining": performance
+            taskType.rawValue: performance
         ])
     }
     
@@ -155,4 +154,4 @@ class TaskProcessManager {
         let task = try document.data(as: UserTaskPerformance.self)
         return task
     }
-}
+    }

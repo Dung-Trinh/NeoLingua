@@ -13,6 +13,7 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @Published var selectedImage: UIImage? = nil
     @Published var imageBasedTask: ImageBasedTask?
     @Published var userPerformance: UserTaskPerformance?
+    @Published var isSheetPresented: Bool = false
 
     private var uploadedImageLink = ""
     private var taskProcessManager = TaskProcessManager.shared
@@ -205,5 +206,6 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         print("fetchPerformance")
         userPerformance =  try? await taskProcessManager.fetchUserTaskPerformance()
         print(userPerformance)
+        isSheetPresented = userPerformance?.isTaskDone() ?? false
     }
 }

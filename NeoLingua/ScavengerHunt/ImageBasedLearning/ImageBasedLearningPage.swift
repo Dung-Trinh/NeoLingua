@@ -59,7 +59,7 @@ struct ImageBasedLearningPage: View {
                     if let listeningComprehension = taskPrompt.listeningComprehension {
                         PrimaryButton(
                             title: "listeningComprehension",
-                            color: .brown,
+                            color: viewModel.userPerformance?.listeningComprehension != nil ? .green : .brown,
                             action: {
                                 router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
                             }
@@ -69,7 +69,7 @@ struct ImageBasedLearningPage: View {
                     if let conversationSimulation = taskPrompt.conversationSimulation {
                         PrimaryButton(
                             title: "conversationSimulation",
-                            color: .brown,
+                            color: viewModel.userPerformance?.conversationSimulation != nil ? .green : .brown,
                             action: {
                                 router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
                             }
@@ -77,6 +77,14 @@ struct ImageBasedLearningPage: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $viewModel.isSheetPresented) {
+            VStack {
+                Text("Exercise done")
+                Button("back to menu") {
+                    router.navigateBack()
+                }
+            }.presentationDetents([.fraction(0.25)])
         }
         .onAppear {
             print("onAppear trigger")

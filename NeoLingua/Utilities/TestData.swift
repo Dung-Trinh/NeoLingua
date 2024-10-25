@@ -3,42 +3,42 @@ import GoogleMaps
 
 class TestData {
     static let vocabularyTasks: [VocabularyExercise] = [
-//        ChooseWordExercise(
-//            id: "3",
-//            type: .multipleChoice,
-//            question: "One of the main attractions of the Warmer Damm is its beautiful ________.",
-//            answer: "gardens",
-//            translation: "Eine der Hauptattraktionen des Warmer Damm sind seine schönen Gärten.",
-//            selectableWords: [
-//                "gardens",
-//                "lakes",
-//                "buildings",
-//                "restaurants"
-//            ]
-//        ),
-//        WriteWordExercise(
-//            id: "1",
-//            type: .fillInTheBlanks,
-//            question: "The Warmer Damm park is a popular place for a ________ in Wiesbaden.",
-//            answer: "walk",
-//            translation: "Der Warmer Damm Park ist ein beliebter Ort für einen Spaziergang in Wiesbaden."
-//        ),
-//        SentenceBuildingExercise(
-//            id: "2",
-//            type: .sentenceAssembly,
-//            question: "Assemble the sentence: is / Wiesbaden / located / Warmer Damm / in / Park / the",
-//            answer: "The Warmer Damm Park is located in Wiesbaden.",
-//            translation: "Der Warmer Damm Park befindet sich in Wiesbaden.",
-//            sentenceComponents: [
-//                "is",
-//                "Wiesbaden",
-//                "located",
-//                "Warmer Damm",
-//                "in",
-//                "Park",
-//                "the"
-//            ]
-//        ),
+        //        ChooseWordExercise(
+        //            id: "3",
+        //            type: .multipleChoice,
+        //            question: "One of the main attractions of the Warmer Damm is its beautiful ________.",
+        //            answer: "gardens",
+        //            translation: "Eine der Hauptattraktionen des Warmer Damm sind seine schönen Gärten.",
+        //            selectableWords: [
+        //                "gardens",
+        //                "lakes",
+        //                "buildings",
+        //                "restaurants"
+        //            ]
+        //        ),
+        //        WriteWordExercise(
+        //            id: "1",
+        //            type: .fillInTheBlanks,
+        //            question: "The Warmer Damm park is a popular place for a ________ in Wiesbaden.",
+        //            answer: "walk",
+        //            translation: "Der Warmer Damm Park ist ein beliebter Ort für einen Spaziergang in Wiesbaden."
+        //        ),
+        //        SentenceBuildingExercise(
+        //            id: "2",
+        //            type: .sentenceAssembly,
+        //            question: "Assemble the sentence: is / Wiesbaden / located / Warmer Damm / in / Park / the",
+        //            answer: "The Warmer Damm Park is located in Wiesbaden.",
+        //            translation: "Der Warmer Damm Park befindet sich in Wiesbaden.",
+        //            sentenceComponents: [
+        //                "is",
+        //                "Wiesbaden",
+        //                "located",
+        //                "Warmer Damm",
+        //                "in",
+        //                "Park",
+        //                "the"
+        //            ]
+        //        ),
         ChooseWordExercise(
             id: "3",
             type: .multipleChoice,
@@ -99,5 +99,58 @@ class TestData {
             listeningComprehension: "Create a listening exercise about citrus fruits and the importance of lemon trees in horticulture.",
             conversationSimulation: "Location: Home garden; the conversation could be between a gardener explaining lemon tree maintenance to a homeowner."
         )
+    )
+    static let listeningExercise: ListeningExercise = ListeningExercise(
+        textForSpeech: "This is a listening exercise about general knowledge.",
+        listeningQuestions: [
+            ListeningQuestion(id: "q1", question: "What is the capital of France?"),
+            ListeningQuestion(id: "q2", question: "How many continents are there?"),
+            ListeningQuestion(id: "q3", question: "Who was the first man on the moon?")
+        ])
+    static let listeningExerciseEvaluation: ListeningTaskEvaluation = .init(evaluatedQuestions: [
+        EvaluatedQuestion(
+            id: "q1",
+            question: "What is the capital of France?",
+            isAnswerRight: true,
+            rightAnswer: "Paris",
+            suggestions: ["Paris", "London", "Berlin"]
+        ),
+        EvaluatedQuestion(
+            id: "q2",
+            question: "What is 2 + 2?",
+            isAnswerRight: true,
+            rightAnswer: "4",
+            suggestions: ["3", "4", "5"]
+        ),
+        EvaluatedQuestion(
+            id: "q3",
+            question: "What is the largest ocean?",
+            isAnswerRight: false,
+            rightAnswer: "Pacific",
+            suggestions: ["Atlantic", "Indian", "Pacific"]
+        )
+    ])
+    static let conversationEvaluation: ConversationEvaluation = ConversationEvaluation(
+        grammar: "The grammar usage is good, but there were a few minor mistakes.",
+        wordChoice: "Word choice was appropriate and natural.",
+        structure: "The sentence structure was clear and followed normal patterns.",
+        tasksCompletion: [
+            TaskCompletion(
+                task: "Translate the sentence correctly",
+                isCompleted: true,
+                suggestion: nil
+            ),
+            TaskCompletion(
+                task: "Use proper grammar in the response",
+                isCompleted: false,
+                suggestion: "Improve the verb usage in future exercises."
+            ),
+            TaskCompletion(
+                task: "Choose the correct word in context",
+                isCompleted: true,
+                suggestion: nil
+            )
+        ],
+        rating: 7.6
     )
 }
