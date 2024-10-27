@@ -2,13 +2,12 @@ import GoogleMaps
 import SwiftUI
 import UIKit
 
-let pointOfInterestSpots = TestData.pointOfInterestSpots
-
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     var map = GMSMapView()
     var isAnimating: Bool = false
+    var markers: [GMSMarker] = []
     
     override func loadView() {
         super.loadView()
@@ -47,20 +46,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         var totalLatitude: CLLocationDegrees = 0
         var totalLongitude: CLLocationDegrees = 0
         
-        pointOfInterestSpots.forEach { spot in
-            totalLatitude += spot.coordinate.latitude
-            totalLongitude += spot.coordinate.longitude
+        markers.forEach { spot in
+            totalLatitude += spot.position.latitude
+            totalLongitude += spot.position.longitude
         }
         
-        let centerLatitude = totalLatitude / Double(pointOfInterestSpots.count)
-        let centerLongitude = totalLongitude / Double(pointOfInterestSpots.count)
+        let centerLatitude = totalLatitude / Double(markers.count)
+        let centerLongitude = totalLongitude / Double(markers.count)
         let centerCoordinate = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
         
         let centerLocation = CLLocation(latitude: centerLatitude, longitude: centerLongitude)
         var maxDistance: CLLocationDistance = 0
         
-        pointOfInterestSpots.forEach { spot in
-            let location = CLLocation(latitude: spot.coordinate.latitude, longitude: spot.coordinate.longitude)
+        markers.forEach { spot in
+            let location = CLLocation(latitude: spot.position.latitude, longitude: spot.position.longitude)
             let distance = centerLocation.distance(from: location)
             maxDistance = max(maxDistance, distance)
         }

@@ -10,6 +10,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> MapViewController {
         let uiViewController = MapViewController()
+        uiViewController.markers = markers
         uiViewController.map.delegate = context.coordinator
         return uiViewController
     }

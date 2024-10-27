@@ -56,6 +56,7 @@
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
 		B63875022CB09A22006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875012CB09A22006B3364 /* SwiftOpenAI */; };
 		B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875042CB09A3F006B3364 /* SwiftOpenAI */; };
+		B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */; };
 		B66D67822CC059D200F70A56 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = B66D67812CC059D200F70A56 /* ActivityIndicatorView */; };
 		B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */; };
 		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
@@ -184,6 +185,7 @@
 		B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSimulationManager.swift; sourceTree = "<group>"; };
 		B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleOptionsResponse.swift; sourceTree = "<group>"; };
 		B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
+		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
 		B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
 		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
 		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				B609EEDA2CC7E1B700A029E8 /* ImageBasedLearningPage.swift */,
 				B609EEDC2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift */,
 				B609EEEF2CC8FD0C00A029E8 /* ImageBasedTask.swift */,
+				B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */,
 			);
 			path = ImageBasedLearning;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
 				B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */,
 				B609EEF02CC8FD0C00A029E8 /* ImageBasedTask.swift in Sources */,
+				B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */,
 				B60F8ACD2CBC8AF800268D75 /* VocabularyTraining.swift in Sources */,
 				B6FED4982C71F3D200339B7C /* ContextAwarePageView.swift in Sources */,
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,

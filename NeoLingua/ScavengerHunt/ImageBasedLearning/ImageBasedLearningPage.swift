@@ -6,74 +6,71 @@ struct ImageBasedLearningPage: View {
     @StateObject var viewModel = ImageBasedLearningPageViewModelImpl()
     
     var body: some View {
-        VStack {
-            if let selectedImage = viewModel.selectedImage {
-                Image(uiImage: selectedImage)
-                    .resizable()
-                    .scaledToFit()
-            }
-            PhotosPicker(
-                selection: $viewModel.selectedPhotos,
-                maxSelectionCount: 1,
-                selectionBehavior: .ordered,
-                matching: .images
-            ) {
-                Label("Select a image", systemImage: "photo")
-            }.onChange(of: viewModel.selectedPhotos) {
-                viewModel.convertDataToImage()
-                
-            }
-            
-            Button("sendRequest") {
-                Task {
-                    await viewModel.sendRequest()
-                }
-            }
-            Button("upload") {
-                Task {
-                    await viewModel.uploadImage()
-                }
-            }
-            Button("requestVisionAPI3") {
-                Task {
-                    do {
-                        await try viewModel.requestVisionAPI3()
-                    } catch {
-                        print("upload error: ", error.localizedDescription)
-                    }
-                }
-            }
-            
+        ScrollView {
             VStack {
-                if let taskPrompt = viewModel.imageBasedTask?.taskPrompt {
-                    if let vocabularyTraining = taskPrompt.vocabularyTraining {
-                        PrimaryButton(
-                            title: "vocabularyTraining",
-                            color: viewModel.userPerformance?.vocabularyTraining != nil ? .green : .brown,
-                            action: {
-                                router.push( .imageBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
-                            }
-                        )
+                if let selectedImage = viewModel.selectedImage {
+                    Image(uiImage: selectedImage)
+                        .resizable()
+                        .scaledToFit()
+                }
+                PhotosPicker(
+                    selection: $viewModel.selectedPhotos,
+                    maxSelectionCount: 1,
+                    selectionBehavior: .ordered,
+                    matching: .images
+                ) {
+                    Label("Select a image", systemImage: "photo")
+                }.onChange(of: viewModel.selectedPhotos) {
+                    viewModel.convertDataToImage()
+                }.if(
+                    viewModel.state != .initialState,
+                    transform: { view in
+                        view.hidden()
                     }
-                    
-                    if let listeningComprehension = taskPrompt.listeningComprehension {
-                        PrimaryButton(
-                            title: "listeningComprehension",
-                            color: viewModel.userPerformance?.listeningComprehension != nil ? .green : .brown,
-                            action: {
-                                router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
-                            }
-                        )
+                )
+                
+                if viewModel.state == .imageSelected {
+                    Button("analyze Image") {
+                        Task {
+                            await viewModel.analyzeImage()
+                        }
                     }
-
-                    if let conversationSimulation = taskPrompt.conversationSimulation {
-                        PrimaryButton(
-                            title: "conversationSimulation",
-                            color: viewModel.userPerformance?.conversationSimulation != nil ? .green : .brown,
-                            action: {
-                                router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
-                            }
-                        )
+                }
+                
+                VStack {
+                    if let imageBasedTask = viewModel.imageBasedTask {
+                        Text(viewModel.imageBasedTask?.title ?? "").font(.title)
+                        Text(viewModel.imageBasedTask?.description ?? "")
+                        
+                        if let vocabularyTraining = imageBasedTask.taskPrompt.vocabularyTraining {
+                            PrimaryButton(
+                                title: "vocabularyTraining",
+                                color: viewModel.userPerformance?.vocabularyTraining != nil ? .green : .brown,
+                                action: {
+                                    router.push( .imageBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
+                                }
+                            )
+                        }
+                        
+                        if let listeningComprehension = imageBasedTask.taskPrompt.listeningComprehension {
+                            PrimaryButton(
+                                title: "listeningComprehension",
+                                color: viewModel.userPerformance?.listeningComprehension != nil ? .green : .brown,
+                                action: {
+                                    router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
+                                }
+                            )
+                        }
+                        
+                        if let conversationSimulation = imageBasedTask.taskPrompt.conversationSimulation {
+                            PrimaryButton(
+                                title: "conversationSimulation",
+                                color: viewModel.userPerformance?.conversationSimulation != nil ? .green : .brown,
+                                action: {
+                                    router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
+                                }
+                            )
+                        }
                     }
                 }
             }
@@ -86,13 +83,14 @@ struct ImageBasedLearningPage: View {
                 }
             }.presentationDetents([.fraction(0.25)])
         }
-        .onAppear {
+        .onAppear {
             print("onAppear trigger")
             Task {
                 await viewModel.fetchPerformance()
             }
         }
         .padding()
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
         .navigationDestination(for: Route.self) { route in
                 router.destination(for: route)
         }

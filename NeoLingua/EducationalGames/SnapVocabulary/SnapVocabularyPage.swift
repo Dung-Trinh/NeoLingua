@@ -30,6 +30,13 @@ struct SnapVocabularyPage: View {
                     
                 }
             )
+            PrimaryButton(
+                title: "Schnitzeljagd in der Umgebung generieren",
+                color: .blue,
+                action: {
+                    router.push(.scavengerHunt(.overview))
+                }
+            )
         }
         .padding()
         .navigationDestination(for: Route.self) { route in

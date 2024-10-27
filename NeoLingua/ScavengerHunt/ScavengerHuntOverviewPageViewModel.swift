@@ -11,14 +11,23 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     @Published var currentScavengerHunt: ScavengerHunt?
     @Published var markers: [GMSMarker] = []
 
+    init(type: ScavengerHuntType) {
+        switch type {
+        case .generatedNearMe: break
+            //location ermitteln und assistant fragen
+        case .locationBased: break
+            // von firebase db fragen
+        }
+    }
+    
     func fetchScavengerHunt() async {
         do {
             currentScavengerHunt = TestData.scavengerHunt
+            //Prod code
+            //currentScavengerHunt = try await scavengerHuntManager.fetchScavengerHuntNearMe()
             if let currentScavengerHunt = currentScavengerHunt {
                 markers = await createMarkers(scavengerHunt: currentScavengerHunt)
             }
-            
-//            currentScavengerHunt = try await scavengerHuntManager.fetchScavengerHunt()
         } catch {
             print("fetchScavengerHunt error: ", error.localizedDescription)
         }

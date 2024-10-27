@@ -5,7 +5,7 @@ import Alamofire
 final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     @Published var lastKnownLocation: CLLocationCoordinate2D?
-    var manager = CLLocationManager()
+    let manager = CLLocationManager()
     
     override init() {
         super.init()
@@ -14,10 +14,11 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         self.manager.startUpdatingLocation()
     }
     
+    func requestLocation() {
+        manager.requestLocation()
+    }
+    
     func checkLocationAuthorization() {
-        print("checkLocationAuthorization")
-
-        print(manager.authorizationStatus.rawValue.description)
         switch manager.authorizationStatus {
         case .notDetermined://The user choose allow or denny your app to get the location yet
             manager.requestWhenInUseAuthorization()
@@ -42,12 +43,15 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-
         checkLocationAuthorization()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         lastKnownLocation = locations.first?.coordinate
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to get users location.")
     }
     
     func fetchNearbyPlaces(location: CLLocation?) async throws -> [Place] {

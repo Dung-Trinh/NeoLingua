@@ -11,7 +11,7 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
             path: $router.routes
         ) {
             TabView {
-                ScavengerHuntOverviewPage()
+                ScavengerHuntOverviewPage(viewModel: ScavengerHuntOverviewPageViewModelImpl(type: .locationBased))
                     .tabItem {
                         Label("Learning", systemImage: "person.crop.circle.fill")
                     }

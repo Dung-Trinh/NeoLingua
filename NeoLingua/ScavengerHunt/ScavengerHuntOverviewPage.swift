@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ScavengerHuntOverviewPage: View {
     @EnvironmentObject private var router: Router
-    @StateObject private var viewModel = ScavengerHuntOverviewPageViewModelImpl()
+    @StateObject var viewModel: ScavengerHuntOverviewPageViewModelImpl
     
     var body: some View {
         ScrollView {

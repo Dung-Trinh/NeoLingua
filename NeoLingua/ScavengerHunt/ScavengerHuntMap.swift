@@ -91,9 +91,6 @@ struct CitiesList: View {
                 }
                 
                 List {
-                    Button("Spielfeld anzeigen") {
-                        
-                    }
                     ForEach(taskLocation) { location in
                         Button(action: {
                             buttonAction(location)

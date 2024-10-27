@@ -1,5 +1,7 @@
 import Foundation
 import SwiftOpenAI
+import Alamofire
+import GoogleMaps
 
 struct TaskPrompt: Codable {
     let vocabularyTraining: String?
@@ -38,35 +40,61 @@ struct ScavengerHunt: Codable {
     var taskLocations: [TaskLocation]
 }
 
+struct ScavengerHuntResponse: Codable{
+    let scavengerHunt: ScavengerHunt
+}
+
 class ScavengerHuntManager: TaskManager {
     let assistantID = ProdENV().TASK_ASSISTANT_ID
+    let locationManager = LocationManager()
 
-    func fetchScavengerHunt() async throws -> ScavengerHunt? {
-        let prompt = "kurhaus and kurpark in wiesbaden"
-        let parameters = MessageParameter(
-            role: .user,
-            content: prompt
-        )
+//    func fetchScavengerHunt() async throws -> ScavengerHunt? {
+//        let prompt = "kurhaus and kurpark in wiesbaden"
+//        let parameters = MessageParameter(
+//            role: .user,
+//            content: prompt
+//        )
+//        
+//        let thread = try await service.createThread(parameters: CreateThreadParameters())
+//        threadID = thread.id
+//        let _ = try await service.createMessage(
+//            threadID: threadID,
+//            parameters: parameters
+//        )
+//        
+//        let jsonString = try await openAiServiceHelper.getJsonResponseAfterRun(
+//            assistantID: assistantID,
+//            threadID: threadID
+//        )
+//        
+//        print("fetchScavengerHunt:")
+//        print(jsonString)
+//        
+//        if let jsonData = jsonString.data(using: .utf8) {
+//            let scavengerHunt = try decoder.decode(ScavengerHunt.self, from: jsonData)
+//            return scavengerHunt
+//        }
+//        return nil
+//    }
+    
+    func fetchScavengerHuntNearMe() async throws -> ScavengerHunt {
+        locationManager.requestLocation()
         
-        let thread = try await service.createThread(parameters: CreateThreadParameters())
-        threadID = thread.id
-        let _ = try await service.createMessage(
-            threadID: threadID,
-            parameters: parameters
-        )
-        
-        let jsonString = try await openAiServiceHelper.getJsonResponseAfterRun(
-            assistantID: assistantID,
-            threadID: threadID
-        )
-        
-        print("fetchScavengerHunt:")
-        print(jsonString)
-        
-        if let jsonData = jsonString.data(using: .utf8) {
-            let scavengerHunt = try decoder.decode(ScavengerHunt.self, from: jsonData)
-            return scavengerHunt
+        guard let location = locationManager.lastKnownLocation else {
+            print("no location found")
+            throw NSError(domain: "no location found", code: 400)
         }
-        return nil
+        print("currentLocation:", location)
+        let url = "http://localhost:3000/locationAgent"
+            let parameters: [String: Any] = [
+                "latitude": location.latitude,
+                "longitude": location.longitude
+            ]
+            
+            let locationData = try await AF.request(url, parameters: parameters)
+                .serializingDecodable(ScavengerHuntResponse.self)
+                .value
+            
+        return locationData.scavengerHunt
     }
 }
