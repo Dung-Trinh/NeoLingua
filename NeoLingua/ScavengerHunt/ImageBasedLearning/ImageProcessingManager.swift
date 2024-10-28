@@ -24,6 +24,10 @@ class ImageProcessingManager {
     private let imageBasedAssistantID = ProdENV().CONTEXT_BASED_LEARNING_ASSISTANT_ID
     
     func createImageBasedTask(imageUrl: String) async throws -> ImageBasedTask? {
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.imageBasedTask
+        }
+        
         let newThread = try await createThreadWithImage(imageUrl: imageUrl)
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
             assistantID: imageBasedAssistantID,

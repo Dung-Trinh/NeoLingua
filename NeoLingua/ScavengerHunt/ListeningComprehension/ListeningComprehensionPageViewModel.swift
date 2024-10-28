@@ -26,20 +26,19 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     func fetchListeningComprehensionTask() async {
         isLoading = true
         defer { isLoading = false }
-        exercise = TestData.listeningExercise
-        evaluation = TestData.listeningExerciseEvaluation
-//        do {
-//            exercise = try await listeningComprehensionManager.fetchListeningComprehensionTask(prompt: prompt)
-//            if let exercise {
-//                for _ in 0..<exercise.listeningQuestions.count {
-//                    answers.append("")
-//                }
-//            }
-//
-//            await createSpeech()
-//        } catch {
-//            print("fetchListeningComprehensionTask error: ", error.localizedDescription)
-//        }
+        
+        do {
+            exercise = try await listeningComprehensionManager.fetchListeningComprehensionTask(prompt: prompt)
+            if let exercise {
+                for _ in 0..<exercise.listeningQuestions.count {
+                    answers.append("")
+                }
+            }
+
+            //await createSpeech()
+        } catch {
+            print("fetchListeningComprehensionTask error: ", error.localizedDescription)
+        }
     }
     
     private func createSpeech() async {
@@ -67,7 +66,7 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
         let finalResult = userInputs.joined(separator: ",")
         
         do {
-//            evaluation = try await listeningComprehensionManager.fetchListeningTaskEvaluation(userAnswer: finalResult)
+            evaluation = try await listeningComprehensionManager.fetchListeningTaskEvaluation(userAnswer: finalResult)
             
             guard let evaluation else{
                 print("keine evaluation")

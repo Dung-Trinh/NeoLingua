@@ -8,7 +8,10 @@ class VocabularyManager {
     var threadID = ""
     
     func fetchVocabularyTraining(prompt: String) async throws -> [VocabularyExercise] {
-//        let prompt = "create vocabulary task with the topic 'warmer damm' in Wiesbaden"
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.vocabularyTasks
+        }
+        
         let parameters = MessageParameter(
             role: .user,
             content: prompt

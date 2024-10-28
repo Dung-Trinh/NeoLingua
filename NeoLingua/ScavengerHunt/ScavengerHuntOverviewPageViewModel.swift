@@ -22,9 +22,7 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     
     func fetchScavengerHunt() async {
         do {
-            currentScavengerHunt = TestData.scavengerHunt
-            //Prod code
-            //currentScavengerHunt = try await scavengerHuntManager.fetchScavengerHuntNearMe()
+            currentScavengerHunt = try await scavengerHuntManager.fetchScavengerHuntNearMe()
             if let currentScavengerHunt = currentScavengerHunt {
                 markers = await createMarkers(scavengerHunt: currentScavengerHunt)
             }

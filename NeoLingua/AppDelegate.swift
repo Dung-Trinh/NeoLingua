@@ -14,6 +14,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         GMSServices.provideAPIKey(ProdENV().GOOGLE_MAPS_KEY)
         GMSPlacesClient.provideAPIKey(ProdENV().GOOGLE_MAPS_KEY)
+        
+        let arguments = CommandLine.arguments
+        if arguments.contains("--useMockData") {
+            print("--- USE MOCK DATA ---")
+        } else {
+            print(arguments)
+        }
         return true
     }
 }

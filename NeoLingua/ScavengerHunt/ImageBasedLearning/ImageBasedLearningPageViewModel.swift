@@ -50,9 +50,6 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         }
         selectedPhotos.removeAll()
         state = .imageSelected
-        // MOCKDATA
-//        imageBasedTask = TestData.imageBasedTask
-//        taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
         
 //        Task {
 //            try? await taskProcessManager.saveImageBasedTask(task: TestData.imageBasedTask, imageUrl: "https://firebasestorage.googleapis.com/v0/b/neolingua.appspot.com/o/images%2F9F81734D-46FA-40D0-83B1-E9A8B734DE91.jpg?alt=media&token=07735721-22e5-4688-b681-06a8124dac5a")

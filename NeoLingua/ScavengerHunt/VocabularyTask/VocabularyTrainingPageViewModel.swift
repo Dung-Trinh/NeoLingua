@@ -84,19 +84,14 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
         }
     }
     
-   
-    func fetchVocabularyTraining() async {
-        tasks = TestData.vocabularyTasks
-        currentTask = tasks.first
-        
-        // Prod code
-//        do {
-//            let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
-//            tasks = result
-//            currentTask = result.first
-//            print("fetchVocabularyTraining count: ", result.count)
-//        } catch {
-//            print("fetchVocabularyTraining error: ", error.localizedDescription)
-//        }
+    func fetchVocabularyTraining() async {        
+        do {
+            let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
+            tasks = result
+            currentTask = result.first
+            print("fetchVocabularyTraining count: ", result.count)
+        } catch {
+            print("fetchVocabularyTraining error: ", error.localizedDescription)
+        }
     }
 }

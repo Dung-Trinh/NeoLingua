@@ -78,6 +78,10 @@ class ScavengerHuntManager: TaskManager {
 //    }
     
     func fetchScavengerHuntNearMe() async throws -> ScavengerHunt {
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.scavengerHunt
+        }
+        
         locationManager.requestLocation()
         
         guard let location = locationManager.lastKnownLocation else {

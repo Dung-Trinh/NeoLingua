@@ -12,7 +12,10 @@ class ListeningComprehensionManager: TaskManager {
     let assistantID = ProdENV().LISTENING_COMPREHENSION_ASSISTANT_ID
 
     func fetchListeningComprehensionTask(prompt: String) async throws -> ListeningExercise? {
-//        let prompt = "create a listening comprehension task with the topic 'warmer damm' in Wiesbaden"
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.listeningExercise
+        }
+        
         let parameters = MessageParameter(
             role: .user,
             content: prompt
@@ -40,6 +43,10 @@ class ListeningComprehensionManager: TaskManager {
     }
     
     func fetchListeningTaskEvaluation(userAnswer: String) async throws -> ListeningTaskEvaluation? {
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.listeningExerciseEvaluation
+        }
+        
         try await openAiServiceHelper.sendUserMessageToThread(
             message: userAnswer,
             threadID: threadID
@@ -64,7 +71,7 @@ class ListeningComprehensionManager: TaskManager {
             model: .tts1,
             input: text,
             voice: .shimmer,
-            speed: 0.8
+            speed: 1
         )
         let speech = try await service.createSpeech(parameters: parameters).output
         return speech
