@@ -153,4 +153,9 @@ class TestData {
         ],
         rating: 7.6
     )
+    static let imageValidationResult: ImageValidationResult = .init(
+        isMatching: true,
+        reason: "it is true, it is true, it is true, it is true, it is true, it is true",
+        confidenceScore: 0.9
+    )
 }

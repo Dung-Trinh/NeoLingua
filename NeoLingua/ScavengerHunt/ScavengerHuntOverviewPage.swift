@@ -6,51 +6,34 @@ struct ScavengerHuntOverviewPage: View {
     
     var body: some View {
         ScrollView {
-            if let currentScavengerHunt = viewModel.currentScavengerHunt {
-                PageHeader(
-                    title: "ScavengerHunt",
-                    subtitle: currentScavengerHunt.introduction
-                )
-                
-                Text("Location")
-                VStack {
-                    if let scavengerHunt = viewModel.currentScavengerHunt {
-                        Button("Spielfeld anzeigen") {
-                            if let scavengerHunt = viewModel.currentScavengerHunt {
-                                router.scavengerHunt = scavengerHunt
-                            }
-                            router.push(.learningTask(.map))
+            VStack {
+                if let currentScavengerHunt = viewModel.currentScavengerHunt {
+                    PageHeader(
+                        title: "ScavengerHunt",
+                        subtitle: currentScavengerHunt.introduction
+                    )
+                    
+                    Text("Location")
+                    VStack {
+                        if let scavengerHunt = viewModel.currentScavengerHunt {
+                            Button(action: {
+                                if let scavengerHunt = viewModel.currentScavengerHunt {
+                                    router.scavengerHunt = scavengerHunt
+                                }
+                                router.push(.learningTask(.map))
+                            }, label: {
+                                Label("Show playing field", systemImage: "map.fill")
+                            })
                         }
-                        
-//                        Button("Vokabelübung starten") {
-////                            router.push(.learningTask(.vocabularyTrainingPage))
-//                        }
                     }
-                    
-                    
-//                    Button("Hörverständnis Aufgaben starten") {
-////                        router.push(.learningTask(.listeningComprehensionPage))
-//                    }
-//                    
-//                    Button("Gesprächssimulation starten") {
-////                        router.push(.learningTask(.conversationSimulationPage))
-//                    }
-//                    
-//                    Button("Schreibaufgabe starten") {
-////                        router.push(.learningTask(.writingTaskPage))
-//                    }
                 }
-            }
-            Button("fetch ScavengerHunt") {
+            }.onAppear {
                 Task {
                     await viewModel.fetchScavengerHunt()
                 }
             }
-            Button("Foto schießen und Lerninhalte generien lassen") {
-                router.push(.imageBasedLearningPage)
-            }
         }.navigationDestination(for: Route.self) { route in
-                router.destination(for: route)
+            router.destination(for: route)
         }
     }
 }

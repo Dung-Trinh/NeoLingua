@@ -52,3 +52,5 @@ struct ViewFirstAppearModifier: ViewModifier {
         }
     }
 }
+
+extension String: Error {}

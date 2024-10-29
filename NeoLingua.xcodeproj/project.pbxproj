@@ -58,6 +58,8 @@
 		B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875042CB09A3F006B3364 /* SwiftOpenAI */; };
 		B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */; };
 		B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */; };
+		B6595B702CD0E1BF004816E8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B6595B6F2CD0E1BF004816E8 /* Alamofire */; };
+		B6595B722CD0EB38004816E8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6595B712CD0EB37004816E8 /* CameraView.swift */; };
 		B66D67822CC059D200F70A56 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = B66D67812CC059D200F70A56 /* ActivityIndicatorView */; };
 		B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */; };
 		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
@@ -68,7 +70,6 @@
 		B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562022CC5396A0008C05C /* ListeningExercise.swift */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
-		B6E6569C2C939A7100350D98 /* AlamofireDynamic in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B6FED42D2C70B72900339B7C /* AlamofireDynamic */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */; };
 		B6EB6D262CA414B80055FD67 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D252CA414B80055FD67 /* HomePage.swift */; };
 		B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D272CA414CE0055FD67 /* HomePageViewModel.swift */; };
@@ -99,8 +100,6 @@
 		B6FED3BC2C70B3BB00339B7C /* NeoLinguaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FED3BB2C70B3BB00339B7C /* NeoLinguaApp.swift */; };
 		B6FED3C02C70B3C200339B7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FED3BF2C70B3C200339B7C /* Assets.xcassets */; };
 		B6FED3C32C70B3C200339B7C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6FED3C22C70B3C200339B7C /* Preview Assets.xcassets */; };
-		B6FED42C2C70B72900339B7C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B6FED42B2C70B72900339B7C /* Alamofire */; };
-		B6FED42E2C70B72900339B7C /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = B6FED42D2C70B72900339B7C /* AlamofireDynamic */; };
 		B6FED44E2C70B96500339B7C /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B6FED44D2C70B96500339B7C /* FirebaseAnalytics */; };
 		B6FED4542C70B96500339B7C /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = B6FED4532C70B96500339B7C /* FirebaseAppCheck */; };
 		B6FED4562C70B96500339B7C /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = B6FED4552C70B96500339B7C /* FirebaseAppDistribution-Beta */; };
@@ -135,7 +134,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B6E6569C2C939A7100350D98 /* AlamofireDynamic in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,6 +186,7 @@
 		B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
 		B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTaskEvaluationView.swift; sourceTree = "<group>"; };
 		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
+		B6595B712CD0EB37004816E8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
 		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
 		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
@@ -248,16 +247,15 @@
 				B6FED45A2C70B96500339B7C /* FirebaseAuthCombine-Community in Frameworks */,
 				B6FED47F2C70BB3C00339B7C /* GoogleSignIn in Frameworks */,
 				B6FED46C2C70B96500339B7C /* FirebaseInstallations in Frameworks */,
-				B6FED42C2C70B72900339B7C /* Alamofire in Frameworks */,
 				B6FED47A2C70B96500339B7C /* FirebaseVertexAI-Preview in Frameworks */,
 				B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */,
 				B60F8AA32CB5D55300268D75 /* Lottie in Frameworks */,
 				B6E656982C93837700350D98 /* GooglePlaces in Frameworks */,
 				B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */,
 				B6FED4812C70BB3C00339B7C /* GoogleSignInSwift in Frameworks */,
-				B6FED42E2C70B72900339B7C /* AlamofireDynamic in Frameworks */,
 				B6FED44E2C70B96500339B7C /* FirebaseAnalytics in Frameworks */,
 				B6FED4782C70B96500339B7C /* FirebaseStorageCombine-Community in Frameworks */,
+				B6595B702CD0E1BF004816E8 /* Alamofire in Frameworks */,
 				B66D67822CC059D200F70A56 /* ActivityIndicatorView in Frameworks */,
 				B6FED4542C70B96500339B7C /* FirebaseAppCheck in Frameworks */,
 				B6FED4762C70B96500339B7C /* FirebaseStorage in Frameworks */,
@@ -283,6 +281,7 @@
 			children = (
 				B609EED52CC79A4200A029E8 /* TaskLocationPage.swift */,
 				B609EED72CC79C3800A029E8 /* TaskLocationPageViewModel.swift */,
+				B6595B712CD0EB37004816E8 /* CameraView.swift */,
 			);
 			path = TaskLocation;
 			sourceTree = "<group>";
@@ -617,8 +616,6 @@
 			);
 			name = NeoLingua;
 			packageProductDependencies = (
-				B6FED42B2C70B72900339B7C /* Alamofire */,
-				B6FED42D2C70B72900339B7C /* AlamofireDynamic */,
 				B6FED44D2C70B96500339B7C /* FirebaseAnalytics */,
 				B6FED4532C70B96500339B7C /* FirebaseAppCheck */,
 				B6FED4552C70B96500339B7C /* FirebaseAppDistribution-Beta */,
@@ -648,6 +645,7 @@
 				B60F8AA22CB5D55300268D75 /* Lottie */,
 				B60F8AB22CB7DAE800268D75 /* GoogleMaps */,
 				B66D67812CC059D200F70A56 /* ActivityIndicatorView */,
+				B6595B6F2CD0E1BF004816E8 /* Alamofire */,
 			);
 			productName = NeoLingua;
 			productReference = B6FED3B82C70B3BB00339B7C /* NeoLingua.app */;
@@ -678,7 +676,6 @@
 			);
 			mainGroup = B6FED3AF2C70B3BB00339B7C;
 			packageReferences = (
-				B6FED42A2C70B72900339B7C /* XCRemoteSwiftPackageReference "Alamofire" */,
 				B6FED44C2C70B96500339B7C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B6FED47D2C70BB3C00339B7C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
@@ -686,6 +683,7 @@
 				B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				B60F8AB12CB7DAE700268D75 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				B66D67802CC059D200F70A56 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				B6595B6E2CD0E1BF004816E8 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = B6FED3B92C70B3BB00339B7C /* Products */;
 			projectDirPath = "";
@@ -774,6 +772,7 @@
 				B6FA77C92CA4197800C52F73 /* OnboardingContent.swift in Sources */,
 				B6FED4962C71F3BD00339B7C /* ContextAwarePage.swift in Sources */,
 				B609EED62CC79A4300A029E8 /* TaskLocationPage.swift in Sources */,
+				B6595B722CD0EB38004816E8 /* CameraView.swift in Sources */,
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
 				B609EEDD2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift in Sources */,
 				B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */,
@@ -1033,6 +1032,14 @@
 				kind = branch;
 			};
 		};
+		B6595B6E2CD0E1BF004816E8 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.0;
+			};
+		};
 		B66D67802CC059D200F70A56 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
@@ -1047,14 +1054,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 9.1.0;
-			};
-		};
-		B6FED42A2C70B72900339B7C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.1;
 			};
 		};
 		B6FED44C2C70B96500339B7C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -1107,6 +1106,11 @@
 			package = B63875032CB09A3F006B3364 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
 			productName = SwiftOpenAI;
 		};
+		B6595B6F2CD0E1BF004816E8 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6595B6E2CD0E1BF004816E8 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		B66D67812CC059D200F70A56 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B66D67802CC059D200F70A56 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
@@ -1116,16 +1120,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
 			productName = GooglePlaces;
-		};
-		B6FED42B2C70B72900339B7C /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B6FED42A2C70B72900339B7C /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-		B6FED42D2C70B72900339B7C /* AlamofireDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B6FED42A2C70B72900339B7C /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = AlamofireDynamic;
 		};
 		B6FED44D2C70B96500339B7C /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

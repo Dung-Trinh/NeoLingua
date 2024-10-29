@@ -28,7 +28,10 @@ class ImageProcessingManager {
             return TestData.imageBasedTask
         }
         
-        let newThread = try await createThreadWithImage(imageUrl: imageUrl)
+        let newThread = try await createThreadWithImage(
+            imageUrl: imageUrl,
+            prompt: "what can be seen in the picture?"
+        )
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
             assistantID: imageBasedAssistantID,
             threadID: newThread.id
@@ -55,7 +58,29 @@ class ImageProcessingManager {
         return downloadURL?.absoluteString
     }
     
-    private func createThreadWithImage(imageUrl: String) async throws -> ThreadResponse {
+    func verifyImage(imageUrl: String, searchedObject: String) async throws -> ImageValidationResult? {
+        let imageAnalyser = "asst_UGMnDx0fcYMJNFhEhu6PVDrr"
+        
+        if CommandLine.arguments.contains("--useMockData") {            
+            return TestData.imageValidationResult
+        }
+        
+        let newThread = try await createThreadWithImage(imageUrl: imageUrl, prompt: searchedObject)
+        let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
+            assistantID: imageAnalyser,
+            threadID: newThread.id
+        )
+        
+        print("jsonStringResponse")
+        print(jsonStringResponse)
+        if let jsonData = jsonStringResponse.data(using: .utf8) {
+            let decodedData = try JSONDecoder().decode(ImageValidationResult.self, from: jsonData)
+            return decodedData
+        }
+        throw "verifyImage error"
+    }
+    
+    private func createThreadWithImage(imageUrl: String, prompt: String) async throws -> ThreadResponse {
         let url = "https://api.openai.com/v1/threads"
         let apiKey = ProdENV().OPENAI_KEY
         let parameters: [String: Any] = [
@@ -65,7 +90,7 @@ class ImageProcessingManager {
                     "content": [
                         [
                             "type": "text",
-                            "text": "what can be seen in the picture?"
+                            "text": "\(prompt)"
                         ],
                         [
                             "type": "image_url",
@@ -96,6 +121,7 @@ class ImageProcessingManager {
                 case .success(let data):
                     do {
                         let threadResponse = try JSONDecoder().decode(ThreadResponse.self, from: data)
+                        print("thread with image ID: ", threadResponse.id)
                         continuation.resume(returning: threadResponse)
                     } catch {
                         continuation.resume(throwing: error)
@@ -106,4 +132,10 @@ class ImageProcessingManager {
             }
         }
     }
+}
+
+struct ImageValidationResult: Codable {
+    let isMatching: Bool
+    let reason: String
+    let confidenceScore: Double
 }
