@@ -12,6 +12,8 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     @Published var audioPlayer: AVAudioPlayer?
     @Published var exercise: ListeningExercise?
     @Published var evaluation: ListeningTaskEvaluation?
+    @Published var evaluatedQuestion: [EvaluatedQuestion] = []
+
     let prompt: String
 
     private let service: OpenAIService
@@ -67,6 +69,7 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
         
         do {
             evaluation = try await listeningComprehensionManager.fetchListeningTaskEvaluation(userAnswer: finalResult)
+            evaluatedQuestion = evaluation?.evaluatedQuestions ?? []
             
             guard let evaluation else{
                 print("keine evaluation")

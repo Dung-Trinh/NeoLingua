@@ -11,33 +11,32 @@ struct AudioPlayerView: View {
         self.player = player
         totalTime = player.duration
     }
-
+    
     var body: some View {
         VStack {
-                Text("Title for Audio")
-                HStack {
-                    Button(
-                        action: {
-                            tootglePlayButton()
-                        },
-                        label: {
-                            Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
-                                .font(.largeTitle)
-                        }).buttonStyle(PlainButtonStyle())
-                    
-                    Slider(
-                        value: Binding(get: { currentTime }, set: { newValue in
-                            player.currentTime = newValue
+            HStack {
+                Button(
+                    action: {
+                        tootglePlayButton()
+                    },
+                    label: {
+                        Image(systemName: isPlaying ? "pause.circle.fill" : "play.circle.fill")
+                            .font(.largeTitle)
+                    }).buttonStyle(PlainButtonStyle())
+                
+                Slider(
+                    value: Binding(get: { currentTime }, set: { newValue in
+                        player.currentTime = newValue
                         currentTime = newValue
                     }), in: 0...totalTime)
-                    .accentColor(.blue)
-                }
-                HStack {
-                    Text("\(formatTime(currentTime))")
-                    Spacer()
-                    Text("\(formatTime(totalTime))")
-                }
-                .padding(.horizontal)
+                .accentColor(.blue)
+            }
+            HStack {
+                Text("\(formatTime(currentTime))")
+                Spacer()
+                Text("\(formatTime(totalTime))")
+            }
+            .padding(.horizontal)
         }
         .onReceive(Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()) { _ in
             updateProgress()
