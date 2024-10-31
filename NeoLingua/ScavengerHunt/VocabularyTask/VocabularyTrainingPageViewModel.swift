@@ -14,6 +14,8 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     @Published var router: Router
     @Published var showResult: Bool = false
 
+    var isScavengerHuntMode: Bool = false
+
     private var prompt = ""
     private var vocabularyManager = VocabularyManager()
     private var anyCancellables = Set<AnyCancellable>()
@@ -70,8 +72,14 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             userInputText = ""
         } else {
             Task {
-                let parameter = TaskPerformancetParameter(result: Double(points/tasks.count))
-                try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .vocabularyTraining)
+                let finalPoints =  Double(points) / Double(points)
+                let parameter = TaskPerformancetParameter(result: finalPoints, isDone: true)
+                if isScavengerHuntMode {
+                    try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .vocabularyTraining)
+                } else {
+                    
+                    try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .vocabularyTraining)
+                }
             }
             
             print("keine antworten mehr zurück")

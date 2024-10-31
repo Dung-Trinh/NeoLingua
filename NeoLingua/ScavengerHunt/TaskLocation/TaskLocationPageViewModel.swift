@@ -16,9 +16,21 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
     
     private var uploadedImageLink = ""
     private let imageProcessingManager = ImageProcessingManager()
+    private let taskProcessManager = TaskProcessManager.shared
 
     init(taskLocation: TaskLocation) {
         self.taskLocation = taskLocation
+        taskProcessManager.taskLocationId = taskLocation.id
+    }
+    
+    func fetchTaskLocationState() async {
+        do {
+            let locationTaskPerformance = try await taskProcessManager.fetchTaskLocationState(locationId: taskLocation.id)
+            taskLocation.performance = locationTaskPerformance
+            
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func verifyImage() async {
@@ -28,9 +40,10 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
         do {
             await uploadImage()
             imageValidationResult = try await imageProcessingManager.verifyImage(
-                    imageUrl: uploadedImageLink,
-                    searchedObject: taskLocation.photoObject
+                imageUrl: uploadedImageLink,
+                searchedObject: taskLocation.photoObject
             )
+            try await taskProcessManager.updateTaskLocationImageState(locationId: taskLocation.id, result: imageValidationResult?.isMatching ?? false)
             isSheetPresented = true
             print("imageValidationResult")
             print(imageValidationResult)

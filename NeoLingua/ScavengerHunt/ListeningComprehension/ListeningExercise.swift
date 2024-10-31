@@ -24,4 +24,11 @@ struct ListeningTaskEvaluation: Codable {
     func countCorrectAnswers() -> Int {
         return evaluatedQuestions.filter { $0.isAnswerRight }.count
     }
+    
+    func getScorePercentage() -> Double {
+        let correctAnswers = Double(countCorrectAnswers())
+        let questionAmount = Double(evaluatedQuestions.count)
+        print(correctAnswers, questionAmount)
+        return correctAnswers/questionAmount
+    }
 }

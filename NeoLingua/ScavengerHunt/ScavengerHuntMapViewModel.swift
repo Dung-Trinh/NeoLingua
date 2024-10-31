@@ -12,7 +12,8 @@ class ScavengerHuntMapViewModelImpl: ScavengerHuntMapViewModel {
     @Published var selectedTaskLocation: TaskLocation?
     @Published var router: Router
 
-    
+    let scavengerHuntManager = ScavengerHuntManager()
+
     init(router: Router, scavengerHunt: ScavengerHunt) {
         self.scavengerHunt = scavengerHunt
         self.router = router
@@ -25,6 +26,23 @@ class ScavengerHuntMapViewModelImpl: ScavengerHuntMapViewModel {
         router.taskLocation = location
         router.push(.scavengerHunt(.taskLocation))
         print(selectedTaskLocation)
+    }
+    
+    func fetchScavengerHuntState() async {
+        do {
+            let state = try await scavengerHuntManager.fetchScavengerHuntState(scavengerHuntId: scavengerHunt.id)
+            scavengerHunt.scavengerHuntState = state
+            
+            for (index, location) in scavengerHunt.taskLocations.enumerated() {
+                for performance in state.locationTaskPerformance {
+                    if performance.locationId == scavengerHunt.taskLocations[index].id {
+                        scavengerHunt.taskLocations[index].performance = performance
+                    }
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     private func createMarkers(scavengerHunt: ScavengerHunt) -> [GMSMarker] {

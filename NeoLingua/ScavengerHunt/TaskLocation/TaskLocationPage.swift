@@ -5,7 +5,7 @@ import _PhotosUI_SwiftUI
 struct TaskLocationPage: View {
     @EnvironmentObject private var router: Router
     @StateObject var viewModel: TaskLocationPageViewModelImpl
-
+    
     var location: TaskLocation {
         return viewModel.taskLocation
     }
@@ -18,39 +18,61 @@ struct TaskLocationPage: View {
                     .scaledToFit()
             }
             Text(location.name).font(.title)
-            Text(location.type)
+            Text("Tasks").font(.subheadline).bold()
             
             if let vocabularyTrainingPrompt =  location.taskPrompt.vocabularyTraining {
                 VStack {
-                    Button("Vokabelübung starten") {
-                        router.push(.learningTask(.vocabularyTrainingPage(prompt: location.taskPrompt.vocabularyTraining ?? "")))
+                    HStack {
+                        Button("Vokabelübung starten") {
+                            router.push(.learningTask(.vocabularyTrainingPage(prompt: location.taskPrompt.vocabularyTraining ?? "", isScavengerHuntMode: true)))
+                        }.if(location.performance?.performance.vocabularyTraining?.isDone == true, transform: {
+                            view in
+                            view.disabled(true)
+                        })
+                        if location.performance?.performance.vocabularyTraining?.isDone == true {
+                            Text("✅")
+                        }
+                    }
+                    HStack {
+                        Button("Hörverständnis Aufgaben starten") {
+                            router.push(.learningTask(.listeningComprehensionPage(prompt: location.taskPrompt.listeningComprehension ?? "", isScavengerHuntMode: true)))
+                        }.if(location.performance?.performance.listeningComprehension?.isDone == true, transform: {
+                            view in
+                            view.disabled(true)
+                        })
+                        if location.performance?.performance.listeningComprehension?.isDone == true {
+                            Text("✅")
+                        }
+                    }
+                    HStack {
+                        Button("Gesprächssimulation starten") {
+                            router.push(.learningTask(.conversationSimulationPage(prompt: location.taskPrompt.conversationSimulation ?? "", isScavengerHuntMode: true)))
+                        }.if(location.performance?.performance.conversationSimulation?.isDone == true, transform: {
+                            view in
+                            view.disabled(true)
+                        })
+                        if location.performance?.performance.conversationSimulation?.isDone == true {
+                            Text("✅")
+                        }
                     }
                     
-                    Button("Hörverständnis Aufgaben starten") {
-                        router.push(.learningTask(.listeningComprehensionPage(prompt: location.taskPrompt.listeningComprehension ?? "")))
-                    }
-                    
-                    Button("Gesprächssimulation starten") {
-                        router.push(.learningTask(.conversationSimulationPage(prompt: location.taskPrompt.conversationSimulation ?? "")))
-                    }
-                    
-                    Button("Schreibaufgabe starten") {
-//                        router.push(.learningTask(.writingTaskPage))
-                    }
+//                    Button("Schreibaufgabe starten") {
+//                        //                        router.push(.learningTask(.writingTaskPage))
+//                    }
                 }
             }
-            
-            Text(location.photoClue)
-            Text(location.photoObject)
-            
+            Spacer()
+            if location.performance?.performance.isTaskDone() == true {
             VStack(alignment: .center) {
+                Text("Hint for the object").font(.subheadline).bold().multilineTextAlignment(.center)
+                Text(location.photoClue).multilineTextAlignment(.center)
                 PhotosPicker(
                     selection: $viewModel.selectedPhotos,
                     maxSelectionCount: 1,
                     selectionBehavior: .ordered,
                     matching: .images
                 ) {
-                    Label("Select the image with the object we are looking for", systemImage: "photo").frame(alignment: .center)
+                    (Text(Image(systemName: "photo")) + Text("Select the image"))
                 }.onChange(of: viewModel.selectedPhotos) {
                     viewModel.convertDataToImage()
                 }
@@ -81,7 +103,13 @@ struct TaskLocationPage: View {
                 }
             }
         }
+        }
         .padding()
+        .onAppear {
+            Task {
+                await viewModel.fetchTaskLocationState()
+            }
+        }
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
@@ -97,9 +125,6 @@ struct TaskLocationPage: View {
         }
     }
 }
-
-
-import SwiftUI
 
 struct ImageValidationResultView: View {
     let validationResult: ImageValidationResult

@@ -33,10 +33,10 @@ enum Route: Hashable {
     
     enum LearningTaskRoute: Hashable {
         case map
-        case vocabularyTrainingPage(prompt: String)
-        case listeningComprehensionPage(prompt: String)
-        case conversationSimulationPage(prompt: String)
-        case writingTaskPage(prompt: String)
+        case vocabularyTrainingPage(prompt: String, isScavengerHuntMode: Bool = false)
+        case listeningComprehensionPage(prompt: String, isScavengerHuntMode: Bool = false)
+        case conversationSimulationPage(prompt: String, isScavengerHuntMode: Bool = false)
+        case writingTaskPage(prompt: String, isScavengerHuntMode: Bool = false)
     }
 }
 //@Observable
@@ -139,13 +139,28 @@ class Router: ObservableObject  {
         scavengerHunt: ScavengerHunt
     ) -> some View {
         switch learningTaskRoute {
-        case .vocabularyTrainingPage(let prompt):
-            VocabularyTrainingPage(viewModel: VocabularyTrainingPageViewModelImpl(prompt: prompt, router: self))
-        case .listeningComprehensionPage(let prompt):
-            ListeningComprehensionPage(viewModel: ListeningComprehensionPageViewModelImpl(prompt: prompt))
-        case .conversationSimulationPage(let prompt):
-            ConversationSimulationPage(viewModel: ConversationSimulationPageViewModelImpl(prompt: prompt))
-        case .writingTaskPage(let prompt):
+        case .vocabularyTrainingPage(let prompt, let isScavengerHuntMode):
+            var vm: VocabularyTrainingPageViewModelImpl {
+                let vm = VocabularyTrainingPageViewModelImpl(prompt: prompt, router: self)
+                vm.isScavengerHuntMode = isScavengerHuntMode
+                return vm
+            }
+            VocabularyTrainingPage(viewModel: vm)
+        case .listeningComprehensionPage(let prompt, let isScavengerHuntMode):
+            var vm: ListeningComprehensionPageViewModelImpl {
+                let vm = ListeningComprehensionPageViewModelImpl(prompt: prompt)
+                vm.isScavengerHuntMode = isScavengerHuntMode
+                return vm
+            }
+            ListeningComprehensionPage(viewModel: vm )
+        case .conversationSimulationPage(let prompt, let isScavengerHuntMode):
+            var vm: ConversationSimulationPageViewModelImpl {
+                let vm = ConversationSimulationPageViewModelImpl(prompt: prompt)
+                vm.isScavengerHuntMode = isScavengerHuntMode
+                return vm
+            }
+            ConversationSimulationPage(viewModel: vm)
+        case .writingTaskPage(let prompt, let isScavengerHuntMode):
             WritingTaskPage()
         case .map:
             ScavengerHuntMap(viewModel: ScavengerHuntMapViewModelImpl(router: self, scavengerHunt: scavengerHunt))
@@ -156,13 +171,13 @@ class Router: ObservableObject  {
     private func handleLearningTaskRoute(
         _ learningTaskRoute: Route.LearningTaskRoute) -> some View {
         switch learningTaskRoute {
-        case .vocabularyTrainingPage(let prompt):
+        case .vocabularyTrainingPage(let prompt, let isScavengerHuntMode):
             VocabularyTrainingPage(viewModel: VocabularyTrainingPageViewModelImpl(prompt: prompt, router: self))
-        case .listeningComprehensionPage(let prompt):
+        case .listeningComprehensionPage(let prompt, let isScavengerHuntMode):
             ListeningComprehensionPage(viewModel: ListeningComprehensionPageViewModelImpl(prompt: prompt))
-        case .conversationSimulationPage(let prompt):
+        case .conversationSimulationPage(let prompt, let isScavengerHuntMode):
             ConversationSimulationPage(viewModel: ConversationSimulationPageViewModelImpl(prompt: prompt))
-        case .writingTaskPage(let prompt):
+        case .writingTaskPage(let prompt, let isScavengerHuntMode):
             WritingTaskPage()
         case .map:
             Text("handleLearningTaskRoute error")

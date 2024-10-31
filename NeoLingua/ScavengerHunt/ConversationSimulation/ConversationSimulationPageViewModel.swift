@@ -28,6 +28,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var conversationEvaluation: ConversationEvaluation?
     let prompt: String
     private var taskProcessManager = TaskProcessManager.shared
+    var isScavengerHuntMode: Bool = false
 
     init(prompt: String) {
         self.prompt = prompt
@@ -109,8 +110,13 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
 //            print(result)
 //            conversationEvaluation = result
             
-            let parameter = TaskPerformancetParameter(result: Double((conversationEvaluation?.rating ?? 0) / 10))
-            try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .conversationSimulation)
+            let parameter = TaskPerformancetParameter(result: Double((conversationEvaluation?.rating ?? 0) / 10),isDone: true)
+            
+            if isScavengerHuntMode {
+                try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .conversationSimulation)
+            } else {
+                try await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .conversationSimulation)
+            }
         } catch {
             print("getConversationEvaluation() error: ", error.localizedDescription)
         }

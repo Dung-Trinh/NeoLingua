@@ -3,6 +3,7 @@ import SwiftUI
 struct ScavengerHuntOverviewPage: View {
     @EnvironmentObject private var router: Router
     @StateObject var viewModel: ScavengerHuntOverviewPageViewModelImpl
+    @State var initialAppearance = false
     
     var body: some View {
         ScrollView {
@@ -12,10 +13,12 @@ struct ScavengerHuntOverviewPage: View {
                         title: "ScavengerHunt",
                         subtitle: currentScavengerHunt.introduction
                     )
-                    
                     Text("Location")
-                    VStack {
-                        if let scavengerHunt = viewModel.currentScavengerHunt {
+                    if let scavengerHunt = viewModel.currentScavengerHunt {
+                        ForEach(scavengerHunt.taskLocations) { location in
+                            Label(location.name, systemImage: "mappin.and.ellipse")
+                        }
+                        VStack {
                             Button(action: {
                                 if let scavengerHunt = viewModel.currentScavengerHunt {
                                     router.scavengerHunt = scavengerHunt
@@ -25,11 +28,23 @@ struct ScavengerHuntOverviewPage: View {
                                 Label("Show playing field", systemImage: "map.fill")
                             })
                         }
+                        
+                        if scavengerHunt.isHuntComplete() {
+                            Button("show final result") {
+                                
+                            }
+                        }
                     }
+                    
                 }
             }.onAppear {
                 Task {
-                    await viewModel.fetchScavengerHunt()
+                    if initialAppearance == false {
+                        await viewModel.fetchScavengerHunt()
+                        initialAppearance = true
+                    } else {
+                        await viewModel.updateScavengerHuntState()
+                    }
                 }
             }
         }.navigationDestination(for: Route.self) { route in

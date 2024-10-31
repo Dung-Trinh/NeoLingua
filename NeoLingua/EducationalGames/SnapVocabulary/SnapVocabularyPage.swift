@@ -16,20 +16,20 @@ struct SnapVocabularyPage: View {
                     router.push(.imageBasedLearningPage)
                 }
             )
-            PrimaryButton(
-                title: "Suche nach Lerninhalten in der Umgebung",
-                color: .blue,
-                action: {
-                    
-                }
-            )
-            PrimaryButton(
-                title: "Schnitzeljagd in der Umgebung suchen",
-                color: .blue,
-                action: {
-                    
-                }
-            )
+//            PrimaryButton(
+//                title: "Suche nach Lerninhalten in der Umgebung",
+//                color: .blue,
+//                action: {
+//                    
+//                }
+//            )
+//            PrimaryButton(
+//                title: "Schnitzeljagd in der Umgebung suchen",
+//                color: .blue,
+//                action: {
+//                    
+//                }
+//            )
             PrimaryButton(
                 title: "Schnitzeljagd in der Umgebung generieren",
                 color: .blue,

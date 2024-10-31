@@ -15,6 +15,7 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     @Published var evaluatedQuestion: [EvaluatedQuestion] = []
 
     let prompt: String
+    var isScavengerHuntMode: Bool = false
 
     private let service: OpenAIService
     private let listeningComprehensionManager = ListeningComprehensionManager()
@@ -76,11 +77,14 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
                 return
             }
             
-            let points = Double ((evaluation.countCorrectAnswers())/evaluation.evaluatedQuestions.count)
-            
-            let parameter = TaskPerformancetParameter(result: points)
-            
-            try await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .listeningComprehension)
+            let points = evaluation.getScorePercentage()
+            let parameter = TaskPerformancetParameter(result: points, isDone: true)
+            print(points)
+            if isScavengerHuntMode {
+                try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .listeningComprehension)
+            } else {
+                try await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .listeningComprehension)
+            }
         } catch {
             print("evaluateQuestions error: ", error.localizedDescription)
         }
