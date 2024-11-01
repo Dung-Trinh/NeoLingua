@@ -7,6 +7,10 @@ class ConversationSimulationManager {
     var threadID = ""
 
     func selectedRole(selectedRole: RoleOption) async throws -> IntroResponse? {
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.conversationIntroResponse
+        }
+        
         let prompt = "userSelection: \(selectedRole.role)"
         await sendUserMessageToCurrentThread(message: prompt)
         
@@ -21,7 +25,10 @@ class ConversationSimulationManager {
     }
     
     func createConversation(prompt: String) async throws -> RoleOptionsResponse? {
-//        let prompt = "you are in a turkish restaurant and want to order food and drinks"
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.roleOptionsResponse
+        }
+        
         let parameters = MessageParameter(
             role: .user,
             content: prompt
@@ -47,6 +54,10 @@ class ConversationSimulationManager {
     }
     
     func sendMessageAndGetResponse(message: String) async throws -> ConversationResponse? {
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.conversationResponse
+        }
+        
         await sendUserMessageToCurrentThread(message: message)
         let resultJsonString = try await getJsonResponseAfterRun()
         if let jsonData = resultJsonString.data(using: .utf8) {
@@ -57,6 +68,10 @@ class ConversationSimulationManager {
     }
     
     func fetchEvaluation() async throws -> ConversationEvaluation? {
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.conversationEvaluation
+        }
+        
         await sendUserMessageToCurrentThread(message: "give me an evaluation of the conversation")
         let resultJsonString = try await getJsonResponseAfterRun()
         if let jsonData = resultJsonString.data(using: .utf8) {

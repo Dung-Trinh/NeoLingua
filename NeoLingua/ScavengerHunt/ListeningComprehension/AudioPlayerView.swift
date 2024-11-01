@@ -2,14 +2,14 @@ import SwiftUI
 import AVFoundation
 
 struct AudioPlayerView: View {
-    @State var player: AVAudioPlayer
+    @Binding var player: AVAudioPlayer?
     @State private var isPlaying = false
     @State private var totalTime: TimeInterval
     @State private var currentTime: TimeInterval = 0.0
     
-    init(player: AVAudioPlayer){
-        self.player = player
-        totalTime = player.duration
+    init(player: Binding<AVAudioPlayer?>){
+        self._player = player
+        totalTime = player.wrappedValue?.duration ?? 0
     }
     
     var body: some View {
@@ -26,7 +26,7 @@ struct AudioPlayerView: View {
                 
                 Slider(
                     value: Binding(get: { currentTime }, set: { newValue in
-                        player.currentTime = newValue
+                        player?.currentTime = newValue 
                         currentTime = newValue
                     }), in: 0...totalTime)
                 .accentColor(.blue)
@@ -38,11 +38,16 @@ struct AudioPlayerView: View {
             }
             .padding(.horizontal)
         }
+        .onChange(of: player) { newPlayer in
+            totalTime = newPlayer?.duration ?? 0
+            currentTime = 0
+            isPlaying = newPlayer?.isPlaying ?? false
+        }
         .onReceive(Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()) { _ in
             updateProgress()
         }
         .onDisappear {
-            player.stop()
+            player?.stop()
         }
     }
     
@@ -53,15 +58,15 @@ struct AudioPlayerView: View {
     }
     
     private func updateProgress() {
-        currentTime = player.currentTime
+        currentTime = player?.currentTime ?? 0
     }
     
     private func tootglePlayButton() {
         isPlaying.toggle()
         if isPlaying {
-            player.play()
+            player?.play()
         } else {
-            player.pause()
+            player?.pause()
         }
     }
 }

@@ -4,7 +4,7 @@ import AVFoundation
 
 class AudioPlayer: ObservableObject {
     let service = OpenAIServiceFactory.service(apiKey: ProdENV().OPENAI_KEY)
-    var audioPlayer: AVAudioPlayer?
+    @Published var audioPlayer: AVAudioPlayer?
     
     func createSpeech(textForSpeech: String) async throws {
         let parameters = AudioSpeechParameters(

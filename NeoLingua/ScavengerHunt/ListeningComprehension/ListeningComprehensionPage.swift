@@ -9,12 +9,13 @@ struct ListeningComprehensionPage: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Task definition").font(.title2)
+                Text("ⓘ Task definition").bold()
                 VStack(alignment: .leading) {
-                    Text("Listen to the text carefully.Respond to the following questions when you're ready.").font(.subheadline).padding(.bottom, Styleguide.Margin.small)
-                    if let player = viewModel.audioPlayer {
-                        AudioPlayerView(player: player).padding(.vertical, Styleguide.Margin.small)
-                    }
+                    Text("Listen to the text carefully.Respond to the following questions when you're ready.").font(.subheadline)
+                        .foregroundColor(.gray).padding(.bottom, Styleguide.Margin.small)
+                    
+                    AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer).padding(.vertical, Styleguide.Margin.small)
+            
                     if let exercise = viewModel.exercise {
                         VStack(alignment: .center) {
                             Text("Task questions").font(.title2)

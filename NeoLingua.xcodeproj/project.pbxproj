@@ -56,6 +56,7 @@
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
 		B63875022CB09A22006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875012CB09A22006B3364 /* SwiftOpenAI */; };
 		B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875042CB09A3F006B3364 /* SwiftOpenAI */; };
+		B6401FEC2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */; };
 		B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */; };
 		B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */; };
 		B6595B702CD0E1BF004816E8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B6595B6F2CD0E1BF004816E8 /* Alamofire */; };
@@ -184,6 +185,7 @@
 		B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSimulationManager.swift; sourceTree = "<group>"; };
 		B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleOptionsResponse.swift; sourceTree = "<group>"; };
 		B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
+		B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEvaluationView.swift; sourceTree = "<group>"; };
 		B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTaskEvaluationView.swift; sourceTree = "<group>"; };
 		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
 		B6595B712CD0EB37004816E8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				B60F8ADC2CBDAA0C00268D75 /* ConversationSimulationPageViewModel.swift */,
 				B60F8ADE2CBDCDDD00268D75 /* SpeechRecognizer.swift */,
 				B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */,
+				B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */,
 			);
 			path = ConversationSimulation;
 			sourceTree = "<group>";
@@ -724,6 +727,7 @@
 				B60F8AD62CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift in Sources */,
 				B609EEDF2CC7F7BD00A029E8 /* ImageBasedLearningManager.swift in Sources */,
 				B60F8AD32CBD108F00268D75 /* ListeningComprehensionPage.swift in Sources */,
+				B6401FEC2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift in Sources */,
 				B609EEDB2CC7E1B700A029E8 /* ImageBasedLearningPage.swift in Sources */,
 				B6FA77E42CA44CFB00C52F73 /* LoginPage.swift in Sources */,
 				B6EB6D382CA416A70055FD67 /* SecondaryButton.swift in Sources */,

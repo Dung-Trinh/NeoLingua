@@ -158,4 +158,26 @@ class TestData {
         reason: "it is true, it is true, it is true, it is true, it is true, it is true",
         confidenceScore: 0.9
     )
+    static let roleOptionsResponse: RoleOptionsResponse = RoleOptionsResponse(
+        contextDescription: "You are dining at a seafood restaurant known for its fresh catch and elegant atmosphere. The restaurant prides itself on its wide selection of fish dishes and exquisite wine list. As you settle into the cozy setting, you are either ready to place your order as a customer or assist a diner as a server.",
+        roleOptions: [
+        RoleOption(
+            role: "Cashier",
+            tasks: [
+                "Greet the customer and offer help.",
+                "Suggest a combo meal.",
+                "Ask if the customer wants to upsize their order."
+            ]
+        ),
+        RoleOption(
+            role: "Customer",
+            tasks: [
+                "Order a main course.",
+                "Order a drink.",
+                "Ask for something specific like extra sauce or no onions."
+            ]
+        )
+    ])
+    static let conversationResponse: ConversationResponse = ConversationResponse(endOfConversation: true, answer: "test done i think so")
+    static let conversationIntroResponse: IntroResponse = .init(introText: "You've just entered a McDonald's and are greeted by a friendly cashier behind the counter. There's a digital menu overhead showcasing various options, like the Big Mac meal, Chicken McNuggets, and Quarter Pounder with Cheese. For drinks, you see options like Coke, Sprite, and Iced Tea. As you approach the counter, you begin to decide what you'd like to order. Don't forget, you can ask for modifications, such as extra sauce or no onions.")
 }

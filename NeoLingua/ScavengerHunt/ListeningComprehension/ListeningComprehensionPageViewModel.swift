@@ -9,7 +9,7 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     @Published var isLoading = false
     @Published var userInput = ""
     @Published var answers: [String] = []
-    @Published var audioPlayer: AVAudioPlayer?
+    @Published var audioPlayer = AudioPlayer()
     @Published var exercise: ListeningExercise?
     @Published var evaluation: ListeningTaskEvaluation?
     @Published var evaluatedQuestion: [EvaluatedQuestion] = []
@@ -47,9 +47,8 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     private func createSpeech() async {
         var speechErrorMessage = ""
         do {
-            let speech = try await listeningComprehensionManager.createSpeech(text: exercise?.textForSpeech ?? "no text for speech")
-            audioPlayer = try AVAudioPlayer(data: speech)
-            audioPlayer?.prepareToPlay()
+            try await audioPlayer.createSpeech(textForSpeech: exercise?.textForSpeech ?? "no text for speech error")
+            audioPlayer.audioPlayer?.prepareToPlay()
         } catch let error as APIError {
             speechErrorMessage = error.displayDescription
         } catch {

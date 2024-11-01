@@ -81,8 +81,6 @@ struct TaskLocationList: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                
-                // List Handle
                 HStack(alignment: .center) {
                     Rectangle()
                         .frame(width: 25, height: 4, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -96,37 +94,41 @@ struct TaskLocationList: View {
                 }
                 
                 List {
-                    ForEach(taskLocation) { location in
-                        Button(action: {
-                            buttonAction(location)
-                            for marker in markers {
-                                if marker.title == location.name {
-                                    setMarker(marker)
-                                }
-                            }
-                        }) {
-                            HStack {
-                                Text(location.name)
-                                if let didFoundObject = location.performance?.performance.didFoundObject {
-                                    if didFoundObject {
-                                        Text("✅")
-                                    } else {
-                                        Text("❌")
+                    Section {
+                        ForEach(taskLocation) { location in
+                            Button(action: {
+                                buttonAction(location)
+                                for marker in markers {
+                                    if marker.title == location.name {
+                                        setMarker(marker)
                                     }
                                 }
-                            }
-                            
-                        }.if(location.performance?.performance.didFoundObject != nil, transform: { view in
-                            view.disabled(true)
-                        })
-                    }
-                    if areAllTaskDone() {
-                        Button("back to scavenger hunt over view") {
-                            router.navigateBack()
+                            }) {
+                                HStack {
+                                    Text(location.name)
+                                    if let didFoundObject = location.performance?.performance.didFoundObject {
+                                        if didFoundObject {
+                                            Text("✅")
+                                        } else {
+                                            Text("❌")
+                                        }
+                                    }
+                                }
+                                
+                            }.if(location.performance?.performance.didFoundObject != nil, transform: { view in
+                                view.disabled(true)
+                            })
                         }
+                        if areAllTaskDone() {
+                            Button("back to scavenger hunt over view") {
+                                router.navigateBack()
+                            }
+                        }
+                    }header: {
+                        Text("Task location")
                     }
                 }
-                .frame(maxWidth: .infinity,maxHeight: 200)
+                .frame(maxWidth: .infinity,maxHeight: 300)
             }
         }
     }
