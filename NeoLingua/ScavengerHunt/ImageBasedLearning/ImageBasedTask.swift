@@ -7,17 +7,17 @@ struct ImageBasedTask: Codable {
     let taskPrompt: TaskPrompt
 }
 
-struct UserTaskResult: Codable {
-    let userUid: String
-    let taskId: String
-    let imageUrl: String
-    let title: String
-    let description: String
-    let taskPrompt: TaskPrompt
-    
-    let vocabularyTraining: [VocabularyTask]?
-    let listeningExercise: ListeningExercise?
-}
+//struct UserTaskResult: Codable {
+//    let userUid: String
+//    let taskId: String
+//    let imageUrl: String
+//    let title: String
+//    let description: String
+//    let taskPrompt: TaskPrompt
+//    
+//    let vocabularyTraining: [VocabularyTask]?
+//    let listeningExercise: ListeningExercise?
+//}
 
 struct UserTaskPerformance: Codable {
     let userId: String

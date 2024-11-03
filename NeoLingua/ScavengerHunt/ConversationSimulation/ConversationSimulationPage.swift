@@ -58,11 +58,25 @@ struct ConversationSimulationPage: View {
                 }
             }
             
-            if viewModel.audioPlayer.audioPlayer != nil {
-                AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer)
-            }
-            
             if viewModel.conversationState == .conversation {
+                if let selectedRole = viewModel.selectedRole {
+                    VStack(alignment: .center){
+                        Text(selectedRole.role)
+                        ForEach(selectedRole.tasks, id: \.self) { task in
+                            VStack(alignment: .leading) {
+                                HStack(alignment: .top) {
+                                    Text("• \(task)")
+                                    Spacer()
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                if viewModel.audioPlayer.audioPlayer != nil {
+                    AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer)
+                }
+                
                 Picker("Input Mode", selection: $viewModel.selectedMode) {
                     ForEach(ConversationInputMode.allCases, id: \.self) { mode in
                         Text(mode.rawValue).tag(mode)

@@ -13,6 +13,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     @Published var sheetViewModel: ResultSheetViewModel?
     @Published var router: Router
     @Published var showResult: Bool = false
+    @Published var isLoading: Bool = false
 
     var isScavengerHuntMode: Bool = false
 
@@ -92,7 +93,9 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
         }
     }
     
-    func fetchVocabularyTraining() async {        
+    func fetchVocabularyTraining() async {
+        isLoading = true
+        defer { isLoading = false }
         do {
             let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
             tasks = result

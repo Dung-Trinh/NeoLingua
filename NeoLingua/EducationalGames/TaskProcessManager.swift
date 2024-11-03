@@ -36,11 +36,11 @@ class TaskProcessManager {
             "vocabularyTraining": [],
             "listeningExercise": nil as AnyObject?
         ]
-        try await db.collection("userTaskResult").addDocument(data: data)
+        try await db.collection("imageBasedTaskResult").addDocument(data: data)
     }
     
 //    func fetchTasksForUser(userId: String) async throws -> [ImageBasedTask] {
-//        let querySnapshot = try await db.collection("userTaskResult")
+//        let querySnapshot = try await db.collection("ImageBasedTaskResult")
 //            .whereField("userId", isEqualTo: userId)
 //            .getDocuments()
 //        
@@ -58,7 +58,7 @@ class TaskProcessManager {
     func updateVocabularyExercise(exercises: [VocabularyExercise]) async throws {
         print(currentTaskId)
         
-        let querySnapshot = try await db.collection("userTaskResult")
+        let querySnapshot = try await db.collection("imageBasedTaskResult")
             .whereField("taskId", isEqualTo: currentTaskId)
             .getDocuments()
         guard let document = querySnapshot.documents.first else {
@@ -102,7 +102,7 @@ class TaskProcessManager {
             "userId": userId,
             "taskId": task.id
         ]
-        try await db.collection("userTaskResult").addDocument(data: data)
+        try await db.collection("imageBasedTaskResult").addDocument(data: data)
     }
     
     func updateTaskPerformance(parameter: TaskPerformancetParameter, taskType: TaskType) async throws {
@@ -112,7 +112,7 @@ class TaskProcessManager {
         }
         
         print("currentTaskId: ", currentTaskId)
-        let querySnapshot = try await db.collection("userTaskResult")
+        let querySnapshot = try await db.collection("imageBasedTaskResult")
             .whereField("userId", isEqualTo: userId)
             .whereField("taskId", isEqualTo: currentTaskId)
             .getDocuments()
@@ -130,7 +130,8 @@ class TaskProcessManager {
         
         let performance: [String: Any] = [
             "result": parameter.result,
-            "time": parameter.time
+            "time": parameter.time,
+            "isDone": parameter.isDone
         ]
         
         try await documentRef.updateData([
@@ -183,7 +184,7 @@ class TaskProcessManager {
             return nil
         }
         
-        let querySnapshot = try await db.collection("userTaskResult")
+        let querySnapshot = try await db.collection("imageBasedTaskResult")
             .whereField("userId", isEqualTo: userId)
             .whereField("taskId", isEqualTo: currentTaskId)
             .getDocuments()

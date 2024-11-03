@@ -53,6 +53,7 @@ struct VocabularyTrainingPage: View {
             }
         }
         .padding()
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
         .onAppear {
             Task {
                 await viewModel.fetchVocabularyTraining()

@@ -74,9 +74,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let distanceInMeters = location.distance(from: targetLocation)
         
         let isInRadius = checkIfWithinRadius(currentLocation: location, targetLocation: targetLocation, radius: 50)
-        drawRadiusCircle(at: CLLocationCoordinate2D(latitude: 50.085472, longitude: 8.251848), radius: 50, color: UIColor.red)
-        print("distanceInMeters: ", distanceInMeters)
-        print("isInRadius: ", isInRadius)
+//        drawRadiusCircle(at: CLLocationCoordinate2D(latitude: 50.085472, longitude: 8.251848), radius: 50, color: UIColor.red)
+//        print("distanceInMeters: ", distanceInMeters)
+//        print("isInRadius: ", isInRadius)
         // center camera when user location is available
 //        guard let location = locations.first else { return }
 //        

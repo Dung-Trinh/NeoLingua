@@ -23,6 +23,7 @@ class ImageProcessingManager {
     private let openAiServiceHelper = OpenAIServiceHelper()
     private let imageBasedAssistantID = ProdENV().CONTEXT_BASED_LEARNING_ASSISTANT_ID
     
+    var currentThreadID = ""
     func createImageBasedTask(imageUrl: String) async throws -> ImageBasedTask? {
         if CommandLine.arguments.contains("--useMockData") {
             return TestData.imageBasedTask
@@ -71,6 +72,7 @@ class ImageProcessingManager {
             threadID: newThread.id
         )
         
+        currentThreadID = newThread.id
         print("jsonStringResponse")
         print(jsonStringResponse)
         if let jsonData = jsonStringResponse.data(using: .utf8) {
@@ -78,6 +80,52 @@ class ImageProcessingManager {
             return decodedData
         }
         throw "verifyImage error"
+    }
+    
+    func verifyTextWithImage(
+        imageUrl: String,
+        searchedVocabulary: [String],
+        userInput: String
+    ) async throws -> InspectImageForVocabularyResult {
+        if currentThreadID == "" {
+            let newThread = try await createThreadWithImage(
+                imageUrl: imageUrl,
+                prompt: "InspectImageForVocabulary; searchedVocabulary: \(searchedVocabulary.joined(separator: ",")); userInput: \(userInput)"
+            )
+            currentThreadID = newThread.id
+        } else {
+            try await openAiServiceHelper.sendUserMessageToThread(message: "InspectImageForVocabulary; searchedVocabulary: \(searchedVocabulary.joined(separator: ",")); userInput: \(userInput)", threadID: currentThreadID)
+        }
+        
+        let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
+            assistantID: ProdENV().IMAGE_ANALYZER_ASSISTANT_ID,
+            threadID: currentThreadID
+        )
+        
+        print("jsonStringResponse")
+        print(jsonStringResponse)
+        
+        if let jsonData = jsonStringResponse.data(using: .utf8) {
+            let decodedData = try JSONDecoder().decode(InspectImageForVocabularyResult.self, from: jsonData)
+            return decodedData
+        }
+        throw "verifyTextWithImage error"
+    }
+    
+    func fetchImageHint() async throws -> String {
+        try await openAiServiceHelper.sendUserMessageToThread(message: "I need a hint", threadID: currentThreadID)
+        let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
+            assistantID: ProdENV().IMAGE_ANALYZER_ASSISTANT_ID,
+            threadID: currentThreadID
+        )
+        
+        print("jsonStringResponse")
+        print(jsonStringResponse)
+        if let jsonData = jsonStringResponse.data(using: .utf8) {
+            let decodedData = try JSONDecoder().decode(InspectImageForVocabularyHint.self, from: jsonData)
+            return decodedData.hint
+        }
+        throw "fetchImageHint error"
     }
     
     private func createThreadWithImage(imageUrl: String, prompt: String) async throws -> ThreadResponse {
@@ -138,4 +186,20 @@ struct ImageValidationResult: Codable {
     let isMatching: Bool
     let reason: String
     let confidenceScore: Double
+}
+
+struct InspectImageForVocabularyResult: Codable {
+    let foundSearchedVocabulary: Bool
+    let result: EvaluationStatus
+    let correctedText: String?
+}
+
+enum EvaluationStatus: String, Codable {
+    case correct
+    case wrong
+    case almostCorrect
+}
+
+struct InspectImageForVocabularyHint: Codable {
+    let hint: String
 }

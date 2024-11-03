@@ -5,6 +5,11 @@ import FirebaseStorage
 import _PhotosUI_SwiftUI
 import SwiftUI
 
+struct SharedContentForTask: Hashable {
+    let image: UIImage
+    let uploadedLink: String
+}
+
 enum ImageBasedLearningPageState {
     case initialState
     case imageSelected
@@ -23,7 +28,15 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @Published var isSheetPresented: Bool = false
     @Published var state: ImageBasedLearningPageState = .initialState
     @Published var isLoading: Bool = false
+    @Published var taskDone: Bool = false
 
+    var sharedImageForTask: SharedContentForTask? {
+        guard let selectedImage = selectedImage, uploadedImageLink != "" else {
+            return nil
+        }
+        return SharedContentForTask(image: selectedImage, uploadedLink: uploadedImageLink)
+    }
+    
     private var uploadedImageLink = ""
     private var taskProcessManager = TaskProcessManager.shared
     private let openAiServiceHelper = OpenAIServiceHelper()
@@ -50,10 +63,6 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         }
         selectedPhotos.removeAll()
         state = .imageSelected
-        
-//        Task {
-//            try? await taskProcessManager.saveImageBasedTask(task: TestData.imageBasedTask, imageUrl: "https://firebasestorage.googleapis.com/v0/b/neolingua.appspot.com/o/images%2F9F81734D-46FA-40D0-83B1-E9A8B734DE91.jpg?alt=media&token=07735721-22e5-4688-b681-06a8124dac5a")
-//        }
     }
     
     func analyzeImage() async {
@@ -84,10 +93,11 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
     }
     
+    @MainActor
     func fetchPerformance() async {
         print("fetchPerformance")
         userPerformance =  try? await taskProcessManager.fetchUserTaskPerformance()
         print(userPerformance)
-        isSheetPresented = userPerformance?.isTaskDone() ?? false
+        taskDone = userPerformance?.isTaskDone() ?? false
     }
 }

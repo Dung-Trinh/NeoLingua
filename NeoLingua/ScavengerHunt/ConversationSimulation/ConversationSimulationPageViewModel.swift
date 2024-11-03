@@ -34,6 +34,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var conversationEvaluation: ConversationEvaluation?
     @Published var isSheetPresented = false
     @Published var selectedMode: ConversationInputMode = .speech
+    @Published var selectedRole: RoleOption?
 
     let prompt: String
     private var taskProcessManager = TaskProcessManager.shared
@@ -54,8 +55,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
         do {
             let result = try await conversationSimulationManager.sendMessageAndGetResponse(message: message)
             try await audioPlayer.createSpeech(textForSpeech: result?.answer ?? "")
-            audioPlayer.audioPlayer?.prepareToPlay()
-            audioPlayer.audioPlayer?.play()
+            audioPlayer.playAudio()
             conversationState = .conversation
             if result?.endOfConversation == true {
                 print("conversationState", conversationState)
@@ -90,11 +90,11 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     
     func selectedRole(role: RoleOption) async {
             do {
+                selectedRole = role
                 let result = try await conversationSimulationManager.selectedRole(selectedRole: role)
                 // for later
-                try await audioPlayer.createSpeech(textForSpeech: result?.introText ?? "")
-                audioPlayer.audioPlayer?.prepareToPlay()
-                audioPlayer.audioPlayer?.play()
+                //try await audioPlayer.createSpeech(textForSpeech: result?.introText ?? "")
+//                audioPlayer.playAudio()
                 conversationState = .conversation
             } catch {
                 print("audioPlayer.createSpeech error: ", error.localizedDescription)

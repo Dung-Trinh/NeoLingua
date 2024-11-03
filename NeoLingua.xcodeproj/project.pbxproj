@@ -51,6 +51,10 @@
 		B60F8AE52CBFE76200268D75 /* ConversationSimulationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */; };
 		B60F8AE82CBFE7B300268D75 /* RoleOptionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */; };
 		B60F8AEA2CBFE85300268D75 /* ConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */; };
+		B61ED9DD2CD6151E00E71258 /* ShareImageForTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61ED9DC2CD6151E00E71258 /* ShareImageForTaskPage.swift */; };
+		B61ED9DF2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61ED9DE2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift */; };
+		B61ED9E12CD62CF700E71258 /* ImageBasedTaskNearMePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61ED9E02CD62CF700E71258 /* ImageBasedTaskNearMePage.swift */; };
+		B61ED9E32CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61ED9E22CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift */; };
 		B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FA2CB0581A006B3364 /* SwiftOpenAI */; };
 		B63874FD2CB059B7006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FC2CB059B7006B3364 /* SwiftOpenAI */; };
 		B63875002CB06838006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63874FF2CB06838006B3364 /* SwiftOpenAI */; };
@@ -65,6 +69,7 @@
 		B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */; };
 		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
 		B66D67882CC2A13900F70A56 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67872CC2A13900F70A56 /* TestData.swift */; };
+		B687450C2CD766640085AFE1 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B687450B2CD766640085AFE1 /* AsyncImageView.swift */; };
 		B6A561FD2CC46C520008C05C /* WritingTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */; };
 		B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */; };
 		B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */; };
@@ -185,6 +190,10 @@
 		B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSimulationManager.swift; sourceTree = "<group>"; };
 		B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleOptionsResponse.swift; sourceTree = "<group>"; };
 		B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
+		B61ED9DC2CD6151E00E71258 /* ShareImageForTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageForTaskPage.swift; sourceTree = "<group>"; };
+		B61ED9DE2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageForTaskPageViewModel.swift; sourceTree = "<group>"; };
+		B61ED9E02CD62CF700E71258 /* ImageBasedTaskNearMePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedTaskNearMePage.swift; sourceTree = "<group>"; };
+		B61ED9E22CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedTaskNearMePageViewModel.swift; sourceTree = "<group>"; };
 		B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEvaluationView.swift; sourceTree = "<group>"; };
 		B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTaskEvaluationView.swift; sourceTree = "<group>"; };
 		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
@@ -192,6 +201,7 @@
 		B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
 		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
 		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		B687450B2CD766640085AFE1 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPage.swift; sourceTree = "<group>"; };
 		B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPageViewModel.swift; sourceTree = "<group>"; };
 		B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionManager.swift; sourceTree = "<group>"; };
@@ -291,10 +301,13 @@
 		B609EED92CC7E13100A029E8 /* ImageBasedLearning */ = {
 			isa = PBXGroup;
 			children = (
+				B61ED9DB2CD614C400E71258 /* ShareImageForTaskPage */,
 				B609EEDA2CC7E1B700A029E8 /* ImageBasedLearningPage.swift */,
 				B609EEDC2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift */,
 				B609EEEF2CC8FD0C00A029E8 /* ImageBasedTask.swift */,
 				B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */,
+				B61ED9E02CD62CF700E71258 /* ImageBasedTaskNearMePage.swift */,
+				B61ED9E22CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift */,
 			);
 			path = ImageBasedLearning;
 			sourceTree = "<group>";
@@ -418,6 +431,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		B61ED9DB2CD614C400E71258 /* ShareImageForTaskPage */ = {
+			isa = PBXGroup;
+			children = (
+				B61ED9DC2CD6151E00E71258 /* ShareImageForTaskPage.swift */,
+				B61ED9DE2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift */,
+			);
+			path = ShareImageForTaskPage;
+			sourceTree = "<group>";
+		};
 		B63874FE2CB06800006B3364 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +482,7 @@
 				B6EB6D352CA416950055FD67 /* PrimaryButton.swift */,
 				B6EB6D372CA416A70055FD67 /* SecondaryButton.swift */,
 				B6FA77D82CA41A7B00C52F73 /* PageHeader.swift */,
+				B687450B2CD766640085AFE1 /* AsyncImageView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -733,6 +756,7 @@
 				B6EB6D382CA416A70055FD67 /* SecondaryButton.swift in Sources */,
 				B60F8AB02CB7D8E200268D75 /* ScavengerHuntMap.swift in Sources */,
 				B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */,
+				B61ED9E32CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift in Sources */,
 				B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */,
 				B609EEEC2CC83F3100A029E8 /* LinguaQuestPage.swift in Sources */,
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
@@ -747,11 +771,13 @@
 				B6FA77D32CA419F000C52F73 /* SignupPage.swift in Sources */,
 				B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */,
 				B60F8AB52CB7E85A00268D75 /* PointOfInterest.swift in Sources */,
+				B61ED9DF2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift in Sources */,
 				B6EB6D2C2CA415240055FD67 /* AccountPageViewModel.swift in Sources */,
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
 				B60F8AE12CBE6B9200268D75 /* OpenAIServiceProvider.swift in Sources */,
 				B609EEEE2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift in Sources */,
 				B609EEF42CC93F6E00A029E8 /* TaskProcessManager.swift in Sources */,
+				B61ED9DD2CD6151E00E71258 /* ShareImageForTaskPage.swift in Sources */,
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
@@ -777,6 +803,7 @@
 				B6FED4962C71F3BD00339B7C /* ContextAwarePage.swift in Sources */,
 				B609EED62CC79A4300A029E8 /* TaskLocationPage.swift in Sources */,
 				B6595B722CD0EB38004816E8 /* CameraView.swift in Sources */,
+				B61ED9E12CD62CF700E71258 /* ImageBasedTaskNearMePage.swift in Sources */,
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
 				B609EEDD2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift in Sources */,
 				B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */,
@@ -801,6 +828,7 @@
 				B60F8ADF2CBDCDDD00268D75 /* SpeechRecognizer.swift in Sources */,
 				B6EB6D322CA416670055FD67 /* ChipView.swift in Sources */,
 				B60F8AAC2CB7D77900268D75 /* MapViewController.swift in Sources */,
+				B687450C2CD766640085AFE1 /* AsyncImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

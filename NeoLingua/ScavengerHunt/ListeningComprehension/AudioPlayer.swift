@@ -7,6 +7,10 @@ class AudioPlayer: ObservableObject {
     @Published var audioPlayer: AVAudioPlayer?
     
     func createSpeech(textForSpeech: String) async throws {
+        if CommandLine.arguments.contains("--useMockData") {
+            return
+        }
+        
         let parameters = AudioSpeechParameters(
             model: .tts1,
             input: textForSpeech,
@@ -18,9 +22,8 @@ class AudioPlayer: ObservableObject {
         audioPlayer?.prepareToPlay()
     }
     
-    func playAudio(from data: Data) {
+    func playAudio() {
         do {
-            audioPlayer = try AVAudioPlayer(data: data)
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
         } catch {
