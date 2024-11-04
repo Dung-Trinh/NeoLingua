@@ -8,6 +8,7 @@ import SwiftUI
 struct SharedContentForTask: Hashable {
     let image: UIImage
     let uploadedLink: String
+    let coordinates: Location?
 }
 
 enum ImageBasedLearningPageState {
@@ -30,11 +31,13 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @Published var isLoading: Bool = false
     @Published var taskDone: Bool = false
 
+    private var imageCoordinates: Location?
     var sharedImageForTask: SharedContentForTask? {
         guard let selectedImage = selectedImage, uploadedImageLink != "" else {
             return nil
         }
-        return SharedContentForTask(image: selectedImage, uploadedLink: uploadedImageLink)
+        
+        return SharedContentForTask(image: selectedImage, uploadedLink: uploadedImageLink, coordinates: imageCoordinates)
     }
     
     private var uploadedImageLink = ""
@@ -56,6 +59,7 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
                     if let imageData = try? await eachItem.loadTransferable(type: Data.self) {
                         if let image = UIImage(data: imageData) {
                             self.selectedImage = image
+                            self.extractMetaData(from: imageData)
                         }
                     }
                 }
@@ -99,5 +103,25 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         userPerformance =  try? await taskProcessManager.fetchUserTaskPerformance()
         print(userPerformance)
         taskDone = userPerformance?.isTaskDone() ?? false
+    }
+    
+    func extractMetaData(from imageData: Data) {
+        
+        guard let source = CGImageSourceCreateWithData(imageData as CFData, nil),
+              let metadata = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [String: Any] else {
+            print("Failed to extract metadata")
+            return
+        }
+                
+        guard let gpsMetadata = metadata[kCGImagePropertyGPSDictionary as String] as? [String: Any] else {
+            print("NO GPS DATA")
+            return
+        }
+        let latitude = (gpsMetadata["Latitude"] as? Double) ?? 0
+        let longitude = (gpsMetadata["Longitude"] as? Double) ?? 0
+
+        imageCoordinates = Location(latitude: latitude, longitude: longitude)
+        print("imageCoordinates")
+        print(imageCoordinates)
     }
 }

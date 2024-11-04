@@ -1,6 +1,7 @@
 import Foundation
 import FirebaseStorage
 import Alamofire
+import Firebase
 
 struct ThreadResponse: Decodable {
     let id: String
@@ -22,7 +23,8 @@ class ImageProcessingManager {
     private let apiKey = ProdENV().OPENAI_KEY
     private let openAiServiceHelper = OpenAIServiceHelper()
     private let imageBasedAssistantID = ProdENV().CONTEXT_BASED_LEARNING_ASSISTANT_ID
-    
+    private let db = Firestore.firestore()
+
     var currentThreadID = ""
     func createImageBasedTask(imageUrl: String) async throws -> ImageBasedTask? {
         if CommandLine.arguments.contains("--useMockData") {
@@ -110,6 +112,47 @@ class ImageProcessingManager {
             return decodedData
         }
         throw "verifyTextWithImage error"
+    }
+    
+    func validateVocabularyInImage(imageUrl: String, vocabulary: [String]) async throws -> [VerifiedVocabular] {
+        if currentThreadID == "" {
+            let newThread = try await createThreadWithImage(
+                imageUrl: imageUrl,
+                prompt: "ValidateVocabularyInImage; vocabulary: \(vocabulary.joined(separator: ", "))"
+            )
+            currentThreadID = newThread.id
+        } else {
+            try await openAiServiceHelper.sendUserMessageToThread(message: "ValidateVocabularyInImage; vocabulary: \(vocabulary.joined(separator: ","));", threadID: currentThreadID)
+        }
+        
+        let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
+            assistantID: ProdENV().IMAGE_ANALYZER_ASSISTANT_ID,
+            threadID: currentThreadID
+        )
+        
+        print("jsonStringResponse")
+        print(jsonStringResponse)
+        
+        if let jsonData = jsonStringResponse.data(using: .utf8) {
+            let decodedData = try JSONDecoder().decode(ValidateVocabularyInImageResult.self, from: jsonData)
+            return decodedData.vocabulary
+        }
+        throw "validateVocabularyInImage error"
+    }
+    
+    func saveSnapVocabularyTask(sharedContentForTask: SharedContentForTask, vocabulary: [String]) throws {
+        guard let userId = UserDefaults.standard.string(forKey: "userId") else {
+            print("userId not found")
+            return
+        }
+        let task = SnapVocabularyTask(
+            id: UUID().uuidString,
+            userId: userId,
+            coordinates: sharedContentForTask.coordinates ?? Location(latitude: 0, longitude: 0),
+            imageUrl: sharedContentForTask.uploadedLink,
+            vocabulary: vocabulary
+        )
+        try db.collection("imageBasedTasks").addDocument(from: task)
     }
     
     func fetchImageHint() async throws -> String {
@@ -202,4 +245,30 @@ enum EvaluationStatus: String, Codable {
 
 struct InspectImageForVocabularyHint: Codable {
     let hint: String
+}
+
+struct ValidateVocabularyInImageResult: Codable {
+    let vocabulary: [VerifiedVocabular]
+}
+
+struct VerifiedVocabular: Codable, Identifiable {
+    var id: String
+    let name: String
+    let isInImage: Bool
+    let improvement: String?
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.isInImage = try container.decode(Bool.self, forKey: .isInImage)
+        self.improvement = try container.decodeIfPresent(String.self, forKey: .improvement)
+        self.id = UUID().uuidString
+    }
+    
+    init(name: String, isInImage: Bool, improvement: String?) {
+        self.name = name
+        self.isInImage = isInImage
+        self.improvement = improvement
+        self.id = UUID().uuidString
+    }
 }

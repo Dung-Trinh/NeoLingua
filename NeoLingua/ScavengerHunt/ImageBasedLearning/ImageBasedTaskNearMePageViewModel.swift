@@ -2,7 +2,7 @@ import SwiftUI
 import FirebaseStorage
 import Firebase
 
-struct SharedImageTask: Codable, Identifiable {
+struct SnapVocabularyTask: Codable, Identifiable {
     let id: String
     let userId: String
     let coordinates: Location
@@ -15,9 +15,9 @@ protocol ImageBasedTaskNearMePageViewModel: ObservableObject {
 }
 
 class ImageBasedTaskNearMePageViewModelImpl: ImageBasedTaskNearMePageViewModel {
-    @Published var allTasks: [SharedImageTask] = []
+    @Published var allTasks: [SnapVocabularyTask] = []
     
-    @Published var sharedImageTask: SharedImageTask?
+    @Published var sharedImageTask: SnapVocabularyTask?
     @Published var userInput: String = ""
     @Published var lastUserInput: String = ""
     @Published var showHintButton: Bool = false
@@ -71,7 +71,7 @@ class ImageBasedTaskNearMePageViewModelImpl: ImageBasedTaskNearMePageViewModel {
             let snapshot = try await db.collection("imageBasedTasks").getDocuments()
             
             self.allTasks = snapshot.documents.compactMap { document in
-                try? document.data(as: SharedImageTask.self)
+                try? document.data(as: SnapVocabularyTask.self)
             }
             print("allTasks")
             print(allTasks)

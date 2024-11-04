@@ -13,7 +13,6 @@
 		B609EED82CC79C3800A029E8 /* TaskLocationPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED72CC79C3800A029E8 /* TaskLocationPageViewModel.swift */; };
 		B609EEDB2CC7E1B700A029E8 /* ImageBasedLearningPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEDA2CC7E1B700A029E8 /* ImageBasedLearningPage.swift */; };
 		B609EEDD2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEDC2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift */; };
-		B609EEDF2CC7F7BD00A029E8 /* ImageBasedLearningManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEDE2CC7F7BD00A029E8 /* ImageBasedLearningManager.swift */; };
 		B609EEE22CC8359B00A029E8 /* SnapVocabularyPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEE12CC8359B00A029E8 /* SnapVocabularyPage.swift */; };
 		B609EEE42CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEE32CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift */; };
 		B609EEE72CC83D4400A029E8 /* EducationalGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEE62CC83D4400A029E8 /* EducationalGames.swift */; };
@@ -153,7 +152,6 @@
 		B609EED72CC79C3800A029E8 /* TaskLocationPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLocationPageViewModel.swift; sourceTree = "<group>"; };
 		B609EEDA2CC7E1B700A029E8 /* ImageBasedLearningPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedLearningPage.swift; sourceTree = "<group>"; };
 		B609EEDC2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedLearningPageViewModel.swift; sourceTree = "<group>"; };
-		B609EEDE2CC7F7BD00A029E8 /* ImageBasedLearningManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedLearningManager.swift; sourceTree = "<group>"; };
 		B609EEE12CC8359B00A029E8 /* SnapVocabularyPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapVocabularyPage.swift; sourceTree = "<group>"; };
 		B609EEE32CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapVocabularyPageViewModel.swift; sourceTree = "<group>"; };
 		B609EEE62CC83D4400A029E8 /* EducationalGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationalGames.swift; sourceTree = "<group>"; };
@@ -367,7 +365,6 @@
 				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
 				B60F8ABA2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift */,
 				B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */,
-				B609EEDE2CC7F7BD00A029E8 /* ImageBasedLearningManager.swift */,
 			);
 			path = ScavengerHunt;
 			sourceTree = "<group>";
@@ -748,7 +745,6 @@
 				B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */,
 				B60F8ADB2CBDA9F700268D75 /* ConversationSimulationPage.swift in Sources */,
 				B60F8AD62CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift in Sources */,
-				B609EEDF2CC7F7BD00A029E8 /* ImageBasedLearningManager.swift in Sources */,
 				B60F8AD32CBD108F00268D75 /* ListeningComprehensionPage.swift in Sources */,
 				B6401FEC2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift in Sources */,
 				B609EEDB2CC7E1B700A029E8 /* ImageBasedLearningPage.swift in Sources */,

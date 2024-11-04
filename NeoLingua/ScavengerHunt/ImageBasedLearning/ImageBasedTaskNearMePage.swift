@@ -111,7 +111,7 @@ struct InspectImageResultView: View {
                         .foregroundColor(.gray)
                     Text("Corrected Text:")
                         .font(.headline)
-                    Text(correctedText)
+                    Text(.init(correctedText))
                         .font(.body)
                         .foregroundColor(.gray)
                 }
@@ -136,7 +136,7 @@ struct InspectImageResultView: View {
 }
 
 struct SharedImageTaskRowView: View {
-    let task: SharedImageTask
+    let task: SnapVocabularyTask
     
     var body: some View {
         HStack(alignment: .center) {
