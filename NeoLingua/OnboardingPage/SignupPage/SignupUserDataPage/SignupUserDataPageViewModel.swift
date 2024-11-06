@@ -1,7 +1,7 @@
 import Foundation
 
 protocol SignupUserDataPageViewModel: ObservableObject {
-    var name: String { get set }
+    var username: String { get set }
     var interestsInputText: String { get set }
     var estimationOfDailyUse: Int { get set }
     var estimationOfDailyUseTime: [Int] { get }
@@ -14,7 +14,7 @@ protocol SignupUserDataPageViewModel: ObservableObject {
 }
 
 class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
-    @Published var name: String = "Dee"
+    @Published var username: String = "Dee"
     @Published var interestsInputText: String = ""
     @Published var learningGoals: [String] = []
     @Published var estimationOfDailyUse: Int = 15
@@ -45,8 +45,8 @@ class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
     }
     
     func saveUserData() async {
-        isLoading = true
-        defer { isLoading = false }
+//        isLoading = true
+//        defer { isLoading = false }
         
         var learningGoals = [String]()
         for vm in vms {
@@ -64,13 +64,13 @@ class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
         let interestsWithoutSpaces = interestsInputText.replacingOccurrences(of: " ", with: "")
         let interestsArray = interestsWithoutSpaces.components(separatedBy: ",")
 
-        print(name)
+        print(username)
         print(learningGoals.description)
         print(interestsArray)
         print(estimationOfDailyUse)
 
         let data = ProfileData(
-            name: name,
+            username: username,
             learningGoals: learningGoals,
             interests: interestsArray,
             estimationOfDailyUse: estimationOfDailyUse

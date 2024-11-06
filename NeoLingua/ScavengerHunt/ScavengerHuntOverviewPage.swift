@@ -36,7 +36,9 @@ struct ScavengerHuntOverviewPage: View {
                         
                         if scavengerHunt.isHuntComplete() {
                             Button("show final result") {
-                                viewModel.isPresented = true
+                                Task {
+                                    await viewModel.showFinalResult()
+                                }
                             }
                         }
                     }
@@ -52,7 +54,9 @@ struct ScavengerHuntOverviewPage: View {
                     }
                 }
             }
-            .sheet(isPresented: $viewModel.isPresented, content: {
+            .sheet(isPresented: $viewModel.isPresented, onDismiss: {
+                router.navigateToRoot()
+            }) {
                 VStack {
                     if let scavengerHuntState = viewModel.currentScavengerHunt?.scavengerHuntState {
                         ForEach(scavengerHuntState.locationTaskPerformance, id: \.self.locationId) {
@@ -89,9 +93,16 @@ struct ScavengerHuntOverviewPage: View {
                             }.padding(.bottom, Styleguide.Margin.medium)
                         }
                     }
-                    Text(viewModel.getFinalScore()).foregroundStyle(.green).bold()
+                    Text(String(format: "%.2f", viewModel.getFinalScore())).foregroundStyle(.green).bold()
+                    PrimaryButton(
+                        title: "back to menu",
+                        color: .blue,
+                        action: {
+                            router.navigateToRoot()
+                        }
+                    )
                 }
-            })
+            }
         }.navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }

@@ -55,10 +55,6 @@ struct TaskLocationPage: View {
                             Text("✅")
                         }
                     }
-                    
-//                    Button("Schreibaufgabe starten") {
-//                        //                        router.push(.learningTask(.writingTaskPage))
-//                    }
                 }
             }
             Spacer()

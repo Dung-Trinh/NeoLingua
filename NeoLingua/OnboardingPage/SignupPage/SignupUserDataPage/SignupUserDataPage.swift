@@ -7,7 +7,7 @@ struct SignupUserDataPage<ViewModel>: View where ViewModel: SignupUserDataPageVi
     var body: some View {
         VStack {
             Text("SignupUserDataPage")
-            nameInputField
+            usernameInputField
             goalsInputField
             Spacer()
             PrimaryButton(
@@ -28,11 +28,11 @@ struct SignupUserDataPage<ViewModel>: View where ViewModel: SignupUserDataPageVi
     }
     
     @ViewBuilder
-    private var nameInputField: some View {
+    private var usernameInputField: some View {
         BasicInputField(
-            input: $viewModel.name,
-            title: "Name",
-            placeholderText: "Name",
+            input: $viewModel.username,
+            title: "Username",
+            placeholderText: "Username",
             iconName: "person.fill",
             isSecurityField: false
         )

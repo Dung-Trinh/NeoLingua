@@ -57,7 +57,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
             print("imageValidationResult")
             print(imageValidationResult)
         } catch {
-            print("verifyImage error")
+            print("verifyImage error: ", error.localizedDescription)
         }
     }
     

@@ -12,7 +12,6 @@ struct SignupPage<ViewModel>: View where ViewModel: SignupPageViewModel {
                 subtitle: "Please enter your data."
             )
             VStack(spacing: Styleguide.Margin.medium) {
-                nameInputField
                 emailInputField
                 passwordInputField
                 PrimaryButton(
@@ -55,17 +54,6 @@ struct SignupPage<ViewModel>: View where ViewModel: SignupPageViewModel {
             router.destination(for: route)
         }
         .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
-    }
-    
-    @ViewBuilder
-    private var nameInputField: some View {
-        BasicInputField(
-            input: $viewModel.name,
-            title: "Name",
-            placeholderText: "Name",
-            iconName: "person.fill",
-            isSecurityField: false
-        )
     }
     
     @ViewBuilder

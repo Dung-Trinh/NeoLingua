@@ -15,15 +15,10 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                     .tabItem {
                         Label("Learning", systemImage: "books.vertical.fill")
                     }
-                LearningOverviewPage(viewModel: LearningOverviewPageViewImpl())
+                LeaderboardPage(viewModel: LeaderboardPageViewModelImpl())
                     .tabItem {
-                        Label("Learning", systemImage: "person.crop.circle.fill")
+                        Label("Leaderboard", systemImage: "trophy.fill")
                     }
-                ContextAwarePage(viewModel: ContextAwarePageViewModelImpl())
-                    .tabItem {
-                        Label("Learning", systemImage: "person.crop.circle.fill")
-                    }
-
                 AccountPage(viewModel: AccountPageViewModelImpl(router: router))
                     .tabItem {
                         Label("Account", systemImage: "person.crop.circle.fill")

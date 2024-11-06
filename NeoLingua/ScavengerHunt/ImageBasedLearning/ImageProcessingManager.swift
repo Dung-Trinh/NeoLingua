@@ -79,6 +79,7 @@ class ImageProcessingManager {
             return TestData.imageValidationResult
         }
         
+        let prompt = "is this object on the following image: \(searchedObject)"
         let newThread = try await createThreadWithImage(imageUrl: imageUrl, prompt: searchedObject)
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
             assistantID: imageAnalyser,

@@ -10,8 +10,8 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
             if let profileData = viewModel.profileData {
                 VStack {
                     HStack {
-                        Text("Name:").bold()
-                        Text(profileData.name)
+                        Text("Username:").bold()
+                        Text(profileData.username)
                     }
                     HStack {
                         Text("tägliches Ziel:").bold()

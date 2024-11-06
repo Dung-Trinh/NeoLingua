@@ -13,7 +13,8 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     @Published var markers: [GMSMarker] = []
     
     private var taskProcessManager = TaskProcessManager.shared
-
+    var leadboardService = LeaderboardService()
+    
     init(type: ScavengerHuntType) {
         scavengerHuntType = type
         switch type {
@@ -55,15 +56,25 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
         }
     }
     
-    func getFinalScore() -> String {
+    func getFinalScore() -> Double {
         var finalScore = 0.0
         guard let scavengerHuntState = currentScavengerHunt?.scavengerHuntState else {
-            return ""
+            return 0
         }
         for performance in scavengerHuntState.locationTaskPerformance {
             finalScore += performance.getPointsForLocationPerformance()
         }
-        return String("points: \(finalScore)")
+        return finalScore
+    }
+    
+    func showFinalResult() async {
+        isPresented = true
+        let finalScore = getFinalScore()
+        do {
+            try await leadboardService.addPointsForLevel(points: finalScore)
+        } catch {
+            print("showFinalResult error ", error.localizedDescription)
+        }
     }
     
     @MainActor

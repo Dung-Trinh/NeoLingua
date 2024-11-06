@@ -50,6 +50,7 @@
 		B60F8AE52CBFE76200268D75 /* ConversationSimulationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */; };
 		B60F8AE82CBFE7B300268D75 /* RoleOptionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */; };
 		B60F8AEA2CBFE85300268D75 /* ConversationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */; };
+		B61D30F92CDB6E950095CBC7 /* LeaderboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D30F82CDB6E950095CBC7 /* LeaderboardService.swift */; };
 		B61ED9DD2CD6151E00E71258 /* ShareImageForTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61ED9DC2CD6151E00E71258 /* ShareImageForTaskPage.swift */; };
 		B61ED9DF2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61ED9DE2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift */; };
 		B61ED9E12CD62CF700E71258 /* ImageBasedTaskNearMePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61ED9E02CD62CF700E71258 /* ImageBasedTaskNearMePage.swift */; };
@@ -192,6 +193,7 @@
 		B60F8AE42CBFE76200268D75 /* ConversationSimulationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSimulationManager.swift; sourceTree = "<group>"; };
 		B60F8AE72CBFE7B300268D75 /* RoleOptionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleOptionsResponse.swift; sourceTree = "<group>"; };
 		B60F8AE92CBFE85300268D75 /* ConversationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationResponse.swift; sourceTree = "<group>"; };
+		B61D30F82CDB6E950095CBC7 /* LeaderboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardService.swift; sourceTree = "<group>"; };
 		B61ED9DC2CD6151E00E71258 /* ShareImageForTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageForTaskPage.swift; sourceTree = "<group>"; };
 		B61ED9DE2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareImageForTaskPageViewModel.swift; sourceTree = "<group>"; };
 		B61ED9E02CD62CF700E71258 /* ImageBasedTaskNearMePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedTaskNearMePage.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 			children = (
 				B68ECA462CDA58A300DDD17D /* LeaderboardPage.swift */,
 				B68ECA482CDA58B200DDD17D /* LeaderboardPageViewModel.swift */,
+				B61D30F82CDB6E950095CBC7 /* LeaderboardService.swift */,
 			);
 			path = Leaderboard;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,
 				B609EEE92CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift in Sources */,
 				B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */,
+				B61D30F92CDB6E950095CBC7 /* LeaderboardService.swift in Sources */,
 				B60F8AE52CBFE76200268D75 /* ConversationSimulationManager.swift in Sources */,
 				B609EEF22CC910FD00A029E8 /* MultipleChoiceView.swift in Sources */,
 				B609EED32CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift in Sources */,

@@ -41,6 +41,10 @@ class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
         let result = try await Auth.auth().signIn(withEmail: email, password: password)
         UserDefaults.standard.setUserLoggedIn(true)
         UserDefaults.standard.set(result.user.uid, forKey: "userId")
+        
+        let userDataManager = UserDataManagerImpl()
+        let userProfile = try await userDataManager.fetchUserData()
+        UserDefaults().setUsername(userProfile.username)
     }
     
     private func handleGoogleCredentials(viewController: UIViewController) async throws -> AuthDataResult? {

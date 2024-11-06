@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 
 protocol SignupPageViewModel: ObservableObject {
-    var name: String { get set }
     var email: String { get set }
     var password: String { get set }
     var isLoading: Bool { get }
@@ -13,7 +12,6 @@ protocol SignupPageViewModel: ObservableObject {
 }
 
 class SignupPageViewModelImpl: SignupPageViewModel {
-    @Published var name: String = "tester"
     @Published var email: String = "test@test.de"
     @Published var password: String = ""
     @Published var router: Router
