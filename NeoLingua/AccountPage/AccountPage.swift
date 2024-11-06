@@ -25,9 +25,15 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
                         Text("Lernziele:").bold()
                         Text(profileData.interests.description)
                     }
-                    
+                    Text("Sprachniveau")
                 }
             }
+            Picker("", selection: $viewModel.selectedLevel){
+                ForEach(LevelOfLanguage.allCases) { level in
+                    Text(level.rawValue).tag(level)
+                }
+            }
+            .pickerStyle(.segmented)
             Spacer()
             Button("Logout") {
                 viewModel.didTappedLogout()
@@ -42,3 +48,4 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
         }
     }
 }
+

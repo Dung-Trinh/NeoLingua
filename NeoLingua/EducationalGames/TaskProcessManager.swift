@@ -97,10 +97,20 @@ class TaskProcessManager {
             print("userUid not found")
             return
         }
+        var taskType: [String] = []
+        let mirror = Mirror(reflecting: task.taskPrompt)
+        
+        for child in mirror.children {
+            if let label = child.label, child.value as? String != nil {
+                taskType.append(label)
+            }
+        }
+        print(taskType.description)
         
         let data: [String: Any] = [
             "userId": userId,
-            "taskId": task.id
+            "taskId": task.id,
+            "taskTypes": taskType
         ]
         try await db.collection("imageBasedTaskResult").addDocument(data: data)
     }
@@ -210,7 +220,11 @@ class TaskProcessManager {
         throw "not found LocationTaskPerformance for locationId \(locationId)"
     }
     
-    func updateTaskLocationImageState(locationId: String, result: Bool) async throws {
+    func updateTaskLocationImageState(
+        locationId: String,
+        result: Bool,
+        numberOfAttempts: Int
+    ) async throws {
         guard let userId = UserDefaults.standard.string(forKey: "userId") else {
             throw "userId not found"
         }
@@ -227,6 +241,15 @@ class TaskProcessManager {
         for index in scavengerHuntState.locationTaskPerformance.indices {
             if scavengerHuntState.locationTaskPerformance[index].locationId == locationId {
                 scavengerHuntState.locationTaskPerformance[index].performance.didFoundObject = result
+                var pointsAsPercentage = 0.0
+
+                if result && numberOfAttempts > 0 {
+                    pointsAsPercentage = Double(numberOfAttempts/3).twoDecimals
+                    
+                    scavengerHuntState.locationTaskPerformance[index].performance.searchingTheObject =  TaskPerformancetParameter(result: pointsAsPercentage, time: 0, isDone: true)
+                } else {
+                    scavengerHuntState.locationTaskPerformance[index].performance.searchingTheObject =  TaskPerformancetParameter(result: 0, time: 0, isDone: true)
+                }
             }
         }
         try document.reference.setData(from: scavengerHuntState)
@@ -247,5 +270,12 @@ class TaskProcessManager {
         
         var scavengerHuntState = try document.data(as: ScavengerHuntState.self)
         return scavengerHuntState
+    }
+}
+
+extension Double {
+    var twoDecimals: Double {
+        let stringValue = String(format: "%.2f", self)
+        return Double(stringValue) ?? 0.0
     }
 }

@@ -1,6 +1,9 @@
 import Foundation
+import Combine
+
 protocol AccountPageViewModel: ObservableObject {
     var profileData: ProfileData? { get }
+    var selectedLevel: LevelOfLanguage { get set }
     
     func didTappedLogout()
     func fetchProfileData() async
@@ -9,9 +12,17 @@ protocol AccountPageViewModel: ObservableObject {
 class AccountPageViewModelImpl: AccountPageViewModel {
     @Published var profileData: ProfileData?
     @Published var router: Router
-    
+    @Published var selectedLevel: LevelOfLanguage = .A1
+    private var anyCancellables = Set<AnyCancellable>()
+
     init(router: Router) {
         self.router = router
+        
+        $selectedLevel.sink(receiveValue: { value in
+            UserDefaults.standard.setLevelOfLanguage(value)
+            print("$selectedLevel")
+            print(value)
+        }).store(in: &anyCancellables)
     }
     
     func fetchProfileData() async {
@@ -29,7 +40,7 @@ class AccountPageViewModelImpl: AccountPageViewModel {
     }
     
     func didTappedLogout() {
-        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
+        UserDefaults.standard.setUserLoggedIn(false)
         router.push(.onboardingPage)
     }
 }

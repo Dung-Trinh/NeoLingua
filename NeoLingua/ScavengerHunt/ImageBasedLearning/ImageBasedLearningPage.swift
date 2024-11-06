@@ -8,32 +8,33 @@ struct ImageBasedLearningPage: View {
     var body: some View {
         VStack {
             ScrollView {
-                VStack {
-                    if let selectedImage = viewModel.selectedImage {
-                        Image(uiImage: selectedImage)
-                            .resizable()
-                            .scaledToFit()
-                    }
-                    PhotosPicker(
-                        selection: $viewModel.selectedPhotos,
-                        maxSelectionCount: 1,
-                        selectionBehavior: .ordered,
-                        matching: .images
-                    ) {
-                        Label("Select a image", systemImage: "photo")
-                    }.onChange(of: viewModel.selectedPhotos) {
-                        viewModel.convertDataToImage()
-                    }.if(
-                        viewModel.state != .initialState,
-                        transform: { view in
-                            view.hidden()
-                        }
-                    )
+                if let selectedImage = viewModel.selectedImage {
+                    Image(uiImage: selectedImage)
+                        .resizable()
+                        .scaledToFit()
                     
                     if viewModel.state == .imageSelected {
-                        Button("analyze Image") {
-                            Task {
-                                await viewModel.analyzeImage()
+                        VStack {
+                            ForEach(TaskType.allCases, id: \.self) { taskType in
+                                Toggle(isOn: Binding(
+                                    get: { !viewModel.excludedTaskType.contains(taskType) },
+                                    set: { isSelected in
+                                        if isSelected {
+                                            viewModel.excludedTaskType.removeAll { $0 == taskType }
+                                        } else {
+                                            viewModel.excludedTaskType.append(taskType)
+                                        }
+                                    }
+                                )) {
+                                    Text(taskType.rawValue)
+                                }
+                            }
+                            
+                            Button("analyze Image")
+                            {
+                                Task {
+                                    await viewModel.analyzeImage()
+                                }
                             }
                         }
                     }
@@ -75,9 +76,36 @@ struct ImageBasedLearningPage: View {
                         }
                     }
                 }
+                
+                if viewModel.state == .initialState {
+                    VStack {
+                        PhotosPicker(
+                            selection: $viewModel.selectedPhotos,
+                            maxSelectionCount: 1,
+                            selectionBehavior: .ordered,
+                            matching: .images
+                        ) {
+                            Label("Select a image", systemImage: "photo")
+                        }.onChange(of: viewModel.selectedPhotos) {
+                            viewModel.convertDataToImage()
+                        }
+                        
+                        Text("OR").padding()
+                        
+                        Button(action: {
+                            viewModel.openCamera()
+                        }, label: {
+                            Label("Open Camera", systemImage: "camera.fill")
+                        }).fullScreenCover(isPresented: $viewModel.showCamera) {
+                            CameraView(selectedImage: $viewModel.selectedImage)
+                                .background(.black)
+                        }
+                    }
+                }
+                
             }
             Spacer()
-            if viewModel.taskDone {
+            if viewModel.areAllTaskDone {
                 VStack {
                     SecondaryButton(
                         title: "share your image with other",

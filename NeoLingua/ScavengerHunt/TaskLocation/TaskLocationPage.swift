@@ -117,8 +117,10 @@ struct TaskLocationPage: View {
             if let imageValidationResult = viewModel.imageValidationResult {
                 VStack {
                     ImageValidationResultView(validationResult: imageValidationResult)
-                    Button("back to map") {
-                        router.navigateBack()
+                    if(imageValidationResult.isMatching) {
+                        Button("back to map") {
+                            router.navigateBack()
+                        }
                     }
                 }.presentationDetents([.fraction(0.50)])
             }

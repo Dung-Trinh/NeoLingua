@@ -69,6 +69,10 @@
 		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
 		B66D67882CC2A13900F70A56 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67872CC2A13900F70A56 /* TestData.swift */; };
 		B687450C2CD766640085AFE1 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B687450B2CD766640085AFE1 /* AsyncImageView.swift */; };
+		B68ECA422CDA32A100DDD17D /* LevelOfLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68ECA412CDA32A100DDD17D /* LevelOfLanguage.swift */; };
+		B68ECA442CDA414C00DDD17D /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68ECA432CDA414C00DDD17D /* UserDefaultsExtension.swift */; };
+		B68ECA472CDA58A300DDD17D /* LeaderboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68ECA462CDA58A300DDD17D /* LeaderboardPage.swift */; };
+		B68ECA492CDA58B200DDD17D /* LeaderboardPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68ECA482CDA58B200DDD17D /* LeaderboardPageViewModel.swift */; };
 		B6A561FD2CC46C520008C05C /* WritingTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */; };
 		B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */; };
 		B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */; };
@@ -200,6 +204,10 @@
 		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
 		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		B687450B2CD766640085AFE1 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		B68ECA412CDA32A100DDD17D /* LevelOfLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelOfLanguage.swift; sourceTree = "<group>"; };
+		B68ECA432CDA414C00DDD17D /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		B68ECA462CDA58A300DDD17D /* LeaderboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPage.swift; sourceTree = "<group>"; };
+		B68ECA482CDA58B200DDD17D /* LeaderboardPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPageViewModel.swift; sourceTree = "<group>"; };
 		B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPage.swift; sourceTree = "<group>"; };
 		B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPageViewModel.swift; sourceTree = "<group>"; };
 		B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionManager.swift; sourceTree = "<group>"; };
@@ -444,6 +452,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B68ECA452CDA588500DDD17D /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				B68ECA462CDA58A300DDD17D /* LeaderboardPage.swift */,
+				B68ECA482CDA58B200DDD17D /* LeaderboardPageViewModel.swift */,
+			);
+			path = Leaderboard;
+			sourceTree = "<group>";
+		};
 		B6A561FB2CC46C300008C05C /* WritingTask */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +484,7 @@
 			children = (
 				B6EB6D292CA415090055FD67 /* AccountPage.swift */,
 				B6EB6D2B2CA415240055FD67 /* AccountPageViewModel.swift */,
+				B68ECA412CDA32A100DDD17D /* LevelOfLanguage.swift */,
 			);
 			path = AccountPage;
 			sourceTree = "<group>";
@@ -526,6 +544,7 @@
 				B60F8AE02CBE6B9200268D75 /* OpenAIServiceProvider.swift */,
 				B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */,
 				B66D67872CC2A13900F70A56 /* TestData.swift */,
+				B68ECA432CDA414C00DDD17D /* UserDefaultsExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -572,6 +591,7 @@
 		B6FED3BA2C70B3BB00339B7C /* NeoLingua */ = {
 			isa = PBXGroup;
 			children = (
+				B68ECA452CDA588500DDD17D /* Leaderboard */,
 				B609EEE52CC838AF00A029E8 /* EducationalGames */,
 				B6E6569B2C938ACD00350D98 /* Info.plist */,
 				B6FED48D2C70C04700339B7C /* GoogleService-Info.plist */,
@@ -756,6 +776,7 @@
 				B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */,
 				B609EEEC2CC83F3100A029E8 /* LinguaQuestPage.swift in Sources */,
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
+				B68ECA492CDA58B200DDD17D /* LeaderboardPageViewModel.swift in Sources */,
 				B6FED4912C71F11B00339B7C /* LearningOverviewPage.swift in Sources */,
 				B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */,
 				B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */,
@@ -775,6 +796,7 @@
 				B609EEF42CC93F6E00A029E8 /* TaskProcessManager.swift in Sources */,
 				B61ED9DD2CD6151E00E71258 /* ShareImageForTaskPage.swift in Sources */,
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
+				B68ECA422CDA32A100DDD17D /* LevelOfLanguage.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
 				B609EED82CC79C3800A029E8 /* TaskLocationPageViewModel.swift in Sources */,
@@ -806,6 +828,7 @@
 				B609EEE72CC83D4400A029E8 /* EducationalGames.swift in Sources */,
 				B60F8AC32CBAB84F00268D75 /* ResultSheetViewModel.swift in Sources */,
 				B609EEE42CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift in Sources */,
+				B68ECA442CDA414C00DDD17D /* UserDefaultsExtension.swift in Sources */,
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
 				B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */,
 				B609EEF02CC8FD0C00A029E8 /* ImageBasedTask.swift in Sources */,
@@ -819,6 +842,7 @@
 				B609EEF22CC910FD00A029E8 /* MultipleChoiceView.swift in Sources */,
 				B609EED32CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift in Sources */,
 				B60F8ACB2CBC854000268D75 /* SentenceBuildingView.swift in Sources */,
+				B68ECA472CDA58A300DDD17D /* LeaderboardPage.swift in Sources */,
 				B60F8ABE2CBAB7ED00268D75 /* WriteVocabularyView.swift in Sources */,
 				B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */,
 				B60F8ADF2CBDCDDD00268D75 /* SpeechRecognizer.swift in Sources */,

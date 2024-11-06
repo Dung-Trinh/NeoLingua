@@ -29,7 +29,9 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @Published var isSheetPresented: Bool = false
     @Published var state: ImageBasedLearningPageState = .initialState
     @Published var isLoading: Bool = false
-    @Published var taskDone: Bool = false
+    @Published var areAllTaskDone: Bool = false
+    @Published var showCamera = false
+    @Published var excludedTaskType: [TaskType] = []
 
     private var imageCoordinates: Location?
     var sharedImageForTask: SharedContentForTask? {
@@ -47,7 +49,6 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
 
     @State private var selectedImageURLS: [URL] = []
     @State private var selectedImages: [Image] = []
-    let service = OpenAIServiceProvider.shared
 
     @MainActor
     func convertDataToImage() {
@@ -93,7 +94,9 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     }
     
     private func createImageBasedTask() async throws {
-        imageBasedTask = try await imageProcessingManager.createImageBasedTask(imageUrl: uploadedImageLink)
+        print("excludedTaskTypes")
+        print(excludedTaskType.description)
+        imageBasedTask = try await imageProcessingManager.createImageBasedTask(imageUrl: uploadedImageLink, excludedTaskTypes: excludedTaskType)
         taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
     }
     
@@ -102,7 +105,14 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         print("fetchPerformance")
         userPerformance =  try? await taskProcessManager.fetchUserTaskPerformance()
         print(userPerformance)
-        taskDone = userPerformance?.isTaskDone() ?? false
+        areAllTaskDone = userPerformance?.isTaskDone() ?? false
+    }
+    
+    func openCamera() {
+        showCamera.toggle()
+        let locationManager = LocationManager()
+        let position = locationManager.lastKnownLocation
+        imageCoordinates = Location(latitude: position?.latitude ?? 0, longitude: position?.longitude ?? 0)
     }
     
     func extractMetaData(from imageData: Data) {

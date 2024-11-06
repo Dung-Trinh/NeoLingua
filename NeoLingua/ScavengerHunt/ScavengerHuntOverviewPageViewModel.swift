@@ -7,13 +7,15 @@ protocol ScavengerHuntOverviewPageViewModel: ObservableObject {
 
 class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel {
     let scavengerHuntManager = ScavengerHuntManager()
-    
+    let scavengerHuntType: ScavengerHuntType
+    @Published var isPresented = false
     @Published var currentScavengerHunt: ScavengerHunt?
     @Published var markers: [GMSMarker] = []
     
     private var taskProcessManager = TaskProcessManager.shared
 
     init(type: ScavengerHuntType) {
+        scavengerHuntType = type
         switch type {
         case .generatedNearMe: break
             //location ermitteln und assistant fragen
@@ -31,6 +33,7 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
                 
                 
                 let state = ScavengerHuntState(scavengerHunt: currentScavengerHunt)
+
                 currentScavengerHunt.scavengerHuntState = state
                 try await scavengerHuntManager.saveScavengerHuntState(state: state)
                 
@@ -50,6 +53,17 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func getFinalScore() -> String {
+        var finalScore = 0.0
+        guard let scavengerHuntState = currentScavengerHunt?.scavengerHuntState else {
+            return ""
+        }
+        for performance in scavengerHuntState.locationTaskPerformance {
+            finalScore += performance.getPointsForLocationPerformance()
+        }
+        return String("points: \(finalScore)")
     }
     
     @MainActor

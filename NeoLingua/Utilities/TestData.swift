@@ -59,7 +59,8 @@ class TestData {
         PointOfInterest(name: "Warmer Damm", coordinate: CLLocationCoordinate2D(latitude: 50.082465, longitude: 8.246972))
     ]
     static let scavengerHunt: ScavengerHunt = ScavengerHunt(
-        id: UUID().uuidString,
+        id: UUID().uuidString, 
+        title: "Wiesbaden scavenger hunt",
         introduction: "Welcome to the Wiesbaden themed English learning scavenger hunt! Explore the city's landmarks while improving your language skills.",
         taskLocations: [
             TaskLocation(

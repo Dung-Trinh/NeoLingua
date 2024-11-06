@@ -38,6 +38,7 @@ struct TaskLocation: Codable, Identifiable {
 
 struct ScavengerHunt: Codable {
     let id: String
+    let title: String
     let introduction: String
     var taskLocations: [TaskLocation]
     var scavengerHuntState: ScavengerHuntState? = nil
@@ -58,12 +59,14 @@ struct ScavengerHunt: Codable {
 
 struct ScavengerHuntState: Codable {
     let scavengerHuntId: String
+    let scavengerHuntTitle: String
     let userId: String
     var isCompleted: Bool
     var locationTaskPerformance: [LocationTaskPerformance]
     
     init(scavengerHunt: ScavengerHunt) {
         self.scavengerHuntId = scavengerHunt.id
+        self.scavengerHuntTitle = scavengerHunt.title
         userId = UserDefaults.standard.string(forKey: "userId") ?? ""
         isCompleted = false
         locationTaskPerformance = []
@@ -82,10 +85,12 @@ struct ScavengerHuntState: Codable {
                 performance.conversationSimulation = performanceParameter
             }
             
-            let locationpPerformance = LocationTaskPerformance(
+            var locationpPerformance = LocationTaskPerformance(
                 locationId: location.id,
+                locationName: location.name,
                 performance: performance
             )
+            locationpPerformance.performance.taskTypes = [.conversationSimulation,.listeningComprehension,.vocabularyTraining]
             locationTaskPerformance.append(locationpPerformance)
         }
     }
@@ -93,7 +98,17 @@ struct ScavengerHuntState: Codable {
 
 struct LocationTaskPerformance: Codable{
     let locationId: String
+    let locationName: String
     var performance: UserTaskPerformance
+    
+    
+    func getPointsForLocationPerformance() -> Double {
+        let vocabularyPoints = Double(((performance.vocabularyTraining?.result ?? 0) * 100) * 15 / 100)
+        let listeningComprehensionPoints = Double(((performance.listeningComprehension?.result ?? 0) * 100) * 30 / 100).twoDecimals
+        let conversationSimulationPoints = Double(((performance.conversationSimulation?.result ?? 0) * 100) * 40 / 100).twoDecimals
+        let searchingTheObjectPoints = Double(((performance.searchingTheObject?.result ?? 0) * 100) * 15 / 100).twoDecimals
+        return (vocabularyPoints + listeningComprehensionPoints + conversationSimulationPoints + searchingTheObjectPoints).twoDecimals
+    }
 }
 
 struct ScavengerHuntResponse: Codable{

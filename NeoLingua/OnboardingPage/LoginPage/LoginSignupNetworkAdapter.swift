@@ -33,13 +33,13 @@ class LoginSignupNetworkAdapterImpl: LoginSignupNetworkAdapter {
     
     func loginWithGoogle(viewController: UIViewController) async throws {
         let result = try await handleGoogleCredentials(viewController: viewController)
-        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+        UserDefaults.standard.setUserLoggedIn(true)
         UserDefaults.standard.set(result?.user.uid, forKey: "userId")
     }
     
     func login(email: String, password: String) async throws {
         let result = try await Auth.auth().signIn(withEmail: email, password: password)
-        UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+        UserDefaults.standard.setUserLoggedIn(true)
         UserDefaults.standard.set(result.user.uid, forKey: "userId")
     }
     

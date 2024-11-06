@@ -14,6 +14,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
     @Published var isSheetPresented: Bool = false
     @Published var imageValidationResult: ImageValidationResult?
     
+    private var numberOfAttempts = 3
     private var uploadedImageLink = ""
     private let imageProcessingManager = ImageProcessingManager()
     private let taskProcessManager = TaskProcessManager.shared
@@ -43,7 +44,15 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
                 imageUrl: uploadedImageLink,
                 searchedObject: taskLocation.photoObject
             )
-            try await taskProcessManager.updateTaskLocationImageState(locationId: taskLocation.id, result: imageValidationResult?.isMatching ?? false)
+            try await taskProcessManager.updateTaskLocationImageState(
+                locationId: taskLocation.id,
+                result: imageValidationResult?.isMatching ?? false, 
+                numberOfAttempts: numberOfAttempts
+            )
+            if imageValidationResult?.isMatching == false {
+                numberOfAttempts -= 1
+            }
+            
             isSheetPresented = true
             print("imageValidationResult")
             print(imageValidationResult)
