@@ -7,6 +7,35 @@ struct LeaderboardPage: View {
     var body: some View {
         VStack {
             Text("LeaderboardPage")
+            Picker("LeadboardType", selection: $viewModel.selectedMode) {
+                ForEach(LeaderboardMode.allCases) { mode in
+                    Text(mode.rawValue).tag(mode)
+                }
+            }
+            .pickerStyle(.segmented)
+            ScrollView {
+                if viewModel.selectedMode == .scavengerHunt {
+                    scavengerHuntLeaderboard
+                } else {
+                    
+                }
+            }
+        }
+        .padding()
+        .onAppear {
+            Task {
+                await viewModel.fetchUserScores()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var scavengerHuntLeaderboard: some View {
+        VStack {
+            HStack {
+                Text("Weekly Ranking for rank").bold()
+                Text("\(UserDefaults().getLevelOfLanguage().rawValue)")
+            }
             HStack {
                 Text("Platz")
                     .font(.headline)
@@ -34,12 +63,6 @@ struct LeaderboardPage: View {
                         .frame(width: 80, alignment: .trailing)
                 }
                 .padding(.vertical, 8)
-            }
-        }
-        .padding()
-        .onAppear {
-            Task {
-                await viewModel.fetchUserScores()
             }
         }
     }

@@ -51,7 +51,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             points += 1
         } else {
             isAnswerCorrect = false
-            userFeedbackText = "Falsch. Die richtige Antwort ist: \(currentTask?.answer), auf Deutsch: \(currentTask?.translation)"
+            userFeedbackText = "Falsch. Die richtige Antwort ist: \(currentTask?.answer.description), auf Deutsch: \(currentTask?.translation.description)"
         }
 
         sheetViewModel = ResultSheetViewModel(

@@ -12,7 +12,11 @@ struct SentenceBuildingView: View {
     var body: some View {
         VStack(spacing: 20) {
             VStack(spacing: 10) {
-                Text("Tap the words in the correct order:").font(.headline)
+                VStack {
+                    Text("Combine the sentence components to form this sentence:").bold()
+                    Text("Translation: " + exercise.translation).padding()
+                }
+                Text("ⓘ Tap the words in the correct order:").font(.headline)
                 VStack {
                     LazyVGrid(columns: columns, spacing: 10) {
                         ForEach(exercise.sentenceComponents.indices, id: \.self) { index in

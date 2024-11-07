@@ -34,7 +34,7 @@ struct ImageBasedTaskNearMePage: View {
     private var taskView: some View {
         ScrollView {
             VStack {
-                Text("ⓘWhat do you see in the picture? Which vocabulary can you identify from the picture").bold()
+                Text("ⓘ What do you see in the picture? Which vocabulary can you identify from the picture").bold()
                 Text("describe the picture")
                     .font(.subheadline)
                     .foregroundColor(.gray)

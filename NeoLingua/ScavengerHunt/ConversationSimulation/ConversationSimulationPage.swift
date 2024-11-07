@@ -58,7 +58,7 @@ struct ConversationSimulationPage: View {
                 }
             }
             
-            if viewModel.conversationState == .conversation {
+            if viewModel.conversationState == .conversation || viewModel.conversationState == .evaluation {
                 if let selectedRole = viewModel.selectedRole {
                     VStack(alignment: .center){
                         Text(selectedRole.role)
@@ -101,6 +101,9 @@ struct ConversationSimulationPage: View {
                             .font(.system(size: 70))
                             .padding()
                     }
+                    .if(viewModel.conversationState == .evaluation, transform: { view in
+                        view.disabled(true)
+                    })
                     .simultaneousGesture(
                         LongPressGesture(minimumDuration: 0.1).onEnded { _ in
                             viewModel.startRecording()
@@ -111,10 +114,14 @@ struct ConversationSimulationPage: View {
                         Task {
                             await viewModel.sendMessage(message: viewModel.messageText)
                         }
-                    }
+                    }.if(viewModel.conversationState == .evaluation, transform: { view in
+                        view.disabled(true)
+                    })
                 }
             }
+            
             if viewModel.conversationState == .evaluation {
+                Spacer()
                 PrimaryButton(
                     title: "get evaluation",
                     color: .blue,
@@ -123,6 +130,12 @@ struct ConversationSimulationPage: View {
                             await viewModel.getConversationEvaluation()
                         }
                 })
+            }
+            Spacer()
+            if viewModel.isLoading {
+                ActivityIndicatorView(isVisible: .constant(true), type: .scalingDots(count: 3, inset: 2))
+                    .frame(width: 50.0, height: 50.0)
+                    .foregroundColor(.red)
             }
         }
         .padding()

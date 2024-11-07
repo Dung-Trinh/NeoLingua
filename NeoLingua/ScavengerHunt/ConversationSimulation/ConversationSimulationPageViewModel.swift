@@ -35,6 +35,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var isSheetPresented = false
     @Published var selectedMode: ConversationInputMode = .speech
     @Published var selectedRole: RoleOption?
+    @Published var isLoading: Bool = false
 
     let prompt: String
     private var taskProcessManager = TaskProcessManager.shared
@@ -50,6 +51,8 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     
     @MainActor 
     func sendMessage(message: String) async {
+        isLoading = true
+        defer { isLoading = false }
 //        let message = speechRecognizer.transcript
         print("sendMessage: ", message)
         do {
@@ -89,6 +92,9 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     }
     
     func selectedRole(role: RoleOption) async {
+        isLoading = true
+        defer { isLoading = false }
+        
             do {
                 selectedRole = role
                 let result = try await conversationSimulationManager.selectedRole(selectedRole: role)
@@ -102,6 +108,9 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
         }
     
     func createConversationSimulation() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         do {
             let result = try await conversationSimulationManager.createConversation(prompt: prompt)
             roleOptionsResponse = result
@@ -112,6 +121,8 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     }
     
     func getConversationEvaluation() async {
+        isLoading = true
+        
         do {
             let result = try await conversationSimulationManager.fetchEvaluation()
             conversationEvaluation = result
@@ -125,6 +136,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
                 try await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .conversationSimulation)
             }
             
+            isLoading = false
             isSheetPresented = true
         } catch {
             print("getConversationEvaluation() error: ", error.localizedDescription)
