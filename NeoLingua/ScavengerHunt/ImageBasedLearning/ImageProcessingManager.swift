@@ -30,13 +30,13 @@ class ImageProcessingManager {
         if CommandLine.arguments.contains("--useMockData") {
             return TestData.imageBasedTask
         }
-        
+        let languageLevel = UserDefaults().getLevelOfLanguage().rawValue
         var excludedTasks = ""
         if excludedTaskTypes != [] {
             var typesArray: [String] = []
             
             for taskType in excludedTaskTypes {
-                typesArray.append(taskType.rawValue)
+                typesArray.append(taskType.rawValue.description)
             }
             
             excludedTasks = "exclude \(typesArray.split(separator: ","))"
@@ -44,7 +44,7 @@ class ImageProcessingManager {
             
         let newThread = try await createThreadWithImage(
             imageUrl: imageUrl,
-            prompt: "what can be seen in the picture? create task prompts for it. \(excludedTasks)"
+            prompt: "what can be seen in the picture? create task prompts for it with the language level \(languageLevel). \(excludedTasks)"
         )
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
             assistantID: imageBasedAssistantID,

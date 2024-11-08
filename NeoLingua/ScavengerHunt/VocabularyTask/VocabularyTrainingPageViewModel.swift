@@ -9,6 +9,9 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     @Published var userInputText: String = ""
     @Published var currentQuestionIndex = 0
     @Published var isSheetPresented: Bool = false
+    @Published var isExplanationSheetPresented: Bool = false
+    @Published var explanationText: String = ""
+
     @Published var isCheckAnswerButtonHidden: Bool = false
     @Published var sheetViewModel: ResultSheetViewModel?
     @Published var router: Router
@@ -51,7 +54,8 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             points += 1
         } else {
             isAnswerCorrect = false
-            userFeedbackText = "Falsch. Die richtige Antwort ist: \(currentTask?.answer.description), auf Deutsch: \(currentTask?.translation.description)"
+            let answer = currentTask?.answer ?? ""
+            userFeedbackText = "Falsch. Die richtige Antwort ist: \(answer)"
         }
 
         sheetViewModel = ResultSheetViewModel(
@@ -59,7 +63,13 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             text: userFeedbackText,
             action: {
                 self.continueTask()
-            }
+            }, 
+            getDetailedFeedback: {
+                Task {
+                    await self.getDetailedFeedback()
+                }
+            },
+            showDetailedFeedbackButton: currentTask?.type == .sentenceAssembly
         )
         isSheetPresented = true
     }
@@ -103,6 +113,18 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             print("fetchVocabularyTraining count: ", result.count)
         } catch {
             print("fetchVocabularyTraining error: ", error.localizedDescription)
+        }
+    }
+    
+    func getDetailedFeedback() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            explanationText = try await vocabularyManager.getDetailedFeedback(userInput: userInputText, taskId: currentTask?.id ?? "")
+            isExplanationSheetPresented = true
+        } catch {
+            print("getDetailedFeedback error :", error.localizedDescription)
         }
     }
 }

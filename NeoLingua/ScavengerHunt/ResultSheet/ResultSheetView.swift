@@ -22,9 +22,15 @@ struct ResultSheetView : View {
             Text(viewModel.text)
                 .padding()
             
-            Button("Weiter") {
-                viewModel.action()
+            if viewModel.showDetailedFeedbackButton {
+                SecondaryButton(title: "getDetailedFeedback", color: .blue, action: {
+                    viewModel.getDetailedFeedback()
+                })
             }
+            
+            PrimaryButton(title: "next", color: .blue, action: {
+                viewModel.action()
+            })
         }.frame(maxWidth: .infinity)
     }
 }

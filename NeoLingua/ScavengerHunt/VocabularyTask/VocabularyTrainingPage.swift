@@ -7,7 +7,6 @@ struct VocabularyTrainingPage: View {
     var body: some View {
         VStack {
             if viewModel.currentTask?.type == .sentenceAssembly {
-                Text("sentenceAssembly")
                 if let exercise = viewModel.currentTask as? SentenceBuildingExercise {
                     SentenceBuildingView(
                         userAnswer: $viewModel.userInputText,
@@ -16,7 +15,6 @@ struct VocabularyTrainingPage: View {
                 }
             }
             if viewModel.currentTask?.type == .fillInTheBlanks {
-                Text("fillInTheBlanks")
                 if let exercise = viewModel.currentTask as? WriteWordExercise {
                     WriteVocabularyView(
                         userInputText: $viewModel.userInputText,
@@ -70,7 +68,15 @@ struct VocabularyTrainingPage: View {
             }
             if (viewModel.sheetViewModel != nil) {
                 ResultSheetView(viewModel: viewModel.sheetViewModel!)
-                    .presentationDetents([.fraction(0.25)])
+                    .presentationDetents([.fraction(0.40)])
+                    .sheet(isPresented: $viewModel.isExplanationSheetPresented, content: {
+                        VStack {
+                            Text("Nutzereingabe:")
+                            Text(viewModel.userInputText).padding(.bottom, Styleguide.Margin.small)
+                            Text("Erklärung des Fehlers").bold()
+                            Text(.init(viewModel.explanationText))
+                        }.padding()
+                    })
             } else {
                 EmptyView()
             }

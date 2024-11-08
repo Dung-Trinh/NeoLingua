@@ -23,7 +23,7 @@ struct ConversationEvaluationView: View {
                         .font(.body)
                     Text("Word Choice: \(evaluation.wordChoice)")
                         .font(.body)
-                    Text("Structure: \(evaluation.structure)")
+                    Text("Structure and Content: \(evaluation.structureAndContent)")
                         .font(.body)
                 }
                 

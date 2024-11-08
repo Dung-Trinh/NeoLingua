@@ -14,7 +14,7 @@ struct SentenceBuildingView: View {
             VStack(spacing: 10) {
                 VStack {
                     Text("Combine the sentence components to form this sentence:").bold()
-                    Text("Translation: " + exercise.translation).padding()
+                    Text("Translation: " + exercise.translation)
                 }
                 Text("ⓘ Tap the words in the correct order:").font(.headline)
                 VStack {

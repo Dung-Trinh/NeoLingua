@@ -5,9 +5,14 @@ struct WriteVocabularyView: View {
     var exercise: WriteWordExercise
     
     var body: some View {
-        VStack {
+        VStack(spacing: Styleguide.Margin.medium) {
+            Text("ⓘ Fill in the blanks to complete the sentence.")
             Text(exercise.question)
-            TextField("Deine Antwort", text: $userInputText)
+            VStack {
+                Text("Translation:")
+                Text(exercise.translation)
+            }
+            TextField("your answer ...", text: $userInputText)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
         }.padding()
     }

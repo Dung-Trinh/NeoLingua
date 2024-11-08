@@ -134,7 +134,7 @@ class TestData {
     static let conversationEvaluation: ConversationEvaluation = ConversationEvaluation(
         grammar: "The grammar usage is good, but there were a few minor mistakes.",
         wordChoice: "Word choice was appropriate and natural.",
-        structure: "The sentence structure was clear and followed normal patterns.",
+        structureAndContent: "The sentence structure was clear and followed normal patterns.",
         tasksCompletion: [
             TaskCompletion(
                 task: "Translate the sentence correctly",

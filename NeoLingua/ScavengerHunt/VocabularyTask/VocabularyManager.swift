@@ -7,14 +7,33 @@ class VocabularyManager {
     let assistantID = ProdENV().VOCABULARY_ASSISTANT_ID
     var threadID = ""
     
+    func getDetailedFeedback(userInput: String, taskId: String) async  throws -> String {
+        let prompt = "explain in detail why this answer is wrong for the following task. user input: \(userInput), id: \(taskId)"
+        try await openAiServiceHelper.sendUserMessageToThread(message: prompt, threadID: threadID)
+        
+        let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
+            assistantID: assistantID,
+            threadID: threadID
+        )
+        
+        print("jsonStringResponse")
+        print(jsonStringResponse)
+        
+        if let jsonData = jsonStringResponse.data(using: .utf8) {
+            let decodedData = try JSONDecoder().decode(DetailedFeedback.self, from: jsonData)
+            return decodedData.explanation
+        }
+        throw "getDetailedFeedback error"
+    }
+    
     func fetchVocabularyTraining(prompt: String) async throws -> [VocabularyExercise] {
         if CommandLine.arguments.contains("--useMockData") {
             return TestData.vocabularyTasks
         }
-        
+        let languageLevel = UserDefaults().getLevelOfLanguage().rawValue
         let parameters = MessageParameter(
             role: .user,
-            content: prompt
+            content: "\(prompt) adapt the tasks to language level \(languageLevel))"
         )
         
         let thread = try await service.createThread(parameters: CreateThreadParameters())
@@ -84,4 +103,9 @@ class VocabularyManager {
         }
         return exercises
     }
+
+}
+
+struct DetailedFeedback: Decodable {
+    let explanation: String
 }

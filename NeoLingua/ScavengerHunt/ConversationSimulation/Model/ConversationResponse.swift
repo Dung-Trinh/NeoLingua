@@ -40,7 +40,7 @@ struct ConversationEvaluation: Codable {
     let id: UUID
     let grammar: String
     let wordChoice: String
-    let structure: String
+    let structureAndContent: String
     let tasksCompletion: [TaskCompletion]
     let rating: Double
     
@@ -48,7 +48,7 @@ struct ConversationEvaluation: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.grammar = try container.decode(String.self, forKey: .grammar)
         self.wordChoice = try container.decode(String.self, forKey: .wordChoice)
-        self.structure = try container.decode(String.self, forKey: .structure)
+        self.structureAndContent = try container.decode(String.self, forKey: .structureAndContent)
         self.tasksCompletion = try container.decode([TaskCompletion].self, forKey: .tasksCompletion)
         self.rating = try container.decode(Double.self, forKey: .rating)
         id = UUID()
@@ -57,14 +57,14 @@ struct ConversationEvaluation: Codable {
     init(
         grammar: String,
         wordChoice: String,
-        structure: String,
+        structureAndContent: String,
         tasksCompletion: [TaskCompletion],
         rating: Double
     ) {
         id = UUID()
         self.grammar = grammar
         self.wordChoice = wordChoice
-        self.structure = structure
+        self.structureAndContent = structureAndContent
         self.tasksCompletion = tasksCompletion
         self.rating = rating
     }

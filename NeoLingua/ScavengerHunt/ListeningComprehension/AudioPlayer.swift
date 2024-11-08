@@ -10,12 +10,23 @@ class AudioPlayer: ObservableObject {
         if CommandLine.arguments.contains("--useMockData") {
             return
         }
+
+        var speed = 1.0
+        let languageLevel = UserDefaults().getLevelOfLanguage()
+        switch languageLevel {
+        case .A1, .A2:
+            speed = 0.8
+        case .B1, .B2:
+            speed = 1
+        case .C1, .C2:
+            speed = 1.25
+        }
         
         let parameters = AudioSpeechParameters(
             model: .tts1,
             input: textForSpeech,
             voice: .onyx,
-            speed: 1
+            speed: speed
         )
         let speech = try await service.createSpeech(parameters: parameters).output
         audioPlayer = try AVAudioPlayer(data: speech)
