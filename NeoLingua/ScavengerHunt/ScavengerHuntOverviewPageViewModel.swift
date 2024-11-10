@@ -9,40 +9,60 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     let scavengerHuntManager = ScavengerHuntManager()
     let scavengerHuntType: ScavengerHuntType
     @Published var isPresented = false
+    @Published var isLeaderboardPresented = false
     @Published var currentScavengerHunt: ScavengerHunt?
+    @Published var competitiveScavengerHunts: [ScavengerHunt] = []
+    @Published var isLoading = false
+    @Published var userScores: [UserScore]?
     @Published var markers: [GMSMarker] = []
     
     private var taskProcessManager = TaskProcessManager.shared
     var leadboardService = LeaderboardService()
-    
+    private var userDataManager = UserDataManagerImpl()
+
     init(type: ScavengerHuntType) {
         scavengerHuntType = type
-        switch type {
-        case .generatedNearMe: break
-            //location ermitteln und assistant fragen
-        case .locationBased: break
-            // von firebase db fragen
-        }
+
     }
     
     func fetchScavengerHunt() async {
+        isLoading = true
+        
+        switch scavengerHuntType {
+        case .generatedNearMe:
+            await generateScavengerHuntNearMe()
+        case .competitiveMode:
+            await fetchCompetitiveScavengerHunts()
+        }
+        isLoading = false
+    }
+    
+    func generateScavengerHuntNearMe() async {
         do {
-            currentScavengerHunt = try await scavengerHuntManager.fetchScavengerHuntNearMe()
-            if var currentScavengerHunt = currentScavengerHunt {
-                markers = await createMarkers(scavengerHunt: currentScavengerHunt)
-                try await scavengerHuntManager.saveScavengerHunt(scavengerHunt: currentScavengerHunt)
-                
-                
-                let state = ScavengerHuntState(scavengerHunt: currentScavengerHunt)
-
-                currentScavengerHunt.scavengerHuntState = state
-                try await scavengerHuntManager.saveScavengerHuntState(state: state)
-                
-//                router.scavengerHunt = currentScavengerHunt
-                taskProcessManager.currentScavengerHunt = currentScavengerHunt
-            }
+            currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe()
+            try await setupscavengerHunt()
         } catch {
             print("fetchScavengerHunt error: ", error.localizedDescription)
+        }
+    }
+    
+    func setupscavengerHunt() async throws {
+        if var currentScavengerHunt = currentScavengerHunt {
+            markers = await createMarkers(scavengerHunt: currentScavengerHunt)
+            
+            let state = ScavengerHuntState(scavengerHunt: currentScavengerHunt)
+            currentScavengerHunt.scavengerHuntState = state
+            try await scavengerHuntManager.saveScavengerHuntState(state: state)
+            taskProcessManager.currentScavengerHunt = currentScavengerHunt
+        }
+    }
+    
+    func fetchCompetitiveScavengerHunts() async {
+        do {
+            competitiveScavengerHunts = try await scavengerHuntManager.fetchCompetitiveScavengerHunts()
+            try await setupscavengerHunt()
+        } catch {
+            print("fetchCompetitiveScavengerHunt error: ", error.localizedDescription)
         }
     }
     
@@ -72,8 +92,22 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
         let finalScore = getFinalScore()
         do {
             try await leadboardService.addPointsForLevel(points: finalScore)
+            if scavengerHuntType == .competitiveMode {
+                try await userDataManager.addCompetitiveScavengerHuntId(scavengerHuntId: currentScavengerHunt?.id ?? "")
+                try await leadboardService.addPointToCompetitiveScavengerHunt(scavengerHuntId: currentScavengerHunt?.id ?? "", points: finalScore)
+            }
+            
         } catch {
             print("showFinalResult error ", error.localizedDescription)
+        }
+    }
+    
+    func getScavengerHuntLeaderboard() async {
+        do {
+            userScores = try await leadboardService.fetchUserScoresRanking(forHuntId: currentScavengerHunt?.id ?? "")
+            isLeaderboardPresented = true
+        } catch {
+            print("getScavengerHuntLeaderboard error ", error.localizedDescription)
         }
     }
     

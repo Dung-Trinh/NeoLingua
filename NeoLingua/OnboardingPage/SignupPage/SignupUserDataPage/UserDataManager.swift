@@ -11,6 +11,7 @@ struct ProfileData: Codable {
     let learningGoals: [String]
     let interests: [String]
     let estimationOfDailyUse: Int
+    var competitiveScavengerHuntIds: [String] = []
 }
 
 class UserDataManagerImpl: UserDataManager {
@@ -27,5 +28,15 @@ class UserDataManagerImpl: UserDataManager {
         
         let profileData = try document.data(as: ProfileData.self)
         return profileData
+    }
+    
+    func addCompetitiveScavengerHuntId(scavengerHuntId: String) async throws {
+        let userId = UserDefaults().getUserId()
+        let profileRef = db.collection("users").document(userId)
+        let documentSnapshot = try await profileRef.getDocument()
+        
+        var profile = try documentSnapshot.data(as: ProfileData.self)
+        profile.competitiveScavengerHuntIds.append(scavengerHuntId)
+        try profileRef.setData(from: profile)
     }
 }

@@ -32,8 +32,6 @@ class AccountPageViewModelImpl: AccountPageViewModel {
         do {
             let data = try await userDataManager.fetchUserData()
             profileData = data
-            print("fetchProfileData")
-            print(data)
         } catch {
             print("fetchProfileData err")
         }

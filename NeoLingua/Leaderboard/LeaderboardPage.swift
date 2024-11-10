@@ -14,10 +14,9 @@ struct LeaderboardPage: View {
             }
             .pickerStyle(.segmented)
             ScrollView {
-                if viewModel.selectedMode == .scavengerHunt {
-                    scavengerHuntLeaderboard
-                } else {
-                    
+                switch viewModel.selectedMode {
+                case .globalScore: gloabalLeaderboard
+                case .scavengerHunt: scavengerHuntLeaderboard
                 }
             }
         }
@@ -30,39 +29,75 @@ struct LeaderboardPage: View {
     }
     
     @ViewBuilder
-    private var scavengerHuntLeaderboard: some View {
+    private var gloabalLeaderboard: some View {
         VStack {
             HStack {
                 Text("Weekly Ranking for rank").bold()
                 Text("\(UserDefaults().getLevelOfLanguage().rawValue)")
             }
-            HStack {
-                Text("Platz")
-                    .font(.headline)
-                    .frame(width: 50, alignment: .leading)
-                Text("Name")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text("Punkte")
-                    .font(.headline)
-                    .frame(width: 80, alignment: .trailing)
+            LeaderboardView(userScores: viewModel.globalUserScores)
+        }
+    }
+    
+    @ViewBuilder
+    private var scavengerHuntLeaderboard: some View {
+        ScrollView {
+            Text("your last competitive scavenger hunts")
+            if viewModel.scavengerRankingList.count > 0 {
+                ForEach(viewModel.scavengerRankingList) { ranking in
+                    NavigationLink {
+                        LeaderboardView(scavengerHunt: ranking.scavengerHunt, userScores: ranking.userScores)
+                    } label: {
+                        Text(ranking.scavengerHunt.title)
+                    }
+                }
+                
             }
-            .padding(.vertical, 4)
-            .background(Color(.systemGray6))
-            ForEach(Array(viewModel.userScores.enumerated()), id: \.element.id) { index, userScore in
+        }
+    }
+}
+
+struct LeaderboardView: View {
+    @State var scavengerHunt: ScavengerHunt? = nil
+    @State var userScores: [UserScore] = []
+    
+    var body: some View {
+        ScrollView {
+            VStack {
+                if let scavengerHunt = scavengerHunt {
+                    Text(scavengerHunt.title).bold()
+                    ForEach(scavengerHunt.taskLocations) { location in
+                        Label(location.name, systemImage: "mappin.and.ellipse")
+                    }
+                }
                 HStack {
-                    Text("\(index + 1).")
+                    Text("Platz")
                         .font(.headline)
                         .frame(width: 50, alignment: .leading)
-                    Text(userScore.username)
+                    Text("Name")
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    Text(String(format: "%.2f", userScore.points))
-                        .font(.subheadline)
+                    Text("Punkte")
+                        .font(.headline)
                         .frame(width: 80, alignment: .trailing)
                 }
-                .padding(.vertical, 8)
+                .padding(.vertical, 4)
+                .background(Color(.systemGray6))
+                ForEach(0..<userScores.count) { index in
+                    HStack {
+                        Text("\(index + 1).")
+                            .font(.headline)
+                            .frame(width: 50, alignment: .leading)
+                        Text(userScores[index].username)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Text(String(format: "%.2f", userScores[index].totalPoints))
+                            .font(.subheadline)
+                            .frame(width: 80, alignment: .trailing)
+                    }
+                    .padding(.vertical, 8)
+                }
             }
         }
     }

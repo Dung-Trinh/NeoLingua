@@ -9,6 +9,11 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
             Text("AccountPage")
             if let profileData = viewModel.profileData {
                 VStack {
+                    Image(systemName:"person.crop.circle.fill")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
                     HStack {
                         Text("Username:").bold()
                         Text(profileData.username)

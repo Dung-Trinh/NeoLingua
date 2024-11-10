@@ -36,7 +36,7 @@ struct TaskLocation: Codable, Identifiable {
     }
 }
 
-struct ScavengerHunt: Codable {
+struct ScavengerHunt: Codable, Identifiable {
     let id: String
     let title: String
     let introduction: String
@@ -120,7 +120,7 @@ class ScavengerHuntManager: TaskManager {
     let locationManager = LocationManager()
     let db = Firestore.firestore()
     
-    func fetchScavengerHuntNearMe() async throws -> ScavengerHunt {
+    func generateScavengerHuntNearMe() async throws -> ScavengerHunt {
         if CommandLine.arguments.contains("--useMockData") {
             return TestData.scavengerHunt
         }
@@ -159,8 +159,30 @@ class ScavengerHuntManager: TaskManager {
         throw "fetchScavengerHuntNearMe error"
     }
     
-    func saveScavengerHunt(scavengerHunt: ScavengerHunt) async throws {
-        try db.collection("scavengerHunts").document(scavengerHunt.id).setData(from: scavengerHunt)
+    func fetchCompetitiveScavengerHunts() async throws -> [ScavengerHunt] {
+        let snapshot = try await db.collection("competitiveScavengerHunt").getDocuments()
+        let scavengerHunts: [ScavengerHunt] = try snapshot.documents.compactMap { document in
+            try document.data(as: ScavengerHunt.self)
+        }
+        
+        return scavengerHunts
+    }
+    
+    func fetchScavengerHuntById(withId id: String) async throws -> ScavengerHunt? {
+        let snapshot = try await db.collection("competitiveScavengerHunt")
+            .whereField("id", isEqualTo: id)
+            .getDocuments()
+        
+        guard let document = snapshot.documents.first else {
+            throw "fetchScavengerHuntById document not found"
+        }
+        
+        var scavengerHunt = try document.data(as: ScavengerHunt.self)
+        return scavengerHunt
+    }
+    
+    func saveScavengerHuntForRanking(scavengerHunt: ScavengerHunt) async throws {
+        try db.collection("competitiveScavengerHunt").document(scavengerHunt.id).setData(from: scavengerHunt)
     }
     
     func saveScavengerHuntState(state: ScavengerHuntState) async throws {

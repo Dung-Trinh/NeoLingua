@@ -7,9 +7,21 @@ struct ScavengerHuntOverviewPage: View {
     
     var body: some View {
         ScrollView {
-            if viewModel.scavengerHuntType == .locationBased {
-                // Liste mit Competitive ScavengerHunt
-                Text("")
+            if viewModel.scavengerHuntType == .competitiveMode && viewModel.currentScavengerHunt == nil  {
+                Text("ⓘ Choose a scavenger hunt near your location")
+
+                Text("CompetitiveScavengerHunt List")
+                ForEach(Array(viewModel.competitiveScavengerHunts.enumerated()), id: \.element.id ) { index, scavengerHunt in
+                    HStack {
+                        Text("\(index + 1).")
+                        Button(scavengerHunt.title) {
+                            viewModel.currentScavengerHunt = scavengerHunt
+                            Task {
+                                await try? viewModel.setupscavengerHunt()
+                            }
+                        }
+                    }
+                }
             }
             
             VStack {
@@ -90,6 +102,11 @@ struct ScavengerHuntOverviewPage: View {
                                 }
                                 
                                 Text("\(locationPerformance.getPointsForLocationPerformance()) / 100")
+                                Button("show leaderboard for this scavenger hunt") {
+                                    Task {
+                                        await viewModel.getScavengerHuntLeaderboard()
+                                    }
+                                }
                             }.padding(.bottom, Styleguide.Margin.medium)
                         }
                     }
@@ -101,10 +118,13 @@ struct ScavengerHuntOverviewPage: View {
                             router.navigateToRoot()
                         }
                     )
-                }
+                }.sheet(isPresented: $viewModel.isLeaderboardPresented, content: {
+                    LeaderboardView(userScores: viewModel.userScores ?? [])
+                })
             }
         }.navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
     }
 }

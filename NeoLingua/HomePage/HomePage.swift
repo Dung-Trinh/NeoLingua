@@ -19,6 +19,10 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                     .tabItem {
                         Label("Leaderboard", systemImage: "trophy.fill")
                     }
+                UserStatsDashboardPage(viewModel: UserStatsDashboardPageViewModellImpl())
+                    .tabItem {
+                        Label("User Stats", systemImage: "chart.xyaxis.line")
+                    }
                 AccountPage(viewModel: AccountPageViewModelImpl(router: router))
                     .tabItem {
                         Label("Account", systemImage: "person.crop.circle.fill")

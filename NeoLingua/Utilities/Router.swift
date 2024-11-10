@@ -2,7 +2,7 @@ import SwiftUI
 
 enum ScavengerHuntType: Hashable {
     case generatedNearMe
-    case locationBased
+    case competitiveMode
 }
 
 enum Route: Hashable {
@@ -129,13 +129,13 @@ class Router: ObservableObject  {
     private func handleScavengerHuntRoutes(_ scavengerHuntRoute: Route.ScavengerHuntRoute) -> some View {
         switch scavengerHuntRoute {
             case .overview:
-            ScavengerHuntOverviewPage(viewModel: ScavengerHuntOverviewPageViewModelImpl(type: .locationBased))
+            ScavengerHuntOverviewPage(viewModel: ScavengerHuntOverviewPageViewModelImpl(type: .competitiveMode))
         case .taskLocation:
             if let taskLocation = taskLocation {
                 TaskLocationPage(viewModel: TaskLocationPageViewModelImpl(taskLocation: taskLocation))
             }
         case .scavengerHunt(let type):
-            ScavengerHuntOverviewPage(viewModel: ScavengerHuntOverviewPageViewModelImpl(type: .locationBased))
+            ScavengerHuntOverviewPage(viewModel: ScavengerHuntOverviewPageViewModelImpl(type: type))
         }
     }
     

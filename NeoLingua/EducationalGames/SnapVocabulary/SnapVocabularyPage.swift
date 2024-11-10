@@ -40,7 +40,7 @@ struct SnapVocabularyPage: View {
                 title: "Schnitzeljagd in der Umgebung suchen",
                 color: .blue,
                 action: {
-                    router.push(.scavengerHunt(.scavengerHunt(.locationBased)))
+                    router.push(.scavengerHunt(.scavengerHunt(.competitiveMode)))
                 }
             )
         }

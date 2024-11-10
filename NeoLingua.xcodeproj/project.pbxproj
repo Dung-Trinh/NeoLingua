@@ -78,6 +78,8 @@
 		B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */; };
 		B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */; };
 		B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562022CC5396A0008C05C /* ListeningExercise.swift */; };
+		B6ADD6DD2CDE2DA700572F66 /* UserStatsDashboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */; };
+		B6ADD6E02CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
 		B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */; };
@@ -215,6 +217,8 @@
 		B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionManager.swift; sourceTree = "<group>"; };
 		B6A562022CC5396A0008C05C /* ListeningExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningExercise.swift; sourceTree = "<group>"; };
 		B6A562042CC56B070008C05C /* Wiesbaden2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wiesbaden2.gpx; sourceTree = "<group>"; };
+		B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPage.swift; sourceTree = "<group>"; };
+		B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPageViewModel.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -473,6 +477,15 @@
 			path = WritingTask;
 			sourceTree = "<group>";
 		};
+		B6ADD6DE2CDE2DB200572F66 /* UserStatsDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */,
+				B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */,
+			);
+			path = UserStatsDashboard;
+			sourceTree = "<group>";
+		};
 		B6EB6D242CA414A90055FD67 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,6 +607,7 @@
 		B6FED3BA2C70B3BB00339B7C /* NeoLingua */ = {
 			isa = PBXGroup;
 			children = (
+				B6ADD6DE2CDE2DB200572F66 /* UserStatsDashboard */,
 				B68ECA452CDA588500DDD17D /* Leaderboard */,
 				B609EEE52CC838AF00A029E8 /* EducationalGames */,
 				B6E6569B2C938ACD00350D98 /* Info.plist */,
@@ -761,6 +775,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B60F8AD12CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift in Sources */,
+				B6ADD6E02CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift in Sources */,
 				B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */,
 				B60F8AC12CBAB82100268D75 /* ResultSheetView.swift in Sources */,
 				B66D67882CC2A13900F70A56 /* TestData.swift in Sources */,
@@ -773,6 +788,7 @@
 				B609EEDB2CC7E1B700A029E8 /* ImageBasedLearningPage.swift in Sources */,
 				B6FA77E42CA44CFB00C52F73 /* LoginPage.swift in Sources */,
 				B6EB6D382CA416A70055FD67 /* SecondaryButton.swift in Sources */,
+				B6ADD6DD2CDE2DA700572F66 /* UserStatsDashboardPage.swift in Sources */,
 				B60F8AB02CB7D8E200268D75 /* ScavengerHuntMap.swift in Sources */,
 				B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */,
 				B61ED9E32CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift in Sources */,

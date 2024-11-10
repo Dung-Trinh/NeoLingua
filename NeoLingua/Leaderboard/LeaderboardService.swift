@@ -1,15 +1,24 @@
 import Foundation
 import Firebase
 
-struct UserScore: Identifiable {
-    let id = UUID()
+struct UserScore: Identifiable, Decodable {
+    var id: String? = UUID().uuidString
     let username: String
-    let points: Double
+    let totalPoints: Double
 }
+
+struct CompetitiveScavengerHuntRanking: Identifiable {
+    
+    var id: String? = UUID().uuidString
+    let scavengerHunt: ScavengerHunt
+    let userScores: [UserScore]
+}
+
 
 class LeaderboardService {
     private let db = Firestore.firestore()
-    
+    private let scavengerHuntManager = ScavengerHuntManager()
+
     func addPointsForLevel(points: Double) async throws {
         let languageLevel = UserDefaults().getLevelOfLanguage().rawValue
         let userId = UserDefaults().getUserId()
@@ -44,6 +53,44 @@ class LeaderboardService {
         }
     }
     
+    func createRankingsForScavengerHuntId(scavengerHuntIds: [String]) async throws -> [CompetitiveScavengerHuntRanking] {
+        var result: [CompetitiveScavengerHuntRanking] = []
+        
+        for id in scavengerHuntIds {
+            if let ranking = try await fetchUserScoresRanking(forHuntId: id),
+               let scavengerHunt = try await scavengerHuntManager.fetchScavengerHuntById(withId: id) {
+                result.append(.init(scavengerHunt: scavengerHunt, userScores: ranking))
+                print("ranking + hunt")
+            }
+        }
+        
+        return result
+    }
+    
+    func addPointToCompetitiveScavengerHunt(scavengerHuntId: String, points: Double) async throws {
+        let userId = UserDefaults().getUserId()
+        let username = UserDefaults().getUsername()
+        
+        let userScoreRef = db.collection("competitiveScavengerHuntRankings").document(scavengerHuntId).collection("userScores").document(userId)
+
+        try await userScoreRef.setData([
+            "userId": userId,
+            "username": username,
+            "totalPoints": points,
+        ])
+    }
+    
+    func fetchUserScoresRanking(forHuntId huntId: String) async throws -> [UserScore]? {
+        let userScoresRef = db.collection("competitiveScavengerHuntRankings").document(huntId).collection("userScores")
+        let snapshot = try await userScoresRef.order(by: "totalPoints", descending: true).getDocuments()
+        let userScores: [UserScore] = try snapshot.documents.compactMap { document in
+            try document.data(as: UserScore.self)
+        }
+        print("userScores.count")
+        print(userScores.count)
+        return userScores
+    }
+    
     func fetchRankingForLevel() async throws -> [UserScore] {
         let languageLevel = UserDefaults().getLevelOfLanguage().rawValue
         let levelCollectionRef = Firestore.firestore().collection("ranking_\(languageLevel)")
@@ -56,7 +103,7 @@ class LeaderboardService {
         for document in querySnapshot.documents {
             let username = document.data()["username"] as? String ?? ""
             let points = document.data()["totalPoints"] as? Double ?? 0
-            let score = UserScore(username: username, points: points)
+            let score = UserScore(username: username, totalPoints: points)
             
             results.append(score)
         }
