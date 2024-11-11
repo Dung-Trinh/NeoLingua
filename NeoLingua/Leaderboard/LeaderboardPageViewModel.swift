@@ -17,10 +17,14 @@ class LeaderboardPageViewModelImpl: LeaderboardPageViewModel {
     @Published var selectedMode: LeaderboardMode = .globalScore
     @Published var globalUserScores: [UserScore] = []
     @Published var scavengerRankingList: [CompetitiveScavengerHuntRanking] = []
-    
+    @Published var isLoading: Bool = false
+
     private var userManager = UserDataManagerImpl()
     
     func fetchUserScores() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         do {
             globalUserScores = try await leaderboardService.fetchRankingForLevel()
             await fetchScavengerHuntScores()

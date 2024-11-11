@@ -66,7 +66,7 @@ struct SignupUserDataPage<ViewModel>: View where ViewModel: SignupUserDataPageVi
             }
             
             Text("Tägliches Nutzungsziel (in Minuten):")
-            Picker("What is your favorite color?", selection: $viewModel.estimationOfDailyUse) {
+            Picker("", selection: $viewModel.estimationOfDailyUse) {
                 ForEach(viewModel.estimationOfDailyUseTime, id: \.self) {
                     Text($0.description)
                 }

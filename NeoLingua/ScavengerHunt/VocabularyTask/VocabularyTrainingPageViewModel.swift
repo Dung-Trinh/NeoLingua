@@ -18,6 +18,10 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     @Published var showResult: Bool = false
     @Published var isLoading: Bool = false
 
+    @Published var showProgressIndicator: Bool = true
+    @Published var progress: CGFloat = 0.0
+    @Published var numberOfTasks: Int = 0
+    
     var isScavengerHuntMode: Bool = false
 
     private var prompt = ""
@@ -77,6 +81,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     func continueTask() {
         sheetViewModel = nil
         isSheetPresented = false
+        progress = CGFloat(currentQuestionIndex + 1) / CGFloat(numberOfTasks)
         if currentQuestionIndex < tasks.count - 1 {
             currentQuestionIndex += 1
             currentTask = tasks[currentQuestionIndex]
@@ -92,6 +97,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
                     try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .vocabularyTraining)
                 }
             }
+            
             
             print("keine antworten mehr zurück")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -110,6 +116,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
             tasks = result
             currentTask = result.first
+            numberOfTasks = result.count
             print("fetchVocabularyTraining count: ", result.count)
         } catch {
             print("fetchVocabularyTraining error: ", error.localizedDescription)

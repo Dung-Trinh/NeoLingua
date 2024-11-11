@@ -1,11 +1,24 @@
 import SwiftUI
-
+import ProgressIndicatorView
 struct VocabularyTrainingPage: View {
     @EnvironmentObject private var router: Router
     @StateObject var viewModel: VocabularyTrainingPageViewModelImpl
     
     var body: some View {
         VStack {
+            Text("Fortschritt zur Erfüllung der Aufgabe")
+            ProgressIndicatorView(
+                isVisible: $viewModel.showProgressIndicator,
+                type: .dashBar(
+                    progress: $viewModel.progress,
+                    numberOfItems: viewModel.numberOfTasks,
+                    backgroundColor: .gray.opacity(0.25)
+                )
+            )
+            .frame(height: 12.0)
+            .foregroundColor(.red)
+            .padding(.bottom, Styleguide.Margin.extraLarge)
+            
             if viewModel.currentTask?.type == .sentenceAssembly {
                 if let exercise = viewModel.currentTask as? SentenceBuildingExercise {
                     SentenceBuildingView(
@@ -40,6 +53,7 @@ struct VocabularyTrainingPage: View {
                     view.hidden()
                 })
             
+            Spacer()
             if(viewModel.showResult) {
                 PrimaryButton(
                     title: "back to tasks",

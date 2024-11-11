@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B603536B2CE24D5600DAED61 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = B603536A2CE24D5600DAED61 /* SwiftUICharts */; };
 		B609EED12CC6A6A600A029E8 /* ScavengerHuntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */; };
 		B609EED32CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED22CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift */; };
 		B609EED62CC79A4300A029E8 /* TaskLocationPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EED52CC79A4200A029E8 /* TaskLocationPage.swift */; };
@@ -80,6 +81,10 @@
 		B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562022CC5396A0008C05C /* ListeningExercise.swift */; };
 		B6ADD6DD2CDE2DA700572F66 /* UserStatsDashboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */; };
 		B6ADD6E02CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */; };
+		B6DA53992CE0E55200EE26C3 /* ProgressIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = B6DA53982CE0E55200EE26C3 /* ProgressIndicatorView */; };
+		B6DA539C2CE15E7600EE26C3 /* TaskTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */; };
+		B6DA539F2CE160DD00EE26C3 /* ChallengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */; };
+		B6DA53A12CE160EE00EE26C3 /* ChallengePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA53A02CE160EE00EE26C3 /* ChallengePageViewModel.swift */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
 		B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */; };
@@ -219,6 +224,9 @@
 		B6A562042CC56B070008C05C /* Wiesbaden2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wiesbaden2.gpx; sourceTree = "<group>"; };
 		B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPage.swift; sourceTree = "<group>"; };
 		B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPageViewModel.swift; sourceTree = "<group>"; };
+		B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTile.swift; sourceTree = "<group>"; };
+		B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePage.swift; sourceTree = "<group>"; };
+		B6DA53A02CE160EE00EE26C3 /* ChallengePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePageViewModel.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -267,6 +275,7 @@
 				B6FED4562C70B96500339B7C /* FirebaseAppDistribution-Beta in Frameworks */,
 				B63874FB2CB0581A006B3364 /* SwiftOpenAI in Frameworks */,
 				B60F8AB32CB7DAE800268D75 /* GoogleMaps in Frameworks */,
+				B6DA53992CE0E55200EE26C3 /* ProgressIndicatorView in Frameworks */,
 				B6FED4622C70B96500339B7C /* FirebaseFirestore in Frameworks */,
 				B6FED45A2C70B96500339B7C /* FirebaseAuthCombine-Community in Frameworks */,
 				B6FED47F2C70BB3C00339B7C /* GoogleSignIn in Frameworks */,
@@ -292,6 +301,7 @@
 				B6FED4582C70B96500339B7C /* FirebaseAuth in Frameworks */,
 				B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */,
 				B63875022CB09A22006B3364 /* SwiftOpenAI in Frameworks */,
+				B603536B2CE24D5600DAED61 /* SwiftUICharts in Frameworks */,
 				B6FED4662C70B96500339B7C /* FirebaseFunctions in Frameworks */,
 				B6FED4602C70B96500339B7C /* FirebaseDynamicLinks in Frameworks */,
 			);
@@ -486,6 +496,24 @@
 			path = UserStatsDashboard;
 			sourceTree = "<group>";
 		};
+		B6DA539A2CE15E4D00EE26C3 /* TaskView */ = {
+			isa = PBXGroup;
+			children = (
+				B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */,
+			);
+			path = TaskView;
+			sourceTree = "<group>";
+		};
+		B6DA539D2CE1609300EE26C3 /* ChallengePage */ = {
+			isa = PBXGroup;
+			children = (
+				B6DA539A2CE15E4D00EE26C3 /* TaskView */,
+				B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */,
+				B6DA53A02CE160EE00EE26C3 /* ChallengePageViewModel.swift */,
+			);
+			path = ChallengePage;
+			sourceTree = "<group>";
+		};
 		B6EB6D242CA414A90055FD67 /* HomePage */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,6 +635,7 @@
 		B6FED3BA2C70B3BB00339B7C /* NeoLingua */ = {
 			isa = PBXGroup;
 			children = (
+				B6DA539D2CE1609300EE26C3 /* ChallengePage */,
 				B6ADD6DE2CDE2DB200572F66 /* UserStatsDashboard */,
 				B68ECA452CDA588500DDD17D /* Leaderboard */,
 				B609EEE52CC838AF00A029E8 /* EducationalGames */,
@@ -706,6 +735,8 @@
 				B60F8AB22CB7DAE800268D75 /* GoogleMaps */,
 				B66D67812CC059D200F70A56 /* ActivityIndicatorView */,
 				B6595B6F2CD0E1BF004816E8 /* Alamofire */,
+				B6DA53982CE0E55200EE26C3 /* ProgressIndicatorView */,
+				B603536A2CE24D5600DAED61 /* SwiftUICharts */,
 			);
 			productName = NeoLingua;
 			productReference = B6FED3B82C70B3BB00339B7C /* NeoLingua.app */;
@@ -744,6 +775,8 @@
 				B60F8AB12CB7DAE700268D75 /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
 				B66D67802CC059D200F70A56 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				B6595B6E2CD0E1BF004816E8 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				B6DA53972CE0E55200EE26C3 /* XCRemoteSwiftPackageReference "ProgressIndicatorView" */,
+				B60353692CE24D5600DAED61 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = B6FED3B92C70B3BB00339B7C /* Products */;
 			projectDirPath = "";
@@ -817,6 +850,8 @@
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B68ECA422CDA32A100DDD17D /* LevelOfLanguage.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
+				B6DA539F2CE160DD00EE26C3 /* ChallengePage.swift in Sources */,
+				B6DA539C2CE15E7600EE26C3 /* TaskTile.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
 				B609EED82CC79C3800A029E8 /* TaskLocationPageViewModel.swift in Sources */,
 				B609EED12CC6A6A600A029E8 /* ScavengerHuntManager.swift in Sources */,
@@ -849,6 +884,7 @@
 				B609EEE42CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift in Sources */,
 				B68ECA442CDA414C00DDD17D /* UserDefaultsExtension.swift in Sources */,
 				B60F8AA02CB5CC2600268D75 /* SignupSuccessPage.swift in Sources */,
+				B6DA53A12CE160EE00EE26C3 /* ChallengePageViewModel.swift in Sources */,
 				B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */,
 				B609EEF02CC8FD0C00A029E8 /* ImageBasedTask.swift in Sources */,
 				B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */,
@@ -1080,6 +1116,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B60353692CE24D5600DAED61 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.3;
+			};
+		};
 		B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
@@ -1120,6 +1164,14 @@
 				minimumVersion = 1.1.1;
 			};
 		};
+		B6DA53972CE0E55200EE26C3 /* XCRemoteSwiftPackageReference "ProgressIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ProgressIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 		B6E656962C93837700350D98 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
@@ -1147,6 +1199,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B603536A2CE24D5600DAED61 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B60353692CE24D5600DAED61 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
+		};
 		B60F8AA22CB5D55300268D75 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B60F8AA12CB5D55300268D75 /* XCRemoteSwiftPackageReference "lottie-spm" */;
@@ -1187,6 +1244,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B66D67802CC059D200F70A56 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
 			productName = ActivityIndicatorView;
+		};
+		B6DA53982CE0E55200EE26C3 /* ProgressIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6DA53972CE0E55200EE26C3 /* XCRemoteSwiftPackageReference "ProgressIndicatorView" */;
+			productName = ProgressIndicatorView;
 		};
 		B6E656972C93837700350D98 /* GooglePlaces */ = {
 			isa = XCSwiftPackageProductDependency;

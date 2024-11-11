@@ -21,6 +21,7 @@ struct LeaderboardPage: View {
             }
         }
         .padding()
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
         .onAppear {
             Task {
                 await viewModel.fetchUserScores()

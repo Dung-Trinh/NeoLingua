@@ -15,13 +15,17 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                     .tabItem {
                         Label("Learning", systemImage: "books.vertical.fill")
                     }
-                LeaderboardPage(viewModel: LeaderboardPageViewModelImpl())
+                ChallengePage()
                     .tabItem {
-                        Label("Leaderboard", systemImage: "trophy.fill")
+                        Label("Tasks", systemImage: "list.bullet.clipboard.fill")
                     }
                 UserStatsDashboardPage(viewModel: UserStatsDashboardPageViewModellImpl())
                     .tabItem {
                         Label("User Stats", systemImage: "chart.xyaxis.line")
+                    }
+                LeaderboardPage(viewModel: LeaderboardPageViewModelImpl())
+                    .tabItem {
+                        Label("Leaderboard", systemImage: "trophy.fill")
                     }
                 AccountPage(viewModel: AccountPageViewModelImpl(router: router))
                     .tabItem {
