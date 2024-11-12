@@ -15,7 +15,7 @@ struct Location: Codable, Hashable{
     let longitude: Double
 }
 
-struct TaskLocation: Codable, Identifiable {
+struct TaskLocation: Codable, Identifiable, Equatable {
     let id: String
     let name: String
     let type: String
@@ -33,6 +33,13 @@ struct TaskLocation: Codable, Identifiable {
         self.taskPrompt = taskPrompt
         self.photoClue = photoClue
         self.photoObject = photoObject
+    }
+    
+    static func == (lhs: TaskLocation, rhs: TaskLocation) -> Bool {
+        return lhs.id == rhs.id &&
+        lhs.name == rhs.name &&
+        lhs.type == rhs.type &&
+        lhs.location == rhs.location
     }
 }
 

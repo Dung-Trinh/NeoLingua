@@ -1,6 +1,8 @@
 import SwiftUI
 import FirebaseStorage
 import Firebase
+import GoogleMaps
+import MapKit
 
 struct SnapVocabularyTask: Codable, Identifiable {
     let id: String
@@ -16,57 +18,48 @@ protocol ImageBasedTaskNearMePageViewModel: ObservableObject {
 
 class ImageBasedTaskNearMePageViewModelImpl: ImageBasedTaskNearMePageViewModel {
     @Published var allTasks: [SnapVocabularyTask] = []
-    
     @Published var sharedImageTask: SnapVocabularyTask?
-    @Published var userInput: String = ""
-    @Published var lastUserInput: String = ""
-    @Published var showHintButton: Bool = false
-    @Published var hint: String = ""
-    @Published var isFirstValidation: Bool = true
-    
-    @Published var result: InspectImageForVocabularyResult?
+    @Published var isPresented: Bool = false
+
     private var imageProcessingManager = ImageProcessingManager()
+    @Published var region: MKCoordinateRegion
+    let locationManager = LocationManager()
+
     init() {
-        fetchImageBasedTaskNearMe()
+        let myPosition = locationManager.lastKnownLocation ??  CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        region = MKCoordinateRegion(
+            center: myPosition,
+            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        )
     }
     
+    func setPosition() {
+        let myPosition = locationManager.lastKnownLocation ??  CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        region = MKCoordinateRegion(
+            center: myPosition,
+            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        )
+    }
+    
+    @MainActor
     func fetchImageBasedTaskNearMe() {
         Task {
+            setPosition()
             await fetchTasks()
         }
     }
     
-    func validateUserInputWithImage() async {
-        guard let sharedImageTask = sharedImageTask else { return }
+    func showMarkerDetails(marker: SnapVocabularyTask) {
+        sharedImageTask = marker
         
-        do {
-            result = try await imageProcessingManager.verifyTextWithImage(
-                imageUrl: sharedImageTask.imageUrl,
-                searchedVocabulary: sharedImageTask.vocabulary,
-                userInput: userInput
-            )
-            lastUserInput = userInput
-            userInput = ""
-            if result?.foundSearchedVocabulary != true || result?.result == .wrong {
-                showHintButton = true
-            }
-        } catch {
-            print("validateUserInputWithImage ", error.localizedDescription)
-        }
+        isPresented = true
     }
     
-    func fetchHint() async {
-        do {
-            hint = try await imageProcessingManager.fetchImageHint()
-            showHintButton = false
-            print("hint ", hint)
-        } catch {
-            print("fetchHint error")
-        }
-    }
     
+    @MainActor
     func fetchTasks() async {
         let db = Firestore.firestore()
+        
         do {
             let snapshot = try await db.collection("imageBasedTasks").getDocuments()
             

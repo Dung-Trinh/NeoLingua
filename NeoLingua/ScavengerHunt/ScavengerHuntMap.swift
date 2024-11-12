@@ -73,6 +73,7 @@ struct TaskLocationList: View {
     @EnvironmentObject private var router: Router
     @Binding var markers: [GMSMarker]
     @Binding var taskLocation: [TaskLocation]
+    @StateObject var locationManager = LocationManager()
     
     var buttonAction: (TaskLocation) -> Void
     var setMarker: (GMSMarker) -> Void
@@ -97,15 +98,21 @@ struct TaskLocationList: View {
                     Section {
                         ForEach(taskLocation) { location in
                             Button(action: {
-                                buttonAction(location)
-                                for marker in markers {
-                                    if marker.title == location.name {
-                                        setMarker(marker)
+                                if locationManager.checkIfLocationIsNearby(location) {
+                                    buttonAction(location)
+                                    for marker in markers {
+                                        if marker.title == location.name {
+                                            setMarker(marker)
+                                        }
                                     }
                                 }
                             }) {
                                 HStack {
                                     Text(location.name)
+                                        .if(locationManager.checkIfLocationIsNearby(location) == false , transform: { view in
+                                            view.foregroundColor(.gray)
+                                    })
+                                    
                                     if let didFoundObject = location.performance?.performance.didFoundObject {
                                         if didFoundObject {
                                             Text("✅")
@@ -113,9 +120,15 @@ struct TaskLocationList: View {
                                             Text("❌")
                                         }
                                     }
+                                    Spacer()
+                                    if locationManager.checkIfLocationIsNearby(location) {
+                                        Text("📋")
+                                    } else {
+                                        Text("ℹ️")
+                                    }
                                 }
                                 
-                            }.if(location.performance?.performance.didFoundObject != nil, transform: { view in
+                            }.if(location.performance?.performance.didFoundObject != nil , transform: { view in
                                 view.disabled(true)
                             })
                         }
@@ -126,15 +139,20 @@ struct TaskLocationList: View {
                         }
                     }header: {
                         Text("Task location")
+                    } footer: {
+                        Text("ℹ️ = Annäherung an das Objekt erforderlich, 📋 = Aufgaben stehen bereit")
                     }
                 }
                 .frame(maxWidth: .infinity,maxHeight: 300)
+            }
+            .onAppear{
+                locationManager.taskLocations = taskLocation
             }
         }
     }
     
     func areAllTaskDone() -> Bool {
-        var isDone = true
+        let isDone = true
         for location in taskLocation {
             if location.performance?.performance.didFoundObject == nil {
                 return false

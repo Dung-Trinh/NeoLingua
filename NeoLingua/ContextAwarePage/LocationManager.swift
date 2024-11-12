@@ -5,6 +5,9 @@ import Alamofire
 final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
     
     @Published var lastKnownLocation: CLLocationCoordinate2D?
+    @Published var nearbyTaskLocation: [TaskLocation] = []
+    var taskLocations: [TaskLocation] = []
+    
     let manager = CLLocationManager()
     
     override init() {
@@ -47,7 +50,17 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        nearbyTaskLocation = []
         lastKnownLocation = locations.first?.coordinate
+        
+        for taskLocation in taskLocations {
+            let isInRadius = checkIfWithinRadius(currentLocation: location, targetLocation: CLLocation(latitude: taskLocation.location.latitude, longitude: taskLocation.location.longitude), radius: 20)
+            if isInRadius {
+                nearbyTaskLocation.append(taskLocation)
+            }
+        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -77,6 +90,16 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
                 }
             }
         }
+    }
+    
+    func checkIfWithinRadius(currentLocation: CLLocation, targetLocation: CLLocation, radius: Double) -> Bool {
+        let distanceInMeters = currentLocation.distance(from: targetLocation)
+        
+        return distanceInMeters <= radius
+    }
+    
+    func checkIfLocationIsNearby(_ currentLocation: TaskLocation) -> Bool {
+        return nearbyTaskLocation.contains(currentLocation)
     }
 }
 

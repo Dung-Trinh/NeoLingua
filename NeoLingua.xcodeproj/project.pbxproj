@@ -62,6 +62,8 @@
 		B63875022CB09A22006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875012CB09A22006B3364 /* SwiftOpenAI */; };
 		B63875052CB09A3F006B3364 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B63875042CB09A3F006B3364 /* SwiftOpenAI */; };
 		B6401FEC2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */; };
+		B64FA86E2CE39F840088A911 /* NearMeTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FA86D2CE39F840088A911 /* NearMeTaskPage.swift */; };
+		B64FA8702CE39FE30088A911 /* NearMeTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FA86F2CE39FE30088A911 /* NearMeTaskPageViewModel.swift */; };
 		B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */; };
 		B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */; };
 		B6595B702CD0E1BF004816E8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B6595B6F2CD0E1BF004816E8 /* Alamofire */; };
@@ -206,6 +208,8 @@
 		B61ED9E02CD62CF700E71258 /* ImageBasedTaskNearMePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedTaskNearMePage.swift; sourceTree = "<group>"; };
 		B61ED9E22CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedTaskNearMePageViewModel.swift; sourceTree = "<group>"; };
 		B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEvaluationView.swift; sourceTree = "<group>"; };
+		B64FA86D2CE39F840088A911 /* NearMeTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeTaskPage.swift; sourceTree = "<group>"; };
+		B64FA86F2CE39FE30088A911 /* NearMeTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeTaskPageViewModel.swift; sourceTree = "<group>"; };
 		B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTaskEvaluationView.swift; sourceTree = "<group>"; };
 		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
 		B6595B712CD0EB37004816E8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 		B609EED92CC7E13100A029E8 /* ImageBasedLearning */ = {
 			isa = PBXGroup;
 			children = (
+				B64FA86C2CE39F680088A911 /* NearMeTaskPage */,
 				B61ED9DB2CD614C400E71258 /* ShareImageForTaskPage */,
 				B609EEDA2CC7E1B700A029E8 /* ImageBasedLearningPage.swift */,
 				B609EEDC2CC7E1CC00A029E8 /* ImageBasedLearningPageViewModel.swift */,
@@ -466,6 +471,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B64FA86C2CE39F680088A911 /* NearMeTaskPage */ = {
+			isa = PBXGroup;
+			children = (
+				B64FA86D2CE39F840088A911 /* NearMeTaskPage.swift */,
+				B64FA86F2CE39FE30088A911 /* NearMeTaskPageViewModel.swift */,
+			);
+			path = NearMeTaskPage;
 			sourceTree = "<group>";
 		};
 		B68ECA452CDA588500DDD17D /* Leaderboard */ = {
@@ -871,6 +885,7 @@
 				B6FA77D92CA41A7B00C52F73 /* PageHeader.swift in Sources */,
 				B6FED4932C71F12600339B7C /* LearningOverviewPageView.swift in Sources */,
 				B609EEE22CC8359B00A029E8 /* SnapVocabularyPage.swift in Sources */,
+				B64FA86E2CE39F840088A911 /* NearMeTaskPage.swift in Sources */,
 				B6FA77C92CA4197800C52F73 /* OnboardingContent.swift in Sources */,
 				B6FED4962C71F3BD00339B7C /* ContextAwarePage.swift in Sources */,
 				B609EED62CC79A4300A029E8 /* TaskLocationPage.swift in Sources */,
@@ -905,6 +920,7 @@
 				B6EB6D322CA416670055FD67 /* ChipView.swift in Sources */,
 				B60F8AAC2CB7D77900268D75 /* MapViewController.swift in Sources */,
 				B687450C2CD766640085AFE1 /* AsyncImageView.swift in Sources */,
+				B64FA8702CE39FE30088A911 /* NearMeTaskPageViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
