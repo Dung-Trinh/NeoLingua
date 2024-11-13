@@ -32,6 +32,7 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @Published var areAllTaskDone: Bool = false
     @Published var showCamera = false
     @Published var excludedTaskType: [TaskType] = []
+    @Published var promptText: String = ""
 
     private var imageCoordinates: Location?
     var sharedImageForTask: SharedContentForTask? {
@@ -70,6 +71,25 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         state = .imageSelected
     }
     
+    func createTasksWithPrompt() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            imageBasedTask = try await imageProcessingManager.createTasksWithContextPrompt(
+                prompt: promptText, 
+                excludedTaskTypes: excludedTaskType
+            )
+            taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
+            if let task = imageBasedTask {
+                try? await taskProcessManager.createUserResultPerformance(task: task)
+            }
+            state = .taskAvailable
+        } catch {
+            print("createTasksWithPrompt error: ", error.localizedDescription)
+        }
+    }
+    
     func analyzeImage() async {
         isLoading = true
         defer { isLoading = false }
@@ -96,7 +116,11 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     private func createImageBasedTask() async throws {
         print("excludedTaskTypes")
         print(excludedTaskType.description)
-        imageBasedTask = try await imageProcessingManager.createImageBasedTask(imageUrl: uploadedImageLink, excludedTaskTypes: excludedTaskType)
+        imageBasedTask = try await imageProcessingManager.createImageBasedTask(
+            imageUrl: uploadedImageLink,
+            excludedTaskTypes: excludedTaskType,
+            imageLocation: imageCoordinates
+        )
         taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
     }
     

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftOpenAI
 import FirebaseStorage
 import Alamofire
 import Firebase
@@ -26,7 +27,12 @@ class ImageProcessingManager {
     private let db = Firestore.firestore()
 
     var currentThreadID = ""
-    func createImageBasedTask(imageUrl: String, excludedTaskTypes: [TaskType]) async throws -> ImageBasedTask? {
+    
+    func createImageBasedTask(
+        imageUrl: String,
+        excludedTaskTypes: [TaskType],
+        imageLocation: Location? = nil
+    ) async throws -> ImageBasedTask? {
         if CommandLine.arguments.contains("--useMockData") {
             return TestData.imageBasedTask
         }
@@ -41,10 +47,15 @@ class ImageProcessingManager {
             
             excludedTasks = "exclude \(typesArray.split(separator: ","))"
         }
+        
+        var imageLocationText = ""
+        if let imageLocation = imageLocation {
+            imageLocationText = "the image has this metadata latitude: \(imageLocation.latitude) and longitude: \(imageLocation.longitude)."
+        }
             
         let newThread = try await createThreadWithImage(
             imageUrl: imageUrl,
-            prompt: "what can be seen in the picture? create task prompts for it with the language level \(languageLevel). \(excludedTasks)"
+            prompt: "what can be seen in the picture? create task prompts for it with the language level \(languageLevel).\(imageLocationText) \(excludedTasks)"
         )
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
             assistantID: imageBasedAssistantID,
@@ -181,6 +192,46 @@ class ImageProcessingManager {
             return decodedData.hint
         }
         throw "fetchImageHint error"
+    }
+    
+    func createTasksWithContextPrompt(
+        prompt: String,
+        excludedTaskTypes: [TaskType]
+    ) async throws -> ImageBasedTask? {
+        if CommandLine.arguments.contains("--useMockData") {
+            return TestData.imageBasedTask
+        }
+        let languageLevel = UserDefaults().getLevelOfLanguage().rawValue
+        var excludedTasks = ""
+        if excludedTaskTypes != [] {
+            var typesArray: [String] = []
+            
+            for taskType in excludedTaskTypes {
+                typesArray.append(taskType.rawValue.description)
+            }
+            
+            excludedTasks = "exclude \(typesArray.split(separator: ","))"
+        }
+            
+        let newThread = try await openAiServiceHelper.service.createThread(parameters: CreateThreadParameters())
+        currentThreadID = newThread.id
+        
+        try await openAiServiceHelper.sendUserMessageToThread(message: "\(prompt) . create task prompts for it with the language level \(languageLevel).\(excludedTasks)", threadID: currentThreadID)
+
+        let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
+            assistantID: imageBasedAssistantID,
+            threadID: currentThreadID
+        )
+        
+        print("jsonStringResponse")
+        print(jsonStringResponse)
+        
+        if let jsonData = jsonStringResponse.data(using: .utf8) {
+            let decodedData = try JSONDecoder().decode(ImageBasedTask.self, from: jsonData)
+            return decodedData
+        }
+        
+        return nil
     }
     
     private func createThreadWithImage(imageUrl: String, prompt: String) async throws -> ThreadResponse {

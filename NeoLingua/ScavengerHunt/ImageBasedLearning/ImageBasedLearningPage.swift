@@ -15,68 +15,53 @@ struct ImageBasedLearningPage: View {
                     
                     if viewModel.state == .imageSelected {
                         VStack {
-                            ForEach(TaskType.allCases, id: \.self) { taskType in
-                                Toggle(isOn: Binding(
-                                    get: { !viewModel.excludedTaskType.contains(taskType) },
-                                    set: { isSelected in
-                                        if isSelected {
-                                            viewModel.excludedTaskType.removeAll { $0 == taskType }
-                                        } else {
-                                            viewModel.excludedTaskType.append(taskType)
-                                        }
-                                    }
-                                )) {
-                                    Text(taskType.rawValue)
-                                }
-                            }
+                            taskSelection
                             
-                            Button("analyze Image")
-                            {
+                            Button("analyze Image"){
                                 Task {
                                     await viewModel.analyzeImage()
                                 }
                             }
                         }
                     }
-                    
+                }
+                if let imageBasedTask = viewModel.imageBasedTask {
                     VStack {
-                        if let imageBasedTask = viewModel.imageBasedTask {
-                            Text(viewModel.imageBasedTask?.title ?? "").font(.title)
-                            Text(viewModel.imageBasedTask?.description ?? "")
-                            
-                            if let vocabularyTraining = imageBasedTask.taskPrompt.vocabularyTraining {
-                                PrimaryButton(
-                                    title: "vocabularyTraining",
-                                    color: viewModel.userPerformance?.vocabularyTraining != nil ? .green : .brown,
-                                    action: {
-                                        router.push( .imageBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
-                                    }
-                                )
-                            }
-                            
-                            if let listeningComprehension = imageBasedTask.taskPrompt.listeningComprehension {
-                                PrimaryButton(
-                                    title: "listeningComprehension",
-                                    color: viewModel.userPerformance?.listeningComprehension != nil ? .green : .brown,
-                                    action: {
-                                        router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
-                                    }
-                                )
-                            }
-                            
-                            if let conversationSimulation = imageBasedTask.taskPrompt.conversationSimulation {
-                                PrimaryButton(
-                                    title: "conversationSimulation",
-                                    color: viewModel.userPerformance?.conversationSimulation != nil ? .green : .brown,
-                                    action: {
-                                        router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
-                                    }
-                                )
-                            }
+                        
+                        Text(viewModel.imageBasedTask?.title ?? "").font(.title)
+                        Text(viewModel.imageBasedTask?.description ?? "")
+                        
+                        if let vocabularyTraining = imageBasedTask.taskPrompt.vocabularyTraining {
+                            PrimaryButton(
+                                title: "vocabularyTraining",
+                                color: viewModel.userPerformance?.vocabularyTraining != nil ? .green : .brown,
+                                action: {
+                                    router.push( .imageBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
+                                }
+                            )
+                        }
+                        
+                        if let listeningComprehension = imageBasedTask.taskPrompt.listeningComprehension {
+                            PrimaryButton(
+                                title: "listeningComprehension",
+                                color: viewModel.userPerformance?.listeningComprehension != nil ? .green : .brown,
+                                action: {
+                                    router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
+                                }
+                            )
+                        }
+                        
+                        if let conversationSimulation = imageBasedTask.taskPrompt.conversationSimulation {
+                            PrimaryButton(
+                                title: "conversationSimulation",
+                                color: viewModel.userPerformance?.conversationSimulation != nil ? .green : .brown,
+                                action: {
+                                    router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
+                                }
+                            )
                         }
                     }
                 }
-                
                 if viewModel.state == .initialState {
                     VStack {
                         PhotosPicker(
@@ -101,22 +86,37 @@ struct ImageBasedLearningPage: View {
                                 .background(.black)
                         }
                     }
+                    VStack {
+                        Text("enter a prompt to create tasks")
+                        TextField("Prompt", text: $viewModel.promptText, axis: .vertical)
+                            .lineLimit(2...)
+                            .textFieldStyle(.roundedBorder)
+                            .padding()
+                        taskSelection
+                        Button("create tasks") {
+                            Task {
+                                await viewModel.createTasksWithPrompt()
+                            }
+                        }
+                    }
                 }
                 
             }
             Spacer()
             if viewModel.areAllTaskDone {
                 VStack {
-                    SecondaryButton(
-                        title: "share your image with other",
-                        color: .blue,
-                        action: {
-                            if let sharedImageForTask = viewModel.sharedImageForTask {
-                                router.push(.shareImageForTaskPage(sharedImageForTask))
+                    if viewModel.selectedImage != nil {
+                        SecondaryButton(
+                            title: "share your image with other",
+                            color: .blue,
+                            action: {
+                                if let sharedImageForTask = viewModel.sharedImageForTask {
+                                    router.push(.shareImageForTaskPage(sharedImageForTask))
+                                }
+                                return nil
                             }
-                            return nil
-                        }
-                    )
+                        )
+                    }
                     PrimaryButton(
                         title: "back to menu",
                         color: .blue,
@@ -137,6 +137,26 @@ struct ImageBasedLearningPage: View {
         .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
+        }
+    }
+    
+    @ViewBuilder
+    private var taskSelection: some View {
+        VStack {
+            ForEach(TaskType.allCases, id: \.self) { taskType in
+                Toggle(isOn: Binding(
+                    get: { !viewModel.excludedTaskType.contains(taskType) },
+                    set: { isSelected in
+                        if isSelected {
+                            viewModel.excludedTaskType.removeAll { $0 == taskType }
+                        } else {
+                            viewModel.excludedTaskType.append(taskType)
+                        }
+                    }
+                )) {
+                    Text(taskType.rawValue)
+                }
+            }
         }
     }
 }
