@@ -112,22 +112,25 @@ class TestData {
         EvaluatedQuestion(
             id: "q1",
             question: "What is the capital of France?",
-            isAnswerRight: true,
-            rightAnswer: "Paris",
+            isAnswerRight: true, 
+            hasWarnings: true,
+            sampleAnswer: "Paris",
             suggestions: ["Paris", "London", "Berlin"]
         ),
         EvaluatedQuestion(
             id: "q2",
             question: "What is 2 + 2?",
-            isAnswerRight: true,
-            rightAnswer: "4",
+            isAnswerRight: true, 
+            hasWarnings: false,
+            sampleAnswer: "4",
             suggestions: ["3", "4", "5"]
         ),
         EvaluatedQuestion(
             id: "q3",
             question: "What is the largest ocean?",
             isAnswerRight: false,
-            rightAnswer: "Pacific",
+            hasWarnings: false,
+            sampleAnswer: "Pacific",
             suggestions: ["Atlantic", "Indian", "Pacific"]
         )
     ])

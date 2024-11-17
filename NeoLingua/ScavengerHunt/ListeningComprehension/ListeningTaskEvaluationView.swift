@@ -9,6 +9,7 @@ struct EvaluatedQuestionView: View {
             HStack {
                 Text(question.question).font(.headline)
                 Text(question.isAnswerRight ? "✅" : "❌")
+                Text(question.hasWarnings ? "⚠️" : "")
                 Spacer()
                 Button(action: {
                     withAnimation {
@@ -18,15 +19,12 @@ struct EvaluatedQuestionView: View {
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                         .foregroundColor(.blue)
                         
-                }.if(question.isAnswerRight, transform: {
-                    view in
-                    view.hidden()
-                })
+                }
             }.padding()
             
             if isExpanded {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Correct Answer: \(question.rightAnswer ?? "N/A")")
+                    Text("Sample answer: \(question.sampleAnswer ?? "")")
                         .foregroundColor(question.isAnswerRight ? .green : .red)
                     
                     Text("Suggestions:")

@@ -46,7 +46,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
             )
             try await taskProcessManager.updateTaskLocationImageState(
                 locationId: taskLocation.id,
-                result: imageValidationResult?.isMatching ?? false, 
+                result: imageValidationResult?.isMatching ?? false,
                 numberOfAttempts: numberOfAttempts
             )
             if imageValidationResult?.isMatching == false {

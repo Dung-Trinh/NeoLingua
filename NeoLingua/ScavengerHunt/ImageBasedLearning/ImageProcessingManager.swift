@@ -90,8 +90,8 @@ class ImageProcessingManager {
             return TestData.imageValidationResult
         }
         
-        let prompt = "is this object on the following image: \(searchedObject)"
-        let newThread = try await createThreadWithImage(imageUrl: imageUrl, prompt: searchedObject)
+        let prompt = "ValidateDescriptionWithImage: is this object on the following image: \(searchedObject)"
+        let newThread = try await createThreadWithImage(imageUrl: imageUrl, prompt: prompt)
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
             assistantID: imageAnalyser,
             threadID: newThread.id
@@ -298,6 +298,7 @@ struct InspectImageForVocabularyResult: Codable {
     let foundSearchedVocabulary: Bool
     let result: EvaluationStatus
     let correctedText: String?
+    let points: Double?
 }
 
 enum EvaluationStatus: String, Codable {

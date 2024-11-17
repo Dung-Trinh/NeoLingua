@@ -19,7 +19,6 @@ protocol VocabularyTaskProtocol {
     var question: String { get }
     var answer: String { get }
     var translation: String { get }
-    var sentenceComponents: [String]? { get }
     var selectableWords: [String]? { get }
 }
 
@@ -34,7 +33,6 @@ class VocabularyTask: Codable, VocabularyTaskProtocol {
     let question: String
     let answer: String
     let translation: String
-    var sentenceComponents: [String]?
     var selectableWords: [String]?
     
     init(
@@ -43,7 +41,6 @@ class VocabularyTask: Codable, VocabularyTaskProtocol {
         question: String,
         answer: String,
         translation: String,
-        sentenceComponents: [String]?,
         selectableWords: [String]?
     ) {
         self.id = id
@@ -51,7 +48,6 @@ class VocabularyTask: Codable, VocabularyTaskProtocol {
         self.question = question
         self.answer = answer
         self.translation = translation
-        self.sentenceComponents = sentenceComponents
         self.selectableWords = selectableWords
     }
 }
@@ -98,17 +94,16 @@ class SentenceBuildingExercise: VocabularyExercise {
     var question: String
     var answer: String
     var translation: String
-    let sentenceComponents: [String]
+    var sentenceComponents: [String]
     
     init(
         id: String,
         type: VocabularyTaskType,
         question: String,
         answer: String,
-        translation: String,
-        sentenceComponents: [String]
+        translation: String
     ) {
-        self.sentenceComponents = sentenceComponents
+        self.sentenceComponents = answer.split(separator: " ").map { String($0) }.shuffled()
         self.id = id
         self.type = type
         self.question = question

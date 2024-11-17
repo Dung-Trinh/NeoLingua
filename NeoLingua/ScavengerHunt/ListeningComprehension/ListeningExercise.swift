@@ -14,7 +14,8 @@ struct EvaluatedQuestion: Codable {
     let id: String
     let question: String
     let isAnswerRight: Bool
-    let rightAnswer: String?
+    let hasWarnings: Bool
+    let sampleAnswer: String
     let suggestions: [String]
 }
 

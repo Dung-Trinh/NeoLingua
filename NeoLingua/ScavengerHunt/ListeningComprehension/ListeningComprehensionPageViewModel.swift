@@ -58,6 +58,9 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     }
     
     func evaluateQuestions() async {
+        isLoading = true
+        defer { isLoading = false }
+        
         var userInputs: [String] = []
         exercise?.listeningQuestions.enumerated().forEach { (index, question) in
             if answers.count > index {

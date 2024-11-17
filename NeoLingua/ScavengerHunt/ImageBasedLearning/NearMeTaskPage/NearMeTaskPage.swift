@@ -14,13 +14,15 @@ struct NearMeTaskPage: View {
                     .foregroundColor(.gray)
                 AsyncImageView(imageUrl: viewModel.sharedImageTask.imageUrl).frame(maxWidth: .infinity, maxHeight: 300)
                 
-                if viewModel.result?.result != .wrong &&  viewModel.result?.foundSearchedVocabulary == true {
-                    TextField("In the picture I see ...", text: $viewModel.userInput)
+                    TextField("In the picture I see ...", text: $viewModel.userInput, axis: .vertical)
                         .lineLimit(2...4)
                         .textFieldStyle(.roundedBorder)
-                }
+                
                 if let result = viewModel.result {
                     InspectImageResultView(resultData: result, searchedVocabulary: viewModel.sharedImageTask.vocabulary, lastUserInput: viewModel.lastUserInput)
+                    if result.foundSearchedVocabulary {
+                        Text("your points: \(viewModel.finalPoints)")
+                    }
                 }
                 
                 if viewModel.showHintButton {
@@ -50,7 +52,7 @@ struct NearMeTaskPage: View {
                         .foregroundColor(.red)
                 }
                 VStack {
-                    if viewModel.result?.result != .wrong &&  viewModel.result?.foundSearchedVocabulary == true {
+                    if  viewModel.result?.foundSearchedVocabulary == true {
                         PrimaryButton(
                             title: "back to overview",
                             color: .blue,
@@ -82,7 +84,7 @@ struct InspectImageResultView: View {
                     Text(searchedVocabulary.joined(separator: ","))
                         .font(.body)
                 } else {
-                    Text("⚠️unfortunately there is no vocabulary in the text").font(.headline)
+                    Text("⚠️unfortunately there is non of the searched vocabulary in the text").font(.headline)
                 }
             }
             

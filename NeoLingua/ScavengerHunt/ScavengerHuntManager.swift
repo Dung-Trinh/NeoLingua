@@ -16,7 +16,7 @@ struct Location: Codable, Hashable{
 }
 
 struct TaskLocation: Codable, Identifiable, Equatable {
-    let id: String
+    let id: String = UUID().uuidString
     let name: String
     let type: String
     let location: Location
@@ -26,7 +26,6 @@ struct TaskLocation: Codable, Identifiable, Equatable {
     var performance: LocationTaskPerformance? = nil
     
     init(name: String, type: String, location: Location, taskPrompt: TaskPrompt, photoClue: String, photoObject: String) {
-        self.id = UUID().uuidString
         self.name = name
         self.type = type
         self.location = location

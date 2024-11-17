@@ -8,7 +8,7 @@ class VocabularyManager {
     var threadID = ""
     
     func getDetailedFeedback(userInput: String, taskId: String) async  throws -> String {
-        let prompt = "explain in detail why this answer is wrong for the following task. user input: \(userInput), id: \(taskId)"
+        let prompt = "explain in detail why this answer is wrong for the following task with the taskId: \(taskId). user input: \"\"\"\(userInput)\"\"\""
         try await openAiServiceHelper.sendUserMessageToThread(message: prompt, threadID: threadID)
         
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
@@ -75,17 +75,15 @@ class VocabularyManager {
                 exercises.append(fillInTheBlanksTask)
                 
             case .sentenceAssembly:
-                if let components = task.sentenceComponents {
-                    let sentenceTask = SentenceBuildingExercise(
-                        id: task.id,
-                        type: task.type,
-                        question: task.question,
-                        answer: task.answer,
-                        translation: task.translation,
-                        sentenceComponents: task.sentenceComponents ?? []
-                    )
-                    exercises.append(sentenceTask)
-                }
+                let sentenceTask = SentenceBuildingExercise(
+                    id: task.id,
+                    type: task.type,
+                    question: task.question,
+                    answer: task.answer,
+                    translation: task.translation
+                )
+                exercises.append(sentenceTask)
+                
                 
             case .multipleChoice:
                 if let words = task.selectableWords {

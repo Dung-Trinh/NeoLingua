@@ -27,17 +27,18 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     
     func fetchScavengerHunt() async {
         isLoading = true
-        
+        defer { isLoading = false }
+
         switch scavengerHuntType {
         case .generatedNearMe:
             await generateScavengerHuntNearMe()
         case .competitiveMode:
             await fetchCompetitiveScavengerHunts()
         }
-        isLoading = false
     }
     
     func generateScavengerHuntNearMe() async {
+        print("generateScavengerHuntNearMe")
         do {
             currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe()
             try await setupscavengerHunt()

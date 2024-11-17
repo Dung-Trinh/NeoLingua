@@ -62,6 +62,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             userFeedbackText = "Falsch. Die richtige Antwort ist: \(answer)"
         }
 
+        let showDetailedFeedbackButton = currentTask?.type == .sentenceAssembly && isAnswerCorrect == false
         sheetViewModel = ResultSheetViewModel(
             result: isAnswerCorrect ? .correct : .incorrect,
             text: userFeedbackText,
@@ -73,7 +74,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
                     await self.getDetailedFeedback()
                 }
             },
-            showDetailedFeedbackButton: currentTask?.type == .sentenceAssembly
+            showDetailedFeedbackButton: showDetailedFeedbackButton
         )
         isSheetPresented = true
     }

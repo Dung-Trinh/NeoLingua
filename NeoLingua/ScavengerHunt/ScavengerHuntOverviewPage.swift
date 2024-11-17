@@ -59,8 +59,8 @@ struct ScavengerHuntOverviewPage: View {
             }.onAppear {
                 Task {
                     if initialAppearance == false {
-                        await viewModel.fetchScavengerHunt()
                         initialAppearance = true
+                        await viewModel.fetchScavengerHunt()
                     } else {
                         await viewModel.updateScavengerHuntState()
                     }
