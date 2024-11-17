@@ -36,7 +36,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
             print("Location authorizedAlways")
             
         case .authorizedWhenInUse://This authorization allows you to use all location services and receive location events only when your app is in use
-            print("Location authorized when in use")
             lastKnownLocation = manager.location?.coordinate
             
         @unknown default:
@@ -67,31 +66,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
         print("Failed to get users location.")
     }
     
-    func fetchNearbyPlaces(location: CLLocation?) async throws -> [Place] {
-        let apiKey = ProdENV().GOOGLE_MAPS_KEY
-        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-        
-        let parameters: [String: Any] = [
-            "location": "\(50.083163852799835),\(8.245660299715162)",
-            "radius": 1000,
-            "type": "point_of_interest",
-            "key": apiKey
-        ]
-        
-        return try await withCheckedThrowingContinuation { continuation in
-            AF.request(urlString, method: .get, parameters: parameters).responseDecodable(of: PlacesResponse.self) { response in
-                switch response.result {
-                case .success(let placesResponse):
-                    print("nearbysearch success")
-                    continuation.resume(returning: placesResponse.results)
-                case .failure(let error):
-                    print("nearbysearch err")
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
-    }
-    
     func checkIfWithinRadius(currentLocation: CLLocation, targetLocation: CLLocation, radius: Double) -> Bool {
         let distanceInMeters = currentLocation.distance(from: targetLocation)
         
@@ -101,13 +75,4 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
     func checkIfLocationIsNearby(_ currentLocation: TaskLocation) -> Bool {
         return nearbyTaskLocation.contains(currentLocation)
     }
-}
-
-struct Place: Codable {
-    let name: String
-    let vicinity: String
-}
-
-struct PlacesResponse: Codable {
-    let results: [Place]
 }

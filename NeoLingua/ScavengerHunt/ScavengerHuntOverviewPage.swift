@@ -17,7 +17,7 @@ struct ScavengerHuntOverviewPage: View {
                         Button(scavengerHunt.title) {
                             viewModel.currentScavengerHunt = scavengerHunt
                             Task {
-                                await try? viewModel.setupscavengerHunt()
+                                try? await viewModel.setupscavengerHunt()
                             }
                         }
                     }

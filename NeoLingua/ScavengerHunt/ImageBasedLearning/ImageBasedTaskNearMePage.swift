@@ -39,9 +39,7 @@ struct ImageBasedTaskNearMePage: View {
                 .frame(maxWidth: geometry.size.width * 0.9)
             }
         }
-        .onAppear{
-            viewModel.fetchImageBasedTaskNearMe()
-        }
+        .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
         .sheet(isPresented: $viewModel.isPresented, content: {
             VStack {
                 if let sharedImageTask = viewModel.sharedImageTask{
