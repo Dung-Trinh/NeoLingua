@@ -29,6 +29,8 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     private var anyCancellables = Set<AnyCancellable>()
     private var taskProcessManager = TaskProcessManager.shared
     private var points = 0
+    var finalPoints: Double = 0
+    var scorePercentage: Double = 0
     init(
         prompt: String,
         router: Router
@@ -89,8 +91,9 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             userInputText = ""
         } else {
             Task {
-                let finalPoints =  Double(points) / Double(points)
-                let parameter = TaskPerformancetParameter(result: finalPoints, isDone: true)
+                scorePercentage =  Double(points) / Double(tasks.count)
+                finalPoints = scorePercentage * 15
+                let parameter = TaskPerformancetParameter(result: scorePercentage, isDone: true)
                 if isScavengerHuntMode {
                     try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .vocabularyTraining)
                 } else {

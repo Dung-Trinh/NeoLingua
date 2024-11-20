@@ -64,6 +64,7 @@
 		B6401FEC2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */; };
 		B64FA86E2CE39F840088A911 /* NearMeTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FA86D2CE39F840088A911 /* NearMeTaskPage.swift */; };
 		B64FA8702CE39FE30088A911 /* NearMeTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64FA86F2CE39FE30088A911 /* NearMeTaskPageViewModel.swift */; };
+		B651354E2CEC90C300ABBF09 /* firework.json in Resources */ = {isa = PBXBuildFile; fileRef = B651354D2CEC90C300ABBF09 /* firework.json */; };
 		B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */; };
 		B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */; };
 		B6595B702CD0E1BF004816E8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B6595B6F2CD0E1BF004816E8 /* Alamofire */; };
@@ -83,6 +84,7 @@
 		B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562022CC5396A0008C05C /* ListeningExercise.swift */; };
 		B6ADD6DD2CDE2DA700572F66 /* UserStatsDashboardPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */; };
 		B6ADD6E02CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */; };
+		B6B8ACA12CEC1CE0008D9EF7 /* crossmark.json in Resources */ = {isa = PBXBuildFile; fileRef = B6B8ACA02CEC1CDF008D9EF7 /* crossmark.json */; };
 		B6DA53992CE0E55200EE26C3 /* ProgressIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = B6DA53982CE0E55200EE26C3 /* ProgressIndicatorView */; };
 		B6DA539C2CE15E7600EE26C3 /* TaskTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */; };
 		B6DA539F2CE160DD00EE26C3 /* ChallengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */; };
@@ -210,6 +212,7 @@
 		B6401FEB2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationEvaluationView.swift; sourceTree = "<group>"; };
 		B64FA86D2CE39F840088A911 /* NearMeTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeTaskPage.swift; sourceTree = "<group>"; };
 		B64FA86F2CE39FE30088A911 /* NearMeTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeTaskPageViewModel.swift; sourceTree = "<group>"; };
+		B651354D2CEC90C300ABBF09 /* firework.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = firework.json; sourceTree = "<group>"; };
 		B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTaskEvaluationView.swift; sourceTree = "<group>"; };
 		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
 		B6595B712CD0EB37004816E8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 		B6A562042CC56B070008C05C /* Wiesbaden2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wiesbaden2.gpx; sourceTree = "<group>"; };
 		B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPage.swift; sourceTree = "<group>"; };
 		B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPageViewModel.swift; sourceTree = "<group>"; };
+		B6B8ACA02CEC1CDF008D9EF7 /* crossmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = crossmark.json; sourceTree = "<group>"; };
 		B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTile.swift; sourceTree = "<group>"; };
 		B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePage.swift; sourceTree = "<group>"; };
 		B6DA53A02CE160EE00EE26C3 /* ChallengePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePageViewModel.swift; sourceTree = "<group>"; };
@@ -401,6 +405,7 @@
 		B60F8ABC2CBAB7CF00268D75 /* VocabularyTask */ = {
 			isa = PBXGroup;
 			children = (
+				B651354D2CEC90C300ABBF09 /* firework.json */,
 				B60F8ACA2CBC854000268D75 /* SentenceBuildingView.swift */,
 				B60F8ABD2CBAB7ED00268D75 /* WriteVocabularyView.swift */,
 				B60F8ACC2CBC8AF800268D75 /* VocabularyTraining.swift */,
@@ -415,6 +420,7 @@
 		B60F8ABF2CBAB81300268D75 /* ResultSheet */ = {
 			isa = PBXGroup;
 			children = (
+				B6B8ACA02CEC1CDF008D9EF7 /* crossmark.json */,
 				B60F8AC02CBAB82100268D75 /* ResultSheetView.swift */,
 				B60F8AC22CBAB84F00268D75 /* ResultSheetViewModel.swift */,
 			);
@@ -480,6 +486,13 @@
 				B64FA86F2CE39FE30088A911 /* NearMeTaskPageViewModel.swift */,
 			);
 			path = NearMeTaskPage;
+			sourceTree = "<group>";
+		};
+		B651354C2CEC90B500ABBF09 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 		B68ECA452CDA588500DDD17D /* Leaderboard */ = {
@@ -596,6 +609,7 @@
 		B6FA77DA2CA41A9E00C52F73 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B651354C2CEC90B500ABBF09 /* Animation */,
 				B6FA77DB2CA41AAD00C52F73 /* Styleguide.swift */,
 				B6FA77DD2CA41AC600C52F73 /* ViewExtension.swift */,
 				B6FA77DF2CA41ADB00C52F73 /* Router.swift */,
@@ -807,6 +821,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6FED3C32C70B3C200339B7C /* Preview Assets.xcassets in Resources */,
+				B651354E2CEC90C300ABBF09 /* firework.json in Resources */,
+				B6B8ACA12CEC1CE0008D9EF7 /* crossmark.json in Resources */,
 				B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */,
 				B6FED3C02C70B3C200339B7C /* Assets.xcassets in Resources */,
 				B60F8AA92CB5DDF000268D75 /* checkAnimation.json in Resources */,

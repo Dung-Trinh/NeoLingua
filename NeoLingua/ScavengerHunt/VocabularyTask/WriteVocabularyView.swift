@@ -6,7 +6,7 @@ struct WriteVocabularyView: View {
     
     var body: some View {
         VStack(spacing: Styleguide.Margin.medium) {
-            Text("ⓘ Fill in the blanks to complete the sentence.")
+            InfoCardView(message: "Fill in the blanks to complete the sentence.").padding(.bottom, Styleguide.Margin.small)
             Text(exercise.question)
             VStack {
                 Text("Translation:")

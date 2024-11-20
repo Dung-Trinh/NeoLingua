@@ -9,21 +9,21 @@ struct PageHeader: View {
         HStack() {
             VStack(alignment: textAlignment) {
                 Text(title)
-                    .font(.title)
+                    .font(.title).bold()
                     .foregroundColor(.black)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                     .if(textAlignment == .center, transform: { view in
                         view.frame(maxWidth: .infinity, alignment: .center)
                     })
                 Text(subtitle)
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                     .if(textAlignment == .center, transform: { view in
                         view.frame(maxWidth: .infinity, alignment: .center)
                     })
             }
             Spacer()
-        }.padding(.bottom, Styleguide.Margin.medium)
+        }
     }
 }

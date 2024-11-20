@@ -8,8 +8,10 @@ struct ScavengerHuntMap: View {
     @State var zoomInCenter: Bool = false
     @State var expandList: Bool = false
     @State var yDragTranslation: CGFloat = 0
+    @State var showHelpSheet = false
+
     let scrollViewHeight: CGFloat = 80
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
@@ -55,6 +57,19 @@ struct ScavengerHuntMap: View {
                     self.yDragTranslation = 0
                 }
             )
+            }
+            .navigationTitle("Scavenger hunt map")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Need help?") {
+                        showHelpSheet = true
+                    }.sheet(isPresented: $showHelpSheet) {
+                        ScavengerHuntHelpView()
+                            .presentationDetents([.fraction(0.8)])
+                            .presentationCornerRadius(40)
+                    }
+                }
             }
         }
         .onAppear {
@@ -140,11 +155,15 @@ struct TaskLocationList: View {
                     }header: {
                         Text("Task location")
                     } footer: {
-                        Text("ℹ️ = Annäherung an das Objekt erforderlich, 📋 = Aufgaben stehen bereit")
+                        VStack(alignment: .leading, spacing: Styleguide.Margin.small) {
+                            Text("ℹ️ = Annäherung an das Objekt erforderlich")
+                            Text("📋 = Aufgaben stehen bereit")
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity,maxHeight: 300)
             }
+            .background(Color(.systemGray6))
             .onAppear{
                 locationManager.taskLocations = taskLocation
             }

@@ -77,4 +77,15 @@ enum TaskType: String, CaseIterable, Codable {
     case vocabularyTraining = "vocabularyTraining"
     case listeningComprehension = "listeningComprehension"
     case conversationSimulation = "conversationSimulation"
+    
+    var localizedText: String {
+            switch self {
+            case .vocabularyTraining:
+                return "Vokabelübung"
+            case .listeningComprehension:
+                return "Hörverständnis"
+            case .conversationSimulation:
+                return "Gesprächssimulation"
+            }
+        }
 }

@@ -2,18 +2,7 @@
   "images" : [
     {
       "filename" : "AdobeStock_671923740.jpeg",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "AdobeStock_671923740 1.jpeg",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "AdobeStock_671923740 2.jpeg",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "universal"
     }
   ],
   "info" : {
