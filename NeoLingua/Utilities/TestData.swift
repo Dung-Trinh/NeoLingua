@@ -67,19 +67,19 @@ class TestData {
                 photoClue: "Seek something known for 'luck' in the vicinity. This item shines bright.",
                 photoObject: "Casino Signage"
             ),
-            TaskLocation(
-                name: "Bowling Green, Wiesbaden",
-                type: "park",
-                location: Location(latitude: 50.0847005, longitude: 8.2457267),
-                taskPrompt: TaskPrompt(
-                    vocabularyTraining: "Develop vocabulary exercises that emphasize the natural environment at Bowling Green, including words such as 'fountain', 'lawn', 'bench', and 'statue'.",
-                    listeningComprehension: "Create a listening comprehension task where someone describes a relaxing afternoon spent at Bowling Green, Wiesbaden.",
-                    conversationSimulation: "Location: Park. A conversation between friends planning a picnic and discussing their favorite spots in the park."
-                    
-                ),
-                photoClue: "Find the symbol of tranquility, where water flows endlessly.",
-                photoObject: "Fountain"
-            )
+//            TaskLocation(
+//                name: "Bowling Green, Wiesbaden",
+//                type: "park",
+//                location: Location(latitude: 50.0847005, longitude: 8.2457267),
+//                taskPrompt: TaskPrompt(
+//                    vocabularyTraining: "Develop vocabulary exercises that emphasize the natural environment at Bowling Green, including words such as 'fountain', 'lawn', 'bench', and 'statue'.",
+//                    listeningComprehension: "Create a listening comprehension task where someone describes a relaxing afternoon spent at Bowling Green, Wiesbaden.",
+//                    conversationSimulation: "Location: Park. A conversation between friends planning a picnic and discussing their favorite spots in the park."
+//                    
+//                ),
+//                photoClue: "Find the symbol of tranquility, where water flows endlessly.",
+//                photoObject: "Fountain"
+//            )
         ]
     )
     static let imageBasedTask: ImageBasedTask = ImageBasedTask(

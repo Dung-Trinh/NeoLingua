@@ -7,12 +7,14 @@ protocol ListeningComprehensionPageViewModel: ObservableObject {
 
 class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewModel {
     @Published var isLoading = false
+    @Published var isSheetPresented = false
     @Published var userInput = ""
     @Published var answers: [String] = []
     @Published var audioPlayer = AudioPlayer()
     @Published var exercise: ListeningExercise?
     @Published var evaluation: ListeningTaskEvaluation?
     @Published var evaluatedQuestion: [EvaluatedQuestion] = []
+    @Published var taskPerformance: TaskPerformancetParameter?
 
     let prompt: String
     var isScavengerHuntMode: Bool = false
@@ -80,7 +82,10 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
             }
             
             let points = evaluation.getScorePercentage()
-            let parameter = TaskPerformancetParameter(result: points, isDone: true)
+            let parameter = TaskPerformancetParameter(result: points, isDone: true, finalPoints: points)
+            taskPerformance = parameter
+            isSheetPresented = true
+
             print(points)
             if isScavengerHuntMode {
                 try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .listeningComprehension)

@@ -63,14 +63,17 @@ struct ScavengerHuntOverviewPage: View {
                     }
                     
                     if viewModel.currentScavengerHunt?.isHuntComplete() == true {
-                        Button("show final result") {
-                            Task {
-                                await viewModel.showFinalResult()
+                        Spacer()
+                        PrimaryButton(
+                            title: "Show final result",
+                            color: .blue,
+                            action: {
+                                Task {
+                                    await viewModel.showFinalResult()
+                                }
                             }
-                        }
+                        )
                     }
-                    
-                    
                 }
             }
             .padding()

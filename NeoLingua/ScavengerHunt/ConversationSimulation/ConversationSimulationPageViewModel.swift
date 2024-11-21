@@ -32,10 +32,12 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var audioPlayer = AudioPlayer()
     @Published var conversationState: ConversationState = .start
     @Published var conversationEvaluation: ConversationEvaluation?
-    @Published var isSheetPresented = false
+    @Published var isEvaluationSheetPresented = false
     @Published var selectedMode: ConversationInputMode = .speech
     @Published var selectedRole: RoleOption?
     @Published var isLoading: Bool = false
+    @Published var taskPerformance: TaskPerformancetParameter?
+    @Published var isResultSheetPresented = false
 
     let prompt: String
     private var taskProcessManager = TaskProcessManager.shared
@@ -127,9 +129,9 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
             let result = try await conversationSimulationManager.fetchEvaluation()
             conversationEvaluation = result
             conversationState = .evaluation
-            
-            let parameter = TaskPerformancetParameter(result: Double((conversationEvaluation?.rating ?? 0) / 10),isDone: true)
-            
+            let finalPoints = (Double((conversationEvaluation?.rating ?? 0) / 10)) * 40
+            let parameter = TaskPerformancetParameter(result: Double((conversationEvaluation?.rating ?? 0) / 10),isDone: true, finalPoints: finalPoints)
+            taskPerformance = parameter
             if isScavengerHuntMode {
                 try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .conversationSimulation)
             } else {
@@ -137,7 +139,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
             }
             
             isLoading = false
-            isSheetPresented = true
+            isEvaluationSheetPresented = true
         } catch {
             print("getConversationEvaluation() error: ", error.localizedDescription)
         }

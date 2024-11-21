@@ -1,6 +1,7 @@
 import SwiftUI
 import ActivityIndicatorView
 import _PhotosUI_SwiftUI
+import Lottie
 
 struct TaskLocationPage: View {
     @EnvironmentObject private var router: Router
@@ -59,32 +60,40 @@ struct TaskLocationPage: View {
             }
             Spacer()
             if location.performance?.performance.isTaskDone() == true {
-            VStack(alignment: .center) {
-                Text("Hint for the object").font(.subheadline).bold().multilineTextAlignment(.center)
-                Text(location.photoClue).multilineTextAlignment(.center)
-                PhotosPicker(
-                    selection: $viewModel.selectedPhotos,
-                    maxSelectionCount: 1,
-                    selectionBehavior: .ordered,
-                    matching: .images
-                ) {
-                    (Text(Image(systemName: "photo")) + Text("Select the image"))
-                }.onChange(of: viewModel.selectedPhotos) {
-                    viewModel.convertDataToImage()
+//            if true {
+                VStack(alignment: .center, spacing: Styleguide.Margin.medium) {
+                VStack {
+                    InfoCardView(
+                        title: "Hint for the object",
+                        message: location.photoClue,
+                        type: .hint
+                    )
                 }
-                Text("or")
-                Button(action: {
-                    viewModel.showCamera.toggle()
-                }, label: {
-                    Label("Open Camera", systemImage: "camera.fill")
-                }).fullScreenCover(isPresented: $viewModel.showCamera) {
-                    CameraView(selectedImage: $viewModel.selectedImage)
-                        .background(.black)
-                }
+                    HStack {
+                        PhotosPicker(
+                            selection: $viewModel.selectedPhotos,
+                            maxSelectionCount: 1,
+                            selectionBehavior: .ordered,
+                            matching: .images
+                        ) {
+                            (Text(Image(systemName: "photo")) + Text("Select the image"))
+                        }.onChange(of: viewModel.selectedPhotos) {
+                            viewModel.convertDataToImage()
+                        }
+                        Text("or")
+                        Button(action: {
+                            viewModel.showCamera.toggle()
+                        }, label: {
+                            Label("Open Camera", systemImage: "camera.fill")
+                        }).fullScreenCover(isPresented: $viewModel.showCamera) {
+                            CameraView(selectedImage: $viewModel.selectedImage)
+                                .background(.black)
+                        }
+                    }
             }
             if viewModel.selectedImage != nil {
                 PrimaryButton(
-                    title: "verify the image",
+                    title: "Verify the image",
                     color: .blue,
                     action: {
                         Task {
@@ -114,11 +123,19 @@ struct TaskLocationPage: View {
                 VStack {
                     ImageValidationResultView(validationResult: imageValidationResult)
                     if(imageValidationResult.isMatching) {
-                        Button("back to map") {
-                            router.navigateBack()
-                        }
+                        Spacer()
+                        PrimaryButton(
+                            title: "Back to map",
+                            color: .blue,
+                            action: {
+                                router.navigateBack()
+                            }
+                        )
                     }
-                }.presentationDetents([.fraction(0.50)])
+                }
+                .padding()
+                .presentationDetents([.fraction(0.60)])
+                .presentationCornerRadius(40)
             }
         }
     }
@@ -129,39 +146,38 @@ struct ImageValidationResultView: View {
     
     var body: some View {
         VStack {
-            Text("Result")
-                .font(.title)
-                .bold()
-            
-            Image(systemName: validationResult.isMatching ? "checkmark.circle.fill" : "xmark.circle.fill")
-                .resizable()
-                .foregroundColor(validationResult.isMatching ? .green : .red)
-                .frame(width: 50, height: 50)
-            
-            Text(validationResult.isMatching ? "The image matches the searched object!" : "The image does not match the searched object.")
-                .font(.headline)
-                .foregroundColor(validationResult.isMatching ? .green : .red)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, Styleguide.Margin.small)
-            
-            VStack(alignment: .center, spacing: 10) {
-                Text("Reason:")
-                    .font(.subheadline)
+            LottieView(animation: .named(validationResult.isMatching ? "firework": "crossmark"))
+                .looping()
+                .frame(width: .infinity, height: 200)
+                .padding(-30)
+
+                Text(validationResult.isMatching ? "The image matches the searched object!" : "The image does not match the searched object.")
+                    .font(.title3)
                     .bold()
-                
-                Text(validationResult.reason)
-                    .font(.body)
-                    .multilineTextAlignment(.leading)
-                    .padding(.horizontal)
-                
-                Text("Confidence Score:")
-                    .font(.subheadline)
-                    .bold()
-                Text("\(validationResult.confidenceScore * 100, specifier: "%.1f")%")
-                    .font(.body)
+                    .foregroundColor(validationResult.isMatching ? .green : .red)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, Styleguide.Margin.small)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                HStack() {
+                    Text("🎯 Confidence Score:")
+                        .font(.headline)
+                        .bold()
+                    Text("\(validationResult.confidenceScore * 100, specifier: "%.1f")%")
+                        .font(.subheadline)
+                }
+                VStack(alignment: .leading) {
+                    Text("🔎 Reason:")
+                        .font(.headline)
+                        .bold()
+                        .multilineTextAlignment(.leading)
+                    
+                    Text(validationResult.reason)
+                        .font(.subheadline)
+                        .multilineTextAlignment(.leading)
+                }
             }
             .padding()
         }
-        .padding()
     }
 }

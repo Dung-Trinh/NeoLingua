@@ -9,26 +9,21 @@ struct ConversationSimulationPage: View {
         VStack {
             if viewModel.conversationState == .contextDescription {
                 if let roleOptionsResponse = viewModel.roleOptionsResponse {
-                    Text("ⓘ Note on the task").bold()
-                    Text("Try to have a fluent and natural conversation. Integrate the task points into the dialog naturally.")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .padding(.bottom, Styleguide.Margin.small)
-                    
+                    InfoCardView(message: "Try to have a fluent and natural conversation. Integrate the task points into the dialog naturally.").padding(.bottom, Styleguide.Margin.large)
                     Text("Context").bold()
                     Text(roleOptionsResponse.contextDescription)
-                    Button("continue") {
+                    Button("Continue") {
                         viewModel.conversationState = .roleSelection
                         print(viewModel.conversationState)
                         print(viewModel.roleOptionsResponse)
-                    }
+                    }.buttonStyle(.bordered)
                 }
             }
             if viewModel.conversationState == .roleSelection {
                 VStack {
                     if let roleOptions = viewModel.roleOptionsResponse {
                         VStack {
-                            Text("Role Options").bold()
+                            Text("👤 Role Options").bold()
                             Text("Choose one of the following roles and fulfill the tasks in the conversation👇🏻").multilineTextAlignment(.center)
                         }.padding(.vertical, Styleguide.Margin.small)
                         HStack(alignment: .top, spacing: Styleguide.Margin.small) {
@@ -43,6 +38,7 @@ struct ConversationSimulationPage: View {
                                     .background(Color.blue)
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
+                                    Text("🗣️ Tasks").bold()
                                     ForEach(role.tasks, id: \.self) { task in
                                         VStack(alignment: .leading) {
                                             HStack(alignment: .top) {
@@ -60,8 +56,9 @@ struct ConversationSimulationPage: View {
             
             if viewModel.conversationState == .conversation || viewModel.conversationState == .evaluation {
                 if let selectedRole = viewModel.selectedRole {
-                    VStack(alignment: .center){
-                        Text(selectedRole.role)
+                    VStack(alignment: .leading){
+                        Text(.init("👤 **Role:** \(selectedRole.role)"))
+                        Text("🗣️ Tasks").bold()
                         ForEach(selectedRole.tasks, id: \.self) { task in
                             VStack(alignment: .leading) {
                                 HStack(alignment: .top) {
@@ -74,7 +71,7 @@ struct ConversationSimulationPage: View {
                 }
                 
                 if viewModel.audioPlayer.audioPlayer != nil {
-                    AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer)
+                    AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer).padding(.vertical, Styleguide.Margin.medium)
                 }
                 
                 Picker("Input Mode", selection: $viewModel.selectedMode) {
@@ -110,53 +107,65 @@ struct ConversationSimulationPage: View {
                         })
                 case .text:
                     TextField("Eingabe", text: $viewModel.messageText)
-                    Button("sendMessage") {
+                        .textFieldStyle(.roundedBorder)
+                    Button("send Message") {
                         Task {
                             await viewModel.sendMessage(message: viewModel.messageText)
                         }
-                    }.if(viewModel.conversationState == .evaluation, transform: { view in
-                        view.disabled(true)
-                    })
+                    }.buttonStyle(.bordered)
+                        .if(viewModel.conversationState == .evaluation, transform: { view in
+                            view.disabled(true)
+                        })
                 }
             }
-            
+            Spacer()
             if viewModel.conversationState == .evaluation {
-                Spacer()
                 PrimaryButton(
-                    title: "get evaluation",
+                    title: "Get evaluation",
                     color: .blue,
                     action: {
                         Task {
                             await viewModel.getConversationEvaluation()
                         }
-                })
+                    })
+                .sheet(isPresented: $viewModel.isEvaluationSheetPresented, onDismiss: {
+                    viewModel.isResultSheetPresented = true
+                }) {
+                    if let evaluation = viewModel.conversationEvaluation {
+                        VStack {
+                            ConversationEvaluationView(evaluation: evaluation)
+                            Spacer()
+                            PrimaryButton(
+                                title: "Schließen",
+                                color: .blue,
+                                action: {
+                                    viewModel.isEvaluationSheetPresented = false
+                                }
+                            )
+                        }
+                        .padding()
+                    }
+                }
             }
-            Spacer()
             if viewModel.isLoading {
                 ActivityIndicatorView(isVisible: .constant(true), type: .scalingDots(count: 3, inset: 2))
                     .frame(width: 50.0, height: 50.0)
                     .foregroundColor(.red)
             }
+            
         }
         .padding()
-        .sheet(isPresented: $viewModel.isSheetPresented,
-               onDismiss: {
-            router.navigateBack()
-        }) {
-            if let evaluation = viewModel.conversationEvaluation {
-                VStack {
-                    ConversationEvaluationView(evaluation: evaluation)
-                    Spacer()
-                    PrimaryButton(
-                        title: "back to task location",
-                        color: .blue,
-                        action: {
-                            router.navigateBack()
-                        }
-                    )
-                }.padding()
+        .sheet(isPresented: $viewModel.isResultSheetPresented) {
+            if let taskPerformance = viewModel.taskPerformance{
+                TaskCompleteSheetView(
+                    taskPerformance: taskPerformance,
+                    action: {
+                        router.navigateBack()
+                    }
+                )
             }
         }
+        .navigationTitle("Conversation Simulation")
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }

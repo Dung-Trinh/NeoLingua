@@ -51,16 +51,22 @@ struct TaskPerformancetParameter: Codable {
     let isDone: Bool?
     let result: Double
     let time: Double?
+    let finalPoints: Double?
     var amountOfErrors: Double?
     
     var resultPercentage: String {
         String(result * 100)
     }
     
-    init(result: Double = 0, time: Double? = nil, isDone: Bool? = nil) {
+    init(result: Double = 0,
+         time: Double? = nil,
+         isDone: Bool? = nil,
+         finalPoints: Double? = 0
+    ) {
         self.result = result.twoDecimals
         self.time = time
         self.isDone = isDone
+        self.finalPoints = finalPoints
     }
     
     func getPoint(maxPoints: Double) -> Double {

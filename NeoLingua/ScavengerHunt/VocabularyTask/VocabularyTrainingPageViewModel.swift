@@ -21,6 +21,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     @Published var showProgressIndicator: Bool = true
     @Published var progress: CGFloat = 0.0
     @Published var numberOfTasks: Int = 0
+    @Published var taskPerformance: TaskPerformancetParameter?
     
     var isScavengerHuntMode: Bool = false
 
@@ -93,7 +94,8 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             Task {
                 scorePercentage =  Double(points) / Double(tasks.count)
                 finalPoints = scorePercentage * 15
-                let parameter = TaskPerformancetParameter(result: scorePercentage, isDone: true)
+                let parameter = TaskPerformancetParameter(result: scorePercentage, isDone: true, finalPoints: finalPoints)
+                taskPerformance = parameter
                 if isScavengerHuntMode {
                     try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .vocabularyTraining)
                 } else {

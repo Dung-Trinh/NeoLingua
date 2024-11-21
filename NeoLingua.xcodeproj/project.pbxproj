@@ -228,7 +228,7 @@
 		B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPageViewModel.swift; sourceTree = "<group>"; };
 		B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionManager.swift; sourceTree = "<group>"; };
 		B6A562022CC5396A0008C05C /* ListeningExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningExercise.swift; sourceTree = "<group>"; };
-		B6A562042CC56B070008C05C /* Wiesbaden2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wiesbaden2.gpx; sourceTree = "<group>"; };
+		B6A562042CC56B070008C05C /* WiesbadenKurpark.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WiesbadenKurpark.gpx; sourceTree = "<group>"; };
 		B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPage.swift; sourceTree = "<group>"; };
 		B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsDashboardPageViewModel.swift; sourceTree = "<group>"; };
 		B6B8ACA02CEC1CDF008D9EF7 /* crossmark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = crossmark.json; sourceTree = "<group>"; };
@@ -644,7 +644,7 @@
 		B6FED3AF2C70B3BB00339B7C = {
 			isa = PBXGroup;
 			children = (
-				B6A562042CC56B070008C05C /* Wiesbaden2.gpx */,
+				B6A562042CC56B070008C05C /* WiesbadenKurpark.gpx */,
 				B60F8AB62CB80F2000268D75 /* WiesbadenLocation.gpx */,
 				B6FED3BA2C70B3BB00339B7C /* NeoLingua */,
 				B6FED3B92C70B3BB00339B7C /* Products */,

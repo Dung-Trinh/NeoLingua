@@ -9,16 +9,13 @@ struct ListeningComprehensionPage: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("ⓘ Task definition").bold()
+                InfoCardView(message: "Listen to the text carefully. Respond to the following questions when you're ready.").padding(.bottom, Styleguide.Margin.large)
                 VStack(alignment: .leading) {
-                    Text("Listen to the text carefully.Respond to the following questions when you're ready.").font(.subheadline)
-                        .foregroundColor(.gray).padding(.bottom, Styleguide.Margin.small)
+                    AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer).padding(.bottom, Styleguide.Margin.small)
                     
-                    AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer).padding(.vertical, Styleguide.Margin.small)
-            
                     if let exercise = viewModel.exercise {
                         VStack(alignment: .center) {
-                            Text("Task questions").font(.title2)
+                            Text("Task questions").font(.title2).bold()
                             ForEach(exercise.listeningQuestions.indices, id: \.self) { index in
                                 VStack(alignment: .leading, spacing: Styleguide.Margin.small) {
                                     Text(exercise.listeningQuestions[index].question)
@@ -45,7 +42,7 @@ struct ListeningComprehensionPage: View {
                         VStack(spacing: Styleguide.Margin.small) {
                             ListeningTaskEvaluationView(evaluation: evaluation)
                             PrimaryButton(
-                                title: "back to tasks",
+                                title: "Back to tasks",
                                 color: .blue,
                                 action: {
                                     router.navigateBack()
@@ -58,7 +55,9 @@ struct ListeningComprehensionPage: View {
                     Task {
                         await viewModel.evaluateQuestions()
                     }
-                }.if(viewModel.evaluation != nil,
+                }
+                .buttonStyle(.bordered)
+                .if(viewModel.evaluation != nil,
                      transform: { view in
                     view.hidden()
                 })
@@ -68,6 +67,16 @@ struct ListeningComprehensionPage: View {
             .navigationDestination(for: Route.self) { route in
                 router.destination(for: route)
             }
+            .sheet(isPresented: $viewModel.isSheetPresented, content: {
+                if let taskPerformance = viewModel.taskPerformance {
+                    TaskCompleteSheetView(
+                        taskPerformance: taskPerformance,
+                        action: {
+                            viewModel.isSheetPresented = false
+                        }
+                    )
+                }
+            })
         }
         .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
         .onFirstAppear {

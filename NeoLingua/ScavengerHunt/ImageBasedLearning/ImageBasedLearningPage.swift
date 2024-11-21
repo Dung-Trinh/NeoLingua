@@ -69,7 +69,7 @@ struct ImageBasedLearningPage: View {
                         .bold()
                         .multilineTextAlignment(.leading)
                     Text("Wie möchtest du den Inhalt deiner Übungen bestimmen?")
-                        .font(.headline).multilineTextAlignment(.center)
+                        .multilineTextAlignment(.center)
                     
                     VStack(spacing: Styleguide.Margin.medium) {
                         PhotosPicker(
@@ -140,7 +140,7 @@ struct ImageBasedLearningPage: View {
                                 Task {
                                     await viewModel.createTasksWithPrompt()
                                 }
-                            }.buttonStyle(.borderedProminent)
+                            }.buttonStyle(.bordered)
                         }.padding(.horizontal, 8)
                     }
                 }
@@ -162,7 +162,7 @@ struct ImageBasedLearningPage: View {
                         )
                     }
                     PrimaryButton(
-                        title: "back to menu",
+                        title: "Back to menu",
                         color: .blue,
                         action: {
                             router.navigateBack()

@@ -8,12 +8,8 @@ struct NearMeTaskPage: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("ⓘ What do you see in the picture? Which vocabulary can you identify from the picture").bold()
-                Text("describe the picture")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
                 AsyncImageView(imageUrl: viewModel.sharedImageTask.imageUrl).frame(maxWidth: .infinity, maxHeight: 300)
-                
+                InfoCardView(message: "What do you see in the picture? Which vocabulary can you identify from the picture? Describe the picture!").padding(.bottom, Styleguide.Margin.medium)
                     TextField("In the picture I see ...", text: $viewModel.userInput, axis: .vertical)
                         .lineLimit(2...4)
                         .textFieldStyle(.roundedBorder)
@@ -30,7 +26,7 @@ struct NearMeTaskPage: View {
                         Task {
                             await viewModel.fetchHint()
                         }
-                    }
+                    }.buttonStyle(.bordered)
                 }
                 
                 if viewModel.hint != "" {
@@ -43,7 +39,7 @@ struct NearMeTaskPage: View {
                         Task {
                             await viewModel.validateUserInputWithImage()
                         }
-                    }
+                    }.buttonStyle(.borderedProminent)
                 }
                 Spacer()
                 if viewModel.isLoading {
@@ -61,7 +57,9 @@ struct NearMeTaskPage: View {
                     }
                 }
                 
-            }.padding()
+            }
+            .padding()
+            .navigationTitle("SnapVocabulary")
         }
     }
 }

@@ -40,8 +40,6 @@ struct EvaluatedQuestionView: View {
         }
         .background(Color.gray.opacity(0.1))
         .cornerRadius(8)
-        .shadow(radius: 2)
-        .padding(.horizontal)
     }
 }
 
@@ -50,14 +48,11 @@ struct ListeningTaskEvaluationView: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 10) {
-            Text("Solution").font(.title2)
+            Text("Solution").font(.title2).bold()
             ForEach(evaluation.evaluatedQuestions, id: \.id) { question in
                 EvaluatedQuestionView(question: question)
                     .padding(.bottom, 5)
             }
-            Text("Correct Answers: \(evaluation.countCorrectAnswers()) / \(evaluation.evaluatedQuestions.count)")
-                .font(.title2)
-                .padding()
         }
         .padding()
     }
