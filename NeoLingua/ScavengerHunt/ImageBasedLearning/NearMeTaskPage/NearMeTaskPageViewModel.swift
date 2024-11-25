@@ -13,6 +13,7 @@ class NearMeTaskPageViewModelImpl: NearMeTaskPageViewModel {
     @Published var showHintButton: Bool = false
     @Published var isLoading: Bool = false
     @Published var finalPoints: Double = 0
+    @Published var showResultSheet: Bool = false
 
     var numberOfAttempts = -1.0
     private var imageProcessingManager = ImageProcessingManager()
@@ -39,6 +40,7 @@ class NearMeTaskPageViewModelImpl: NearMeTaskPageViewModel {
         isLoading = true
         defer { isLoading = false }
         
+        result = nil
         do {
             hint = try await imageProcessingManager.fetchImageHint()
             showHintButton = false
@@ -52,6 +54,7 @@ class NearMeTaskPageViewModelImpl: NearMeTaskPageViewModel {
         isLoading = true
         defer { isLoading = false }
         
+        hint = ""
         do {
             result = try await imageProcessingManager.verifyTextWithImage(
                 imageUrl: sharedImageTask.imageUrl,

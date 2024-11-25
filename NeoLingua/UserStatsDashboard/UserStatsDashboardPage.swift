@@ -16,7 +16,7 @@ struct UserStatsDashboardPage: View {
                 Text("Wochenrücklick").font(.title).bold().multilineTextAlignment(.leading)
                 VStack(alignment: .leading, spacing: Styleguide.Margin.medium) {
                     VStack {
-                        Text("Deine Lernstatistiken").font(.title)
+                        Text("Deine Lernstatistiken").font(.title3)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: Styleguide.Margin.medium) {
                                 StatsTile(title: "Endeckte Vokabeln", number: "21", percentageChange: "↑ 10% besser als letzte Woche", percentageChangeTextColor: .green, iconName: "text.magnifyingglass")

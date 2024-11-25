@@ -23,52 +23,84 @@ struct TaskLocationPage: View {
             
             if let vocabularyTrainingPrompt =  location.taskPrompt.vocabularyTraining {
                 VStack {
-                    HStack {
-                        Button("Vokabelübung starten") {
-                            router.push(.learningTask(.vocabularyTrainingPage(prompt: location.taskPrompt.vocabularyTraining ?? "", isScavengerHuntMode: true)))
-                        }.if(location.performance?.performance.vocabularyTraining?.isDone == true, transform: {
-                            view in
-                            view.disabled(true)
-                        })
-                        if location.performance?.performance.vocabularyTraining?.isDone == true {
-                            Text("✅")
+                    Button(action: {
+                        router.push(.learningTask(.vocabularyTrainingPage(prompt: location.taskPrompt.vocabularyTraining ?? "", isScavengerHuntMode: true)))
+                    }, label: {
+                        HStack{
+                            Text("Vokabelübung")
+                            if location.performance?.performance.vocabularyTraining?.isDone == true {
+                                Text("✅")
+                            }
                         }
-                    }
-                    HStack {
-                        Button("Hörverständnis Aufgaben starten") {
-                            router.push(.learningTask(.listeningComprehensionPage(prompt: location.taskPrompt.listeningComprehension ?? "", isScavengerHuntMode: true)))
-                        }.if(location.performance?.performance.listeningComprehension?.isDone == true, transform: {
-                            view in
-                            view.disabled(true)
-                        })
-                        if location.performance?.performance.listeningComprehension?.isDone == true {
-                            Text("✅")
+                        .padding(8)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.accentColor)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.accentColor, lineWidth: 1)
+                        )
+                    })
+                    .if(location.performance?.performance.vocabularyTraining?.isDone == true, transform: {
+                        view in
+                        view.disabled(true)
+                    })
+                    
+                    Button(action: {
+                        router.push(.learningTask(.listeningComprehensionPage(prompt: location.taskPrompt.listeningComprehension ?? "", isScavengerHuntMode: true)))
+                    }, label: {
+                        HStack{
+                            Text("Hörverständnisaufgaben")
+                            if location.performance?.performance.listeningComprehension?.isDone == true {
+                                Text("✅")
+                            }
                         }
-                    }
-                    HStack {
-                        Button("Gesprächssimulation starten") {
-                            router.push(.learningTask(.conversationSimulationPage(prompt: location.taskPrompt.conversationSimulation ?? "", isScavengerHuntMode: true)))
-                        }.if(location.performance?.performance.conversationSimulation?.isDone == true, transform: {
-                            view in
-                            view.disabled(true)
-                        })
-                        if location.performance?.performance.conversationSimulation?.isDone == true {
-                            Text("✅")
+                        .padding(8)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.accentColor)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.accentColor, lineWidth: 1)
+                        )
+                    })
+                    .if(location.performance?.performance.listeningComprehension?.isDone == true, transform: {
+                        view in
+                        view.disabled(true)
+                    })
+                    
+                    Button(action: {
+                        router.push(.learningTask(.conversationSimulationPage(prompt: location.taskPrompt.conversationSimulation ?? "", isScavengerHuntMode: true)))
+                    }, label: {
+                        HStack{
+                            Text("Gesprächssimulation")
+                            if location.performance?.performance.conversationSimulation?.isDone == true {
+                                Text("✅")
+                            }
                         }
-                    }
+                        .padding(8)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.accentColor)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.accentColor, lineWidth: 1)
+                        )
+                    })
+                    .if(location.performance?.performance.conversationSimulation?.isDone == true, transform: {
+                        view in
+                        view.disabled(true)
+                    })
                 }
             }
             Spacer()
             if location.performance?.performance.isTaskDone() == true {
-//            if true {
+                //            if true {
                 VStack(alignment: .center, spacing: Styleguide.Margin.medium) {
-                VStack {
-                    InfoCardView(
-                        title: "Hint for the object",
-                        message: location.photoClue,
-                        type: .hint
-                    )
-                }
+                    VStack {
+                        InfoCardView(
+                            title: "Hint for the object",
+                            message: location.photoClue,
+                            type: .hint
+                        )
+                    }
                     HStack {
                         PhotosPicker(
                             selection: $viewModel.selectedPhotos,
@@ -90,24 +122,24 @@ struct TaskLocationPage: View {
                                 .background(.black)
                         }
                     }
-            }
-            if viewModel.selectedImage != nil {
-                PrimaryButton(
-                    title: "Verify the image",
-                    color: .blue,
-                    action: {
-                        Task {
-                            await viewModel.verifyImage()
+                }
+                if viewModel.selectedImage != nil {
+                    PrimaryButton(
+                        title: "Verify the image",
+                        color: .blue,
+                        action: {
+                            Task {
+                                await viewModel.verifyImage()
+                            }
                         }
+                    )
+                    if viewModel.isLoading {
+                        ActivityIndicatorView(isVisible: .constant(true), type: .rotatingDots(count: 5))
+                            .frame(width: 50.0, height: 50.0)
+                            .foregroundColor(.red)
                     }
-                )
-                if viewModel.isLoading {
-                    ActivityIndicatorView(isVisible: .constant(true), type: .rotatingDots(count: 5))
-                        .frame(width: 50.0, height: 50.0)
-                        .foregroundColor(.red)
                 }
             }
-        }
         }
         .padding()
         .onAppear {
@@ -150,13 +182,13 @@ struct ImageValidationResultView: View {
                 .looping()
                 .frame(width: .infinity, height: 200)
                 .padding(-30)
-
-                Text(validationResult.isMatching ? "The image matches the searched object!" : "The image does not match the searched object.")
-                    .font(.title3)
-                    .bold()
-                    .foregroundColor(validationResult.isMatching ? .green : .red)
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, Styleguide.Margin.small)
+            
+            Text(validationResult.isMatching ? "The image matches the searched object!" : "The image does not match the searched object.")
+                .font(.title3)
+                .bold()
+                .foregroundColor(validationResult.isMatching ? .green : .red)
+                .multilineTextAlignment(.center)
+                .padding(.bottom, Styleguide.Margin.small)
             
             VStack(alignment: .leading, spacing: 10) {
                 HStack() {

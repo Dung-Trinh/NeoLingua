@@ -8,7 +8,7 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
     
     var body: some View {
         VStack {
-            Text("Profile")
+            Text("Profile").font(.title).bold()
             if let profileData = viewModel.profileData {
                 VStack {
                     Image(systemName:"person.crop.circle.fill")
@@ -57,12 +57,11 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
                 }
             }
             Spacer()
-            SecondaryButton(
-                title: "Logout",
-                color: .red,
-                action: {
-                    viewModel.didTappedLogout()
-                })
+            Button("Logout") {
+                viewModel.didTappedLogout()
+            }
+            .buttonStyle(.bordered)
+            .foregroundColor(.red)
         }
         .padding()
         .onAppear {

@@ -81,8 +81,9 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
                 return
             }
             
-            let points = evaluation.getScorePercentage()
-            let parameter = TaskPerformancetParameter(result: points, isDone: true, finalPoints: points)
+            let resultPercentage = evaluation.getScorePercentage()
+            let points = Double(evaluation.getScorePercentage() * 30)
+            let parameter = TaskPerformancetParameter(result: resultPercentage, isDone: true, finalPoints: points)
             taskPerformance = parameter
             isSheetPresented = true
 

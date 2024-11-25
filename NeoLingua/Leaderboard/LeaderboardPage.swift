@@ -6,17 +6,17 @@ struct LeaderboardPage: View {
     
     var body: some View {
         VStack {
-            Text("LeaderboardPage")
+            Text("Ranking").font(.title).bold()
             Picker("LeadboardType", selection: $viewModel.selectedMode) {
                 ForEach(LeaderboardMode.allCases) { mode in
-                    Text(mode.rawValue).tag(mode)
+                    Text(mode.text).tag(mode)
                 }
             }
             .pickerStyle(.segmented)
             ScrollView {
                 switch viewModel.selectedMode {
-                case .globalScore: gloabalLeaderboard
-                case .scavengerHunt: scavengerHuntLeaderboard
+                    case .globalScore: gloabalLeaderboard
+                    case .scavengerHunt: scavengerHuntLeaderboard
                 }
             }
         }
@@ -33,9 +33,9 @@ struct LeaderboardPage: View {
     private var gloabalLeaderboard: some View {
         VStack {
             HStack {
-                Text("Weekly Ranking for rank").bold()
+                Text("Wöchentliche Rangliste für Rang")
                 Text("\(UserDefaults().getLevelOfLanguage().rawValue)")
-            }
+            }.font(.headline).bold()
             LeaderboardView(userScores: viewModel.globalUserScores)
         }
     }
@@ -43,7 +43,7 @@ struct LeaderboardPage: View {
     @ViewBuilder
     private var scavengerHuntLeaderboard: some View {
         ScrollView {
-            Text("your last competitive scavenger hunts")
+            Text("Deine letzten Schnitzeljagden").font(.headline).bold().padding()
             if viewModel.scavengerRankingList.count > 0 {
                 ForEach(viewModel.scavengerRankingList) { ranking in
                     NavigationLink {
@@ -85,21 +85,41 @@ struct LeaderboardView: View {
                 .padding(.vertical, 4)
                 .background(Color(.systemGray6))
                 ForEach(0..<userScores.count) { index in
-                    HStack {
-                        Text("\(index + 1).")
-                            .font(.headline)
-                            .frame(width: 50, alignment: .leading)
-                        Text(userScores[index].username)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Text(String(format: "%.2f", userScores[index].totalPoints))
-                            .font(.subheadline)
-                            .frame(width: 80, alignment: .trailing)
-                    }
-                    .padding(.vertical, 8)
+                    LeaderboardTile(
+                        rank: "\(index + 1).",
+                        username: userScores[index].username,
+                        score: String(format: "%.2f", userScores[index].totalPoints)
+                    )
                 }
             }
+        }.padding()
+    }
+}
+
+struct LeaderboardTile: View {
+    let rank: String
+    let username: String
+    let score: String
+
+    
+    var body: some View {
+        HStack {
+            Text(rank)
+                .font(.headline)
+                .frame(width: 50, alignment: .leading)
+            Image(systemName:"person.crop.circle.fill")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 30, height: 30)
+                .clipShape(Circle())
+            Text(username)
+                .font(.headline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Text(score)
+                .font(.subheadline)
+                .frame(width: 80, alignment: .trailing)
         }
+        .padding(.vertical, 8)
     }
 }

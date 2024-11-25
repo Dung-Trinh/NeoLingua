@@ -7,141 +7,164 @@ struct ScavengerHuntOverviewPage: View {
     @State var showHelpSheet = false
     
     var body: some View {
-        ScrollView {
-            if viewModel.scavengerHuntType == .competitiveMode && viewModel.currentScavengerHunt == nil  {
-                Text("ⓘ Choose a scavenger hunt near your location")
-                
-                Text("CompetitiveScavengerHunt List")
-                ForEach(Array(viewModel.competitiveScavengerHunts.enumerated()), id: \.element.id ) { index, scavengerHunt in
-                    HStack {
-                        Text("\(index + 1).")
-                        Button(scavengerHunt.title) {
-                            viewModel.currentScavengerHunt = scavengerHunt
-                            Task {
-                                try? await viewModel.setupscavengerHunt()
+        VStack {
+            ScrollView {
+                if viewModel.scavengerHuntType == .competitiveMode && viewModel.currentScavengerHunt == nil  {
+                    Text("ⓘ Choose a scavenger hunt near your location")
+                    
+                    Text("CompetitiveScavengerHunt List")
+                    ForEach(Array(viewModel.competitiveScavengerHunts.enumerated()), id: \.element.id ) { index, scavengerHunt in
+                        HStack {
+                            Text("\(index + 1).")
+                            Button(scavengerHunt.title) {
+                                viewModel.currentScavengerHunt = scavengerHunt
+                                Task {
+                                    try? await viewModel.setupscavengerHunt()
+                                }
                             }
                         }
                     }
                 }
-            }
-            
-            VStack(alignment: .leading) {
-                if let currentScavengerHunt = viewModel.currentScavengerHunt {
-                    PageHeader(
-                        title: currentScavengerHunt.title,
-                        subtitle: currentScavengerHunt.introduction,
-                        textAlignment: .leading
-                    ).padding(.bottom, Styleguide.Margin.medium)
-                    
-                    Text("Location").font(.headline)
-                    VStack(alignment: .leading, spacing: Styleguide.Margin.small) {
-                        if let scavengerHunt = viewModel.currentScavengerHunt {
-                            ForEach(scavengerHunt.taskLocations) { location in
-                                Text("📍\(location.name)").multilineTextAlignment(.leading)
-                            }
-                        }
-                    }.padding(.bottom, Styleguide.Margin.medium)
-                    
-                    HStack {
-                        Spacer()
-                        Button {
+                
+                VStack(alignment: .leading) {
+                    if let currentScavengerHunt = viewModel.currentScavengerHunt {
+                        PageHeader(
+                            title: currentScavengerHunt.title,
+                            subtitle: currentScavengerHunt.introduction,
+                            textAlignment: .leading
+                        ).padding(.bottom, Styleguide.Margin.medium)
+                        
+                        Text("Location").font(.headline)
+                        VStack(alignment: .leading, spacing: Styleguide.Margin.small) {
                             if let scavengerHunt = viewModel.currentScavengerHunt {
-                                router.scavengerHunt = scavengerHunt
+                                ForEach(scavengerHunt.taskLocations) { location in
+                                    Text("📍\(location.name)").multilineTextAlignment(.leading)
+                                }
                             }
-                            router.push(.learningTask(.map))
-                        } label: {
-                            Text("Show playing field")
-                                .padding(8)
-                                .frame(maxWidth: .infinity)
-                                .foregroundColor(.accentColor)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .stroke(Color.accentColor, lineWidth: 1)
-                                )
+                        }.padding(.bottom, Styleguide.Margin.medium)
+                        
+                        HStack {
+                            Spacer()
+                            Button {
+                                if let scavengerHunt = viewModel.currentScavengerHunt {
+                                    router.scavengerHunt = scavengerHunt
+                                }
+                                router.push(.learningTask(.map))
+                            } label: {
+                                Text("Show playing field")
+                                    .padding(8)
+                                    .frame(maxWidth: .infinity)
+                                    .foregroundColor(.accentColor)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.accentColor, lineWidth: 1)
+                                    )
+                            }
+                        }
+                    }
+                }
+                .padding()
+                .onAppear {
+                    Task {
+                        if initialAppearance == false {
+                            initialAppearance = true
+                            await viewModel.fetchScavengerHunt()
+                        } else {
+                            await viewModel.updateScavengerHuntState()
+                        }
+                    }
+                }
+                .sheet(isPresented: $viewModel.isPresented, onDismiss: {
+                    router.navigateToRoot()
+                }) {
+                    VStack {
+                        ScrollView {
+                            if let scavengerHuntState = viewModel.currentScavengerHunt?.scavengerHuntState {
+                                Text("Locations")
+                                    .font(.title)
+                                    ForEach(scavengerHuntState.locationTaskPerformance, id: \.self.locationId) {
+                                    locationPerformance in
+                                    VStack {
+                                        Text(locationPerformance.locationName)
+                                            .font(.title3)
+                                            .bold()
+                                            .foregroundColor(.blue)
+                                        
+                                        if let vocabularyTraining = locationPerformance.performance.vocabularyTraining {
+                                            TaskResultTile(
+                                                title: "Vocabulary",
+                                                points: vocabularyTraining.getPointString(maxPoints: 15)
+                                            )
+                                        }
+                                        
+                                        if let listeningComprehension = locationPerformance.performance.listeningComprehension {
+                                            TaskResultTile(
+                                                title: "Listening Comprehension",
+                                                points: listeningComprehension.getPointString(maxPoints: 30)
+                                            )
+                                        }
+                                        
+                                        if let conversationSimulation = locationPerformance.performance.conversationSimulation {
+                                            TaskResultTile(
+                                                title: "Conversation Simulation",
+                                                points: conversationSimulation.getPointString(maxPoints: 40)
+                                            )
+                                        }
+                                        
+                                        if let searchingTheObject = locationPerformance.performance.searchingTheObject {
+                                            TaskResultTile(
+                                                title: "Searching the Object",
+                                                points: searchingTheObject.getPointString(maxPoints: 15)
+                                            )
+                                        }
+                                        Text("\(locationPerformance.getPointsForLocationPerformance(), specifier: "%.2f") / 100 points")
+                                            .font(.headline)
+                                            .padding(.top)
+                                        Button("Show leaderboard for this scavenger hunt") {
+                                            Task {
+                                                await viewModel.getScavengerHuntLeaderboard()
+                                            }
+                                        }.font(.body)
+                                        
+                                    }
+                                    .padding()
+                                    .background(Color.gray.opacity(0.1))
+                                    .cornerRadius(12)
+                                }
+                            }
                         }
                         Spacer()
-                    }
-                    
-                    if viewModel.currentScavengerHunt?.isHuntComplete() == true {
-                        Spacer()
+                        Text("Final Score: \(String(format: "%.2f", viewModel.getFinalScore()))")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .padding(.top)
                         PrimaryButton(
-                            title: "Show final result",
+                            title: "Back to menu",
                             color: .blue,
                             action: {
-                                Task {
-                                    await viewModel.showFinalResult()
-                                }
+                                router.navigateToRoot()
                             }
                         )
-                    }
+                    }.padding()
+                    .sheet(isPresented: $viewModel.isLeaderboardPresented, content: {
+                        VStack {
+                            Text("Leaderboard of the scavenger hunt")
+                            LeaderboardView(userScores: viewModel.userScores ?? [])
+                        }.padding()
+                    })
                 }
             }
-            .padding()
-            .onAppear {
-                Task {
-                    if initialAppearance == false {
-                        initialAppearance = true
-                        await viewModel.fetchScavengerHunt()
-                    } else {
-                        await viewModel.updateScavengerHuntState()
-                    }
-                }
-            }
-            .sheet(isPresented: $viewModel.isPresented, onDismiss: {
-                router.navigateToRoot()
-            }) {
-                VStack {
-                    if let scavengerHuntState = viewModel.currentScavengerHunt?.scavengerHuntState {
-                        ForEach(scavengerHuntState.locationTaskPerformance, id: \.self.locationId) {
-                            locationPerformance in
-                            VStack {
-                                Text(locationPerformance.locationName).font(.headline)
-                                HStack {
-                                    Text("Vocabulary").bold()
-                                    if let vocabularyTraining = locationPerformance.performance.vocabularyTraining {
-                                        Text(vocabularyTraining.getPointString(maxPoints: 15) )
-                                    }
-                                }
-                                HStack {
-                                    Text("ListeningComprehension").bold()
-                                    if let listeningComprehension = locationPerformance.performance.listeningComprehension {
-                                        Text(listeningComprehension.getPointString(maxPoints: 30) )
-                                    }
-                                    
-                                }
-                                HStack {
-                                    Text("conversationSimulation").bold()
-                                    if let conversationSimulation = locationPerformance.performance.conversationSimulation {
-                                        Text(conversationSimulation.getPointString(maxPoints: 40) )
-                                    }
-                                }
-                                HStack {
-                                    Text("searchingTheObject").bold()
-                                    if let searchingTheObject = locationPerformance.performance.searchingTheObject {
-                                        Text(searchingTheObject.getPointString(maxPoints: 15) )
-                                    }
-                                }
-                                
-                                Text("\(locationPerformance.getPointsForLocationPerformance()) / 100")
-                                Button("show leaderboard for this scavenger hunt") {
-                                    Task {
-                                        await viewModel.getScavengerHuntLeaderboard()
-                                    }
-                                }
-                            }.padding(.bottom, Styleguide.Margin.medium)
+            if viewModel.currentScavengerHunt?.isHuntComplete() == true {
+                Spacer()
+                PrimaryButton(
+                    title: "Show final result",
+                    color: .blue,
+                    action: {
+                        Task {
+                            await viewModel.showFinalResult()
                         }
                     }
-                    Text(String(format: "%.2f", viewModel.getFinalScore())).foregroundStyle(.green).bold()
-                    PrimaryButton(
-                        title: "back to menu",
-                        color: .blue,
-                        action: {
-                            router.navigateToRoot()
-                        }
-                    )
-                }.sheet(isPresented: $viewModel.isLeaderboardPresented, content: {
-                    LeaderboardView(userScores: viewModel.userScores ?? [])
-                })
+                ).padding(.horizontal, Styleguide.Margin.medium)
             }
         }
         .navigationDestination(for: Route.self) { route in
@@ -184,5 +207,25 @@ struct ScavengerHuntHelpView: View {
             .navigationTitle("Instruction")
             .navigationBarTitleDisplayMode(.inline)
         }
+    }
+}
+
+struct TaskResultTile: View {
+    let title: String
+    let points: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.headline)
+                .fontWeight(.bold)
+            Spacer()
+            Text(points)
+                .font(.subheadline)
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
     }
 }

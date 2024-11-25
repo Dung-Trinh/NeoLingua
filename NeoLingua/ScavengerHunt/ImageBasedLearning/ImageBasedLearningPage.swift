@@ -33,33 +33,75 @@ struct ImageBasedLearningPage: View {
                         Text(viewModel.imageBasedTask?.description ?? "")
                         
                         if let vocabularyTraining = imageBasedTask.taskPrompt.vocabularyTraining {
-                            PrimaryButton(
-                                title: TaskType.vocabularyTraining.localizedText,
-                                color: viewModel.userPerformance?.vocabularyTraining != nil ? .green : .brown,
-                                action: {
-                                    router.push( .imageBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
+                            Button(action: {
+                                router.push( .imageBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
+                            }, label: {
+                                HStack{
+                                    Text(TaskType.vocabularyTraining.localizedText)
+                                    if viewModel.userPerformance?.vocabularyTraining != nil {
+                                        Text("✅")
+                                    }
                                 }
-                            )
+                                .padding(8)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.accentColor)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.accentColor, lineWidth: 1)
+                                )
+                            })
+                            .if(viewModel.userPerformance?.vocabularyTraining != nil, transform: {
+                                view in
+                                view.disabled(true)
+                            })
                         }
                         
                         if let listeningComprehension = imageBasedTask.taskPrompt.listeningComprehension {
-                            PrimaryButton(
-                                title: TaskType.listeningComprehension.localizedText,
-                                color: viewModel.userPerformance?.listeningComprehension != nil ? .green : .brown,
-                                action: {
-                                    router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
+                            Button(action: {
+                                router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
+                            }, label: {
+                                HStack{
+                                    Text(TaskType.listeningComprehension.localizedText)
+                                    if viewModel.userPerformance?.listeningComprehension != nil {
+                                        Text("✅")
+                                    }
                                 }
-                            )
+                                .padding(8)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.accentColor)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.accentColor, lineWidth: 1)
+                                )
+                            })
+                            .if(viewModel.userPerformance?.vocabularyTraining != nil, transform: {
+                                view in
+                                view.disabled(true)
+                            })
                         }
                         
                         if let conversationSimulation = imageBasedTask.taskPrompt.conversationSimulation {
-                            PrimaryButton(
-                                title: TaskType.conversationSimulation.localizedText,
-                                color: viewModel.userPerformance?.conversationSimulation != nil ? .green : .brown,
-                                action: {
-                                    router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
+                            Button(action: {
+                                router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
+                            }, label: {
+                                HStack{
+                                    Text(TaskType.conversationSimulation.localizedText)
+                                    if viewModel.userPerformance?.conversationSimulation != nil {
+                                        Text("✅")
+                                    }
                                 }
-                            )
+                                .padding(8)
+                                .frame(maxWidth: .infinity)
+                                .foregroundColor(.accentColor)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.accentColor, lineWidth: 1)
+                                )
+                            })
+                            .if(viewModel.userPerformance?.conversationSimulation != nil, transform: {
+                                view in
+                                view.disabled(true)
+                            })
                         }
                     }
                 }

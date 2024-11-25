@@ -5,6 +5,13 @@ enum LeaderboardMode: String, CaseIterable, Identifiable {
     case scavengerHunt
     
     var id: Self { self }
+    
+    var text: String {
+        switch self {
+            case .globalScore: "Globale Rangliste"
+            case .scavengerHunt: "Scavenger Hunt Rangliste"
+        }
+    }
 }
 
 protocol LeaderboardPageViewModel: ObservableObject {

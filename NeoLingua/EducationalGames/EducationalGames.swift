@@ -6,12 +6,18 @@ struct EducationalGamesPage: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("EducationalGamesPage").font(.title)
-            EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary")
-                .onTapGesture {
-                    router.push(.snapVocabularyPage)
-                }
-            EducationalGameTile(image: "scavengerHuntImage", title: "ScavengerHunt")
+            Text("Educational Games").font(.title).bold()
+            ScrollView {
+                EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary")
+                    .onTapGesture {
+                        router.push(.snapVocabularyPage)
+                    }
+                EducationalGameTile(image: "scavengerHuntImage", title: "ScavengerHunt")
+                    .onTapGesture {
+                        router.push(.scavengerHuntInfoPage)
+                    }
+            }
+            Spacer()
         }
         .padding()
         .navigationDestination(for: Route.self) { route in

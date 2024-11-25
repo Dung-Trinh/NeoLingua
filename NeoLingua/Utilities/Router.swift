@@ -15,6 +15,7 @@ enum Route: Hashable {
     case taskLocation
     case imageBasedLearningPage
     case snapVocabularyPage
+    case scavengerHuntInfoPage
     case linguaQuestPage
     case imageBasedTaskNearMePage
     case shareImageForTaskPage(SharedContentForTask)
@@ -85,6 +86,8 @@ class Router: ObservableObject  {
             ShareImageForTaskPage(viewModel: ShareImageForTaskPageViewModelImpl(sharedContentForTask: sharedContentForTask))
         case .imageBasedTaskNearMePage:
             ImageBasedTaskNearMePage(viewModel: ImageBasedTaskNearMePageViewModelImpl())
+        case .scavengerHuntInfoPage:
+            ScavengerHuntInfoPage()
         }
     }
     

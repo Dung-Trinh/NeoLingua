@@ -89,6 +89,7 @@
 		B6DA539C2CE15E7600EE26C3 /* TaskTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */; };
 		B6DA539F2CE160DD00EE26C3 /* ChallengePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */; };
 		B6DA53A12CE160EE00EE26C3 /* ChallengePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DA53A02CE160EE00EE26C3 /* ChallengePageViewModel.swift */; };
+		B6DCC4702CF13F6900852884 /* ScavengerHuntInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCC46F2CF13F6900852884 /* ScavengerHuntInfoPage.swift */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
 		B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */; };
@@ -235,6 +236,7 @@
 		B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTile.swift; sourceTree = "<group>"; };
 		B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePage.swift; sourceTree = "<group>"; };
 		B6DA53A02CE160EE00EE26C3 /* ChallengePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengePageViewModel.swift; sourceTree = "<group>"; };
+		B6DCC46F2CF13F6900852884 /* ScavengerHuntInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntInfoPage.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
 				B60F8ABA2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift */,
 				B609EED02CC6A6A600A029E8 /* ScavengerHuntManager.swift */,
+				B6DCC46F2CF13F6900852884 /* ScavengerHuntInfoPage.swift */,
 			);
 			path = ScavengerHunt;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				B60F8AB02CB7D8E200268D75 /* ScavengerHuntMap.swift in Sources */,
 				B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */,
 				B61ED9E32CD62D1C00E71258 /* ImageBasedTaskNearMePageViewModel.swift in Sources */,
+				B6DCC4702CF13F6900852884 /* ScavengerHuntInfoPage.swift in Sources */,
 				B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */,
 				B609EEEC2CC83F3100A029E8 /* LinguaQuestPage.swift in Sources */,
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
