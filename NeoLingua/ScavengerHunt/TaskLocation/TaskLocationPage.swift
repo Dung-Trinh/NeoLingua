@@ -150,24 +150,43 @@ struct TaskLocationPage: View {
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
-        .sheet(isPresented: $viewModel.isSheetPresented) {
-            if let imageValidationResult = viewModel.imageValidationResult {
+        .sheet(isPresented: $viewModel.isSheetPresented, onDismiss: {
+            router.navigateBack()
+        }) {
+            if viewModel.numberOfAttempts < 0
+            {
                 VStack {
-                    ImageValidationResultView(validationResult: imageValidationResult)
-                    if(imageValidationResult.isMatching) {
-                        Spacer()
-                        PrimaryButton(
-                            title: "Back to map",
-                            color: .blue,
-                            action: {
-                                router.navigateBack()
-                            }
-                        )
-                    }
+                    Text("Unfortunately you did not provide the correct image 3 times. Continue with other tasks")
+                    PrimaryButton(
+                        title: "Back to map",
+                        color: .blue,
+                        action: {
+                            router.navigateBack()
+                        }
+                    )
                 }
                 .padding()
-                .presentationDetents([.fraction(0.60)])
+                .presentationDetents([.fraction(0.30)])
                 .presentationCornerRadius(40)
+            } else {
+                if let imageValidationResult = viewModel.imageValidationResult {
+                    VStack {
+                        ImageValidationResultView(validationResult: imageValidationResult)
+                        if(imageValidationResult.isMatching) {
+                            Spacer()
+                            PrimaryButton(
+                                title: "Back to map",
+                                color: .blue,
+                                action: {
+                                    router.navigateBack()
+                                }
+                            )
+                        }
+                    }
+                    .padding()
+                    .presentationDetents([.fraction(0.60)])
+                    .presentationCornerRadius(40)
+                }
             }
         }
     }

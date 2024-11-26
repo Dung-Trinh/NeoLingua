@@ -3,19 +3,19 @@ import SwiftUI
 struct EducationalGamesPage: View {
     @EnvironmentObject private var router: Router
     @StateObject var viewModel = EducationalGamesPageViewModelImpl()
-    
+
     var body: some View {
         VStack {
             Text("Educational Games").font(.title).bold()
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
-                    EducationalGameTile(image: "vocabularyImage", title: "Context-based-tasks") {
+                    EducationalGameTile(image: "contextBasedLearning", title: "Context-based-tasks") {
                         router.push(.imageBasedLearningPage)
                     }
                     EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary") {
                         router.push(.imageBasedTaskNearMePage)
                     }.frame(width: .infinity)
-                    EducationalGameTile(image: "scavengerHuntImage", title: "ScavengerHunt") {
+                    EducationalGameTile(image: "scavengerHuntHelpImage", title: "ScavengerHunt") {
                         router.push(.scavengerHuntInfoPage)
                     }
                 }
@@ -33,6 +33,7 @@ struct EducationalGameTile: View {
     var image: String
     var title: String
     let action: () -> Void
+    let blueColor = Color(red: 48 / 255.0, green: 70 / 255.0, blue: 116 / 255.0)
     
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
@@ -53,8 +54,9 @@ struct EducationalGameTile: View {
                         .foregroundColor(.white)
                 }
                 .padding()
-                .background(Color.black)
+                .background(blueColor)
                 .cornerRadius(16)
+                .shadow(color: blueColor.opacity(0.4), radius: 8, x: 0, y: 4)
                 .frame(width: .infinity)
             })
             

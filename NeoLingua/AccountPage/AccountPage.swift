@@ -8,7 +8,7 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
     
     var body: some View {
         VStack {
-            Text("Profile").font(.title).bold()
+            Text("Profile").font(.title)            
             if let profileData = viewModel.profileData {
                 VStack {
                     Image(systemName:"person.crop.circle.fill")
@@ -17,7 +17,7 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                     
-                    Text(profileData.username).font(.title2)
+                    Text(profileData.username).font(.title2).bold().foregroundColor(.blue)
                     LevelView()
                 }
             }
@@ -87,22 +87,22 @@ struct LevelView: View {
                 Image(systemName: "bolt.circle.fill")
                     .resizable()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
                 
                 Text("3179 XP Punkte")
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
             }
             
             ProgressView(value: 0.95)
-                .progressViewStyle(LinearProgressViewStyle(tint: .orange))
+                .progressViewStyle(LinearProgressViewStyle(tint: .blue))
                 .frame(height: 16)
                 .padding(.vertical, 4)
             
             HStack {
                 Text("LEVEL 5")
                     .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
                 
                 Spacer()
                 
@@ -112,7 +112,7 @@ struct LevelView: View {
                 
                 Text("LEVEL 6")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.orange)
+                    .foregroundColor(.blue)
             }
         }
         .padding()

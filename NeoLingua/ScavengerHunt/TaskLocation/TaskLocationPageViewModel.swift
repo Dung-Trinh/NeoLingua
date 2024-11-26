@@ -14,7 +14,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
     @Published var isSheetPresented: Bool = false
     @Published var imageValidationResult: ImageValidationResult?
     
-    private var numberOfAttempts = 3
+    @Published var numberOfAttempts = 3
     private var uploadedImageLink = ""
     private let imageProcessingManager = ImageProcessingManager()
     private let taskProcessManager = TaskProcessManager.shared
