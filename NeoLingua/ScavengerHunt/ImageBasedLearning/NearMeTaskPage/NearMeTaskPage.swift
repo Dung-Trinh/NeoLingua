@@ -11,6 +11,7 @@ struct NearMeTaskPage: View {
                 VStack {
                     AsyncImageView(imageUrl: viewModel.sharedImageTask.imageUrl).frame(maxWidth: .infinity, maxHeight: 300)
                     InfoCardView(message: "What do you see in the picture? Which vocabulary can you identify from the picture? Describe the picture!").padding(.bottom, Styleguide.Margin.medium)
+                    Text("There are \(viewModel.sharedImageTask.vocabulary.count) vocabulary to be found.").font(.headline).multilineTextAlignment(.leading)
                     TextField("In the picture I see ...", text: $viewModel.userInput, axis: .vertical)
                         .lineLimit(2...4)
                         .textFieldStyle(.roundedBorder)
@@ -98,9 +99,9 @@ struct InspectImageResultView: View {
             HStack {
                 Text("Result:")
                     .font(.headline)
-                Text(resultData.result == .correct ? "✅" : "❌")
+                Text(resultData.result.text)
                     .font(.body)
-                    .foregroundColor(colorForStatus(resultData.result))
+                    .foregroundColor(resultData.result.color)
             }
             
             if let correctedText = resultData.correctedText {
@@ -124,17 +125,6 @@ struct InspectImageResultView: View {
         .frame(width: .infinity)
         .padding()
         .background(RoundedRectangle(cornerRadius: 10).fill(Color(.systemGray6)))
-    }
-    
-    func colorForStatus(_ status: EvaluationStatus) -> Color {
-        switch status {
-        case .correct:
-            return .green
-        case .wrong:
-            return .red
-        case .almostCorrect:
-            return .orange
-        }
     }
 }
 

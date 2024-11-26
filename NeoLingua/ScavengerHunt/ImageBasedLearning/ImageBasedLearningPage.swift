@@ -219,6 +219,8 @@ struct ImageBasedLearningPage: View {
                 await viewModel.fetchPerformance()
             }
         }
+        .navigationTitle("Contex-based-tasks")
+        .navigationBarTitleDisplayMode(.inline)
         .padding()
         .modifier(ActivityIndicatorModifier(isLoading: viewModel.isLoading))
         .navigationDestination(for: Route.self) { route in

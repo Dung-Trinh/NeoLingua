@@ -5,17 +5,20 @@ struct EducationalGamesPage: View {
     @StateObject var viewModel = EducationalGamesPageViewModelImpl()
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack {
             Text("Educational Games").font(.title).bold()
             ScrollView {
-                EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary")
-                    .onTapGesture {
-                        router.push(.snapVocabularyPage)
+                VStack(spacing: 16) {
+                    EducationalGameTile(image: "vocabularyImage", title: "Context-based-tasks") {
+                        router.push(.imageBasedLearningPage)
                     }
-                EducationalGameTile(image: "scavengerHuntImage", title: "ScavengerHunt")
-                    .onTapGesture {
+                    EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary") {
+                        router.push(.imageBasedTaskNearMePage)
+                    }.frame(width: .infinity)
+                    EducationalGameTile(image: "scavengerHuntImage", title: "ScavengerHunt") {
                         router.push(.scavengerHuntInfoPage)
                     }
+                }
             }
             Spacer()
         }
@@ -29,25 +32,32 @@ struct EducationalGamesPage: View {
 struct EducationalGameTile: View {
     var image: String
     var title: String
+    let action: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            ZStack(alignment: .topLeading) {
-                Image(image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 200)
-                    .clipped()
-                    .cornerRadius(16)
-            }
-            Text(title)
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
+        VStack(alignment: .center, spacing: 8) {
+            Button(action: {
+                action()
+            }, label: {
+                VStack {
+                    Image(image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: .infinity, height: 150)
+                        .clipped()
+                        .cornerRadius(16)
+                    
+                    Text(title)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                .padding()
+                .background(Color.black)
+                .cornerRadius(16)
+                .frame(width: .infinity)
+            })
+            
         }
-        .padding()
-        .background(Color.black)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
     }
 }

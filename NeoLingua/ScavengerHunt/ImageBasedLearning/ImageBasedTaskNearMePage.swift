@@ -23,7 +23,7 @@ struct ImageBasedTaskNearMePage: View {
                 }.ignoresSafeArea(edges: .all)
                 VStack {
                     HStack {
-                        Text("ⓘ Click on the image icon to see the image")
+                        Text("ⓘ Tippe auf das Icon um die Bilder zu sehen")
                             .font(.body)
                             .foregroundColor(.white)
                         Image(systemName: "photo.circle.fill")

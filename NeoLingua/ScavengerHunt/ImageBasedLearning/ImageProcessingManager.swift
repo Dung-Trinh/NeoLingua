@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import SwiftOpenAI
 import FirebaseStorage
 import Alamofire
@@ -305,6 +306,22 @@ enum EvaluationStatus: String, Codable {
     case correct
     case wrong
     case almostCorrect
+    
+    var color: Color {
+        switch self {
+            case.correct: .green
+            case .wrong: .red
+            case .almostCorrect: .orange
+        }
+    }
+    
+    var text: String {
+        switch self {
+            case.correct: "correct ✅"
+            case .wrong: "wrong ❌"
+            case .almostCorrect: "almost correct ⚠️"
+        }
+    }
 }
 
 struct InspectImageForVocabularyHint: Codable {

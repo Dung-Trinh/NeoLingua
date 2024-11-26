@@ -126,7 +126,7 @@ class ScavengerHuntManager: TaskManager {
     let locationManager = LocationManager()
     let db = Firestore.firestore()
     
-    func generateScavengerHuntNearMe() async throws -> ScavengerHunt {
+    func generateScavengerHuntNearMe(radius: Int) async throws -> ScavengerHunt {
         if CommandLine.arguments.contains("--useMockData") {
             return TestData.scavengerHunt
         }
@@ -141,7 +141,8 @@ class ScavengerHuntManager: TaskManager {
         let url = "http://localhost:3000/locationAgent"
         let parameters: [String: Any] = [
             "latitude": location.latitude,
-            "longitude": location.longitude
+            "longitude": location.longitude,
+            "radius": radius
         ]
         
         do {
