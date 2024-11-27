@@ -14,6 +14,7 @@ struct NearMeTaskPage: View {
                     Text("There are \(viewModel.sharedImageTask.vocabulary.count) vocabulary to be found.").font(.headline).multilineTextAlignment(.leading)
                     TextField("In the picture I see ...", text: $viewModel.userInput, axis: .vertical)
                         .lineLimit(2...4)
+                        .autocorrectionDisabled()
                         .textFieldStyle(.roundedBorder)
                     
                     if let result = viewModel.result {

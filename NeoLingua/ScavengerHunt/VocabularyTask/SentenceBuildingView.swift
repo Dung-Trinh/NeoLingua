@@ -14,7 +14,7 @@ struct SentenceBuildingView: View {
             VStack {
                 InfoCardView(message: "Combine the sentence components to form a sentence!").padding(.bottom, Styleguide.Margin.large)
                 VStack(alignment: .leading) {
-                    Text("Translation")
+                    Text("Translation:").bold()
                     Text(exercise.translation)
                 }.padding(.bottom, Styleguide.Margin.large)
                 Text("ⓘ Tap the words in the correct order").font(.headline)

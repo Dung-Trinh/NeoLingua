@@ -9,10 +9,11 @@ struct WriteVocabularyView: View {
             InfoCardView(message: "Fill in the blanks to complete the sentence.").padding(.bottom, Styleguide.Margin.small)
             Text(exercise.question)
             VStack {
-                Text("Translation:")
+                Text("Translation:").bold()
                 Text(exercise.translation)
             }
             TextField("your answer ...", text: $userInputText)
+                .autocorrectionDisabled()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
         }.padding()
     }

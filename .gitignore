@@ -63,3 +63,5 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
+NeoLingua/Assets.xcassets/contextBasedLearning.imageset/contextBasedLearningImage.jpeg
+NeoLingua/Assets.xcassets/vocabularyImage.imageset/snapVocabularyImage.jpeg

@@ -150,13 +150,11 @@ struct TaskLocationPage: View {
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
-        .sheet(isPresented: $viewModel.isSheetPresented, onDismiss: {
-            router.navigateBack()
-        }) {
+        .sheet(isPresented: $viewModel.isSheetPresented) {
             if viewModel.numberOfAttempts < 0
             {
                 VStack {
-                    Text("Unfortunately you did not provide the correct image 3 times. Continue with other tasks")
+                    Text("Unfortunately you did not provide the correct image 3 times. Continue with other tasks").font(.headline)
                     PrimaryButton(
                         title: "Back to map",
                         color: .blue,
@@ -217,15 +215,17 @@ struct ImageValidationResultView: View {
                     Text("\(validationResult.confidenceScore * 100, specifier: "%.1f")%")
                         .font(.subheadline)
                 }
-                VStack(alignment: .leading) {
-                    Text("🔎 Reason:")
-                        .font(.headline)
-                        .bold()
-                        .multilineTextAlignment(.leading)
-                    
-                    Text(validationResult.reason)
-                        .font(.subheadline)
-                        .multilineTextAlignment(.leading)
+                if validationResult.reason != "" {
+                    VStack(alignment: .leading) {
+                        Text("🔎 Reason:")
+                            .font(.headline)
+                            .bold()
+                            .multilineTextAlignment(.leading)
+                        
+                        Text(validationResult.reason)
+                            .font(.subheadline)
+                            .multilineTextAlignment(.leading)
+                    }
                 }
             }
             .padding()

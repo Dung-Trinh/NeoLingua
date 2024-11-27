@@ -107,6 +107,7 @@ struct ConversationSimulationPage: View {
                         })
                 case .text:
                     TextField("Eingabe", text: $viewModel.messageText)
+                        .autocorrectionDisabled()
                         .textFieldStyle(.roundedBorder)
                     Button("send Message") {
                         Task {

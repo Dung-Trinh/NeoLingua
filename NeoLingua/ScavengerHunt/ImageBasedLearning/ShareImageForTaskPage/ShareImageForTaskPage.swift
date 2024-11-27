@@ -20,6 +20,7 @@ struct ShareImageForTaskPage: View {
                         
                         Text("Enter your vocabulary for the image").font(.headline)
                         TextField("vocabulary1, vocabulary2 ...", text: $viewModel.vocabulary)
+                            .autocorrectionDisabled()
                             .textFieldStyle(.roundedBorder)
                         Button("Check answer") {
                             Task {
@@ -52,7 +53,9 @@ struct ShareImageForTaskPage: View {
                                                     viewModel.addVocabulary(vocabulary: vocabulary.name)
                                                 }
                                             }
-                                        Text(.init("(\(vocabulary.improvement ?? ""))"))
+                                        if let improvement = vocabulary.improvement{
+                                            Text(.init("(\(improvement))"))
+                                        }
                                     }
                                 }
                             }
@@ -93,13 +96,15 @@ struct ShareImageForTaskPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $viewModel.isSheetPresented) {
             VStack {
-                Text("Thanks for sharing")
+                Text("Thanks for sharing").font(.headline).bold()
                 LottieView(animation: .named("checkAnimation"))
                     .playing()
                     .frame(width: 50, height: 50)
-                Button("back to menu") {
-                    router.navigateToRoot()
-                }
+                PrimaryButton(
+                    title: "Back to menu",
+                    color: .blue,
+                    action: { router.navigateToRoot() }
+                )
             }.presentationDetents([.fraction(0.25)])
         }
     }

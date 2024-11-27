@@ -74,7 +74,7 @@ struct ImageBasedLearningPage: View {
                                         .stroke(Color.accentColor, lineWidth: 1)
                                 )
                             })
-                            .if(viewModel.userPerformance?.vocabularyTraining != nil, transform: {
+                            .if(viewModel.userPerformance?.listeningComprehension != nil, transform: {
                                 view in
                                 view.disabled(true)
                             })
@@ -176,6 +176,7 @@ struct ImageBasedLearningPage: View {
                                 .foregroundColor(.gray)
                             TextField("Prompt...", text: $viewModel.promptText, axis: .vertical)
                                 .lineLimit(2...)
+                                .autocorrectionDisabled()
                                 .textFieldStyle(.roundedBorder)
                             taskSelection
                             Button("Aufgabe erstellen") {

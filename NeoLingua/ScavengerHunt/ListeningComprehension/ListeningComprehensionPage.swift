@@ -23,6 +23,7 @@ struct ListeningComprehensionPage: View {
                                     if viewModel.answers.count > index {
                                         HStack {
                                             TextField("Your answer...", text: $viewModel.answers[index])
+                                                .autocorrectionDisabled()
                                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                             
                                             if viewModel.evaluatedQuestion.count > 0 {

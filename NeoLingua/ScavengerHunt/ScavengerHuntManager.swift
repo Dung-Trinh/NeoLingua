@@ -122,7 +122,6 @@ struct ScavengerHuntResponse: Codable{
 }
 
 class ScavengerHuntManager: TaskManager {
-    let assistantID = ProdENV().TASK_ASSISTANT_ID
     let locationManager = LocationManager()
     let db = Firestore.firestore()
     

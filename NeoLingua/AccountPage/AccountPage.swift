@@ -8,7 +8,7 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
     
     var body: some View {
         VStack {
-            Text("Profile").font(.title)            
+            Text("Profile").font(.title).bold()
             if let profileData = viewModel.profileData {
                 VStack {
                     Image(systemName:"person.crop.circle.fill")
@@ -94,7 +94,7 @@ struct LevelView: View {
                     .foregroundColor(.blue)
             }
             
-            ProgressView(value: 0.95)
+            ProgressView(value: 0.75)
                 .progressViewStyle(LinearProgressViewStyle(tint: .blue))
                 .frame(height: 16)
                 .padding(.vertical, 4)

@@ -1,4 +1,5 @@
 import SwiftUI
+import Lottie
 
 struct ScavengerHuntOverviewPage: View {
     @EnvironmentObject private var router: Router
@@ -82,7 +83,7 @@ struct ScavengerHuntOverviewPage: View {
                             if let scavengerHuntState = viewModel.currentScavengerHunt?.scavengerHuntState {
                                 Text("Locations")
                                     .font(.title)
-                                    ForEach(scavengerHuntState.locationTaskPerformance, id: \.self.locationId) {
+                                ForEach(scavengerHuntState.locationTaskPerformance, id: \.self.locationId) {
                                     locationPerformance in
                                     VStack {
                                         Text(locationPerformance.locationName)
@@ -120,11 +121,13 @@ struct ScavengerHuntOverviewPage: View {
                                         Text("\(locationPerformance.getPointsForLocationPerformance(), specifier: "%.2f") / 100 points")
                                             .font(.headline)
                                             .padding(.top)
-                                        Button("Show leaderboard for this scavenger hunt") {
-                                            Task {
-                                                await viewModel.getScavengerHuntLeaderboard()
-                                            }
-                                        }.font(.body)
+                                        if viewModel.scavengerHuntType == .competitiveMode {
+                                            Button("Show leaderboard for this scavenger hunt") {
+                                                Task {
+                                                    await viewModel.getScavengerHuntLeaderboard()
+                                                }
+                                            }.font(.body)
+                                        }
                                         
                                     }
                                     .padding()
@@ -132,6 +135,10 @@ struct ScavengerHuntOverviewPage: View {
                                     .cornerRadius(12)
                                 }
                             }
+                            Spacer()
+                            LottieView(animation: .named("cupAnimation"))
+                                .looping()
+                                .frame(width: .infinity, height: 300)
                         }
                         Spacer()
                         Text("Final Score: \(String(format: "%.2f", viewModel.getFinalScore()))")

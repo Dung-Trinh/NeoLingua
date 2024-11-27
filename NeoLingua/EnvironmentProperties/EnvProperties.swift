@@ -50,10 +50,6 @@ class ProdENV: BaseENV, APIKeyable {
         dict.object(forKey: "LISTENING_COMPREHENSION_ASSISTANT_ID") as? String ?? ""
     }
     
-    var TASK_ASSISTANT_ID: String {
-        dict.object(forKey: "TASK_ASSISTANT_ID") as? String ?? ""
-    }
-    
     var CONTEXT_BASED_LEARNING_ASSISTANT_ID: String {
         dict.object(forKey: "CONTEXT_BASED_LEARNING_ASSISTANT_ID") as? String ?? ""
     }
