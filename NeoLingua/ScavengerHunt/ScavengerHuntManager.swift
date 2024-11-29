@@ -125,7 +125,7 @@ class ScavengerHuntManager: TaskManager {
     let locationManager = LocationManager()
     let db = Firestore.firestore()
     
-    func generateScavengerHuntNearMe(radius: Int) async throws -> ScavengerHunt {
+    func generateScavengerHuntNearMe(radius: Int, taskLocationAmount: Int = 1) async throws -> ScavengerHunt {
         if CommandLine.arguments.contains("--useMockData") {
             return TestData.scavengerHunt
         }
@@ -137,11 +137,12 @@ class ScavengerHuntManager: TaskManager {
             throw NSError(domain: "no location found", code: 400)
         }
         print("currentLocation:", location)
-        let url = "http://localhost:3000/locationAgent"
+        let url = "http://127.0.0.1:5001/neolingua/us-central1/createScavengerHunt"
         let parameters: [String: Any] = [
             "latitude": location.latitude,
             "longitude": location.longitude,
-            "radius": radius
+            "radius": radius,
+            "taskLocationAmount": taskLocationAmount
         ]
         
         do {

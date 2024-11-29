@@ -7,7 +7,8 @@ struct ScavengerHuntInfoPage: View {
     @State var userLocation: CLLocationCoordinate2D?
     @State var radius: Double = 200.0
     @State var isCustomRadiusActive: Bool = false
-    
+    @State var locationAmount: Int = 1
+
     var body: some View {
         ScrollView {
             VStack(alignment: .center) {
@@ -43,13 +44,23 @@ struct ScavengerHuntInfoPage: View {
                         Text("Radius(\(String(format: "%.0f",radius))m)")
                         Slider(value: $radius, in: 200...2000, step: 100)
                     }
+                    HStack {
+                        Text("Anzahl der Standorte")
+                        Spacer(minLength: 8)
+                        Picker("Anzahl der Locations", selection: $locationAmount) {
+                            ForEach(1...3, id: \.self) { amount in
+                                Text("\(amount)").tag(amount)
+                            }
+                        }
+                    }
+
                 }.padding(.bottom)
                 
                 PrimaryButton(
                     title: "Schnitzeljagd in der Umgebung generieren",
                     color: .blue,
                     action: {
-                        router.push(.scavengerHunt(.scavengerHunt(.generatedNearMe(Int(radius)))))
+                        router.push(.scavengerHunt(.scavengerHunt(.generatedNearMe(Int(radius),locationAmount))))
                     }
                 )
                 

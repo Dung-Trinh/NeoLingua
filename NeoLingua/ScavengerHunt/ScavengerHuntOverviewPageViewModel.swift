@@ -29,17 +29,17 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
         defer { isLoading = false }
 
         switch scavengerHuntType {
-        case .generatedNearMe(let radius):
-            await generateScavengerHuntNearMe(radius: radius)
+        case .generatedNearMe(let radius, let taskLocationAmount):
+            await generateScavengerHuntNearMe(radius: radius, taskLocationAmount: taskLocationAmount)
         case .competitiveMode:
             await fetchCompetitiveScavengerHunts()
         }
     }
     
-    func generateScavengerHuntNearMe(radius: Int) async {
+    func generateScavengerHuntNearMe(radius: Int, taskLocationAmount: Int) async {
         print("generateScavengerHuntNearMe: ", radius)
         do {
-            currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe(radius: radius)
+            currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe(radius: radius, taskLocationAmount: taskLocationAmount)
             try await setupscavengerHunt()
         } catch {
             print("fetchScavengerHunt error: ", error.localizedDescription)

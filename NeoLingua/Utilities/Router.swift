@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum ScavengerHuntType: Hashable {
-    case generatedNearMe(Int)
+    case generatedNearMe(Int, Int)
     case competitiveMode
 }
 
