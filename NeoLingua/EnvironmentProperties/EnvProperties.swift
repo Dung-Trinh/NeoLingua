@@ -58,6 +58,10 @@ class ProdENV: BaseENV, APIKeyable {
         dict.object(forKey: "IMAGE_ANALYZER_ASSISTANT_ID") as? String ?? ""
     }
     
+    var SCAVENGER_HUNT_SERVICE_API_KEY: String {
+        dict.object(forKey: "SCAVENGER_HUNT_SERVICE_API_KEY") as? String ?? ""
+    }
+    
     init() {
         super.init(resourceName: "Env-Properties")
     }

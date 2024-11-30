@@ -137,7 +137,7 @@ class ScavengerHuntManager: TaskManager {
             throw NSError(domain: "no location found", code: 400)
         }
         print("currentLocation:", location)
-        let url = "http://127.0.0.1:5001/neolingua/us-central1/createScavengerHunt"
+        let url = "URL"
         let parameters: [String: Any] = [
             "latitude": location.latitude,
             "longitude": location.longitude,
@@ -145,25 +145,22 @@ class ScavengerHuntManager: TaskManager {
             "taskLocationAmount": taskLocationAmount
         ]
         
-        do {
-            let response = try await AF.request(url, parameters: parameters)
-                .serializingString()
-                .value
-            
-            guard let data = response.data(using: .utf8) else {
-                throw "Failed to convert JSON string to Data."
-            }
-            
-            let scavengerHunt = try JSONDecoder().decode(ScavengerHuntResponse.self, from: data)
-            
-            print("Decoded Data: \(scavengerHunt)")
-            return scavengerHunt.scavengerHunt
-            
-        } catch {
-            print("Error decoding data: \(error)")
+        let headers: HTTPHeaders = [
+            "x-api-key": ProdENV().SCAVENGER_HUNT_SERVICE_API_KEY
+        ]
+        
+        let response = try await AF.request(url, parameters: parameters, headers: headers)
+            .serializingString()
+            .value
+                
+        guard let data = response.data(using: .utf8) else {
+            throw "Failed to convert JSON string to Data."
         }
         
-        throw "fetchScavengerHuntNearMe error"
+        let scavengerHunt = try JSONDecoder().decode(ScavengerHuntResponse.self, from: data)
+        
+        print("Decoded Data: \(scavengerHunt)")
+        return scavengerHunt.scavengerHunt
     }
     
     func fetchCompetitiveScavengerHunts() async throws -> [ScavengerHunt] {
@@ -184,7 +181,7 @@ class ScavengerHuntManager: TaskManager {
             throw "fetchScavengerHuntById document not found"
         }
         
-        var scavengerHunt = try document.data(as: ScavengerHunt.self)
+        let scavengerHunt = try document.data(as: ScavengerHunt.self)
         return scavengerHunt
     }
     
