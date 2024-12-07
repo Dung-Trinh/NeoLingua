@@ -12,7 +12,7 @@ struct SentenceBuildingView: View {
     var body: some View {
         VStack(spacing: Styleguide.Margin.large) {
             VStack {
-                InfoCardView(message: "Combine the sentence components to form a sentence!").padding(.bottom, Styleguide.Margin.large)
+                InfoCardView(message: "Verbinden Sie die Satzteile zu einem Satz!").padding(.bottom, Styleguide.Margin.large)
                 VStack(alignment: .leading) {
                     Text("Translation:").bold()
                     Text(exercise.translation)

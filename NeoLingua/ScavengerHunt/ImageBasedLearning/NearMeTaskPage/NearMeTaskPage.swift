@@ -11,7 +11,7 @@ struct NearMeTaskPage: View {
                 VStack {
                     AsyncImageView(imageUrl: viewModel.sharedImageTask.imageUrl)
                         .frame(width: .infinity, height: 400)
-                    InfoCardView(message: "What do you see in the picture? Which vocabulary can you identify from the picture? Describe the picture!").padding(Styleguide.Margin.medium)
+                    InfoCardView(message: "Was sehen Sie auf dem Bild? Welche Vokabeln kannst du auf dem Bild erkennen? Beschreiben Sie das Bild!").padding(Styleguide.Margin.medium)
                     Text("There are \(viewModel.sharedImageTask.vocabulary.count) vocabulary to be found.").font(.headline).multilineTextAlignment(.leading)
                     TextField("In the picture I see ...", text: $viewModel.userInput, axis: .vertical)
                         .lineLimit(2...4)
@@ -21,7 +21,7 @@ struct NearMeTaskPage: View {
                     if let result = viewModel.result {
                         InspectImageResultView(resultData: result, searchedVocabulary: viewModel.sharedImageTask.vocabulary, lastUserInput: viewModel.lastUserInput)
                         if result.foundSearchedVocabulary {
-                            Text("💎 You received  \(viewModel.finalPoints, specifier: "%.2f") points 💎").font(.headline)
+                            Text("💎 Sie haben  \(viewModel.finalPoints, specifier: "%.2f") Punkte erhalten 💎").font(.headline)
                         }
                     }
                     
@@ -35,7 +35,7 @@ struct NearMeTaskPage: View {
                     
                     if viewModel.hint != "" {
                         InfoCardView(
-                            title: "Hint",
+                            title: "Hinweis",
                             message: viewModel.hint,
                             type: .hint
                         )

@@ -9,7 +9,7 @@ struct ListeningComprehensionPage: View {
     var body: some View {
         ScrollView {
             VStack {
-                InfoCardView(message: "Listen to the text carefully. Respond to the following questions when you're ready.").padding(.bottom, Styleguide.Margin.large)
+                InfoCardView(message: "Hören Sie sich den Text aufmerksam an. Beantworten Sie die folgenden Fragen, wenn Sie bereit sind.").padding(.bottom, Styleguide.Margin.large)
                 VStack(alignment: .leading) {
                     AudioPlayerView(player: $viewModel.audioPlayer.audioPlayer).padding(.bottom, Styleguide.Margin.small)
                     

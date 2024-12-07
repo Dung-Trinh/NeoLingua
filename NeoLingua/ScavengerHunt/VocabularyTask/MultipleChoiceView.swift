@@ -9,7 +9,7 @@ struct MultipleChoiceView: View {
 
     var body: some View {
         VStack {
-            InfoCardView(message: "Select the correct word to complete the sentence!").padding(.bottom, Styleguide.Margin.large)
+            InfoCardView(message: "Wählen Sie das richtige Wort aus, um den Satz zu vervollständigen!").padding(.bottom, Styleguide.Margin.large)
             Text(exercise.question)
             VStack(spacing: Styleguide.Margin.extraLarge){
                 ForEach(0..<exercise.selectableWords.count, id: \.self) { index in

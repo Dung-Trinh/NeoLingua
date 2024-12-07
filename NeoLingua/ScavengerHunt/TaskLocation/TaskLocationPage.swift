@@ -96,7 +96,7 @@ struct TaskLocationPage: View {
                 VStack(alignment: .center, spacing: Styleguide.Margin.medium) {
                     VStack {
                         InfoCardView(
-                            title: "Hint for the object",
+                            title: "Hinweis auf das gesuchte Objekt",
                             message: location.photoClue,
                             type: .hint
                         )

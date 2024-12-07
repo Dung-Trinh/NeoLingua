@@ -11,7 +11,7 @@ struct ShareImageForTaskPage: View {
             ScrollView {
                 VStack(spacing: 16){
                     VStack {
-                        InfoCardView(message: "Write down the vocabulary you see in the picture. e.g: vocabulary1, vocabulary2").padding(.bottom, Styleguide.Margin.large)
+                        InfoCardView(message: "Schreiben Sie die Vokabeln auf, die Sie auf dem Bild sehen, z.B.: Vokabel1, Vokabel2").padding(.bottom, Styleguide.Margin.large)
                         
                         Image(uiImage: viewModel.sharedContentForTask.image)
                             .resizable()
@@ -31,10 +31,10 @@ struct ShareImageForTaskPage: View {
                     
                     if viewModel.verifiedVocabular.count > 0 {
                         VStack{
-                            Text("ⓘ Click to approve the vocabulary").font(.headline)
+                            Text("ⓘ Klicken Sie, um die Vokabeln zu bestätigen").font(.headline)
                             VStack {
-                                Text("✅ = is visible in the picture")
-                                Text("❌ = is not visible in the picture")
+                                Text("✅ = ist auf dem Bild sichtbar")
+                                Text("❌ = ist auf dem Bild nicht sichtbar")
                             }
                             .font(.subheadline)
                             .foregroundColor(.gray)
@@ -64,7 +64,7 @@ struct ShareImageForTaskPage: View {
                     
                     if viewModel.approvedVocabulary.count > 0 {
                         VStack {
-                            Text("Your selection for the new SnapVocabulary task").bold()
+                            Text("Ihre Auswahl für die neue SnapVocabulary Aufgabe").bold()
                             HStack {
                                 Text(viewModel.approvedVocabulary.description).padding(Styleguide.Margin.small)
                                 Image(systemName: "trash.fill")
@@ -78,13 +78,15 @@ struct ShareImageForTaskPage: View {
                 }
             }
             Spacer()
-            PrimaryButton(
-                title: "Create new SnapVocabulary task",
-                color: .blue,
-                action: {
-                    viewModel.saveContent()
-                }
-            )
+            if viewModel.approvedVocabulary.count > 0 {
+                PrimaryButton(
+                    title: "Create new SnapVocabulary task",
+                    color: .blue,
+                    action: {
+                        viewModel.saveContent()
+                    }
+                )
+            }
             if viewModel.isLoading {
                 ActivityIndicatorView(isVisible: .constant(true), type: .scalingDots(count: 3, inset: 2))
                     .frame(width: 50.0, height: 50.0)
