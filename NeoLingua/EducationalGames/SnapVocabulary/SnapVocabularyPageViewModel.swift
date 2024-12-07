@@ -1,9 +1,9 @@
-import Foundation
-
-
-protocol SnapVocabularyPageViewModel: ObservableObject {
-
-}
-
-class SnapVocabularyPageViewModelImpl: SnapVocabularyPageViewModel {
-}
+//import Foundation
+//
+//
+//protocol SnapVocabularyPageViewModel: ObservableObject {
+//
+//}
+//
+//class SnapVocabularyPageViewModelImpl: SnapVocabularyPageViewModel {
+//}

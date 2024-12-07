@@ -9,8 +9,9 @@ struct NearMeTaskPage: View {
         VStack {
             ScrollView {
                 VStack {
-                    AsyncImageView(imageUrl: viewModel.sharedImageTask.imageUrl).frame(maxWidth: .infinity, maxHeight: 300)
-                    InfoCardView(message: "What do you see in the picture? Which vocabulary can you identify from the picture? Describe the picture!").padding(.bottom, Styleguide.Margin.medium)
+                    AsyncImageView(imageUrl: viewModel.sharedImageTask.imageUrl)
+                        .frame(width: .infinity, height: 400)
+                    InfoCardView(message: "What do you see in the picture? Which vocabulary can you identify from the picture? Describe the picture!").padding(Styleguide.Margin.medium)
                     Text("There are \(viewModel.sharedImageTask.vocabulary.count) vocabulary to be found.").font(.headline).multilineTextAlignment(.leading)
                     TextField("In the picture I see ...", text: $viewModel.userInput, axis: .vertical)
                         .lineLimit(2...4)

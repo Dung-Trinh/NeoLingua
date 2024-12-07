@@ -3,6 +3,8 @@ import Foundation
 
 struct ConversationResponse: Codable {
     let endOfConversation: Bool?
+    let correctionOfUserInput: String?
+    let explanation: String?
     let answer: String
 }
 

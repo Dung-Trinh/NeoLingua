@@ -109,6 +109,13 @@ actor SpeechRecognizer: ObservableObject {
         try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = audioEngine.inputNode
         
+        do {
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
+            try audioSession.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
+            try audioSession.setActive(true)
+           } catch _ {
+        }
+        
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(
             onBus: 0,

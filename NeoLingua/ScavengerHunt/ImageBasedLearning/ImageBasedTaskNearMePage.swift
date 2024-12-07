@@ -15,9 +15,11 @@ struct ImageBasedTaskNearMePage: View {
                             viewModel.showMarkerDetails(marker: task)
                         }) {
                             Image(systemName: "photo.circle.fill")
+                                .renderingMode(.original)
                                 .resizable()
                                 .frame(width: 30, height: 30)
-                                .foregroundColor(.red)
+                                .foregroundColor(.indigo)
+                                
                         }
                     }
                 }.ignoresSafeArea(edges: .all)
@@ -29,7 +31,7 @@ struct ImageBasedTaskNearMePage: View {
                         Image(systemName: "photo.circle.fill")
                             .resizable()
                             .frame(width: 30, height: 30)
-                            .foregroundColor(.red)
+                            .foregroundColor(.indigo)
                     }.padding()
                     .background(RoundedRectangle(cornerRadius: 15)
                         .fill(Color.black.opacity(0.8)))

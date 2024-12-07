@@ -173,6 +173,6 @@ class TestData {
             ]
         )
     ])
-    static let conversationResponse: ConversationResponse = ConversationResponse(endOfConversation: true, answer: "test done i think so")
+    static let conversationResponse: ConversationResponse = ConversationResponse(endOfConversation: true, correctionOfUserInput: nil, explanation: nil, answer: "test done i think so")
     static let conversationIntroResponse: IntroResponse = .init(introText: "You've just entered a McDonald's and are greeted by a friendly cashier behind the counter. There's a digital menu overhead showcasing various options, like the Big Mac meal, Chicken McNuggets, and Quarter Pounder with Cheese. For drinks, you see options like Coke, Sprite, and Iced Tea. As you approach the counter, you begin to decide what you'd like to order. Don't forget, you can ask for modifications, such as extra sauce or no onions.")
 }

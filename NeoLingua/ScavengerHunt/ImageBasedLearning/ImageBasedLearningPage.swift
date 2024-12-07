@@ -165,6 +165,8 @@ struct ImageBasedLearningPage: View {
                                         .stroke(shouldShowPromptInput ? Color.green : Color.accentColor, lineWidth: 1)
                                 )
                         })
+                        Spacer(minLength: 50)
+                        Image("guyTalkingToBot").resizable().frame(height: 300).scaledToFit()
                     }
                     .frame(maxWidth: .infinity)
                     .padding()

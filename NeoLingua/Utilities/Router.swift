@@ -77,7 +77,7 @@ class Router: ObservableObject  {
         case .imageBasedLearningPage:
             ImageBasedLearningPage()
         case .snapVocabularyPage:
-            SnapVocabularyPage()
+            EmptyView()
         case .linguaQuestPage:
             LinguaQuestPage()
         case .imageBasedLearning(let taskRoute):

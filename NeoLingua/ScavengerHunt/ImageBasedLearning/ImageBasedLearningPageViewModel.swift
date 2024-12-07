@@ -4,6 +4,7 @@ import SwiftOpenAI
 import FirebaseStorage
 import _PhotosUI_SwiftUI
 import SwiftUI
+import Combine
 
 struct SharedContentForTask: Hashable {
     let image: UIImage
@@ -33,6 +34,7 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @Published var showCamera = false
     @Published var excludedTaskType: [TaskType] = []
     @Published var promptText: String = ""
+    private var cancellables = Set<AnyCancellable>()
 
     private var imageCoordinates: Location?
     var sharedImageForTask: SharedContentForTask? {
@@ -51,6 +53,16 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     @State private var selectedImageURLS: [URL] = []
     @State private var selectedImages: [Image] = []
 
+    init() {
+        $selectedImage
+            .sink { [weak self] newImage in
+                if newImage != nil {
+                    self?.state = .imageSelected
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
     @MainActor
     func convertDataToImage() {
         selectedImage = nil
@@ -68,7 +80,6 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
             }
         }
         selectedPhotos.removeAll()
-        state = .imageSelected
     }
     
     func createTasksWithPrompt() async {

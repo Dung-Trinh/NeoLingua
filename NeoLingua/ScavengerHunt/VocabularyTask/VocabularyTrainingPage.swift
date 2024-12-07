@@ -90,12 +90,16 @@ struct VocabularyTrainingPage: View {
                 ResultSheetView(viewModel: viewModel.sheetViewModel!)
                     .presentationDetents([.fraction(0.40)])
                     .sheet(isPresented: $viewModel.isExplanationSheetPresented, content: {
-                        VStack {
-                            Text("Nutzereingabe:")
-                            Text(viewModel.userInputText).padding(.bottom, Styleguide.Margin.small)
-                            Text("Erklärung des Fehlers").bold()
-                            Text(.init(viewModel.explanationText))
-                        }.padding()
+                        ScrollView {
+                            VStack {
+                                Text("Nutzereingabe:").font(.headline).bold().foregroundColor(.red)
+                                Text(viewModel.userInputText).padding(.bottom, Styleguide.Margin.medium)
+                                Text("Erklärung des Fehlers").bold().foregroundColor(.indigo)
+                                Text(.init(viewModel.explanationText)).padding(.bottom, Styleguide.Margin.extraLarge)
+                                Image("explanationImage").resizable().scaledToFit().frame(height: 200)
+                            }
+                            .padding()
+                        }
                     })
             } else {
                 EmptyView()

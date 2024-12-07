@@ -40,7 +40,7 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
                 }
             }
 
-            //await createSpeech()
+            await createSpeech()
         } catch {
             print("fetchListeningComprehensionTask error: ", error.localizedDescription)
         }
