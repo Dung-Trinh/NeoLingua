@@ -9,13 +9,13 @@ struct EducationalGamesPage: View {
             Text("Educational Games").font(.title).bold()
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
-                    EducationalGameTile(image: "contextBasedLearning", title: "Context-based-tasks") {
+                    EducationalGameTile(image: "contextBasedLearning", title: "Kontextbasiertes Lernen") {
                         router.push(.imageBasedLearningPage)
                     }
                     EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary") {
                         router.push(.imageBasedTaskNearMePage)
                     }.frame(width: .infinity)
-                    EducationalGameTile(image: "scavengerHuntHelpImage", title: "ScavengerHunt") {
+                    EducationalGameTile(image: "scavengerHuntHelpImage", title: "Schnitzeljagd") {
                         router.push(.scavengerHuntInfoPage)
                     }
                 }
