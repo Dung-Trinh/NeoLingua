@@ -37,7 +37,7 @@ struct TaskTile: View {
             Spacer()
         }
         .padding()
-        .background(Color(.systemGray6))
+        .background(Color(.systemGray5))
         .cornerRadius(12)
     }
 }

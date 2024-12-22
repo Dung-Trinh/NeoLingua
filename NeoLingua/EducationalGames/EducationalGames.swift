@@ -59,7 +59,6 @@ struct EducationalGameTile: View {
                 .shadow(color: blueColor.opacity(0.4), radius: 8, x: 0, y: 4)
                 .frame(width: .infinity)
             })
-            
         }
     }
 }

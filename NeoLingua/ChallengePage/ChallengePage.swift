@@ -25,6 +25,7 @@ struct ChallengePage: View {
                 }
                 
             }
-        }.padding()
+        }
+        .padding()
     }
 }
