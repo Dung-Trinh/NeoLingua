@@ -17,7 +17,7 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
                     }
                 ChallengePage()
                     .tabItem {
-                        Label("Tasks", systemImage: "list.bullet.clipboard.fill")
+                        Label("Challenges", systemImage: "list.bullet.clipboard.fill")
                     }
                 UserStatsDashboardPage(viewModel: UserStatsDashboardPageViewModellImpl())
                     .tabItem {

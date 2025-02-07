@@ -14,7 +14,7 @@ protocol SignupUserDataPageViewModel: ObservableObject {
 }
 
 class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
-    @Published var username: String = "Dee"
+    @Published var username: String = ""
     @Published var interestsInputText: String = ""
     @Published var learningGoals: [String] = []
     @Published var estimationOfDailyUse: Int = 15
@@ -26,10 +26,10 @@ class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
         ChipViewModel(text: "Hören")
     ]
     @Published var complexSkills: [ChipViewModel] = [
-        ChipViewModel(text: "Wortschatz erweitern"),
+        ChipViewModel(text: "Wortschatz "),
         ChipViewModel(text: "Aussprache"),
-        ChipViewModel(text: "Grammatikbeherrschung"),
-        ChipViewModel(text: "Konversationssicherheit")
+        ChipViewModel(text: "Grammatik"),
+        ChipViewModel(text: "Gesprächsführung")
     ]
     @Published var estimationOfDailyUseTime: [Int] = [5,15,30,60]
     @Published var isLoading = false

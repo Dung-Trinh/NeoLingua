@@ -5,14 +5,14 @@ struct SignupUserDataPage<ViewModel>: View where ViewModel: SignupUserDataPageVi
     @EnvironmentObject private var router: Router
 
     var body: some View {
-        VStack {
-            Text("SignupUserDataPage")
+        VStack(spacing: Styleguide.Margin.small) {
+            Text("Persöhnliche Daten")
             usernameInputField
-            goalsInputField
+            interestInputField
             Spacer()
             PrimaryButton(
                 title: "Weiter",
-                color: Styleguide.PrimaryColor.purple,
+                color: .blue,
                 action: {
                     Task {
                         await viewModel.saveUserData()
@@ -31,21 +31,21 @@ struct SignupUserDataPage<ViewModel>: View where ViewModel: SignupUserDataPageVi
     private var usernameInputField: some View {
         BasicInputField(
             input: $viewModel.username,
-            title: "Username",
-            placeholderText: "Username",
+            title: "Benutzername",
+            placeholderText: "Benutzername",
             iconName: "person.fill",
             isSecurityField: false
         )
     }
     
     @ViewBuilder
-    private var goalsInputField: some View {
+    private var interestInputField: some View {
         VStack {
             BasicInputField(
                 input: $viewModel.interestsInputText,
-                title: "Ziele",
+                title: "Interessen",
                 placeholderText: "lesen, malen, Serien schauen",
-                iconName: "person.fill",
+                iconName: "eyes",
                 isSecurityField: false
             )
             Text("Welche grundlegenden Sprachfähigkeiten möchten Sie verbessern?")

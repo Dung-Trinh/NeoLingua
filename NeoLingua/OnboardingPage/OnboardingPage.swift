@@ -9,13 +9,11 @@ struct OnboardingPage<ViewModel>: View where ViewModel: OnboardingPageViewModel 
             path: $router.routes
         ) {
             VStack(alignment: .center) {
-                TabView {
-                    ForEach(viewModel.carouselContent) { content in
-                        //CarouselView(content: content)
-                    }
-                }
-                .tabViewStyle(.page)
-                .indexViewStyle(.page(backgroundDisplayMode: .always))
+                Text("Sprachen lernen mit").font(.title).bold()
+                Text("NeoLingua").font(.title).bold().padding(.bottom,100)
+
+                Image("guyTalkingToBot").resizable().frame(height: 300).scaledToFit()
+                Spacer()
                 buttonContainer
             }
             .padding()
@@ -31,15 +29,15 @@ struct OnboardingPage<ViewModel>: View where ViewModel: OnboardingPageViewModel 
     private var buttonContainer: some View {
         VStack(spacing: Styleguide.Margin.medium) {
             SecondaryButton(
-                title: "Sign up",
-                color: Styleguide.PrimaryColor.purple,
+                title: "Registrieren",
+                color: .blue,
                 action: {
                     router.push(.loginSignup(.signup))
                 }
             )
             PrimaryButton(
-                title: "Login",
-                color: Styleguide.PrimaryColor.purple,
+                title: "Anmelden",
+                color: .blue,
                 action: {
                     router.push(.loginSignup(.login))
                 }

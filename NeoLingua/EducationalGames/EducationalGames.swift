@@ -13,7 +13,7 @@ struct EducationalGamesPage: View {
                         router.push(.imageBasedLearningPage)
                     }
                     EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary") {
-                        router.push(.imageBasedTaskNearMePage)
+                        router.push(.snapVocabularyPage)
                     }.frame(width: .infinity)
                     EducationalGameTile(image: "scavengerHuntHelpImage", title: "Schnitzeljagd") {
                         router.push(.scavengerHuntInfoPage)

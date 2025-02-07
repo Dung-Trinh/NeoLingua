@@ -21,11 +21,11 @@ struct ChipView: View {
     }
     
     func getBackgroundColor() -> Color {
-        return viewModel.isSelected ? .green : .gray
+        return viewModel.isSelected ? .green : .gray.opacity(0.8)
     }
     
     func getForegroundColor() -> Color {
-        return viewModel.isSelected ? .gray : .red
+        return viewModel.isSelected ? .white : .black
     }
 }
 

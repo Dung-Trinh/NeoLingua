@@ -32,6 +32,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
     private var points = 0
     var finalPoints: Double = 0
     var scorePercentage: Double = 0
+    
     init(
         prompt: String,
         router: Router

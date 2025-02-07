@@ -7,8 +7,8 @@ struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
     var body: some View {
         VStack {
             PageHeader(
-                title: "Log in",
-                subtitle: "Please enter your data."
+                title: "Anmeldung",
+                subtitle: "Bitte gebe deine Daten ein."
             )
             VStack(spacing: Styleguide.Margin.medium) {
                 emailInputField
@@ -19,38 +19,38 @@ struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
                     }
                 }
                 PrimaryButton(
-                    title: "Login",
-                    color: Styleguide.PrimaryColor.purple,
+                    title: "Anmelden",
+                    color: .blue,
                     action: {
                         Task {
                             await viewModel.didTappedLogin()
                         }
                     }
                 )
-                HStack {
-                    dividerLine
-                    Text("OR").foregroundColor(.gray)
-                    dividerLine
-                }
-                PrimaryButton(
-                    title: "Log in with Google",
-                    color: .gray.opacity(0.8),
-                    image: Image("googleLogo"),
-                    action: {
-                        Task {
-                            await viewModel.handleSignInButton(viewController: getRootViewController())
-                        }
-                    }
-                )
+//                HStack {
+//                    dividerLine
+//                    Text("OR").foregroundColor(.gray)
+//                    dividerLine
+//                }
+//                PrimaryButton(
+//                    title: "Log in with Google",
+//                    color: .gray.opacity(0.8),
+//                    image: Image("googleLogo"),
+//                    action: {
+//                        Task {
+//                            await viewModel.handleSignInButton(viewController: getRootViewController())
+//                        }
+//                    }
+//                )
             }
             
             Spacer()
             HStack {
-                Text("Don't have an account?").foregroundColor(.gray)
+                Text("Hast du noch kein Account?").foregroundColor(.gray)
                 Button {
                     router.push(.loginSignup(.signup))
                 } label: {
-                    Text("Sign up").foregroundColor(.black)
+                    Text("Jetzt registrieren").foregroundColor(.black)
                 }
             }
         }
@@ -75,7 +75,7 @@ struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
     private var passwordInputField: some View {
         BasicInputField(
             input: $viewModel.password,
-            title: "Password",
+            title: "Passwort",
             placeholderText: "Password",
             iconName: "lock",
             isSecurityField: true
