@@ -13,12 +13,12 @@ enum Route: Hashable {
     case homePage
     case onboardingPage
     case taskLocation
-    case imageBasedLearningPage
+    case contexBasedLearningPage
     case snapVocabularyPage
     case scavengerHuntInfoPage
     case linguaQuestPage
     case shareImageForTaskPage(SharedContentForTask)
-    case imageBasedLearning(LearningTaskRoute)
+    case contextBasedLearning(LearningTaskRoute)
 
     enum LoginSignupRoute: Hashable {
         case login
@@ -73,13 +73,13 @@ class Router: ObservableObject  {
             if let taskLocation = taskLocation {
                 TaskLocationPage(viewModel: TaskLocationPageViewModelImpl(taskLocation: taskLocation))
             }
-        case .imageBasedLearningPage:
-            ImageBasedLearningPage()
+        case .contexBasedLearningPage:
+            ContexBasedLearningPage()
         case .snapVocabularyPage:
             SnapVocabularyPage(viewModel: SnapVocabularyPageViewModelImpl())
         case .linguaQuestPage:
             LinguaQuestPage()
-        case .imageBasedLearning(let taskRoute):
+        case .contextBasedLearning(let taskRoute):
             handleLearningTaskRoute(taskRoute)
         case .shareImageForTaskPage(let sharedContentForTask):
             ShareImageForTaskPage(viewModel: ShareImageForTaskPageViewModelImpl(sharedContentForTask: sharedContentForTask))

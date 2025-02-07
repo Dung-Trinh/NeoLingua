@@ -8,7 +8,7 @@ class OpenAIServiceProvider {
     }()
 }
 
-class OpenAIServiceHelper {
+class OpenAIManager {
     let service = OpenAIServiceProvider.shared
     
     func getJsonResponseAfterRun(

@@ -14,10 +14,6 @@ struct NeoLinguaApp: App {
             } else {
                 OnboardingPage(viewModel: OnboardingPageViewModelImpl())
                     .environmentObject(router)
-
-//                    .onOpenURL { url in
-////                        GIDSignIn.sharedInstance.handle(url)
-//                    }
             }
         }
     }

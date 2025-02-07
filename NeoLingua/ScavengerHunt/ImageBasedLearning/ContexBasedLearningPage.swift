@@ -1,9 +1,9 @@
 import SwiftUI
 import _PhotosUI_SwiftUI
 
-struct ImageBasedLearningPage: View {
+struct ContexBasedLearningPage: View {
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel = ImageBasedLearningPageViewModelImpl()
+    @StateObject var viewModel = ContextBasedLearningPageViewModelImpl()
     @State var shouldShowPromptInput = false
     
     var body: some View {
@@ -34,7 +34,7 @@ struct ImageBasedLearningPage: View {
                         
                         if let vocabularyTraining = imageBasedTask.taskPrompt.vocabularyTraining {
                             Button(action: {
-                                router.push( .imageBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
+                                router.push( .contextBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
                             }, label: {
                                 HStack{
                                     Text(TaskType.vocabularyTraining.localizedText)
@@ -58,7 +58,7 @@ struct ImageBasedLearningPage: View {
                         
                         if let listeningComprehension = imageBasedTask.taskPrompt.listeningComprehension {
                             Button(action: {
-                                router.push( .imageBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
+                                router.push( .contextBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
                             }, label: {
                                 HStack{
                                     Text(TaskType.listeningComprehension.localizedText)
@@ -82,7 +82,7 @@ struct ImageBasedLearningPage: View {
                         
                         if let conversationSimulation = imageBasedTask.taskPrompt.conversationSimulation {
                             Button(action: {
-                                router.push(.imageBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
+                                router.push(.contextBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
                             }, label: {
                                 HStack{
                                     Text(TaskType.conversationSimulation.localizedText)

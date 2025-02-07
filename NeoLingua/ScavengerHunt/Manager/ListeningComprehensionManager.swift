@@ -3,7 +3,7 @@ import SwiftOpenAI
 
 class TaskManager {
     let service = OpenAIServiceProvider.shared
-    let openAiServiceHelper = OpenAIServiceHelper()
+    let openAiServiceHelper = OpenAIManager()
     let decoder = JSONDecoder()
     var threadID = ""
 }

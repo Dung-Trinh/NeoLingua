@@ -3,7 +3,7 @@ import SwiftOpenAI
 
 class VocabularyManager {
     let service = OpenAIServiceProvider.shared
-    let openAiServiceHelper = OpenAIServiceHelper()
+    let openAiServiceHelper = OpenAIManager()
     let assistantID = ProdENV().VOCABULARY_ASSISTANT_ID
     var threadID = ""
     

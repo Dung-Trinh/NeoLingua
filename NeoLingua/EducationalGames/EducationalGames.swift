@@ -10,7 +10,7 @@ struct EducationalGamesPage: View {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
                     EducationalGameTile(image: "contextBasedLearning", title: "Kontextbasiertes Lernen") {
-                        router.push(.imageBasedLearningPage)
+                        router.push(.contexBasedLearningPage)
                     }
                     EducationalGameTile(image: "vocabularyImage", title: "SnapVocabulary") {
                         router.push(.snapVocabularyPage)

@@ -18,6 +18,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
     private var uploadedImageLink = ""
     private let imageProcessingManager = ImageProcessingManager()
     private let taskProcessManager = TaskProcessManager.shared
+    private let firebaseDataManager = FirebaseDataManager()
 
     init(taskLocation: TaskLocation) {
         self.taskLocation = taskLocation
@@ -80,7 +81,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
     
     private func uploadImage() async {
         guard let imageData = selectedImage?.jpegData(compressionQuality: 0.8) else { return }
-        if let downloadURL = await imageProcessingManager.uploadImageToFirebase(imageData: imageData) {
+        if let downloadURL = await firebaseDataManager.uploadImageToFileStorage(imageData: imageData) {
             uploadedImageLink = downloadURL
         }
     }

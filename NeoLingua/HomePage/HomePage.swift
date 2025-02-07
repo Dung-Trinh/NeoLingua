@@ -6,7 +6,6 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
     
     
     var body: some View {
-        // TODO: fix nav bug
         NavigationStack(
             path: $router.routes
         ) {

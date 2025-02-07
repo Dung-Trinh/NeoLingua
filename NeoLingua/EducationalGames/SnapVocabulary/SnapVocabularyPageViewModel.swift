@@ -25,7 +25,7 @@ class SnapVocabularyPageViewModelImpl: SnapVocabularyPagePageViewModel {
     private var imageProcessingManager = ImageProcessingManager()
     @Published var region: MKCoordinateRegion
     let locationManager = LocationManager()
-    private let db = Firestore.firestore()
+    private let firebaseDataManager = FirebaseDataManager()
 
     init() {
         let myPosition = locationManager.lastKnownLocation ??  CLLocationCoordinate2D(latitude: 0, longitude: 0)
@@ -67,12 +67,9 @@ class SnapVocabularyPageViewModelImpl: SnapVocabularyPagePageViewModel {
         defer { isLoading = false }
         
         do {
-            let snapshots = try await db.collection("imageBasedTasks").getDocuments()
-            self.allTasks = snapshots.documents.compactMap { document in
-                try? document.data(as: SnapVocabularyTask.self)
-            }
+            allTasks = try await firebaseDataManager.fetchSnapVocabularyTasks()
             // Filter task by radius
-//            let snapshots = try await queryLocations(
+//            let snapshots = try await firebaseDataManager.queryLocations(
 //                centerLatitude: locationManager.lastKnownLocation?.latitude ?? 0,
 //                centerLongitude: locationManager.lastKnownLocation?.longitude ?? 0,
 //                radiusInKm: 2
@@ -87,37 +84,5 @@ class SnapVocabularyPageViewModelImpl: SnapVocabularyPagePageViewModel {
         } catch {
             print("Error fetching tasks: \(error)")
         }
-    }
-    
-    func queryLocations(
-        centerLatitude: Double,
-        centerLongitude: Double,
-        radiusInKm: Double
-    ) async throws -> [QueryDocumentSnapshot] {
-        print("centerLatitude: ", centerLatitude)
-        print("centerLongitude: ", centerLongitude)
-        
-        //Berechnung der Bounding Box
-        let rangeLat = radiusInKm / 110.574 // ca. 110.574 km pro Breitengrad
-        let rangeLon = radiusInKm / (111.320 * cos(centerLatitude * .pi / 180))
-        
-        let minLat = centerLatitude - rangeLat
-        let maxLat = centerLatitude + rangeLat
-        let minLon = centerLongitude - rangeLon
-        let maxLon = centerLongitude + rangeLon
-        
-        print("minLat ", minLat)
-        print("maxLat ", maxLat)
-        print("minLon ", minLon)
-        print("maxLon ", maxLon)
-        
-        let query = db.collection("imageBasedTasks")
-            .whereField("coordinates.longitude", isGreaterThanOrEqualTo: minLon)
-            .whereField("coordinates.longitude", isLessThanOrEqualTo: maxLon)
-            .whereField("coordinates.latitude", isGreaterThanOrEqualTo: minLat)
-            .whereField("coordinates.latitude", isLessThanOrEqualTo: maxLat)
-        
-        let querySnapshot = try await query.getDocuments()
-        return querySnapshot.documents
     }
 }

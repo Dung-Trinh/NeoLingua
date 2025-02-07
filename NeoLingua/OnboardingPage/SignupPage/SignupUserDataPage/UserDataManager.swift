@@ -15,28 +15,21 @@ struct ProfileData: Codable {
 }
 
 class UserDataManagerImpl: UserDataManager {
-    let db = Firestore.firestore()
+    let firebaseDataManager = FirebaseDataManager()
     
     func saveUserData(userData: ProfileData) async throws {
         let userId = UserDefaults().getUserId()
-        try db.collection("users").document(userId).setData(from: userData)
+        try firebaseDataManager.saveUserData(userData: userData, userId: userId)
     }
     
     func fetchUserData() async throws -> ProfileData {
         let userId = UserDefaults().getUserId()
-        let document = try await db.collection("users").document(userId).getDocument()
-        
-        let profileData = try document.data(as: ProfileData.self)
+        let profileData = try await firebaseDataManager.fetchUserData(userId: userId)
         return profileData
     }
     
     func addCompetitiveScavengerHuntId(scavengerHuntId: String) async throws {
         let userId = UserDefaults().getUserId()
-        let profileRef = db.collection("users").document(userId)
-        let documentSnapshot = try await profileRef.getDocument()
-        
-        var profile = try documentSnapshot.data(as: ProfileData.self)
-        profile.competitiveScavengerHuntIds.append(scavengerHuntId)
-        try profileRef.setData(from: profile)
+        try await firebaseDataManager.addCompetitiveScavengerHuntId(scavengerHuntId: scavengerHuntId, userId: userId)
     }
 }

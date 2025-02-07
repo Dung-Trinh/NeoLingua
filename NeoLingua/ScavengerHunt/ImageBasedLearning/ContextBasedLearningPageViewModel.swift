@@ -12,23 +12,23 @@ struct SharedContentForTask: Hashable {
     let coordinates: Location?
 }
 
-enum ImageBasedLearningPageState {
+enum ContexBasedLearningPageState {
     case initialState
     case imageSelected
     case taskAvailable
 }
 
-protocol ImageBasedLearningPageViewModel: ObservableObject {
+protocol ContextBasedLearningPageViewModel: ObservableObject {
 
 }
 
-class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
+class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
     @Published var selectedPhotos: [PhotosPickerItem] = []
     @Published var selectedImage: UIImage? = nil
     @Published var imageBasedTask: ImageBasedTask?
     @Published var userPerformance: UserTaskPerformance?
     @Published var isSheetPresented: Bool = false
-    @Published var state: ImageBasedLearningPageState = .initialState
+    @Published var state: ContexBasedLearningPageState = .initialState
     @Published var isLoading: Bool = false
     @Published var areAllTaskDone: Bool = false
     @Published var showCamera = false
@@ -47,8 +47,9 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
     
     private var uploadedImageLink = ""
     private var taskProcessManager = TaskProcessManager.shared
-    private let openAiServiceHelper = OpenAIServiceHelper()
+    private let openAiServiceHelper = OpenAIManager()
     private let imageProcessingManager = ImageProcessingManager()
+    private let firebaseDataManager = FirebaseDataManager()
 
     @State private var selectedImageURLS: [URL] = []
     @State private var selectedImages: [Image] = []
@@ -106,7 +107,8 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
         defer { isLoading = false }
 
         do {
-            await uploadImage()
+            uploadedImageLink = await firebaseDataManager.generateDownloadURL(selectedImage: selectedImage)
+            print("LINK: ",uploadedImageLink)
             try await createImageBasedTask()
             if let task = imageBasedTask {
                 try? await taskProcessManager.createUserResultPerformance(task: task)
@@ -116,14 +118,7 @@ class ImageBasedLearningPageViewModelImpl: ImageBasedLearningPageViewModel {
             print("analyzeImage error: ", error.localizedDescription)
         }
     }
-    
-    private func uploadImage() async {
-        guard let imageData = selectedImage?.jpegData(compressionQuality: 0.8) else { return }
-        if let downloadURL = await imageProcessingManager.uploadImageToFirebase(imageData: imageData) {
-            uploadedImageLink = downloadURL
-        }
-    }
-    
+
     private func createImageBasedTask() async throws {
         print("excludedTaskTypes")
         print(excludedTaskType.description)

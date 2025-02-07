@@ -56,7 +56,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "--useMockData true"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>

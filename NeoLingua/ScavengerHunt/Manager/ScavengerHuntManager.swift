@@ -137,7 +137,7 @@ class ScavengerHuntManager: TaskManager {
             throw NSError(domain: "no location found", code: 400)
         }
         print("currentLocation:", location)
-        let url = "URL"
+        let url = "https://us-central1-neolingua.cloudfunctions.net/createScavengerHunt"
         let parameters: [String: Any] = [
             "latitude": location.latitude,
             "longitude": location.longitude,

@@ -15,11 +15,11 @@ class AudioPlayer: ObservableObject {
         let languageLevel = UserDefaults().getLevelOfLanguage()
         switch languageLevel {
         case .A1, .A2:
-            speed = 0.8
+            speed = 0.9
         case .B1, .B2:
             speed = 1
         case .C1, .C2:
-            speed = 1.25
+            speed = 1.15
         }
         
         let parameters = AudioSpeechParameters(

@@ -23,7 +23,7 @@ struct ThreadResponse: Decodable {
 
 class ImageProcessingManager {
     private let apiKey = ProdENV().OPENAI_KEY
-    private let openAiServiceHelper = OpenAIServiceHelper()
+    private let openAiServiceHelper = OpenAIManager()
     private let imageBasedAssistantID = ProdENV().CONTEXT_BASED_LEARNING_ASSISTANT_ID
     private let db = Firestore.firestore()
 
@@ -73,17 +73,7 @@ class ImageProcessingManager {
         
         return nil
     }
-    
-    func uploadImageToFirebase(imageData: Data) async -> String? {
-        let storageRef = Storage.storage().reference()
-        let imageRef = storageRef.child("images/\(UUID().uuidString).jpg")
-        let metadata = try? await imageRef.putDataAsync(imageData)
-        let downloadURL = try? await imageRef.downloadURL()
-        print(downloadURL?.absoluteString)
-
-        return downloadURL?.absoluteString
-    }
-    
+        
     func verifyImage(imageUrl: String, searchedObject: String) async throws -> ImageValidationResult? {
         let imageAnalyser = "asst_UGMnDx0fcYMJNFhEhu6PVDrr"
         

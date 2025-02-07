@@ -28,6 +28,8 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var speechRecognizer = SpeechRecognizer()
     @Published var isRecording = false
     @Published var messageText = ""
+    @Published var lastUserMessage = ""
+    @Published var lastConversationResponse: ConversationResponse?
     @Published var roleOptionsResponse: RoleOptionsResponse?
     @Published var audioPlayer = AudioPlayer()
     @Published var conversationState: ConversationState = .start
@@ -54,11 +56,13 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @MainActor 
     func sendMessage(message: String) async {
         isLoading = true
+        lastConversationResponse = nil
         defer { isLoading = false }
-//        let message = speechRecognizer.transcript
         print("sendMessage: ", message)
         do {
+            lastUserMessage = messageText
             let result = try await conversationSimulationManager.sendMessageAndGetResponse(message: message)
+            lastConversationResponse = result
             try await audioPlayer.createSpeech(textForSpeech: result?.answer ?? "")
             audioPlayer.playAudio()
             conversationState = .conversation
@@ -88,9 +92,9 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
         print("speechRecognizer.transcript")
         print(speechRecognizer.transcript)
         messageText = speechRecognizer.transcript
-        Task {
-            await sendMessage(message: speechRecognizer.transcript)
-        }
+//        Task {
+//            await sendMessage(message: speechRecognizer.transcript)
+//        }
     }
     
     func selectedRole(role: RoleOption) async {
@@ -101,8 +105,8 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
                 selectedRole = role
                 let result = try await conversationSimulationManager.selectedRole(selectedRole: role)
                 // for later
-                //try await audioPlayer.createSpeech(textForSpeech: result?.introText ?? "")
-//                audioPlayer.playAudio()
+                try await audioPlayer.createSpeech(textForSpeech: result?.introText ?? "")
+                audioPlayer.playAudio()
                 conversationState = .conversation
             } catch {
                 print("audioPlayer.createSpeech error: ", error.localizedDescription)
