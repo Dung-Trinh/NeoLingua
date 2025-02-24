@@ -1,21 +1,15 @@
 import Foundation
 import Firebase
 
-struct UserScore: Identifiable, Decodable {
-    var id: String? = UUID().uuidString
-    let username: String
-    let totalPoints: Double
+protocol LeaderboardService {
+    func addPointsForLevel(points: Double) async throws
+    func createRankingsForScavengerHuntId(scavengerHuntIds: [String]) async throws -> [CompetitiveScavengerHuntRanking]
+    func addPointToCompetitiveScavengerHunt(scavengerHuntId: String, points: Double) async throws
+    func fetchUserScoresRanking(forHuntId huntId: String) async throws -> [UserScore]?
+    func fetchRankingForLevel() async throws -> [UserScore]
 }
 
-struct CompetitiveScavengerHuntRanking: Identifiable {
-    
-    var id: String? = UUID().uuidString
-    let scavengerHunt: ScavengerHunt
-    let userScores: [UserScore]
-}
-
-
-class LeaderboardService {
+class LeaderboardServiceImpl: LeaderboardService {
     private let db = Firestore.firestore()
     private let scavengerHuntManager = ScavengerHuntManager()
 

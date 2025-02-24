@@ -3,15 +3,23 @@ import SwiftUI
 import Firebase
 import MapKit
 
-struct SnapVocabularyPage: View {
-    @EnvironmentObject private var router: Router
-    @StateObject var viewModel: SnapVocabularyPageViewModelImpl
+struct SnapVocabularyPage<ViewModel>: View where ViewModel: SnapVocabularyPageViewModel {
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                Map(coordinateRegion: $viewModel.region, showsUserLocation: true, annotationItems: viewModel.allTasks) { task in
-                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: task.coordinates.latitude, longitude: task.coordinates.longitude)) {
+                Map(
+                    coordinateRegion: $viewModel.region,
+                    showsUserLocation: true,
+                    annotationItems: viewModel.allTasks
+                ) { task in
+                    MapAnnotation(
+                        coordinate: CLLocationCoordinate2D(
+                            latitude: task.coordinates.latitude,
+                            longitude: task.coordinates.longitude
+                        )
+                    ) {
                         Button(action: {
                             viewModel.showMarkerDetails(marker: task)
                         }) {
@@ -20,7 +28,7 @@ struct SnapVocabularyPage: View {
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.indigo)
-                                
+                            
                         }
                     }
                 }.ignoresSafeArea(edges: .all)
@@ -34,10 +42,10 @@ struct SnapVocabularyPage: View {
                             .frame(width: 30, height: 30)
                             .foregroundColor(.indigo)
                     }.padding()
-                    .background(RoundedRectangle(cornerRadius: 15)
-                        .fill(Color.black.opacity(0.8)))
-                    .padding(.horizontal, 10)
-                    .padding(.bottom, geometry.safeAreaInsets.bottom + 10)
+                        .background(RoundedRectangle(cornerRadius: 15)
+                            .fill(Color.black.opacity(0.8)))
+                        .padding(.horizontal, 10)
+                        .padding(.bottom, geometry.safeAreaInsets.bottom + 10)
                 }
                 .frame(maxWidth: geometry.size.width * 0.9)
             }
@@ -46,7 +54,10 @@ struct SnapVocabularyPage: View {
         .sheet(isPresented: $viewModel.isPresented, content: {
             VStack {
                 if let sharedImageTask = viewModel.sharedImageTask{
-                    NearMeTaskPage(viewModel: NearMeTaskPageViewModelImpl(sharedImageTask: sharedImageTask), isPresented: $viewModel.isPresented)
+                    NearMeTaskPage(
+                        viewModel: NearMeTaskPageViewModelImpl(sharedImageTask: sharedImageTask), 
+                        isPresented: $viewModel.isPresented
+                    )
                 }
             }
         })

@@ -18,7 +18,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
     private var uploadedImageLink = ""
     private let imageProcessingManager = ImageProcessingManager()
     private let taskProcessManager = TaskProcessManager.shared
-    private let firebaseDataManager = FirebaseDataManager()
+    private let firebaseDataManager = FirebaseDataManagerImpl()
 
     init(taskLocation: TaskLocation) {
         self.taskLocation = taskLocation

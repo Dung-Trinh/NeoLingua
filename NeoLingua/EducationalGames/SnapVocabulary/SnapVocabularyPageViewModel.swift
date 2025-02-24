@@ -4,28 +4,26 @@ import Firebase
 import GoogleMaps
 import MapKit
 
-struct SnapVocabularyTask: Codable, Identifiable {
-    let id: String
-    let userId: String
-    let coordinates: Location
-    let imageUrl: String
-    let vocabulary: [String]
-}
-
-protocol SnapVocabularyPagePageViewModel: ObservableObject {
+protocol SnapVocabularyPageViewModel: ObservableObject {
+    var allTasks: [SnapVocabularyTask] { get }
+    var sharedImageTask: SnapVocabularyTask? { get }
+    var isPresented: Bool { get set }
+    var isLoading: Bool { get }
+    var region: MKCoordinateRegion { get set }
     
+    func showMarkerDetails(marker: SnapVocabularyTask)
 }
 
-class SnapVocabularyPageViewModelImpl: SnapVocabularyPagePageViewModel {
+class SnapVocabularyPageViewModelImpl: SnapVocabularyPageViewModel {
+    private let imageProcessingManager = ImageProcessingManager()
+    private let locationManager = LocationManager()
+    private let firebaseDataManager = FirebaseDataManagerImpl()
+    
     @Published var allTasks: [SnapVocabularyTask] = []
     @Published var sharedImageTask: SnapVocabularyTask?
     @Published var isPresented: Bool = false
     @Published var isLoading: Bool = false
-
-    private var imageProcessingManager = ImageProcessingManager()
     @Published var region: MKCoordinateRegion
-    let locationManager = LocationManager()
-    private let firebaseDataManager = FirebaseDataManager()
 
     init() {
         let myPosition = locationManager.lastKnownLocation ??  CLLocationCoordinate2D(latitude: 0, longitude: 0)
@@ -37,29 +35,6 @@ class SnapVocabularyPageViewModelImpl: SnapVocabularyPagePageViewModel {
             await fetchImageBasedTaskNearMe()
         }
     }
-    
-    func setPosition() {
-        let myPosition = locationManager.lastKnownLocation ??  CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        region = MKCoordinateRegion(
-            center: myPosition,
-            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
-        )
-    }
-    
-    @MainActor
-    func fetchImageBasedTaskNearMe() {
-        Task {
-            setPosition()
-            await fetchTasks()
-        }
-    }
-    
-    func showMarkerDetails(marker: SnapVocabularyTask) {
-        sharedImageTask = marker
-        
-        isPresented = true
-    }
-    
     
     @MainActor
     func fetchTasks() async {
@@ -83,6 +58,28 @@ class SnapVocabularyPageViewModelImpl: SnapVocabularyPagePageViewModel {
             print(allTasks)
         } catch {
             print("Error fetching tasks: \(error)")
+        }
+    }
+    
+    func showMarkerDetails(marker: SnapVocabularyTask) {
+        sharedImageTask = marker
+        
+        isPresented = true
+    }
+    
+    private func setPosition() {
+        let myPosition = locationManager.lastKnownLocation ??  CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        region = MKCoordinateRegion(
+            center: myPosition,
+            span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        )
+    }
+    
+    @MainActor
+    private func fetchImageBasedTaskNearMe() {
+        Task {
+            setPosition()
+            await fetchTasks()
         }
     }
 }

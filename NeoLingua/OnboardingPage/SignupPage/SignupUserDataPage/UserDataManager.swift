@@ -15,7 +15,7 @@ struct ProfileData: Codable {
 }
 
 class UserDataManagerImpl: UserDataManager {
-    let firebaseDataManager = FirebaseDataManager()
+    let firebaseDataManager = FirebaseDataManagerImpl()
     
     func saveUserData(userData: ProfileData) async throws {
         let userId = UserDefaults().getUserId()

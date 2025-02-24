@@ -3,7 +3,21 @@ import SwiftUI
 import Firebase
 import FirebaseStorage
 
-class FirebaseDataManager {
+protocol FirebaseDataManager {
+    func fetchSnapVocabularyTasks() async throws -> [SnapVocabularyTask]
+    func queryLocations(
+        centerLatitude: Double,
+        centerLongitude: Double,
+        radiusInKm: Double
+    ) async throws -> [QueryDocumentSnapshot]
+    func generateDownloadURL(selectedImage: UIImage?) async -> String
+    func uploadImageToFileStorage(imageData: Data) async -> String?
+    func saveUserData(userData: ProfileData, userId: String) throws
+    func fetchUserData(userId: String) async throws -> ProfileData
+    func addCompetitiveScavengerHuntId(scavengerHuntId: String, userId: String) async throws
+}
+
+class FirebaseDataManagerImpl: FirebaseDataManager {
     private let db = Firestore.firestore()
 
     func generateDownloadURL(selectedImage: UIImage?) async -> String {
@@ -39,7 +53,7 @@ class FirebaseDataManager {
         print("centerLatitude: ", centerLatitude)
         print("centerLongitude: ", centerLongitude)
         
-        //Berechnung der Bounding Box
+        // calculate bounding box to fetch the tasks in this area
         let rangeLat = radiusInKm / 110.574
         let rangeLon = radiusInKm / (111.320 * cos(centerLatitude * .pi / 180))
         

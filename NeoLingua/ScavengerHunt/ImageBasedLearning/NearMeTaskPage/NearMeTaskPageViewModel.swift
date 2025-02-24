@@ -17,7 +17,7 @@ class NearMeTaskPageViewModelImpl: NearMeTaskPageViewModel {
 
     var numberOfAttempts = -1.0
     private var imageProcessingManager = ImageProcessingManager()
-    private let leaderboardService = LeaderboardService()
+    private let leaderboardService = LeaderboardServiceImpl()
 
     init(sharedImageTask: SnapVocabularyTask) {
         self.sharedImageTask = sharedImageTask

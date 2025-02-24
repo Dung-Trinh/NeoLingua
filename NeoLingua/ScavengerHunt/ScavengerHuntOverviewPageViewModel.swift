@@ -17,7 +17,7 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     @Published var markers: [GMSMarker] = []
     
     private var taskProcessManager = TaskProcessManager.shared
-    var leadboardService = LeaderboardService()
+    var leadboardService = LeaderboardServiceImpl()
     private var userDataManager = UserDataManagerImpl()
 
     init(type: ScavengerHuntType) {

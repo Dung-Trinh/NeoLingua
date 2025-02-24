@@ -15,18 +15,23 @@ enum LeaderboardMode: String, CaseIterable, Identifiable {
 }
 
 protocol LeaderboardPageViewModel: ObservableObject {
-
+    var selectedMode: LeaderboardMode { get set }
+    var isLoading: Bool { get }
+    var scavengerRankingList: [CompetitiveScavengerHuntRanking] { get }
+    var globalUserScores: [UserScore] { get }
+    
+    func fetchScavengerHuntScores() async
+    func fetchUserScores() async
 }
 
 class LeaderboardPageViewModelImpl: LeaderboardPageViewModel {
-    
-    private let leaderboardService = LeaderboardService()
+    private let leaderboardService: LeaderboardService = LeaderboardServiceImpl()
+    private var userManager = UserDataManagerImpl()
+
     @Published var selectedMode: LeaderboardMode = .globalScore
     @Published var globalUserScores: [UserScore] = []
     @Published var scavengerRankingList: [CompetitiveScavengerHuntRanking] = []
     @Published var isLoading: Bool = false
-
-    private var userManager = UserDataManagerImpl()
     
     func fetchUserScores() async {
         isLoading = true
@@ -43,18 +48,13 @@ class LeaderboardPageViewModelImpl: LeaderboardPageViewModel {
     func fetchScavengerHuntScores() async {
         do {
             let userProfile = try await userManager.fetchUserData()
-            scavengerRankingList = try await leaderboardService.createRankingsForScavengerHuntId(scavengerHuntIds: userProfile.competitiveScavengerHuntIds)
+            scavengerRankingList = try await leaderboardService.createRankingsForScavengerHuntId(
+                scavengerHuntIds: userProfile.competitiveScavengerHuntIds
+            )
             print("scavengerRankingList.count")
             print(scavengerRankingList.first?.userScores)
-            print(scavengerRankingList.last?.userScores)
         } catch {
             print("fetchScavengerHuntScores error: ", error.localizedDescription)
         }
-        
     }
-}
-
-struct ScavengerHuntRanking {
-    var scavengerHuntId: String
-    var userPerformances: [UserTaskPerformance]
 }

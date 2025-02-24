@@ -18,7 +18,7 @@ struct WeeklyStudyTimeView<ViewModel>: View where ViewModel: WeeklyStudyTimeView
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                         HStack(alignment: .firstTextBaseline, spacing: Styleguide.Margin.extraSmall) {
-                            Text("~(\(viewModel.averageStudyTime)")
+                            Text("~\(viewModel.averageStudyTime)")
                                 .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(.blue)
                             Text("min")

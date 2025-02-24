@@ -1,8 +1,7 @@
 import SwiftUI
 
-struct LeaderboardPage: View {
-    @EnvironmentObject private var router: Router
-    @StateObject var viewModel: LeaderboardPageViewModelImpl
+struct LeaderboardPage<ViewModel>: View where ViewModel: LeaderboardPageViewModel {
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
@@ -47,79 +46,15 @@ struct LeaderboardPage: View {
             if viewModel.scavengerRankingList.count > 0 {
                 ForEach(viewModel.scavengerRankingList) { ranking in
                     NavigationLink {
-                        LeaderboardView(scavengerHunt: ranking.scavengerHunt, userScores: ranking.userScores)
+                        LeaderboardView(
+                            scavengerHunt: ranking.scavengerHunt,
+                            userScores: ranking.userScores
+                        )
                     } label: {
                         Text(ranking.scavengerHunt.title)
                     }
                 }
-                
             }
         }
-    }
-}
-
-struct LeaderboardView: View {
-    @State var scavengerHunt: ScavengerHunt? = nil
-    @State var userScores: [UserScore] = []
-    
-    var body: some View {
-        ScrollView {
-            VStack {
-                if let scavengerHunt = scavengerHunt {
-                    Text(scavengerHunt.title).bold()
-                    ForEach(scavengerHunt.taskLocations) { location in
-                        Label(location.name, systemImage: "mappin.and.ellipse")
-                    }
-                }
-                HStack {
-                    Text("Platz")
-                        .font(.headline)
-                        .frame(width: 50, alignment: .leading)
-                    Text("Name")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("Punkte")
-                        .font(.headline)
-                        .frame(width: 80, alignment: .trailing)
-                }
-                .padding(.vertical, 4)
-                .background(Color(.systemGray6))
-                ForEach(0..<userScores.count) { index in
-                    LeaderboardTile(
-                        rank: "\(index + 1).",
-                        username: userScores[index].username,
-                        score: String(format: "%.2f", userScores[index].totalPoints)
-                    )
-                }
-            }
-        }.padding()
-    }
-}
-
-struct LeaderboardTile: View {
-    let rank: String
-    let username: String
-    let score: String
-
-    
-    var body: some View {
-        HStack {
-            Text(rank)
-                .font(.headline)
-                .frame(width: 50, alignment: .leading)
-            Image(systemName:"person.crop.circle.fill")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 30, height: 30)
-                .clipShape(Circle())
-            Text(username)
-                .font(.headline)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Text(score)
-                .font(.subheadline)
-                .frame(width: 80, alignment: .trailing)
-        }
-        .padding(.vertical, 8)
     }
 }

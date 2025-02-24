@@ -49,7 +49,7 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
     private var taskProcessManager = TaskProcessManager.shared
     private let openAiServiceHelper = OpenAIManager()
     private let imageProcessingManager = ImageProcessingManager()
-    private let firebaseDataManager = FirebaseDataManager()
+    private let firebaseDataManager = FirebaseDataManagerImpl()
 
     @State private var selectedImageURLS: [URL] = []
     @State private var selectedImages: [Image] = []
