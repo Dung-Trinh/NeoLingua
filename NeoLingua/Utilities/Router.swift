@@ -16,7 +16,6 @@ enum Route: Hashable {
     case contexBasedLearningPage
     case snapVocabularyPage
     case scavengerHuntInfoPage
-    case linguaQuestPage
     case shareImageForTaskPage(SharedContentForTask)
     case contextBasedLearning(LearningTaskRoute)
 
@@ -77,8 +76,6 @@ class Router: ObservableObject  {
             ContexBasedLearningPage()
         case .snapVocabularyPage:
             SnapVocabularyPage(viewModel: SnapVocabularyPageViewModelImpl())
-        case .linguaQuestPage:
-            LinguaQuestPage()
         case .contextBasedLearning(let taskRoute):
             handleLearningTaskRoute(taskRoute)
         case .shareImageForTaskPage(let sharedContentForTask):

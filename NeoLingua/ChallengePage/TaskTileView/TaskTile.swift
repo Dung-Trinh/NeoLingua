@@ -1,17 +1,10 @@
 import SwiftUI
 
-struct TaskTileViewModel {
-    var taskTitle: String
-    var iconName: String
-    var currentProgress: Int
-    var totalProgress: Int
-}
-
-struct TaskTile: View {
-    let viewModel: TaskTileViewModel
+struct TaskTile<ViewModel>: View where ViewModel: TaskTileViewModel {
+    let viewModel: ViewModel
     
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: Styleguide.Margin.medium) {
             Image(systemName: viewModel.iconName)
                 .resizable()
                 .frame(width: 40, height: 40)
@@ -21,7 +14,7 @@ struct TaskTile: View {
                         .fill(Color.blue.opacity(0.1))
                 )
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: Styleguide.Margin.extraSmall) {
                 Text(viewModel.taskTitle)
                     .font(.system(size: 16, weight: .semibold))
                     .foregroundColor(.black)

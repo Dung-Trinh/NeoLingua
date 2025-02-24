@@ -53,7 +53,7 @@ struct ShareImageForTaskPage: View {
                                                     viewModel.addVocabulary(vocabulary: vocabulary.name)
                                                 }
                                             }
-                                        if let improvement = vocabulary.improvement{
+                                        if let improvement = vocabulary.improvement, !improvement.isEmpty {
                                             Text(.init("(\(improvement))"))
                                         }
                                     }

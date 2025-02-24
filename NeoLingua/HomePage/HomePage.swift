@@ -4,17 +4,16 @@ struct HomePage<ViewModel>: View where ViewModel: HomePageViewModel {
     @StateObject var viewModel: ViewModel
     @EnvironmentObject private var router: Router
     
-    
     var body: some View {
         NavigationStack(
             path: $router.routes
         ) {
             TabView {
-                EducationalGamesPage()
+                EducationalGamesPage(viewModel: EducationalGamesPageViewModelImpl(router: router))
                     .tabItem {
                         Label("Learning", systemImage: "books.vertical.fill")
                     }
-                ChallengePage()
+                ChallengePage(viewModel: ChallengePageViewModellImpl())
                     .tabItem {
                         Label("Challenges", systemImage: "list.bullet.clipboard.fill")
                     }

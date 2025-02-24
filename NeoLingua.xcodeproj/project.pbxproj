@@ -18,8 +18,6 @@
 		B609EEE42CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEE32CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift */; };
 		B609EEE72CC83D4400A029E8 /* EducationalGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEE62CC83D4400A029E8 /* EducationalGames.swift */; };
 		B609EEE92CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEE82CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift */; };
-		B609EEEC2CC83F3100A029E8 /* LinguaQuestPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEEB2CC83F3100A029E8 /* LinguaQuestPage.swift */; };
-		B609EEEE2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEED2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift */; };
 		B609EEF02CC8FD0C00A029E8 /* ImageBasedTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEEF2CC8FD0C00A029E8 /* ImageBasedTask.swift */; };
 		B609EEF22CC910FD00A029E8 /* MultipleChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEF12CC910FD00A029E8 /* MultipleChoiceView.swift */; };
 		B609EEF42CC93F6E00A029E8 /* TaskProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609EEF32CC93F6E00A029E8 /* TaskProcessManager.swift */; };
@@ -92,6 +90,11 @@
 		B6DCC4702CF13F6900852884 /* ScavengerHuntInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCC46F2CF13F6900852884 /* ScavengerHuntInfoPage.swift */; };
 		B6E656982C93837700350D98 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = B6E656972C93837700350D98 /* GooglePlaces */; };
 		B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E656992C9389C700350D98 /* LocationManager.swift */; };
+		B6E682812D6CA1A4006C0083 /* TaskTileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E682802D6CA1A4006C0083 /* TaskTileViewModel.swift */; };
+		B6E682832D6CAC34006C0083 /* EducationalGameTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E682822D6CAC34006C0083 /* EducationalGameTile.swift */; };
+		B6E682862D6CB23D006C0083 /* StatsTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E682852D6CB23D006C0083 /* StatsTile.swift */; };
+		B6E682882D6CB2CE006C0083 /* WeeklyStudyTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E682872D6CB2CE006C0083 /* WeeklyStudyTimeView.swift */; };
+		B6E6828B2D6CB561006C0083 /* WeeklyStudyTimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E6828A2D6CB561006C0083 /* WeeklyStudyTimeViewModel.swift */; };
 		B6EB6D0A2CA4042A0055FD67 /* Env-Properties.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */; };
 		B6EB6D262CA414B80055FD67 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D252CA414B80055FD67 /* HomePage.swift */; };
 		B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D272CA414CE0055FD67 /* HomePageViewModel.swift */; };
@@ -169,8 +172,6 @@
 		B609EEE32CC835AD00A029E8 /* SnapVocabularyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapVocabularyPageViewModel.swift; sourceTree = "<group>"; };
 		B609EEE62CC83D4400A029E8 /* EducationalGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationalGames.swift; sourceTree = "<group>"; };
 		B609EEE82CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationalGamesPageViewModel.swift; sourceTree = "<group>"; };
-		B609EEEB2CC83F3100A029E8 /* LinguaQuestPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinguaQuestPage.swift; sourceTree = "<group>"; };
-		B609EEED2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinguaQuestPageViewModel.swift; sourceTree = "<group>"; };
 		B609EEEF2CC8FD0C00A029E8 /* ImageBasedTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBasedTask.swift; sourceTree = "<group>"; };
 		B609EEF12CC910FD00A029E8 /* MultipleChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceView.swift; sourceTree = "<group>"; };
 		B609EEF32CC93F6E00A029E8 /* TaskProcessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskProcessManager.swift; sourceTree = "<group>"; };
@@ -235,6 +236,11 @@
 		B6DCC46F2CF13F6900852884 /* ScavengerHuntInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntInfoPage.swift; sourceTree = "<group>"; };
 		B6E656992C9389C700350D98 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B6E6569B2C938ACD00350D98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B6E682802D6CA1A4006C0083 /* TaskTileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTileViewModel.swift; sourceTree = "<group>"; };
+		B6E682822D6CAC34006C0083 /* EducationalGameTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationalGameTile.swift; sourceTree = "<group>"; };
+		B6E682852D6CB23D006C0083 /* StatsTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTile.swift; sourceTree = "<group>"; };
+		B6E682872D6CB2CE006C0083 /* WeeklyStudyTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyStudyTimeView.swift; sourceTree = "<group>"; };
+		B6E6828A2D6CB561006C0083 /* WeeklyStudyTimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyStudyTimeViewModel.swift; sourceTree = "<group>"; };
 		B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Env-Properties.plist"; sourceTree = "<group>"; };
 		B6EB6D252CA414B80055FD67 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
 		B6EB6D272CA414CE0055FD67 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
@@ -346,21 +352,12 @@
 		B609EEE52CC838AF00A029E8 /* EducationalGames */ = {
 			isa = PBXGroup;
 			children = (
-				B609EEEA2CC83F1900A029E8 /* LinguaQuest */,
 				B609EEE02CC82F1500A029E8 /* SnapVocabulary */,
 				B609EEE62CC83D4400A029E8 /* EducationalGames.swift */,
 				B609EEE82CC83D5D00A029E8 /* EducationalGamesPageViewModel.swift */,
+				B6E682822D6CAC34006C0083 /* EducationalGameTile.swift */,
 			);
 			path = EducationalGames;
-			sourceTree = "<group>";
-		};
-		B609EEEA2CC83F1900A029E8 /* LinguaQuest */ = {
-			isa = PBXGroup;
-			children = (
-				B609EEEB2CC83F3100A029E8 /* LinguaQuestPage.swift */,
-				B609EEED2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift */,
-			);
-			path = LinguaQuest;
 			sourceTree = "<group>";
 		};
 		B60F8AAA2CB7D76600268D75 /* GoogleMaps */ = {
@@ -522,28 +519,48 @@
 		B6ADD6DE2CDE2DB200572F66 /* UserStatsDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				B6E682892D6CB52B006C0083 /* WeeklyStudyTimeView */,
+				B6E682842D6CB22E006C0083 /* StatsTile */,
 				B6ADD6DC2CDE2DA700572F66 /* UserStatsDashboardPage.swift */,
 				B6ADD6DF2CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift */,
 			);
 			path = UserStatsDashboard;
 			sourceTree = "<group>";
 		};
-		B6DA539A2CE15E4D00EE26C3 /* TaskView */ = {
+		B6DA539A2CE15E4D00EE26C3 /* TaskTileView */ = {
 			isa = PBXGroup;
 			children = (
 				B6DA539B2CE15E7600EE26C3 /* TaskTile.swift */,
+				B6E682802D6CA1A4006C0083 /* TaskTileViewModel.swift */,
 			);
-			path = TaskView;
+			path = TaskTileView;
 			sourceTree = "<group>";
 		};
 		B6DA539D2CE1609300EE26C3 /* ChallengePage */ = {
 			isa = PBXGroup;
 			children = (
-				B6DA539A2CE15E4D00EE26C3 /* TaskView */,
+				B6DA539A2CE15E4D00EE26C3 /* TaskTileView */,
 				B6DA539E2CE160DD00EE26C3 /* ChallengePage.swift */,
 				B6DA53A02CE160EE00EE26C3 /* ChallengePageViewModel.swift */,
 			);
 			path = ChallengePage;
+			sourceTree = "<group>";
+		};
+		B6E682842D6CB22E006C0083 /* StatsTile */ = {
+			isa = PBXGroup;
+			children = (
+				B6E682852D6CB23D006C0083 /* StatsTile.swift */,
+			);
+			path = StatsTile;
+			sourceTree = "<group>";
+		};
+		B6E682892D6CB52B006C0083 /* WeeklyStudyTimeView */ = {
+			isa = PBXGroup;
+			children = (
+				B6E682872D6CB2CE006C0083 /* WeeklyStudyTimeView.swift */,
+				B6E6828A2D6CB561006C0083 /* WeeklyStudyTimeViewModel.swift */,
+			);
+			path = WeeklyStudyTimeView;
 			sourceTree = "<group>";
 		};
 		B6EB6D242CA414A90055FD67 /* HomePage */ = {
@@ -821,6 +838,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6E682812D6CA1A4006C0083 /* TaskTileViewModel.swift in Sources */,
 				B60F8AD12CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift in Sources */,
 				B6ADD6E02CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift in Sources */,
 				B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */,
@@ -828,6 +846,7 @@
 				B66D67882CC2A13900F70A56 /* TestData.swift in Sources */,
 				B6FA77E62CA44D0500C52F73 /* LoginSignupNetworkAdapter.swift in Sources */,
 				B6FA77E52CA44CFF00C52F73 /* LoginPageViewModel.swift in Sources */,
+				B6E682882D6CB2CE006C0083 /* WeeklyStudyTimeView.swift in Sources */,
 				B60F8ADB2CBDA9F700268D75 /* ConversationSimulationPage.swift in Sources */,
 				B60F8AD62CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift in Sources */,
 				B60F8AD32CBD108F00268D75 /* ListeningComprehensionPage.swift in Sources */,
@@ -839,8 +858,8 @@
 				B60F8AB02CB7D8E200268D75 /* ScavengerHuntMap.swift in Sources */,
 				B6FA77EE2CA4A0A000C52F73 /* UserDataManager.swift in Sources */,
 				B6DCC4702CF13F6900852884 /* ScavengerHuntInfoPage.swift in Sources */,
+				B6E682832D6CAC34006C0083 /* EducationalGameTile.swift in Sources */,
 				B651F3FA2CCFC95300471D78 /* ListeningTaskEvaluationView.swift in Sources */,
-				B609EEEC2CC83F3100A029E8 /* LinguaQuestPage.swift in Sources */,
 				B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */,
 				B68ECA492CDA58B200DDD17D /* LeaderboardPageViewModel.swift in Sources */,
 				B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */,
@@ -850,6 +869,7 @@
 				B6EB6D262CA414B80055FD67 /* HomePage.swift in Sources */,
 				B60F8AEA2CBFE85300268D75 /* ConversationResponse.swift in Sources */,
 				B6E6569A2C9389C700350D98 /* LocationManager.swift in Sources */,
+				B6E682862D6CB23D006C0083 /* StatsTile.swift in Sources */,
 				B6FED3BC2C70B3BB00339B7C /* NeoLinguaApp.swift in Sources */,
 				B6FA77D32CA419F000C52F73 /* SignupPage.swift in Sources */,
 				B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */,
@@ -858,9 +878,9 @@
 				B6EB6D2C2CA415240055FD67 /* AccountPageViewModel.swift in Sources */,
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
 				B60F8AE12CBE6B9200268D75 /* OpenAIManager.swift in Sources */,
-				B609EEEE2CC83F7B00A029E8 /* LinguaQuestPageViewModel.swift in Sources */,
 				B609EEF42CC93F6E00A029E8 /* TaskProcessManager.swift in Sources */,
 				B61ED9DD2CD6151E00E71258 /* ShareImageForTaskPage.swift in Sources */,
+				B6E6828B2D6CB561006C0083 /* WeeklyStudyTimeViewModel.swift in Sources */,
 				B6FA77EC2CA49E8A00C52F73 /* SignupUserDataPageViewModel.swift in Sources */,
 				B68ECA422CDA32A100DDD17D /* LevelOfLanguage.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,

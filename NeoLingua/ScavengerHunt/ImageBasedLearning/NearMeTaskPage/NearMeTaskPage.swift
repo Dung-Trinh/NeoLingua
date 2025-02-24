@@ -20,7 +20,7 @@ struct NearMeTaskPage: View {
                     
                     if let result = viewModel.result {
                         InspectImageResultView(resultData: result, searchedVocabulary: viewModel.sharedImageTask.vocabulary, lastUserInput: viewModel.lastUserInput)
-                        if result.foundSearchedVocabulary {
+                        if result.foundSearchedVocabulary && result.result == .correct {
                             Text("💎 Sie haben  \(viewModel.finalPoints, specifier: "%.2f") Punkte erhalten 💎").font(.headline)
                         }
                     }

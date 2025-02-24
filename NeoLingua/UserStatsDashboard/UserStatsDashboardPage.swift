@@ -25,7 +25,7 @@ struct UserStatsDashboardPage: View {
                             }
                         }
                     }
-                    WeeklyMinutesView()
+                    WeeklyStudyTimeView(viewModel: WeeklyStudyTimeViewModelImpl())
                     PieChart(chartData: data)
                         .touchOverlay(chartData: data)
                         .headerBox(chartData: data)
@@ -36,7 +36,6 @@ struct UserStatsDashboardPage: View {
                         .background(Color(.systemGray6))
                         .cornerRadius(12)
                         .frame(width: .infinity)
-                    
                 }
             }
         }.padding()
@@ -53,101 +52,11 @@ struct UserStatsDashboardPage: View {
         
         return PieChartData(
             dataSets: data,
-            metadata: ChartMetadata(title: "Erledigte Aufgaben nach Kategorie in dieser Woche", subtitle: "in %"),
+            metadata: ChartMetadata(
+                title: "Erledigte Aufgaben nach Kategorie in dieser Woche",
+                subtitle: "in %"
+            ),
             chartStyle: PieChartStyle(infoBoxPlacement: .header)
         )
-    }
-}
-
-struct WeeklyMinutesView: View {
-    var dailyMinutes = [8, 9, 20, 14, 12, 30, 15]
-    
-    var body: some View {
-        VStack(spacing: 6) {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack {
-                    Image(systemName: "hourglass")
-                    Text("Lernzeit dieser Woche")
-                        .font(.system(size: 24))
-                }
-                
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("durchschnittlich")
-                            .font(.system(size: 14))
-                            .foregroundColor(.gray)
-                        HStack(alignment: .firstTextBaseline, spacing: 2) {
-                            Text("~15")
-                                .font(.system(size: 24, weight: .bold))
-                                .foregroundColor(.blue)
-                            Text("min")
-                                .font(.system(size: 16))
-                                .foregroundColor(.blue)
-                        }
-                    }
-                }
-            }
-            HStack(alignment: .bottom, spacing: 6) {
-                ForEach(0..<dailyMinutes.count, id: \.self) { index in
-                    VStack(alignment: .center) {
-                        Text("\(dailyMinutes[index])")
-                            .font(.system(size: 12))
-                            .foregroundColor(.gray)
-                        
-                        Rectangle()
-                            .fill(Color.blue)
-                            .frame(width: 25, height: CGFloat(dailyMinutes[index]) * 5)
-                        
-                        Text(dayAbbreviation(for: index))
-                            .font(.system(size: 12))
-                            .foregroundColor(.gray)
-                    }
-                }
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
-        .padding(.horizontal)
-    }
-    
-    func dayAbbreviation(for index: Int) -> String {
-        let days = ["Mo", "Di", "Mi", "Do", "Fr", "Sa","So"]
-        return days[index]
-    }
-}
-
-struct StatsTile: View {
-    var title: String = ""
-    var number: String = ""
-    var percentageChange: String = ""
-    var percentageChangeTextColor: Color?
-    var iconName: String = ""
-    var iconColor: Color?
-    
-    var body: some View {
-        VStack(spacing: 4) {
-            Text(title)
-                .font(.system(size: 16))
-            
-            HStack(alignment: .center, spacing: 4) {
-                Image(systemName: iconName)
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(iconColor != nil ? iconColor : .orange)
-                
-                Text(number)
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.black)
-            }
-            
-            Text(percentageChange)
-                .font(.system(size: 12))
-                .foregroundColor(percentageChangeTextColor != nil ? percentageChangeTextColor: .gray)
-        }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
     }
 }
