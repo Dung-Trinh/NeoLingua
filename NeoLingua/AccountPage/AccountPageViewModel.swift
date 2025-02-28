@@ -6,20 +6,23 @@ protocol AccountPageViewModel: ObservableObject {
     var selectedLevel: LevelOfLanguage { get set }
     var selectedDailyUseTime: Int { get set }
     var isLoading: Bool { get set }
+    var estimationOfDailyUseTime: [Int] { get }
 
     func didTappedLogout()
     func fetchProfileData() async
 }
 
 class AccountPageViewModelImpl: AccountPageViewModel {
+    private var anyCancellables = Set<AnyCancellable>()
+    private let userDataManager = UserDataManagerImpl()
+    let estimationOfDailyUseTime: [Int] = [5,10,15,30,60]
+
     @Published var profileData: ProfileData?
     @Published var router: Router
     @Published var selectedLevel: LevelOfLanguage = .A1
     @Published var selectedDailyUseTime: Int = 0
     @Published var isLoading: Bool = false
-
-    private var anyCancellables = Set<AnyCancellable>()
-
+    
     init(router: Router) {
         self.router = router
         
@@ -35,7 +38,6 @@ class AccountPageViewModelImpl: AccountPageViewModel {
         defer { isLoading = false }
         
         print("fetchProfileData")
-        let userDataManager = UserDataManagerImpl()
         
         do {
             let data = try await userDataManager.fetchUserData()

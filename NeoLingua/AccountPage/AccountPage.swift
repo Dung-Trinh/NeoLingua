@@ -3,8 +3,7 @@ import SwiftUI
 struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
     @StateObject var viewModel: ViewModel
     @EnvironmentObject private var router: Router
-    let estimationOfDailyUseTime: [Int] = [5,10,15,30,60]
-    @State var firstAppear: Bool = false
+    @State private var firstAppear: Bool = false
     
     var body: some View {
         VStack {
@@ -31,7 +30,7 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
                     }
                     
                     Picker("Tägliches Nutzungsziel (in Minuten):", selection: $viewModel.selectedDailyUseTime) {
-                        ForEach(estimationOfDailyUseTime, id: \.self) { level in
+                        ForEach(viewModel.estimationOfDailyUseTime, id: \.self) { level in
                             Text("\(level)").tag(level)
                         }
                     }
@@ -77,46 +76,5 @@ struct AccountPage<ViewModel>: View where ViewModel: AccountPageViewModel {
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
-    }
-}
-
-struct LevelView: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .center) {
-                Image(systemName: "bolt.circle.fill")
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.blue)
-                
-                Text("3179 XP Punkte")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.blue)
-            }
-            
-            ProgressView(value: 0.75)
-                .progressViewStyle(LinearProgressViewStyle(tint: .blue))
-                .frame(height: 16)
-                .padding(.vertical, 4)
-            
-            HStack {
-                Text("LEVEL 5")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.blue)
-                
-                Spacer()
-                
-                Text("165 XP to")
-                    .font(.system(size: 16))
-                    .foregroundColor(.gray)
-                
-                Text("LEVEL 6")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.blue)
-            }
-        }
-        .padding()
-        .background(Color(.systemGray6))
-        .cornerRadius(12)
     }
 }

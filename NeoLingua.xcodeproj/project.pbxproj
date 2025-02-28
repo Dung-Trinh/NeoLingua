@@ -66,6 +66,7 @@
 		B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */; };
 		B6595B702CD0E1BF004816E8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B6595B6F2CD0E1BF004816E8 /* Alamofire */; };
 		B6595B722CD0EB38004816E8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6595B712CD0EB37004816E8 /* CameraView.swift */; };
+		B65D06C42D6FEB3A008C641B /* ScavengerHuntHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D06C32D6FEB3A008C641B /* ScavengerHuntHelpView.swift */; };
 		B66D67822CC059D200F70A56 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = B66D67812CC059D200F70A56 /* ActivityIndicatorView */; };
 		B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */; };
 		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
@@ -81,6 +82,7 @@
 		B69D63762D6D20CB005C0FE0 /* LeaderboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D63752D6D20CB005C0FE0 /* LeaderboardView.swift */; };
 		B69D63782D6D2388005C0FE0 /* LeaderboardPageModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D63772D6D2388005C0FE0 /* LeaderboardPageModels.swift */; };
 		B69D637A2D6D266D005C0FE0 /* SnapVocabularyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D63792D6D266D005C0FE0 /* SnapVocabularyTask.swift */; };
+		B69D637C2D6D2C37005C0FE0 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D637B2D6D2C37005C0FE0 /* LevelView.swift */; };
 		B6A561FD2CC46C520008C05C /* WritingTaskPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */; };
 		B6A561FF2CC46C830008C05C /* WritingTaskPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */; };
 		B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */; };
@@ -109,6 +111,9 @@
 		B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D332CA416800055FD67 /* BasicInputField.swift */; };
 		B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D352CA416950055FD67 /* PrimaryButton.swift */; };
 		B6EB6D382CA416A70055FD67 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EB6D372CA416A70055FD67 /* SecondaryButton.swift */; };
+		B6ECAD132D71C17600AC3B37 /* ScavengerHuntResultPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ECAD122D71C17500AC3B37 /* ScavengerHuntResultPage.swift */; };
+		B6ECAD152D71C1A700AC3B37 /* TaskResultTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ECAD142D71C1A700AC3B37 /* TaskResultTile.swift */; };
+		B6ECAD172D71C86500AC3B37 /* TaskLocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6ECAD162D71C86500AC3B37 /* TaskLocationList.swift */; };
 		B6FA77C32CA4190200C52F73 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77C22CA4190200C52F73 /* OnboardingPage.swift */; };
 		B6FA77C52CA4192600C52F73 /* OnboardingPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77C42CA4192600C52F73 /* OnboardingPageViewModel.swift */; };
 		B6FA77C72CA4196500C52F73 /* OnboardingNetworkAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FA77C62CA4196500C52F73 /* OnboardingNetworkAdapter.swift */; };
@@ -218,6 +223,7 @@
 		B651F3F92CCFC95300471D78 /* ListeningTaskEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningTaskEvaluationView.swift; sourceTree = "<group>"; };
 		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
 		B6595B712CD0EB37004816E8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		B65D06C32D6FEB3A008C641B /* ScavengerHuntHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntHelpView.swift; sourceTree = "<group>"; };
 		B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
 		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
 		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
@@ -232,6 +238,7 @@
 		B69D63752D6D20CB005C0FE0 /* LeaderboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardView.swift; sourceTree = "<group>"; };
 		B69D63772D6D2388005C0FE0 /* LeaderboardPageModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardPageModels.swift; sourceTree = "<group>"; };
 		B69D63792D6D266D005C0FE0 /* SnapVocabularyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapVocabularyTask.swift; sourceTree = "<group>"; };
+		B69D637B2D6D2C37005C0FE0 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 		B6A561FC2CC46C510008C05C /* WritingTaskPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPage.swift; sourceTree = "<group>"; };
 		B6A561FE2CC46C830008C05C /* WritingTaskPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingTaskPageViewModel.swift; sourceTree = "<group>"; };
 		B6A562002CC528860008C05C /* ListeningComprehensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeningComprehensionManager.swift; sourceTree = "<group>"; };
@@ -260,6 +267,9 @@
 		B6EB6D332CA416800055FD67 /* BasicInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInputField.swift; sourceTree = "<group>"; };
 		B6EB6D352CA416950055FD67 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		B6EB6D372CA416A70055FD67 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		B6ECAD122D71C17500AC3B37 /* ScavengerHuntResultPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntResultPage.swift; sourceTree = "<group>"; };
+		B6ECAD142D71C1A700AC3B37 /* TaskResultTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResultTile.swift; sourceTree = "<group>"; };
+		B6ECAD162D71C86500AC3B37 /* TaskLocationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLocationList.swift; sourceTree = "<group>"; };
 		B6FA77C22CA4190200C52F73 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingPage.swift; path = ../OnboardingPage/OnboardingPage.swift; sourceTree = "<group>"; };
 		B6FA77C42CA4192600C52F73 /* OnboardingPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingPageViewModel.swift; path = ../OnboardingPage/OnboardingPageViewModel.swift; sourceTree = "<group>"; };
 		B6FA77C62CA4196500C52F73 /* OnboardingNetworkAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OnboardingNetworkAdapter.swift; path = ../OnboardingPage/OnboardingNetworkAdapter.swift; sourceTree = "<group>"; };
@@ -384,7 +394,7 @@
 		B60F8AB72CB8194600268D75 /* ScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
-				B69577062D56146600C859C4 /* Manager */,
+				B65D06C22D6FEB05008C641B /* ScavengerHuntOverviewPage */,
 				B609EED92CC7E13100A029E8 /* ImageBasedLearning */,
 				B609EED42CC79A1D00A029E8 /* TaskLocation */,
 				B6A561FB2CC46C300008C05C /* WritingTask */,
@@ -394,10 +404,9 @@
 				B60F8ABC2CBAB7CF00268D75 /* VocabularyTask */,
 				B60F8AAF2CB7D8E200268D75 /* ScavengerHuntMap.swift */,
 				B609EED22CC6FAA700A029E8 /* ScavengerHuntMapViewModel.swift */,
-				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
-				B60F8ABA2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift */,
 				B63863AD2CF77E0A00ACE058 /* cupAnimation.json */,
 				B6DCC46F2CF13F6900852884 /* ScavengerHuntInfoPage.swift */,
+				B6ECAD162D71C86500AC3B37 /* TaskLocationList.swift */,
 			);
 			path = ScavengerHunt;
 			sourceTree = "<group>";
@@ -490,6 +499,18 @@
 			children = (
 			);
 			path = Animation;
+			sourceTree = "<group>";
+		};
+		B65D06C22D6FEB05008C641B /* ScavengerHuntOverviewPage */ = {
+			isa = PBXGroup;
+			children = (
+				B60F8AB82CB8196200268D75 /* ScavengerHuntOverviewPage.swift */,
+				B60F8ABA2CBA9D8600268D75 /* ScavengerHuntOverviewPageViewModel.swift */,
+				B65D06C32D6FEB3A008C641B /* ScavengerHuntHelpView.swift */,
+				B6ECAD122D71C17500AC3B37 /* ScavengerHuntResultPage.swift */,
+				B6ECAD142D71C1A700AC3B37 /* TaskResultTile.swift */,
+			);
+			path = ScavengerHuntOverviewPage;
 			sourceTree = "<group>";
 		};
 		B68ECA452CDA588500DDD17D /* Leaderboard */ = {
@@ -593,6 +614,7 @@
 				B6EB6D292CA415090055FD67 /* AccountPage.swift */,
 				B6EB6D2B2CA415240055FD67 /* AccountPageViewModel.swift */,
 				B68ECA412CDA32A100DDD17D /* LevelOfLanguage.swift */,
+				B69D637B2D6D2C37005C0FE0 /* LevelView.swift */,
 			);
 			path = AccountPage;
 			sourceTree = "<group>";
@@ -699,13 +721,13 @@
 		B6FED3BA2C70B3BB00339B7C /* NeoLingua */ = {
 			isa = PBXGroup;
 			children = (
+				B6E6569B2C938ACD00350D98 /* Info.plist */,
+				B6FED48D2C70C04700339B7C /* GoogleService-Info.plist */,
+				B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */,
 				B6DA539D2CE1609300EE26C3 /* ChallengePage */,
 				B6ADD6DE2CDE2DB200572F66 /* UserStatsDashboard */,
 				B68ECA452CDA588500DDD17D /* Leaderboard */,
 				B609EEE52CC838AF00A029E8 /* EducationalGames */,
-				B6E6569B2C938ACD00350D98 /* Info.plist */,
-				B6FED48D2C70C04700339B7C /* GoogleService-Info.plist */,
-				B6EB6D092CA4042A0055FD67 /* Env-Properties.plist */,
 				B60F8AB72CB8194600268D75 /* ScavengerHunt */,
 				B60F8AAA2CB7D76600268D75 /* GoogleMaps */,
 				B6FA77C12CA418E700C52F73 /* OnboardingPage */,
@@ -715,6 +737,7 @@
 				B6EB6D302CA416520055FD67 /* Components */,
 				B6FED3C12C70B3C200339B7C /* Preview Content */,
 				B6FA77E72CA45DA000C52F73 /* EnvironmentProperties */,
+				B69577062D56146600C859C4 /* Manager */,
 				B6FA77DA2CA41A9E00C52F73 /* Utilities */,
 				B6FA77D62CA41A4500C52F73 /* AppDelegate.swift */,
 				B6FED3BB2C70B3BB00339B7C /* NeoLinguaApp.swift */,
@@ -880,6 +903,7 @@
 				B68ECA492CDA58B200DDD17D /* LeaderboardPageViewModel.swift in Sources */,
 				B6EB6D342CA416800055FD67 /* BasicInputField.swift in Sources */,
 				B6A562012CC528860008C05C /* ListeningComprehensionManager.swift in Sources */,
+				B6ECAD152D71C1A700AC3B37 /* TaskResultTile.swift in Sources */,
 				B6FA77DE2CA41AC600C52F73 /* ViewExtension.swift in Sources */,
 				B69577082D5616BE00C859C4 /* FirebaseDataManager.swift in Sources */,
 				B6EB6D262CA414B80055FD67 /* HomePage.swift in Sources */,
@@ -902,9 +926,12 @@
 				B68ECA422CDA32A100DDD17D /* LevelOfLanguage.swift in Sources */,
 				B6FA77D52CA419FF00C52F73 /* SignupPageViewModel.swift in Sources */,
 				B6DA539F2CE160DD00EE26C3 /* ChallengePage.swift in Sources */,
+				B69D637C2D6D2C37005C0FE0 /* LevelView.swift in Sources */,
 				B6DA539C2CE15E7600EE26C3 /* TaskTile.swift in Sources */,
+				B6ECAD132D71C17600AC3B37 /* ScavengerHuntResultPage.swift in Sources */,
 				B60F8AAE2CB7D7BB00268D75 /* MapViewControllerBridge.swift in Sources */,
 				B609EED82CC79C3800A029E8 /* TaskLocationPageViewModel.swift in Sources */,
+				B65D06C42D6FEB3A008C641B /* ScavengerHuntHelpView.swift in Sources */,
 				B609EED12CC6A6A600A029E8 /* ScavengerHuntManager.swift in Sources */,
 				B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */,
 				B6FA77D72CA41A4500C52F73 /* AppDelegate.swift in Sources */,
@@ -953,6 +980,7 @@
 				B6EB6D362CA416950055FD67 /* PrimaryButton.swift in Sources */,
 				B60F8ADF2CBDCDDD00268D75 /* SpeechRecognizer.swift in Sources */,
 				B6EB6D322CA416670055FD67 /* ChipView.swift in Sources */,
+				B6ECAD172D71C86500AC3B37 /* TaskLocationList.swift in Sources */,
 				B69D63722D6CFD49005C0FE0 /* StatsTileViewModel.swift in Sources */,
 				B60F8AAC2CB7D77900268D75 /* MapViewController.swift in Sources */,
 				B687450C2CD766640085AFE1 /* AsyncImageView.swift in Sources */,

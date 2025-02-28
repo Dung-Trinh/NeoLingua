@@ -2,7 +2,12 @@ import Foundation
 import GoogleMaps
 
 protocol ScavengerHuntOverviewPageViewModel: ObservableObject {
-
+    var currentScavengerHunt: ScavengerHunt? { get set }
+    var isLeaderboardPresented: Bool { get set }
+    var userScores: [UserScore]? { get }
+    
+    func getScavengerHuntLeaderboard() async
+    func getFinalScore() -> Double
 }
 
 class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel {

@@ -3,7 +3,7 @@ import Firebase
 protocol UserDataManager {
     func saveUserData(userData: ProfileData) async throws
     func fetchUserData() async throws -> ProfileData
-    
+    func addCompetitiveScavengerHuntId(scavengerHuntId: String) async throws
 }
 
 struct ProfileData: Codable {
@@ -15,7 +15,7 @@ struct ProfileData: Codable {
 }
 
 class UserDataManagerImpl: UserDataManager {
-    let firebaseDataManager = FirebaseDataManagerImpl()
+    private let firebaseDataManager = FirebaseDataManagerImpl()
     
     func saveUserData(userData: ProfileData) async throws {
         let userId = UserDefaults().getUserId()
@@ -30,6 +30,9 @@ class UserDataManagerImpl: UserDataManager {
     
     func addCompetitiveScavengerHuntId(scavengerHuntId: String) async throws {
         let userId = UserDefaults().getUserId()
-        try await firebaseDataManager.addCompetitiveScavengerHuntId(scavengerHuntId: scavengerHuntId, userId: userId)
+        try await firebaseDataManager.addCompetitiveScavengerHuntId(
+            scavengerHuntId: scavengerHuntId,
+            userId: userId
+        )
     }
 }

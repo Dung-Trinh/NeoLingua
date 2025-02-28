@@ -15,13 +15,13 @@ protocol LoginPageViewModel: ObservableObject {
 }
 
 class LoginPageViewModelImpl: LoginPageViewModel {
+    private var router: Router
+    private let loginAdapter: LoginSignupNetworkAdapter
+    
     @Published var email = ProdENV().USER_NAME
     @Published var password = ProdENV().USER_PASSWORD
     @Published var errorMessage: String?
     @Published var isLoading: Bool = false
-    @Published var router: Router
-    
-    private let loginAdapter: LoginSignupNetworkAdapter
     
     init(
         router: Router,

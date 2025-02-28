@@ -41,7 +41,6 @@ class SignupPageViewModelImpl: SignupPageViewModel {
             try await loginAdapter.createUser(email: email, password: password)
             router.push(.loginSignup(.signupData))
         } catch let err {
-            // TODO: adding error handling
             print(err.localizedDescription)
         }
     }

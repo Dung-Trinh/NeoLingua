@@ -12,7 +12,7 @@ struct NeoLinguaApp: App {
                 HomePage(viewModel: HomePageViewModelImpl())
                     .environmentObject(router)
             } else {
-                OnboardingPage(viewModel: OnboardingPageViewModelImpl())
+                OnboardingPage(viewModel: OnboardingPageViewModelImpl(adapter: OnboardingNetworkAdapterImpl(), router: router))
                     .environmentObject(router)
             }
         }

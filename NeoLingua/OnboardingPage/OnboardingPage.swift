@@ -10,8 +10,7 @@ struct OnboardingPage<ViewModel>: View where ViewModel: OnboardingPageViewModel 
         ) {
             VStack(alignment: .center) {
                 Text("Sprachen lernen mit").font(.title).bold()
-                Text("NeoLingua").font(.title).bold().padding(.bottom,100)
-
+                Text("NeoLingua").font(.title).bold().padding(.bottom, 100)
                 Image("guyTalkingToBot").resizable().frame(height: 300).scaledToFit()
                 Spacer()
                 buttonContainer
@@ -32,14 +31,14 @@ struct OnboardingPage<ViewModel>: View where ViewModel: OnboardingPageViewModel 
                 title: "Registrieren",
                 color: .blue,
                 action: {
-                    router.push(.loginSignup(.signup))
+                    viewModel.navigateTo(.signup)
                 }
             )
             PrimaryButton(
                 title: "Anmelden",
                 color: .blue,
                 action: {
-                    router.push(.loginSignup(.login))
+                    viewModel.navigateTo(.login)
                 }
             )
         }
