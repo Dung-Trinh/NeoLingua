@@ -3,7 +3,7 @@ import SwiftOpenAI
 import AVFoundation
 
 class AudioPlayer: ObservableObject {
-    let service = OpenAIServiceFactory.service(apiKey: ProdENV().OPENAI_KEY)
+    let service = OpenAIServiceProvider.shared
     @Published var audioPlayer: AVAudioPlayer?
     
     func createSpeech(textForSpeech: String) async throws {
@@ -34,11 +34,7 @@ class AudioPlayer: ObservableObject {
     }
     
     func playAudio() {
-        do {
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-        } catch {
-            print("Error playing audio: \(error.localizedDescription)")
-        }
+        audioPlayer?.prepareToPlay()
+        audioPlayer?.play()
     }
 }

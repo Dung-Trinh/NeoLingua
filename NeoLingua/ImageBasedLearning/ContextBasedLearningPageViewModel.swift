@@ -19,10 +19,40 @@ enum ContexBasedLearningPageState {
 }
 
 protocol ContextBasedLearningPageViewModel: ObservableObject {
-
+    var selectedPhotos: [PhotosPickerItem] { get set }
+    var selectedImage: UIImage? { get set }
+    var imageBasedTask: ImageBasedTask? { get }
+    var userPerformance: UserTaskPerformance? { get }
+    var isSheetPresented: Bool { get }
+    var state: ContexBasedLearningPageState { get }
+    var isLoading: Bool { get }
+    var areAllTaskDone: Bool { get }
+    var showCamera: Bool { get set }
+    var excludedTaskType: [TaskType] { get set }
+    var promptText: String { get set }
+    var shouldShowPromptInput: Bool { get set }
+    var sharedImageForTask: SharedContentForTask? { get }
+    
+    func openCamera()
+    func fetchPerformance() async
+    func analyzeImage() async
+    func createTasksWithPrompt() async
+    func convertDataToImage()
+    func navigateTo(_ route: Route)
 }
 
 class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
+    private var router: Router
+    private var cancellables = Set<AnyCancellable>()
+    private var imageCoordinates: Location?
+    private var uploadedImageLink = ""
+    private var taskProcessManager = TaskProcessManager.shared
+    private var selectedImageURLS: [URL] = []
+    private var selectedImages: [Image] = []
+    private let openAiServiceHelper = OpenAIManager()
+    private let imageProcessingManager = ImageProcessingManager()
+    private let firebaseDataManager = FirebaseDataManagerImpl()
+    
     @Published var selectedPhotos: [PhotosPickerItem] = []
     @Published var selectedImage: UIImage? = nil
     @Published var imageBasedTask: ImageBasedTask?
@@ -34,9 +64,7 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
     @Published var showCamera = false
     @Published var excludedTaskType: [TaskType] = []
     @Published var promptText: String = ""
-    private var cancellables = Set<AnyCancellable>()
-
-    private var imageCoordinates: Location?
+    @Published var shouldShowPromptInput = false
     var sharedImageForTask: SharedContentForTask? {
         guard let selectedImage = selectedImage, uploadedImageLink != "" else {
             return nil
@@ -45,16 +73,8 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
         return SharedContentForTask(image: selectedImage, uploadedLink: uploadedImageLink, coordinates: imageCoordinates)
     }
     
-    private var uploadedImageLink = ""
-    private var taskProcessManager = TaskProcessManager.shared
-    private let openAiServiceHelper = OpenAIManager()
-    private let imageProcessingManager = ImageProcessingManager()
-    private let firebaseDataManager = FirebaseDataManagerImpl()
-
-    @State private var selectedImageURLS: [URL] = []
-    @State private var selectedImages: [Image] = []
-
-    init() {
+    init(router: Router) {
+        self.router = router
         $selectedImage
             .sink { [weak self] newImage in
                 if newImage != nil {
@@ -118,17 +138,6 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
             print("analyzeImage error: ", error.localizedDescription)
         }
     }
-
-    private func createImageBasedTask() async throws {
-        print("excludedTaskTypes")
-        print(excludedTaskType.description)
-        imageBasedTask = try await imageProcessingManager.createImageBasedTask(
-            imageUrl: uploadedImageLink,
-            excludedTaskTypes: excludedTaskType,
-            imageLocation: imageCoordinates
-        )
-        taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
-    }
     
     @MainActor
     func fetchPerformance() async {
@@ -145,7 +154,11 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
         imageCoordinates = Location(latitude: position?.latitude ?? 0, longitude: position?.longitude ?? 0)
     }
     
-    func extractMetaData(from imageData: Data) {
+    func navigateTo(_ route: Route) {
+        router.push(route)
+    }
+    
+    private func extractMetaData(from imageData: Data) {
         
         guard let source = CGImageSourceCreateWithData(imageData as CFData, nil),
               let metadata = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [String: Any] else {
@@ -163,5 +176,16 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
         imageCoordinates = Location(latitude: latitude, longitude: longitude)
         print("imageCoordinates")
         print(imageCoordinates)
+    }
+    
+    private func createImageBasedTask() async throws {
+        print("excludedTaskTypes")
+        print(excludedTaskType.description)
+        imageBasedTask = try await imageProcessingManager.createImageBasedTask(
+            imageUrl: uploadedImageLink,
+            excludedTaskTypes: excludedTaskType,
+            imageLocation: imageCoordinates
+        )
+        taskProcessManager.currentTaskId = imageBasedTask?.id ?? ""
     }
 }

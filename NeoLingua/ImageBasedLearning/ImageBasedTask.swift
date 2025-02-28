@@ -7,18 +7,6 @@ struct ImageBasedTask: Codable {
     let taskPrompt: TaskPrompt
 }
 
-//struct UserTaskResult: Codable {
-//    let userUid: String
-//    let taskId: String
-//    let imageUrl: String
-//    let title: String
-//    let description: String
-//    let taskPrompt: TaskPrompt
-//    
-//    let vocabularyTraining: [VocabularyTask]?
-//    let listeningExercise: ListeningExercise?
-//}
-
 struct UserTaskPerformance: Codable {
     let userId: String
     let taskId: String
@@ -26,10 +14,10 @@ struct UserTaskPerformance: Codable {
     var listeningComprehension: TaskPerformancetParameter? = nil
     var conversationSimulation: TaskPerformancetParameter? = nil
     var searchingTheObject: TaskPerformancetParameter? = nil
-
+    
     var taskTypes: [TaskType] = []
     var didFoundObject: Bool?
-
+    
     func isTaskDone() -> Bool {
         var isTaskDone = true
         
@@ -78,20 +66,19 @@ struct TaskPerformancetParameter: Codable {
     }
 }
 
-
 enum TaskType: String, CaseIterable, Codable {
     case vocabularyTraining = "vocabularyTraining"
     case listeningComprehension = "listeningComprehension"
     case conversationSimulation = "conversationSimulation"
     
     var localizedText: String {
-            switch self {
-            case .vocabularyTraining:
-                return "Vokabelübung"
-            case .listeningComprehension:
-                return "Hörverständnis"
-            case .conversationSimulation:
-                return "Gesprächssimulation"
-            }
+        switch self {
+        case .vocabularyTraining:
+            return "Vokabelübung"
+        case .listeningComprehension:
+            return "Hörverständnis"
+        case .conversationSimulation:
+            return "Gesprächssimulation"
         }
+    }
 }

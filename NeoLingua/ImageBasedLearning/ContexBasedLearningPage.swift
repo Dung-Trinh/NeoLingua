@@ -1,10 +1,9 @@
 import SwiftUI
 import _PhotosUI_SwiftUI
 
-struct ContexBasedLearningPage: View {
+struct ContexBasedLearningPage<ViewModel>: View where ViewModel: ContextBasedLearningPageViewModel {
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel = ContextBasedLearningPageViewModelImpl()
-    @State var shouldShowPromptInput = false
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
@@ -34,7 +33,7 @@ struct ContexBasedLearningPage: View {
                         
                         if let vocabularyTraining = imageBasedTask.taskPrompt.vocabularyTraining {
                             Button(action: {
-                                router.push( .contextBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
+                                viewModel.navigateTo(.contextBasedLearning(.vocabularyTrainingPage(prompt: vocabularyTraining)))
                             }, label: {
                                 HStack{
                                     Text(TaskType.vocabularyTraining.localizedText)
@@ -58,7 +57,7 @@ struct ContexBasedLearningPage: View {
                         
                         if let listeningComprehension = imageBasedTask.taskPrompt.listeningComprehension {
                             Button(action: {
-                                router.push( .contextBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
+                                viewModel.navigateTo(.contextBasedLearning(.listeningComprehensionPage(prompt: listeningComprehension)))
                             }, label: {
                                 HStack{
                                     Text(TaskType.listeningComprehension.localizedText)
@@ -82,7 +81,7 @@ struct ContexBasedLearningPage: View {
                         
                         if let conversationSimulation = imageBasedTask.taskPrompt.conversationSimulation {
                             Button(action: {
-                                router.push(.contextBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
+                                viewModel.navigateTo(.contextBasedLearning(.conversationSimulationPage(prompt: conversationSimulation)))
                             }, label: {
                                 HStack{
                                     Text(TaskType.conversationSimulation.localizedText)
@@ -132,7 +131,7 @@ struct ContexBasedLearningPage: View {
                         }.onChange(of: viewModel.selectedPhotos) {
                             viewModel.convertDataToImage()
                         }
-                                    
+                        
                         
                         
                         Button(action: {
@@ -153,16 +152,16 @@ struct ContexBasedLearningPage: View {
                         
                         Button(action: {
                             withAnimation {
-                                shouldShowPromptInput.toggle()
+                                viewModel.shouldShowPromptInput.toggle()
                             }
                         }, label: {
                             Text("Beschreibe deine Aufgabe 📝")
                                 .padding(8)
                                 .frame(maxWidth: .infinity)
-                                .foregroundColor(shouldShowPromptInput ? Color.green : .accentColor)
+                                .foregroundColor(viewModel.shouldShowPromptInput ? Color.green : .accentColor)
                                 .background(
                                     RoundedRectangle(cornerRadius: 8)
-                                        .stroke(shouldShowPromptInput ? Color.green : Color.accentColor, lineWidth: 1)
+                                        .stroke(viewModel.shouldShowPromptInput ? Color.green : Color.accentColor, lineWidth: 1)
                                 )
                         })
                         Spacer(minLength: 50)
@@ -171,7 +170,7 @@ struct ContexBasedLearningPage: View {
                     .frame(maxWidth: .infinity)
                     .padding()
                     
-                    if shouldShowPromptInput {
+                    if viewModel.shouldShowPromptInput {
                         VStack {
                             Text("Beispiel: Erstelle mir Aufgaben über das Thema Umweltschutz.")
                                 .font(.subheadline)
@@ -200,7 +199,7 @@ struct ContexBasedLearningPage: View {
                             color: .blue,
                             action: {
                                 if let sharedImageForTask = viewModel.sharedImageForTask {
-                                    router.push(.shareImageForTaskPage(sharedImageForTask))
+                                    viewModel.navigateTo(.shareImageForTaskPage(sharedImageForTask))
                                 }
                                 return nil
                             }

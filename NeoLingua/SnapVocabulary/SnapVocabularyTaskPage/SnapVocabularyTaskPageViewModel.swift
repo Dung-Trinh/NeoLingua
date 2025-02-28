@@ -1,10 +1,24 @@
 import Combine
 
-protocol NearMeTaskPageViewModel: ObservableObject {
+protocol SnapVocabularyTaskPageViewModel: ObservableObject {
+    var sharedImageTask: SnapVocabularyTask { get }
+    var userInput: String { get set }
+    var result: InspectImageForVocabularyResult? { get }
+    var lastUserInput: String { get }
+    var showHintButton: Bool { get }
+    var hint: String { get }
+    var isLoading: Bool { get }
+    var finalPoints: Double { get }
     
+    func fetchHint() async
+    func validateUserInputWithImage() async
 }
 
-class NearMeTaskPageViewModelImpl: NearMeTaskPageViewModel {
+class SnapVocabularyTaskPageViewModelImpl: SnapVocabularyTaskPageViewModel {
+    private let imageProcessingManager = ImageProcessingManager()
+    private let leaderboardService = LeaderboardServiceImpl()
+    private var numberOfAttempts = -1.0
+    
     @Published var sharedImageTask: SnapVocabularyTask
     @Published var userInput: String = ""
     @Published var lastUserInput: String = ""
@@ -14,11 +28,7 @@ class NearMeTaskPageViewModelImpl: NearMeTaskPageViewModel {
     @Published var isLoading: Bool = false
     @Published var finalPoints: Double = 0
     @Published var showResultSheet: Bool = false
-
-    var numberOfAttempts = -1.0
-    private var imageProcessingManager = ImageProcessingManager()
-    private let leaderboardService = LeaderboardServiceImpl()
-
+    
     init(sharedImageTask: SnapVocabularyTask) {
         self.sharedImageTask = sharedImageTask
     }

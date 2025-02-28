@@ -1,12 +1,12 @@
 import SwiftUI
 import Lottie
 
-struct ResultSheetView : View {
-    var viewModel: ResultSheetViewModel
-    var isResultTrue: Bool {
+struct ResultSheetView<ViewModel>: View where ViewModel: ResultSheetViewModel {
+    var viewModel: ViewModel
+    private var isResultTrue: Bool {
         return viewModel.result == .correct
     }
-    var title: String {
+    private var title: String {
         return isResultTrue ? "Richtig!" : "Leider falsch"
     }
     

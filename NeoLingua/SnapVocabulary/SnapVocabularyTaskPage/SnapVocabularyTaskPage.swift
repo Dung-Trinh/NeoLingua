@@ -1,8 +1,8 @@
 import SwiftUI
 import ActivityIndicatorView
 
-struct NearMeTaskPage: View {
-    @StateObject var viewModel: NearMeTaskPageViewModelImpl
+struct SnapVocabularyTaskPage<ViewModel>: View where ViewModel: SnapVocabularyTaskPageViewModel{
+    @StateObject var viewModel: ViewModel
     @Binding var isPresented: Bool
     
     var body: some View {
@@ -19,9 +19,13 @@ struct NearMeTaskPage: View {
                         .textFieldStyle(.roundedBorder)
                     
                     if let result = viewModel.result {
-                        InspectImageResultView(resultData: result, searchedVocabulary: viewModel.sharedImageTask.vocabulary, lastUserInput: viewModel.lastUserInput)
+                        InspectImageResultView(
+                            resultData: result,
+                            searchedVocabulary: viewModel.sharedImageTask.vocabulary,
+                            lastUserInput: viewModel.lastUserInput
+                        )
                         if result.foundSearchedVocabulary && result.result == .correct {
-                            Text("💎 Sie haben  \(viewModel.finalPoints, specifier: "%.2f") Punkte erhalten 💎").font(.headline)
+                            Text("💎 Sie haben \(viewModel.finalPoints, specifier: "%.2f") Punkte erhalten 💎").font(.headline)
                         }
                     }
                     
@@ -71,62 +75,6 @@ struct NearMeTaskPage: View {
         .padding()
         .navigationTitle("SnapVocabulary")
         .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-struct InspectImageResultView: View {
-    let resultData: InspectImageForVocabularyResult
-    let searchedVocabulary: [String]
-    let lastUserInput: String
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Validation Result")
-                .fontWeight(.bold)
-                .padding(.bottom, 10)
-                .multilineTextAlignment(.center)
-            VStack(alignment: .leading){
-                if resultData.foundSearchedVocabulary {
-                    Text("You found one of the vocabulary: ")
-                        .font(.headline)
-                        .multilineTextAlignment(.leading)
-                    Text(searchedVocabulary.joined(separator: ","))
-                        .font(.body)
-                        .multilineTextAlignment(.leading)
-                } else {
-                    Text("⚠️ Unfortunately there is non of the searched vocabulary in the text")
-                }
-            }
-            
-            HStack {
-                Text("Result:")
-                    .font(.headline)
-                Text(resultData.result.text)
-                    .font(.body)
-                    .foregroundColor(resultData.result.color)
-            }
-            
-            if let correctedText = resultData.correctedText {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Your Input:")
-                        .font(.headline)
-                        .foregroundColor(.red)
-                    Text(lastUserInput)
-                        .font(.body)
-                        .foregroundColor(.gray)
-                    Text("Corrected Text:")
-                        .font(.headline)
-                        .foregroundColor(.green)
-                    Text(.init(correctedText))
-                        .font(.body)
-                        .foregroundColor(.gray)
-                }
-                .padding(.top, 10)
-            }
-        }
-        .frame(width: .infinity)
-        .padding()
-        .background(RoundedRectangle(cornerRadius: 10).fill(Color(.systemGray6)))
     }
 }
 

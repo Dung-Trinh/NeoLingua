@@ -1,10 +1,9 @@
 import SwiftUI
 
-struct ScavengerHuntOverviewPage: View {
+struct ScavengerHuntOverviewPage<ViewModel>: View where ViewModel: ScavengerHuntOverviewPageViewModel {
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel: ScavengerHuntOverviewPageViewModelImpl
+    @StateObject var viewModel: ViewModel
     @State var initialAppearance = false
-    @State var showHelpSheet = false
     
     var body: some View {
         VStack {
@@ -18,7 +17,7 @@ struct ScavengerHuntOverviewPage: View {
                             Button(scavengerHunt.title) {
                                 viewModel.currentScavengerHunt = scavengerHunt
                                 Task {
-                                    try? await viewModel.setupscavengerHunt()
+                                    await viewModel.setupscavengerHunt()
                                 }
                             }
                         }
@@ -99,8 +98,8 @@ struct ScavengerHuntOverviewPage: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Need help?") {
-                    showHelpSheet = true
-                }.sheet(isPresented: $showHelpSheet) {
+                    viewModel.showHelpSheet = true
+                }.sheet(isPresented: $viewModel.showHelpSheet) {
                     ScavengerHuntHelpView()
                         .presentationDetents([.fraction(0.8)])
                         .presentationCornerRadius(40)

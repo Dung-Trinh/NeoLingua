@@ -1,37 +1,52 @@
 import Combine
 import SwiftUI
 
-protocol VocabularyTrainingPageViewModel: ObservableObject {}
+protocol VocabularyTrainingPageViewModel: ObservableObject {
+    var currentTask: VocabularyExercise? { get }
+    var userInputText: String { get set }
+    var isSheetPresented: Bool { get set }
+    var isExplanationSheetPresented: Bool { get set }
+    var explanationText: String { get }
+    var isCheckAnswerButtonHidden: Bool { get }
+    var sheetViewModel: ResultSheetViewModelImpl? { get }
+    var showResult: Bool { get }
+    var isLoading: Bool { get }
+    var showProgressIndicator: Bool { get set }
+    var progress: CGFloat { get set }
+    var numberOfTasks: Int { get }
+    var taskPerformance: TaskPerformancetParameter? { get }
+    
+    func checkAnswerTapped()
+    func fetchVocabularyTraining() async
+}
 
 class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
-    @Published var tasks: [VocabularyExercise] = []
+    private var tasks: [VocabularyExercise] = []
+    private var prompt = ""
+    private var points = 0
+    private var finalPoints: Double = 0
+    private var scorePercentage: Double = 0
+    private var anyCancellables = Set<AnyCancellable>()
+    private var currentQuestionIndex = 0
+
+    private let vocabularyManager = VocabularyManager()
+    private let taskProcessManager = TaskProcessManager.shared
+    private let router: Router
+
     @Published var currentTask: VocabularyExercise?
     @Published var userInputText: String = ""
-    @Published var currentQuestionIndex = 0
     @Published var isSheetPresented: Bool = false
     @Published var isExplanationSheetPresented: Bool = false
     @Published var explanationText: String = ""
-
     @Published var isCheckAnswerButtonHidden: Bool = false
-    @Published var sheetViewModel: ResultSheetViewModel?
-    @Published var router: Router
+    @Published var sheetViewModel: ResultSheetViewModelImpl?
     @Published var showResult: Bool = false
     @Published var isLoading: Bool = false
-
     @Published var showProgressIndicator: Bool = true
     @Published var progress: CGFloat = 0.0
     @Published var numberOfTasks: Int = 0
     @Published var taskPerformance: TaskPerformancetParameter?
-    
     var isScavengerHuntMode: Bool = false
-
-    private var prompt = ""
-    private var vocabularyManager = VocabularyManager()
-    private var anyCancellables = Set<AnyCancellable>()
-    private var taskProcessManager = TaskProcessManager.shared
-    private var points = 0
-    var finalPoints: Double = 0
-    var scorePercentage: Double = 0
     
     init(
         prompt: String,
@@ -55,7 +70,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
         }
         var userFeedbackText = ""
         var isAnswerCorrect = false
-
+        
         if let currentTask = currentTask, currentTask.checkAnswer(userInputText) {
             isAnswerCorrect = true
             userFeedbackText = "Richtig! Die deutsche Übersetzung ist: \(currentTask.translation)"
@@ -65,14 +80,14 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             let answer = currentTask?.answer ?? ""
             userFeedbackText = "Falsch. Die richtige Antwort ist: \(answer)"
         }
-
+        
         let showDetailedFeedbackButton = currentTask?.type == .sentenceAssembly && isAnswerCorrect == false
-        sheetViewModel = ResultSheetViewModel(
+        sheetViewModel = ResultSheetViewModelImpl(
             result: isAnswerCorrect ? .correct : .incorrect,
             text: userFeedbackText,
             action: {
                 self.continueTask()
-            }, 
+            },
             getDetailedFeedback: {
                 Task {
                     await self.getDetailedFeedback()
@@ -83,7 +98,21 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
         isSheetPresented = true
     }
     
-    func continueTask() {
+    func fetchVocabularyTraining() async {
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
+            tasks = result
+            currentTask = result.first
+            numberOfTasks = result.count
+            print("fetchVocabularyTraining count: ", result.count)
+        } catch {
+            print("fetchVocabularyTraining error: ", error.localizedDescription)
+        }
+    }
+    
+    private func continueTask() {
         sheetViewModel = nil
         isSheetPresented = false
         progress = CGFloat(currentQuestionIndex + 1) / CGFloat(numberOfTasks)
@@ -105,7 +134,6 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
                 }
             }
             
-            
             print("keine antworten mehr zurück")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 withAnimation {
@@ -116,21 +144,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
         }
     }
     
-    func fetchVocabularyTraining() async {
-        isLoading = true
-        defer { isLoading = false }
-        do {
-            let result = try await vocabularyManager.fetchVocabularyTraining(prompt: prompt)
-            tasks = result
-            currentTask = result.first
-            numberOfTasks = result.count
-            print("fetchVocabularyTraining count: ", result.count)
-        } catch {
-            print("fetchVocabularyTraining error: ", error.localizedDescription)
-        }
-    }
-    
-    func getDetailedFeedback() async {
+    private func getDetailedFeedback() async {
         isLoading = true
         defer { isLoading = false }
         

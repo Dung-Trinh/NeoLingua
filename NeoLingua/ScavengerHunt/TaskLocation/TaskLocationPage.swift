@@ -3,11 +3,11 @@ import ActivityIndicatorView
 import _PhotosUI_SwiftUI
 import Lottie
 
-struct TaskLocationPage: View {
+struct TaskLocationPage<ViewModel>: View where ViewModel: TaskLocationPageViewModel{
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel: TaskLocationPageViewModelImpl
+    @StateObject var viewModel: ViewModel
     
-    var location: TaskLocation {
+    private var location: TaskLocation {
         return viewModel.taskLocation
     }
     
@@ -92,7 +92,6 @@ struct TaskLocationPage: View {
             }
             Spacer()
             if location.performance?.performance.isTaskDone() == true {
-                //            if true {
                 VStack(alignment: .center, spacing: Styleguide.Margin.medium) {
                     VStack {
                         InfoCardView(
@@ -134,9 +133,12 @@ struct TaskLocationPage: View {
                         }
                     )
                     if viewModel.isLoading {
-                        ActivityIndicatorView(isVisible: .constant(true), type: .rotatingDots(count: 5))
-                            .frame(width: 50.0, height: 50.0)
-                            .foregroundColor(.red)
+                        ActivityIndicatorView(
+                            isVisible: .constant(true),
+                            type: .rotatingDots(count: 5)
+                        )
+                        .frame(width: 50.0, height: 50.0)
+                        .foregroundColor(.red)
                     }
                 }
             }
@@ -186,49 +188,6 @@ struct TaskLocationPage: View {
                     .presentationCornerRadius(40)
                 }
             }
-        }
-    }
-}
-
-struct ImageValidationResultView: View {
-    let validationResult: ImageValidationResult
-    
-    var body: some View {
-        VStack {
-            LottieView(animation: .named(validationResult.isMatching ? "firework": "crossmark"))
-                .looping()
-                .frame(width: .infinity, height: 200)
-                .padding(-30)
-            
-            Text(validationResult.isMatching ? "The image matches the searched object!" : "The image does not match the searched object.")
-                .font(.title3)
-                .bold()
-                .foregroundColor(validationResult.isMatching ? .green : .red)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, Styleguide.Margin.small)
-            
-            VStack(alignment: .leading, spacing: 10) {
-                HStack() {
-                    Text("🎯 Confidence Score:")
-                        .font(.headline)
-                        .bold()
-                    Text("\(validationResult.confidenceScore * 100, specifier: "%.1f")%")
-                        .font(.subheadline)
-                }
-                if validationResult.reason != "" {
-                    VStack(alignment: .leading) {
-                        Text("🔎 Reason:")
-                            .font(.headline)
-                            .bold()
-                            .multilineTextAlignment(.leading)
-                        
-                        Text(validationResult.reason)
-                            .font(.subheadline)
-                            .multilineTextAlignment(.leading)
-                    }
-                }
-            }
-            .padding()
         }
     }
 }

@@ -6,7 +6,7 @@ struct MultipleChoiceView: View {
     @State private var selectedAnswerIndex: Int? = nil
     var exercise: ChooseWordExercise
     let action: () -> Void
-
+    
     var body: some View {
         VStack {
             InfoCardView(message: "Wählen Sie das richtige Wort aus, um den Satz zu vervollständigen!").padding(.bottom, Styleguide.Margin.large)

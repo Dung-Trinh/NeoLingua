@@ -83,7 +83,7 @@ class TestData {
         ]
     )
     static let imageBasedTask: ImageBasedTask = ImageBasedTask(
-        id: "f28acc6b-fd5c-4438-b5bc-ba60e16a426c",
+        id: UUID().uuidString,
         title: "Lemon Tree",
         description: "The image showcases a branch of a lemon tree with green leaves and one yellowing leaf. The focus on foliage suggests a natural setting, potentially in a home garden or a botanical environment.",
         taskPrompt: TaskPrompt(

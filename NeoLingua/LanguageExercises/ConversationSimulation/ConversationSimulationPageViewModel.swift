@@ -18,13 +18,35 @@ enum ConversationState {
 }
 
 protocol ConversationSimulationPageViewModel: ObservableObject {
+    var conversationState: ConversationState { get set }
+    var roleOptionsResponse: RoleOptionsResponse? { get }
+    var isResultSheetPresented: Bool { get set }
+    var taskPerformance: TaskPerformancetParameter? { get }
+    var selectedRole: RoleOption? { get }
+    var isRecording: Bool { get }
+    var audioPlayer: AudioPlayer { get set }
+    var selectedMode: ConversationInputMode{ get set }
+    var messageText: String { get set }
+    var isLoading: Bool { get }
+    var lastConversationResponse: ConversationResponse? { get }
+    var lastUserMessage: String { get }
+    var conversationEvaluation: ConversationEvaluation? { get }
+    var isEvaluationSheetPresented: Bool { get set }
     
+    func selectedRole(role: RoleOption) async
+    func sendMessage(message: String) async
+    func startRecording()
+    func endRecording()
+    func getConversationEvaluation() async
 }
 
 class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewModel {
     private var cancellables = Set<AnyCancellable>()
     private let service: OpenAIService
-    let conversationSimulationManager = ConversationSimulationManager()
+    private let conversationSimulationManager = ConversationSimulationManager()
+    private let prompt: String
+    private var taskProcessManager = TaskProcessManager.shared
+    
     @Published var speechRecognizer = SpeechRecognizer()
     @Published var isRecording = false
     @Published var messageText = ""
@@ -40,11 +62,8 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
     @Published var isLoading: Bool = false
     @Published var taskPerformance: TaskPerformancetParameter?
     @Published var isResultSheetPresented = false
-
-    let prompt: String
-    private var taskProcessManager = TaskProcessManager.shared
     var isScavengerHuntMode: Bool = false
-
+    
     init(prompt: String) {
         self.prompt = prompt
         service = OpenAIServiceProvider.shared
@@ -53,7 +72,7 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
         }
     }
     
-    @MainActor 
+    @MainActor
     func sendMessage(message: String) async {
         isLoading = true
         lastConversationResponse = nil
@@ -77,14 +96,14 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
         }
     }
     
-    @MainActor 
+    @MainActor
     func startRecording() {
         speechRecognizer.resetTranscript()
         speechRecognizer.startTranscribing()
         isRecording = true
     }
     
-    @MainActor 
+    @MainActor
     func endRecording() {
         speechRecognizer.stopTranscribing()
         isRecording = false
@@ -92,37 +111,20 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
         print("speechRecognizer.transcript")
         print(speechRecognizer.transcript)
         messageText = speechRecognizer.transcript
-//        Task {
-//            await sendMessage(message: speechRecognizer.transcript)
-//        }
     }
     
     func selectedRole(role: RoleOption) async {
         isLoading = true
         defer { isLoading = false }
         
-            do {
-                selectedRole = role
-                let result = try await conversationSimulationManager.selectedRole(selectedRole: role)
-                // for later
-                try await audioPlayer.createSpeech(textForSpeech: result?.introText ?? "")
-                audioPlayer.playAudio()
-                conversationState = .conversation
-            } catch {
-                print("audioPlayer.createSpeech error: ", error.localizedDescription)
-            }
-        }
-    
-    func createConversationSimulation() async {
-        isLoading = true
-        defer { isLoading = false }
-        
         do {
-            let result = try await conversationSimulationManager.createConversation(prompt: prompt)
-            roleOptionsResponse = result
-            conversationState = .contextDescription
+            selectedRole = role
+            let result = try await conversationSimulationManager.selectedRole(selectedRole: role)
+            try await audioPlayer.createSpeech(textForSpeech: result?.introText ?? "")
+            audioPlayer.playAudio()
+            conversationState = .conversation
         } catch {
-            print("createConversationSimulation() error: ", error.localizedDescription)
+            print("audioPlayer.createSpeech error: ", error.localizedDescription)
         }
     }
     
@@ -146,6 +148,19 @@ class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewMod
             isEvaluationSheetPresented = true
         } catch {
             print("getConversationEvaluation() error: ", error.localizedDescription)
+        }
+    }
+    
+    private func createConversationSimulation() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            let result = try await conversationSimulationManager.createConversation(prompt: prompt)
+            roleOptionsResponse = result
+            conversationState = .contextDescription
+        } catch {
+            print("createConversationSimulation() error: ", error.localizedDescription)
         }
     }
 }

@@ -2,10 +2,26 @@ import Foundation
 import _PhotosUI_SwiftUI
 
 protocol TaskLocationPageViewModel: ObservableObject {
+    var taskLocation: TaskLocation { get }
+    var selectedPhotos: [PhotosPickerItem] { get set }
+    var selectedImage: UIImage? { get set}
+    var showCamera: Bool { get set }
+    var isLoading: Bool { get }
+    var isSheetPresented: Bool { get set }
+    var imageValidationResult: ImageValidationResult? { get }
+    var numberOfAttempts: Int { get }
     
+    func fetchTaskLocationState() async
+    func convertDataToImage()
+    func verifyImage() async
 }
 
 class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
+    private var uploadedImageLink = ""
+    private let imageProcessingManager = ImageProcessingManager()
+    private let taskProcessManager = TaskProcessManager.shared
+    private let firebaseDataManager = FirebaseDataManagerImpl()
+    
     @Published var taskLocation: TaskLocation
     @Published var selectedPhotos: [PhotosPickerItem] = []
     @Published var selectedImage: UIImage? = nil
@@ -13,12 +29,7 @@ class TaskLocationPageViewModelImpl: TaskLocationPageViewModel {
     @Published var isLoading: Bool = false
     @Published var isSheetPresented: Bool = false
     @Published var imageValidationResult: ImageValidationResult?
-    
     @Published var numberOfAttempts = 3
-    private var uploadedImageLink = ""
-    private let imageProcessingManager = ImageProcessingManager()
-    private let taskProcessManager = TaskProcessManager.shared
-    private let firebaseDataManager = FirebaseDataManagerImpl()
 
     init(taskLocation: TaskLocation) {
         self.taskLocation = taskLocation

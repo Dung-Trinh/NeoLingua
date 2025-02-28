@@ -23,7 +23,7 @@ struct CameraView: UIViewControllerRepresentable {
 }
 
 class CameraCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    var picker: CameraView
+    private var picker: CameraView
     
     init(picker: CameraView) {
         self.picker = picker

@@ -54,8 +54,8 @@ struct SnapVocabularyPage<ViewModel>: View where ViewModel: SnapVocabularyPageVi
         .sheet(isPresented: $viewModel.isPresented, content: {
             VStack {
                 if let sharedImageTask = viewModel.sharedImageTask{
-                    NearMeTaskPage(
-                        viewModel: NearMeTaskPageViewModelImpl(sharedImageTask: sharedImageTask), 
+                    SnapVocabularyTaskPage(
+                        viewModel: SnapVocabularyTaskPageViewModelImpl(sharedImageTask: sharedImageTask),
                         isPresented: $viewModel.isPresented
                     )
                 }

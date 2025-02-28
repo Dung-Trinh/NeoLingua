@@ -18,7 +18,6 @@ struct EvaluatedQuestionView: View {
                 }) {
                     Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
                         .foregroundColor(.blue)
-                        
                 }
             }.padding()
             
@@ -50,10 +49,8 @@ struct ListeningTaskEvaluationView: View {
         VStack(alignment: .center, spacing: 10) {
             Text("Solution").font(.title2).bold()
             ForEach(evaluation.evaluatedQuestions, id: \.id) { question in
-                EvaluatedQuestionView(question: question)
-                    .padding(.bottom, 5)
+                EvaluatedQuestionView(question: question).padding(.bottom, 5)
             }
-        }
-        .padding()
+        }.padding()
     }
 }

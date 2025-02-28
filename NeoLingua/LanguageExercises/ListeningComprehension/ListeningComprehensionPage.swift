@@ -2,9 +2,9 @@ import SwiftUI
 import AVFAudio
 import SwiftOpenAI
 
-struct ListeningComprehensionPage: View {
+struct ListeningComprehensionPage<ViewModel>: View where ViewModel: ListeningComprehensionPageViewModel {
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel: ListeningComprehensionPageViewModelImpl
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         ScrollView {
@@ -33,7 +33,6 @@ struct ListeningComprehensionPage: View {
                                             view.disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                                         })
                                     }
-                                    
                                 }.padding(.vertical, 10)
                             }
                         }

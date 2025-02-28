@@ -1,14 +1,10 @@
 import SwiftUI
 import MapKit
 
-struct ScavengerHuntInfoPage: View {
+struct ScavengerHuntInfoPage<ViewModel>: View where ViewModel: ScavengerHuntInfoPageViewModel {
+    @StateObject var viewModel: ViewModel
     @EnvironmentObject private var router: Router
-    let locationManager = LocationManager()
-    @State var userLocation: CLLocationCoordinate2D?
-    @State var radius: Double = 200.0
-    @State var isCustomRadiusActive: Bool = false
-    @State var locationAmount: Int = 1
-
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .center) {
@@ -29,38 +25,44 @@ struct ScavengerHuntInfoPage: View {
                 .multilineTextAlignment(.leading)
                 .padding(.bottom)
                 VStack {
-                    Toggle("Radius(\(String(format: "%.0f",radius))m) anpassen ", isOn: $isCustomRadiusActive)
+                    Toggle("Radius(\(String(format: "%.0f", viewModel.radius))m) anpassen ", isOn: $viewModel.isCustomRadiusActive)
                     
-                    if let userLocation = userLocation, isCustomRadiusActive {
+                    if let userLocation = viewModel.userLocation, viewModel.isCustomRadiusActive {
                         Map {
-                            MapCircle(center: userLocation, radius: CLLocationDistance(radius))
-                                .foregroundStyle(.blue.opacity(0.2))
-                                .mapOverlayLevel(level: .aboveRoads)
-                            MapCircle(center: userLocation, radius: CLLocationDistance(10))
-                                .foregroundStyle(.red.opacity(0.8))
-                                .mapOverlayLevel(level: .aboveRoads)
+                            MapCircle(
+                                center: userLocation,
+                                radius: CLLocationDistance(viewModel.radius)
+                            )
+                            .foregroundStyle(.blue.opacity(0.2))
+                            .mapOverlayLevel(level: .aboveRoads)
+                            MapCircle(
+                                center: userLocation,
+                                radius: CLLocationDistance(10)
+                            )
+                            .foregroundStyle(.red.opacity(0.8))
+                            .mapOverlayLevel(level: .aboveRoads)
                             
                         }.frame(height: 300)
-                        Text("Radius(\(String(format: "%.0f",radius))m)")
-                        Slider(value: $radius, in: 200...2000, step: 100)
+                        Text("Radius(\(String(format: "%.0f", viewModel.radius))m)")
+                        Slider(value: $viewModel.radius, in: 200...2000, step: 100)
                     }
                     HStack {
                         Text("Anzahl der Standorte")
                         Spacer(minLength: 8)
-                        Picker("Anzahl der Locations", selection: $locationAmount) {
+                        Picker("Anzahl der Locations", selection: $viewModel.locationAmount) {
                             ForEach(1...3, id: \.self) { amount in
                                 Text("\(amount)").tag(amount)
                             }
                         }
                     }
-
+                    
                 }.padding(.bottom)
                 
                 PrimaryButton(
                     title: "Schnitzeljagd in der Umgebung generieren",
                     color: .blue,
                     action: {
-                        router.push(.scavengerHunt(.scavengerHunt(.generatedNearMe(Int(radius),locationAmount))))
+                        viewModel.navigateTo(route: .scavengerHunt(.generatedNearMe(Int(viewModel.radius), viewModel.locationAmount)))
                     }
                 )
                 
@@ -68,7 +70,7 @@ struct ScavengerHuntInfoPage: View {
                     title: "Schnitzeljagd in der Umgebung suchen",
                     color: .blue,
                     action: {
-                        router.push(.scavengerHunt(.scavengerHunt(.competitiveMode)))
+                        viewModel.navigateTo(route: .scavengerHunt(.competitiveMode))
                     }
                 )
             }
@@ -76,19 +78,8 @@ struct ScavengerHuntInfoPage: View {
             .navigationTitle("Schnitzeljagd")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear{
-                fetchUserLocation()
+                viewModel.fetchUserLocation()
             }
         }
-    }
-    
-    func fetchUserLocation() {
-        locationManager.requestLocation()
-        locationManager.checkLocationAuthorization()
-        guard let lastKnownLocation = locationManager.lastKnownLocation else {
-            print("lastKnownLocation is nil")
-            return
-        }
-        print(lastKnownLocation)
-        self.userLocation = CLLocationCoordinate2D(latitude: lastKnownLocation.latitude, longitude: lastKnownLocation.longitude)
     }
 }

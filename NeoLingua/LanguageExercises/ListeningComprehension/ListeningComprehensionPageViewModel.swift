@@ -2,10 +2,25 @@ import AVFoundation
 import SwiftOpenAI
 
 protocol ListeningComprehensionPageViewModel: ObservableObject {
+    var audioPlayer: AudioPlayer { get set }
+    var exercise: ListeningExercise? { get }
+    var answers: [String] { get set }
+    var evaluatedQuestion: [EvaluatedQuestion] { get }
+    var isLoading: Bool { get set }
+    var isSheetPresented: Bool { get set }
+    var taskPerformance: TaskPerformancetParameter? { get }
+    var evaluation: ListeningTaskEvaluation? { get }
     
+    func evaluateQuestions() async
+    func fetchListeningComprehensionTask() async
 }
 
 class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewModel {
+    private let prompt: String
+    private let service: OpenAIService = OpenAIServiceProvider.shared
+    private let listeningComprehensionManager = ListeningComprehensionManager()
+    private var taskProcessManager = TaskProcessManager.shared
+    
     @Published var isLoading = false
     @Published var isSheetPresented = false
     @Published var userInput = ""
@@ -15,17 +30,10 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
     @Published var evaluation: ListeningTaskEvaluation?
     @Published var evaluatedQuestion: [EvaluatedQuestion] = []
     @Published var taskPerformance: TaskPerformancetParameter?
-
-    let prompt: String
     var isScavengerHuntMode: Bool = false
-
-    private let service: OpenAIService
-    private let listeningComprehensionManager = ListeningComprehensionManager()
-    private var taskProcessManager = TaskProcessManager.shared
-
+    
     init(prompt: String) {
         self.prompt = prompt
-        service = OpenAIServiceFactory.service(apiKey: ProdENV().OPENAI_KEY)
     }
     
     func fetchListeningComprehensionTask() async {
@@ -39,24 +47,11 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
                     answers.append("")
                 }
             }
-
+            
             await createSpeech()
         } catch {
             print("fetchListeningComprehensionTask error: ", error.localizedDescription)
         }
-    }
-    
-    private func createSpeech() async {
-        var speechErrorMessage = ""
-        do {
-            try await audioPlayer.createSpeech(textForSpeech: exercise?.textForSpeech ?? "no text for speech error")
-            audioPlayer.audioPlayer?.prepareToPlay()
-        } catch let error as APIError {
-            speechErrorMessage = error.displayDescription
-        } catch {
-            speechErrorMessage = "\(error)"
-        }
-        print(speechErrorMessage)
     }
     
     func evaluateQuestions() async {
@@ -86,7 +81,7 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
             let parameter = TaskPerformancetParameter(result: resultPercentage, isDone: true, finalPoints: points)
             taskPerformance = parameter
             isSheetPresented = true
-
+            
             print(points)
             if isScavengerHuntMode {
                 try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .listeningComprehension)
@@ -96,5 +91,18 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
         } catch {
             print("evaluateQuestions error: ", error.localizedDescription)
         }
+    }
+    
+    private func createSpeech() async {
+        var speechErrorMessage = ""
+        do {
+            try await audioPlayer.createSpeech(textForSpeech: exercise?.textForSpeech ?? "no text for speech error")
+            audioPlayer.audioPlayer?.prepareToPlay()
+        } catch let error as APIError {
+            speechErrorMessage = error.displayDescription
+        } catch {
+            speechErrorMessage = "\(error)"
+        }
+        print(speechErrorMessage)
     }
 }

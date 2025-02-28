@@ -3,16 +3,29 @@ import GoogleMaps
 
 protocol ScavengerHuntOverviewPageViewModel: ObservableObject {
     var currentScavengerHunt: ScavengerHunt? { get set }
+    var isLoading: Bool { get }
     var isLeaderboardPresented: Bool { get set }
     var userScores: [UserScore]? { get }
+    var showHelpSheet: Bool { get set }
+    var scavengerHuntType: ScavengerHuntType { get }
+    var competitiveScavengerHunts: [ScavengerHunt] { get }
+    var isPresented: Bool { get set }
     
     func getScavengerHuntLeaderboard() async
     func getFinalScore() -> Double
+    func showFinalResult() async
+    func fetchScavengerHunt() async
+    func updateScavengerHuntState() async
+    func setupscavengerHunt() async
 }
 
 class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel {
-    let scavengerHuntManager = ScavengerHuntManager()
+    private let scavengerHuntManager = ScavengerHuntManager()
+    private let taskProcessManager = TaskProcessManager.shared
+    private let leadboardService = LeaderboardServiceImpl()
+    private let userDataManager = UserDataManagerImpl()
     let scavengerHuntType: ScavengerHuntType
+    
     @Published var isPresented = false
     @Published var isLeaderboardPresented = false
     @Published var currentScavengerHunt: ScavengerHunt?
@@ -20,10 +33,7 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     @Published var isLoading = false
     @Published var userScores: [UserScore]?
     @Published var markers: [GMSMarker] = []
-    
-    private var taskProcessManager = TaskProcessManager.shared
-    var leadboardService = LeaderboardServiceImpl()
-    private var userDataManager = UserDataManagerImpl()
+    @Published var showHelpSheet = false
 
     init(type: ScavengerHuntType) {
         scavengerHuntType = type
@@ -41,36 +51,6 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
         }
     }
     
-    func generateScavengerHuntNearMe(radius: Int, taskLocationAmount: Int) async {
-        print("generateScavengerHuntNearMe: ", radius)
-        do {
-            currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe(radius: radius, taskLocationAmount: taskLocationAmount)
-            try await setupscavengerHunt()
-        } catch {
-            print("fetchScavengerHunt error: ", error.localizedDescription)
-        }
-    }
-    
-    func setupscavengerHunt() async throws {
-        if var currentScavengerHunt = currentScavengerHunt {
-            markers = await createMarkers(scavengerHunt: currentScavengerHunt)
-            
-            let state = ScavengerHuntState(scavengerHunt: currentScavengerHunt)
-            currentScavengerHunt.scavengerHuntState = state
-            try await scavengerHuntManager.saveScavengerHuntState(state: state)
-            taskProcessManager.currentScavengerHunt = currentScavengerHunt
-        }
-    }
-    
-    func fetchCompetitiveScavengerHunts() async {
-        do {
-            competitiveScavengerHunts = try await scavengerHuntManager.fetchCompetitiveScavengerHunts()
-            try await setupscavengerHunt()
-        } catch {
-            print("fetchCompetitiveScavengerHunt error: ", error.localizedDescription)
-        }
-    }
-    
     func updateScavengerHuntState() async {
         do {
             let scavengerHuntId = currentScavengerHunt?.id ?? ""
@@ -78,6 +58,21 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
             currentScavengerHunt?.scavengerHuntState = state
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func setupscavengerHunt() async {
+        if var currentScavengerHunt = currentScavengerHunt {
+            markers = await createMarkers(scavengerHunt: currentScavengerHunt)
+            
+            let state = ScavengerHuntState(scavengerHunt: currentScavengerHunt)
+            currentScavengerHunt.scavengerHuntState = state
+            do {
+                try await scavengerHuntManager.saveScavengerHuntState(state: state)
+                taskProcessManager.currentScavengerHunt = currentScavengerHunt
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -128,6 +123,25 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
             )
             marker.title = $0.name
             return marker
+        }
+    }
+    
+    private func generateScavengerHuntNearMe(radius: Int, taskLocationAmount: Int) async {
+        print("generateScavengerHuntNearMe: ", radius)
+        do {
+            currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe(radius: radius, taskLocationAmount: taskLocationAmount)
+            try await setupscavengerHunt()
+        } catch {
+            print("fetchScavengerHunt error: ", error.localizedDescription)
+        }
+    }
+    
+    private func fetchCompetitiveScavengerHunts() async {
+        do {
+            competitiveScavengerHunts = try await scavengerHuntManager.fetchCompetitiveScavengerHunts()
+            try await setupscavengerHunt()
+        } catch {
+            print("fetchCompetitiveScavengerHunt error: ", error.localizedDescription)
         }
     }
 }

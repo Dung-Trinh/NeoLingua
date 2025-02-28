@@ -1,9 +1,18 @@
-class ResultSheetViewModel {
-    enum AnswerResult {
-        case correct
-        case incorrect
-    }
+enum AnswerResult {
+    case correct
+    case incorrect
+}
+
+protocol ResultSheetViewModel {
+    var result: AnswerResult { get }
+    var text: String { get }
+    var showDetailedFeedbackButton: Bool { get }
+    var action: () -> Void { get }
+    var getDetailedFeedback: () -> Void? { get }
     
+}
+
+class ResultSheetViewModelImpl: ResultSheetViewModel {
     let result: AnswerResult
     let text: String
     let action: () -> Void

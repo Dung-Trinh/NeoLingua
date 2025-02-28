@@ -1,8 +1,8 @@
 import SwiftUI
 import Lottie
 
-struct ScavengerHuntResultPage: View {
-    @StateObject var viewModel: ScavengerHuntOverviewPageViewModelImpl
+struct ScavengerHuntResultPage<ViewModel>: View where ViewModel: ScavengerHuntOverviewPageViewModel {
+    @StateObject var viewModel: ViewModel
     @EnvironmentObject private var router: Router
     
     var body: some View {

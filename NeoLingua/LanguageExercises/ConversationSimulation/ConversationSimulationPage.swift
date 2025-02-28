@@ -1,9 +1,9 @@
 import SwiftUI
 import ActivityIndicatorView
 
-struct ConversationSimulationPage: View {
+struct ConversationSimulationPage<ViewModel>: View where ViewModel: ConversationSimulationPageViewModel {
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel: ConversationSimulationPageViewModelImpl
+    @StateObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
@@ -15,8 +15,6 @@ struct ConversationSimulationPage: View {
                         Text(roleOptionsResponse.contextDescription)
                         Button("Continue") {
                             viewModel.conversationState = .roleSelection
-                            print(viewModel.conversationState)
-                            print(viewModel.roleOptionsResponse)
                         }.buttonStyle(.bordered)
                     }
                 }
@@ -145,7 +143,11 @@ struct ConversationSimulationPage: View {
                 }
                 
                 if let lastConversationResponse = viewModel.lastConversationResponse, lastConversationResponse.correctionOfUserInput != nil,lastConversationResponse.explanation != nil {
-                    ExpandableTextView(userText: viewModel.lastUserMessage, correctedText: lastConversationResponse.correctionOfUserInput ?? "", explanation: lastConversationResponse.explanation ?? "")
+                    ExpandableTextView(
+                        userText: viewModel.lastUserMessage,
+                        correctedText: lastConversationResponse.correctionOfUserInput ?? "",
+                        explanation: lastConversationResponse.explanation ?? ""
+                    )
                 }
             }
             Spacer()
@@ -200,47 +202,5 @@ struct ConversationSimulationPage: View {
         .navigationDestination(for: Route.self) { route in
             router.destination(for: route)
         }
-    }
-}
-
-struct ExpandableTextView: View {
-    @State var isExpanded: Bool = false
-    @State var userText: String
-    @State var correctedText: String
-    @State var explanation: String
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Attention ⚠️").font(.headline)
-                Spacer()
-                Button(action: {
-                    withAnimation {
-                        isExpanded.toggle()
-                    }
-                }) {
-                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-                        .foregroundColor(.blue)
-                    
-                }
-            }.padding()
-            
-            if isExpanded {
-                VStack(alignment: .leading, spacing: 5) {
-                    Text("Your answer: \(userText)")
-                        .foregroundColor(.red)
-                    
-                    Text("Corrected answer: \(correctedText)")
-                        .foregroundColor(.green)
-                    
-                    Text("Explanation: \(explanation)")
-                        .foregroundColor(.indigo)
-                }
-                .padding([.horizontal, .bottom])
-                .cornerRadius(8)
-            }
-        }
-        .background(Color.gray.opacity(0.1))
-        .cornerRadius(8)
     }
 }
