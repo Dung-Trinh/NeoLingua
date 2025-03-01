@@ -122,16 +122,7 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             userInputText = ""
         } else {
             Task {
-                scorePercentage =  Double(points) / Double(tasks.count)
-                finalPoints = scorePercentage * 15
-                let parameter = TaskPerformancetParameter(result: scorePercentage, isDone: true, finalPoints: finalPoints)
-                taskPerformance = parameter
-                if isScavengerHuntMode {
-                    try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .vocabularyTraining)
-                } else {
-                    
-                    try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .vocabularyTraining)
-                }
+                await calcAndSavePoints()
             }
             
             print("keine antworten mehr zurück")
@@ -153,6 +144,18 @@ class VocabularyTrainingPageViewModelImpl: VocabularyTrainingPageViewModel {
             isExplanationSheetPresented = true
         } catch {
             print("getDetailedFeedback error :", error.localizedDescription)
+        }
+    }
+    
+    private func calcAndSavePoints() async {
+        scorePercentage =  Double(points) / Double(tasks.count)
+        finalPoints = scorePercentage * 15
+        let parameter = TaskPerformancetParameter(result: scorePercentage, isDone: true, finalPoints: finalPoints)
+        taskPerformance = parameter
+        if isScavengerHuntMode {
+            try? await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .vocabularyTraining)
+        } else {
+            try? await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .vocabularyTraining)
         }
     }
 }

@@ -2,15 +2,15 @@ import Foundation
 import SwiftUI
 import GoogleMaps
 
-struct ScavengerHuntMap: View {
+struct ScavengerHuntMap<ViewModel>: View where ViewModel: ScavengerHuntMapViewModel {
     @EnvironmentObject private var router: Router
-    @StateObject var viewModel: ScavengerHuntMapViewModelImpl
-    @State var zoomInCenter: Bool = false
-    @State var expandList: Bool = false
-    @State var yDragTranslation: CGFloat = 0
-    @State var showHelpSheet = false
+    @StateObject var viewModel: ViewModel
+    @State private var zoomInCenter: Bool = false
+    @State private var expandList: Bool = false
+    @State private var yDragTranslation: CGFloat = 0
+    @State private var showHelpSheet = false
 
-    let scrollViewHeight: CGFloat = 80
+    private let scrollViewHeight: CGFloat = 80
 
     var body: some View {
         GeometryReader { geometry in

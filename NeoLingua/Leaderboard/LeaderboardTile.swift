@@ -22,7 +22,6 @@ struct LeaderboardTile: View {
             Text(score)
                 .font(.subheadline)
                 .frame(width: 80, alignment: .trailing)
-        }
-        .padding(.vertical, Styleguide.Margin.small)
+        }.padding(.vertical, Styleguide.Margin.small)
     }
 }

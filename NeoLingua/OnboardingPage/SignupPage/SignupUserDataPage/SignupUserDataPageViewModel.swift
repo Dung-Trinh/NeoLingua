@@ -45,8 +45,8 @@ class SignupUserDataPageViewModelImpl: SignupUserDataPageViewModel {
     }
     
     func saveUserData() async {
-//        isLoading = true
-//        defer { isLoading = false }
+        isLoading = true
+        defer { isLoading = false }
         
         var learningGoals = [String]()
         for vm in vms {

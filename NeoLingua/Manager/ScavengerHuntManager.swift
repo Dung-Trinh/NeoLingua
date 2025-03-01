@@ -4,126 +4,13 @@ import Alamofire
 import GoogleMaps
 import Firebase
 
-struct TaskPrompt: Codable {
-    let vocabularyTraining: String?
-    let listeningComprehension: String?
-    let conversationSimulation: String?
-}
-
-struct Location: Codable, Hashable{
-    let latitude: Double
-    let longitude: Double
-}
-
-struct TaskLocation: Codable, Identifiable, Equatable {
-    let id: String = UUID().uuidString
-    let name: String
-    let type: String
-    let location: Location
-    let taskPrompt: TaskPrompt
-    let photoClue: String
-    let photoObject: String
-    var performance: LocationTaskPerformance? = nil
+protocol ScavengerHuntManager {
     
-    init(name: String, type: String, location: Location, taskPrompt: TaskPrompt, photoClue: String, photoObject: String) {
-        self.name = name
-        self.type = type
-        self.location = location
-        self.taskPrompt = taskPrompt
-        self.photoClue = photoClue
-        self.photoObject = photoObject
-    }
-    
-    static func == (lhs: TaskLocation, rhs: TaskLocation) -> Bool {
-        return lhs.id == rhs.id &&
-        lhs.name == rhs.name &&
-        lhs.type == rhs.type &&
-        lhs.location == rhs.location
-    }
 }
 
-struct ScavengerHunt: Codable, Identifiable {
-    let id: String
-    let title: String
-    let introduction: String
-    var taskLocations: [TaskLocation]
-    var scavengerHuntState: ScavengerHuntState? = nil
-    
-    func isHuntComplete() -> Bool {
-        guard let scavengerHuntState = scavengerHuntState else {
-            return false
-        }
-        let isDone = true
-        for performance in scavengerHuntState.locationTaskPerformance {
-            if performance.performance.didFoundObject == nil {
-                return false
-            }
-        }
-        return isDone
-    }
-}
-
-struct ScavengerHuntState: Codable {
-    let scavengerHuntId: String
-    let scavengerHuntTitle: String
-    let userId: String
-    var isCompleted: Bool
-    var locationTaskPerformance: [LocationTaskPerformance]
-    
-    init(scavengerHunt: ScavengerHunt) {
-        self.scavengerHuntId = scavengerHunt.id
-        self.scavengerHuntTitle = scavengerHunt.title
-        userId = UserDefaults.standard.string(forKey: "userId") ?? ""
-        isCompleted = false
-        locationTaskPerformance = []
-        for location in scavengerHunt.taskLocations {
-            var performance = UserTaskPerformance(userId: userId,taskId: "")
-            let performanceParameter = TaskPerformancetParameter()
-            if location.taskPrompt.vocabularyTraining != nil {
-                performance.vocabularyTraining = performanceParameter
-            }
-            
-            if location.taskPrompt.listeningComprehension != nil {
-                performance.listeningComprehension = performanceParameter
-            }
-            
-            if location.taskPrompt.conversationSimulation != nil {
-                performance.conversationSimulation = performanceParameter
-            }
-            
-            var locationpPerformance = LocationTaskPerformance(
-                locationId: location.id,
-                locationName: location.name,
-                performance: performance
-            )
-            locationpPerformance.performance.taskTypes = [.conversationSimulation,.listeningComprehension,.vocabularyTraining]
-            locationTaskPerformance.append(locationpPerformance)
-        }
-    }
-}
-
-struct LocationTaskPerformance: Codable{
-    let locationId: String
-    let locationName: String
-    var performance: UserTaskPerformance
-    
-    
-    func getPointsForLocationPerformance() -> Double {
-        let vocabularyPoints = Double(((performance.vocabularyTraining?.result ?? 0) * 100) * 15 / 100)
-        let listeningComprehensionPoints = Double(((performance.listeningComprehension?.result ?? 0) * 100) * 30 / 100).twoDecimals
-        let conversationSimulationPoints = Double(((performance.conversationSimulation?.result ?? 0) * 100) * 40 / 100).twoDecimals
-        let searchingTheObjectPoints = Double(((performance.searchingTheObject?.result ?? 0) * 100) * 15 / 100).twoDecimals
-        return (vocabularyPoints + listeningComprehensionPoints + conversationSimulationPoints + searchingTheObjectPoints).twoDecimals
-    }
-}
-
-struct ScavengerHuntResponse: Codable{
-    let scavengerHunt: ScavengerHunt
-}
-
-class ScavengerHuntManager: TaskManager {
-    let locationManager = LocationManager()
-    let db = Firestore.firestore()
+class ScavengerHuntManagerImpl: TaskManager, ScavengerHuntManager {
+    private let locationManager = LocationManager()
+    private let db = Firestore.firestore()
     
     func generateScavengerHuntNearMe(radius: Int, taskLocationAmount: Int = 1) async throws -> ScavengerHunt {
         if CommandLine.arguments.contains("--useMockData") {

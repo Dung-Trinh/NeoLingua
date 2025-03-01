@@ -2,17 +2,23 @@ import Foundation
 import GoogleMaps
 
 protocol ScavengerHuntMapViewModel: ObservableObject {
-
+    var scavengerHunt: ScavengerHunt { get set }
+    var markers: [GMSMarker] { get set }
+    var selectedMarker: GMSMarker? { get set }
+    
+    func tappedTaskLocation(location: TaskLocation)
+    func fetchScavengerHuntState() async
 }
 
 class ScavengerHuntMapViewModelImpl: ScavengerHuntMapViewModel {
+    private let scavengerHuntManager = ScavengerHuntManagerImpl()
+
     @Published var selectedMarker: GMSMarker?
     @Published var markers: [GMSMarker] = []
     @Published var scavengerHunt: ScavengerHunt
     @Published var selectedTaskLocation: TaskLocation?
     @Published var router: Router
 
-    let scavengerHuntManager = ScavengerHuntManager()
 
     init(router: Router, scavengerHunt: ScavengerHunt) {
         self.scavengerHunt = scavengerHunt

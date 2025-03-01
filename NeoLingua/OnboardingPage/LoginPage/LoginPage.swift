@@ -27,21 +27,6 @@ struct LoginPage<ViewModel>: View where ViewModel: LoginPageViewModel {
                         }
                     }
                 )
-//                HStack {
-//                    dividerLine
-//                    Text("OR").foregroundColor(.gray)
-//                    dividerLine
-//                }
-//                PrimaryButton(
-//                    title: "Log in with Google",
-//                    color: .gray.opacity(0.8),
-//                    image: Image("googleLogo"),
-//                    action: {
-//                        Task {
-//                            await viewModel.handleSignInButton(viewController: getRootViewController())
-//                        }
-//                    }
-//                )
             }
             
             Spacer()

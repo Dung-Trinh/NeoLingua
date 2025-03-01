@@ -43,7 +43,7 @@ protocol ConversationSimulationPageViewModel: ObservableObject {
 class ConversationSimulationPageViewModelImpl: ConversationSimulationPageViewModel {
     private var cancellables = Set<AnyCancellable>()
     private let service: OpenAIService
-    private let conversationSimulationManager = ConversationSimulationManager()
+    private let conversationSimulationManager = ConversationSimulationManagerImpl()
     private let prompt: String
     private var taskProcessManager = TaskProcessManager.shared
     

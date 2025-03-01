@@ -8,8 +8,14 @@ class TaskManager {
     var threadID = ""
 }
 
-class ListeningComprehensionManager: TaskManager {
-    let assistantID = ProdENV().LISTENING_COMPREHENSION_ASSISTANT_ID
+protocol ListeningComprehensionManager {
+    func fetchListeningComprehensionTask(prompt: String) async throws -> ListeningExercise?
+    func createSpeech(text: String) async throws -> Data
+    func fetchListeningTaskEvaluation(userAnswer: String) async throws -> ListeningTaskEvaluation?
+}
+
+class ListeningComprehensionManagerImpl: TaskManager, ListeningComprehensionManager {
+    private let assistantID = ProdENV().LISTENING_COMPREHENSION_ASSISTANT_ID
 
     func fetchListeningComprehensionTask(prompt: String) async throws -> ListeningExercise? {
         if CommandLine.arguments.contains("--useMockData") {

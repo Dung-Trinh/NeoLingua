@@ -1,7 +1,14 @@
 import SwiftOpenAI
 import Foundation
 
-class ConversationSimulationManager {
+protocol ConversationSimulationManager {
+    func selectedRole(selectedRole: RoleOption) async throws -> IntroResponse?
+    func createConversation(prompt: String) async throws -> RoleOptionsResponse?
+    func sendMessageAndGetResponse(message: String) async throws -> ConversationResponse?
+    func fetchEvaluation() async throws -> ConversationEvaluation?
+}
+
+class ConversationSimulationManagerImpl: ConversationSimulationManager {
     let service = OpenAIServiceProvider.shared
     let assistantID = ProdENV().CONVERSATION_ASSISTANT_ID
     var threadID = ""

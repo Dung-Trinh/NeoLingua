@@ -8,8 +8,8 @@ enum LeaderboardMode: String, CaseIterable, Identifiable {
     
     var text: String {
         switch self {
-            case .globalScore: "Globale Rangliste"
-            case .scavengerHunt: "Scavenger Hunt Rangliste"
+        case .globalScore: "Globale Rangliste"
+        case .scavengerHunt: "Scavenger Hunt Rangliste"
         }
     }
 }
@@ -20,14 +20,13 @@ protocol LeaderboardPageViewModel: ObservableObject {
     var scavengerRankingList: [CompetitiveScavengerHuntRanking] { get }
     var globalUserScores: [UserScore] { get }
     
-    func fetchScavengerHuntScores() async
     func fetchUserScores() async
 }
 
 class LeaderboardPageViewModelImpl: LeaderboardPageViewModel {
     private let leaderboardService: LeaderboardService = LeaderboardServiceImpl()
-    private var userManager = UserDataManagerImpl()
-
+    private let userManager = UserDataManagerImpl()
+    
     @Published var selectedMode: LeaderboardMode = .globalScore
     @Published var globalUserScores: [UserScore] = []
     @Published var scavengerRankingList: [CompetitiveScavengerHuntRanking] = []
@@ -45,7 +44,7 @@ class LeaderboardPageViewModelImpl: LeaderboardPageViewModel {
         }
     }
     
-    func fetchScavengerHuntScores() async {
+    private func fetchScavengerHuntScores() async {
         do {
             let userProfile = try await userManager.fetchUserData()
             scavengerRankingList = try await leaderboardService.createRankingsForScavengerHuntId(

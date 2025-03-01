@@ -23,21 +23,6 @@ struct SignupPage<ViewModel>: View where ViewModel: SignupPageViewModel {
                         }
                     }
                 )
-//                HStack {
-//                    dividerLine
-//                    Text("OR").foregroundColor(.gray)
-//                    dividerLine
-//                }
-//                PrimaryButton(
-//                    title: "Sign up with Google",
-//                    color: .gray.opacity(0.8),
-//                    image: Image("googleLogo"),
-//                    action: {
-//                        Task {
-//                            await viewModel.handleSignupWithGoogle(viewController: getRootViewController())
-//                        }
-//                    }
-//                )
             }.padding(.bottom, Styleguide.Margin.medium)
             Spacer()
             HStack {

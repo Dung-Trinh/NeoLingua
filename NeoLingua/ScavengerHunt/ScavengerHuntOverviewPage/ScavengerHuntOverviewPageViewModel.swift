@@ -20,7 +20,7 @@ protocol ScavengerHuntOverviewPageViewModel: ObservableObject {
 }
 
 class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel {
-    private let scavengerHuntManager = ScavengerHuntManager()
+    private let scavengerHuntManager = ScavengerHuntManagerImpl()
     private let taskProcessManager = TaskProcessManager.shared
     private let leadboardService = LeaderboardServiceImpl()
     private let userDataManager = UserDataManagerImpl()
@@ -94,7 +94,10 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
             try await leadboardService.addPointsForLevel(points: finalScore)
             if scavengerHuntType == .competitiveMode {
                 try await userDataManager.addCompetitiveScavengerHuntId(scavengerHuntId: currentScavengerHunt?.id ?? "")
-                try await leadboardService.addPointToCompetitiveScavengerHunt(scavengerHuntId: currentScavengerHunt?.id ?? "", points: finalScore)
+                try await leadboardService.addPointToCompetitiveScavengerHunt(
+                    scavengerHuntId: currentScavengerHunt?.id ?? "",
+                    points: finalScore
+                )
             }
             
         } catch {
@@ -129,8 +132,11 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     private func generateScavengerHuntNearMe(radius: Int, taskLocationAmount: Int) async {
         print("generateScavengerHuntNearMe: ", radius)
         do {
-            currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe(radius: radius, taskLocationAmount: taskLocationAmount)
-            try await setupscavengerHunt()
+            currentScavengerHunt = try await scavengerHuntManager.generateScavengerHuntNearMe(
+                radius: radius,
+                taskLocationAmount: taskLocationAmount
+            )
+            await setupscavengerHunt()
         } catch {
             print("fetchScavengerHunt error: ", error.localizedDescription)
         }
@@ -139,7 +145,7 @@ class ScavengerHuntOverviewPageViewModelImpl: ScavengerHuntOverviewPageViewModel
     private func fetchCompetitiveScavengerHunts() async {
         do {
             competitiveScavengerHunts = try await scavengerHuntManager.fetchCompetitiveScavengerHunts()
-            try await setupscavengerHunt()
+            await setupscavengerHunt()
         } catch {
             print("fetchCompetitiveScavengerHunt error: ", error.localizedDescription)
         }

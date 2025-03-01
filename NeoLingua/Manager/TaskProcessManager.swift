@@ -7,10 +7,9 @@ class TaskProcessManager {
         return instance
     }()
     
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
     var currentTaskId = ""
     var taskLocationId = ""
-    
     var currentScavengerHunt: ScavengerHunt? = nil
 
     func saveImageBasedTask(task: ImageBasedTask, imageUrl: String) async throws {
@@ -38,22 +37,6 @@ class TaskProcessManager {
         ]
         try await db.collection("imageBasedTaskResult").addDocument(data: data)
     }
-    
-//    func fetchTasksForUser(userId: String) async throws -> [ImageBasedTask] {
-//        let querySnapshot = try await db.collection("ImageBasedTaskResult")
-//            .whereField("userId", isEqualTo: userId)
-//            .getDocuments()
-//        
-//        var tasks: [ImageBasedTask] = []
-//        
-//        for document in querySnapshot.documents {
-//            if let task = try? document.data(as: ImageBasedTask.self) {
-//                tasks.append(task)
-//            }
-//        }
-//        
-//        return tasks
-//    }
     
     func updateVocabularyExercise(exercises: [VocabularyExercise]) async throws {
         print(currentTaskId)
@@ -246,9 +229,17 @@ class TaskProcessManager {
                 if result && numberOfAttempts > 0 {
                     pointsAsPercentage = Double(numberOfAttempts/3).twoDecimals
                     
-                    scavengerHuntState.locationTaskPerformance[index].performance.searchingTheObject =  TaskPerformancetParameter(result: pointsAsPercentage, time: 0, isDone: true)
+                    scavengerHuntState.locationTaskPerformance[index].performance.searchingTheObject =  TaskPerformancetParameter(
+                        result: pointsAsPercentage,
+                        time: 0,
+                        isDone: true
+                    )
                 } else {
-                    scavengerHuntState.locationTaskPerformance[index].performance.searchingTheObject =  TaskPerformancetParameter(result: 0, time: 0, isDone: true)
+                    scavengerHuntState.locationTaskPerformance[index].performance.searchingTheObject =  TaskPerformancetParameter(
+                        result: 0,
+                        time: 0,
+                        isDone: true
+                    )
                 }
             }
         }

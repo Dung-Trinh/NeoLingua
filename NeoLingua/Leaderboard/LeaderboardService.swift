@@ -11,13 +11,13 @@ protocol LeaderboardService {
 
 class LeaderboardServiceImpl: LeaderboardService {
     private let db = Firestore.firestore()
-    private let scavengerHuntManager = ScavengerHuntManager()
-
+    private let scavengerHuntManager = ScavengerHuntManagerImpl()
+    
     func addPointsForLevel(points: Double) async throws {
         let languageLevel = UserDefaults().getLevelOfLanguage().rawValue
         let userId = UserDefaults().getUserId()
         let username = UserDefaults().getUsername()
-
+        
         let levelCollectionRef = db.collection("ranking_\(languageLevel)")
         let userRef = levelCollectionRef.document(userId)
         
@@ -66,7 +66,7 @@ class LeaderboardServiceImpl: LeaderboardService {
         let username = UserDefaults().getUsername()
         
         let userScoreRef = db.collection("competitiveScavengerHuntRankings").document(scavengerHuntId).collection("userScores").document(userId)
-
+        
         try await userScoreRef.setData([
             "userId": userId,
             "username": username,

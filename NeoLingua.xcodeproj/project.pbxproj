@@ -67,6 +67,12 @@
 		B6595B702CD0E1BF004816E8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = B6595B6F2CD0E1BF004816E8 /* Alamofire */; };
 		B6595B722CD0EB38004816E8 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6595B712CD0EB37004816E8 /* CameraView.swift */; };
 		B65D06C42D6FEB3A008C641B /* ScavengerHuntHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65D06C32D6FEB3A008C641B /* ScavengerHuntHelpView.swift */; };
+		B66669AB2D732B380054B993 /* VerifiedVocabular.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66669AA2D732B380054B993 /* VerifiedVocabular.swift */; };
+		B66669AD2D732B8C0054B993 /* ImageValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66669AC2D732B8C0054B993 /* ImageValidationResult.swift */; };
+		B66669B22D737A290054B993 /* ScavengerHuntState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66669B12D737A290054B993 /* ScavengerHuntState.swift */; };
+		B66669B42D737A530054B993 /* TaskLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66669B32D737A530054B993 /* TaskLocation.swift */; };
+		B66669B62D737A920054B993 /* LocationTaskPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66669B52D737A920054B993 /* LocationTaskPerformance.swift */; };
+		B66669B82D737ACD0054B993 /* ScavengerHunt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66669B72D737ACC0054B993 /* ScavengerHunt.swift */; };
 		B66D67822CC059D200F70A56 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = B66D67812CC059D200F70A56 /* ActivityIndicatorView */; };
 		B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */; };
 		B66D67862CC25BDF00F70A56 /* VocabularyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */; };
@@ -228,6 +234,12 @@
 		B6585AD02CCE7D3000B47299 /* ImageProcessingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessingManager.swift; sourceTree = "<group>"; };
 		B6595B712CD0EB37004816E8 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		B65D06C32D6FEB3A008C641B /* ScavengerHuntHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntHelpView.swift; sourceTree = "<group>"; };
+		B66669AA2D732B380054B993 /* VerifiedVocabular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifiedVocabular.swift; sourceTree = "<group>"; };
+		B66669AC2D732B8C0054B993 /* ImageValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageValidationResult.swift; sourceTree = "<group>"; };
+		B66669B12D737A290054B993 /* ScavengerHuntState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHuntState.swift; sourceTree = "<group>"; };
+		B66669B32D737A530054B993 /* TaskLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskLocation.swift; sourceTree = "<group>"; };
+		B66669B52D737A920054B993 /* LocationTaskPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTaskPerformance.swift; sourceTree = "<group>"; };
+		B66669B72D737ACC0054B993 /* ScavengerHunt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScavengerHunt.swift; sourceTree = "<group>"; };
 		B66D67832CC05FCB00F70A56 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
 		B66D67852CC25BDF00F70A56 /* VocabularyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyManager.swift; sourceTree = "<group>"; };
 		B66D67872CC2A13900F70A56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
@@ -402,6 +414,7 @@
 		B60F8AB72CB8194600268D75 /* ScavengerHunt */ = {
 			isa = PBXGroup;
 			children = (
+				B66669B02D7379F70054B993 /* Models */,
 				B6ECAD1A2D71DAEA00AC3B37 /* ScavengerHuntInfoPage */,
 				B65D06C22D6FEB05008C641B /* ScavengerHuntOverviewPage */,
 				B609EED42CC79A1D00A029E8 /* TaskLocation */,
@@ -494,6 +507,8 @@
 				B64FA86D2CE39F840088A911 /* SnapVocabularyTaskPage.swift */,
 				B64FA86F2CE39FE30088A911 /* SnapVocabularyTaskPageViewModel.swift */,
 				B6ECAD1B2D71E52700AC3B37 /* InspectImageResultView.swift */,
+				B66669AA2D732B380054B993 /* VerifiedVocabular.swift */,
+				B66669AC2D732B8C0054B993 /* ImageValidationResult.swift */,
 			);
 			path = SnapVocabularyTaskPage;
 			sourceTree = "<group>";
@@ -515,6 +530,26 @@
 				B6ECAD142D71C1A700AC3B37 /* TaskResultTile.swift */,
 			);
 			path = ScavengerHuntOverviewPage;
+			sourceTree = "<group>";
+		};
+		B66669A92D7323FB0054B993 /* GPX */ = {
+			isa = PBXGroup;
+			children = (
+				B6A562042CC56B070008C05C /* WiesbadenKurpark.gpx */,
+				B60F8AB62CB80F2000268D75 /* WiesbadenLocation.gpx */,
+			);
+			path = GPX;
+			sourceTree = "<group>";
+		};
+		B66669B02D7379F70054B993 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B66669B12D737A290054B993 /* ScavengerHuntState.swift */,
+				B66669B32D737A530054B993 /* TaskLocation.swift */,
+				B66669B52D737A920054B993 /* LocationTaskPerformance.swift */,
+				B66669B72D737ACC0054B993 /* ScavengerHunt.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B68ECA452CDA588500DDD17D /* Leaderboard */ = {
@@ -693,6 +728,7 @@
 		B6FA77DA2CA41A9E00C52F73 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B66669A92D7323FB0054B993 /* GPX */,
 				B651354C2CEC90B500ABBF09 /* Animation */,
 				B6FA77DB2CA41AAD00C52F73 /* Styleguide.swift */,
 				B6FA77DD2CA41AC600C52F73 /* ViewExtension.swift */,
@@ -727,8 +763,6 @@
 		B6FED3AF2C70B3BB00339B7C = {
 			isa = PBXGroup;
 			children = (
-				B6A562042CC56B070008C05C /* WiesbadenKurpark.gpx */,
-				B60F8AB62CB80F2000268D75 /* WiesbadenLocation.gpx */,
 				B6FED3BA2C70B3BB00339B7C /* NeoLingua */,
 				B6FED3B92C70B3BB00339B7C /* Products */,
 				B63874FE2CB06800006B3364 /* Frameworks */,
@@ -907,6 +941,7 @@
 				B6E682812D6CA1A4006C0083 /* TaskTileViewModel.swift in Sources */,
 				B60F8AD12CBD0A6700268D75 /* VocabularyTrainingPageViewModel.swift in Sources */,
 				B6ADD6E02CDE2DCB00572F66 /* UserStatsDashboardPageViewModel.swift in Sources */,
+				B66669AD2D732B8C0054B993 /* ImageValidationResult.swift in Sources */,
 				B6ECAD242D72654B00AC3B37 /* TaskCompleteSheetView.swift in Sources */,
 				B66D67842CC05FCB00F70A56 /* ActivityIndicatorModifier.swift in Sources */,
 				B60F8AC12CBAB82100268D75 /* ResultSheetView.swift in Sources */,
@@ -916,6 +951,7 @@
 				B69D63742D6D209F005C0FE0 /* LeaderboardTile.swift in Sources */,
 				B6E682882D6CB2CE006C0083 /* WeeklyStudyTimeView.swift in Sources */,
 				B60F8ADB2CBDA9F700268D75 /* ConversationSimulationPage.swift in Sources */,
+				B66669B42D737A530054B993 /* TaskLocation.swift in Sources */,
 				B60F8AD62CBD10BC00268D75 /* ListeningComprehensionPageViewModel.swift in Sources */,
 				B60F8AD32CBD108F00268D75 /* ListeningComprehensionPage.swift in Sources */,
 				B6401FEC2CD4EA1F00A6FEA9 /* ConversationEvaluationView.swift in Sources */,
@@ -944,6 +980,7 @@
 				B6A562032CC5396A0008C05C /* ListeningExercise.swift in Sources */,
 				B60F8AB52CB7E85A00268D75 /* PointOfInterest.swift in Sources */,
 				B61ED9DF2CD6152C00E71258 /* ShareImageForTaskPageViewModel.swift in Sources */,
+				B66669B22D737A290054B993 /* ScavengerHuntState.swift in Sources */,
 				B6EB6D2C2CA415240055FD67 /* AccountPageViewModel.swift in Sources */,
 				B6EB6D2A2CA415090055FD67 /* AccountPage.swift in Sources */,
 				B69D637A2D6D266D005C0FE0 /* SnapVocabularyTask.swift in Sources */,
@@ -966,6 +1003,7 @@
 				B6EB6D282CA414CE0055FD67 /* HomePageViewModel.swift in Sources */,
 				B6FA77D72CA41A4500C52F73 /* AppDelegate.swift in Sources */,
 				B6FA77C52CA4192600C52F73 /* OnboardingPageViewModel.swift in Sources */,
+				B66669B82D737ACD0054B993 /* ScavengerHunt.swift in Sources */,
 				B60F8AE32CBFC36E00268D75 /* AudioPlayer.swift in Sources */,
 				B6FA77E22CA41AEA00C52F73 /* EnvProperties.swift in Sources */,
 				B60F8AD82CBD55CF00268D75 /* AudioPlayerView.swift in Sources */,
@@ -981,6 +1019,7 @@
 				B6FA77C92CA4197800C52F73 /* OnboardingContent.swift in Sources */,
 				B609EED62CC79A4300A029E8 /* TaskLocationPage.swift in Sources */,
 				B6595B722CD0EB38004816E8 /* CameraView.swift in Sources */,
+				B66669AB2D732B380054B993 /* VerifiedVocabular.swift in Sources */,
 				B6FA77DC2CA41AAD00C52F73 /* Styleguide.swift in Sources */,
 				B609EEDD2CC7E1CC00A029E8 /* ContextBasedLearningPageViewModel.swift in Sources */,
 				B609EEE72CC83D4400A029E8 /* EducationalGames.swift in Sources */,
@@ -992,6 +1031,7 @@
 				B6DA53A12CE160EE00EE26C3 /* ChallengePageViewModel.swift in Sources */,
 				B60F8ACF2CBD09DB00268D75 /* VocabularyTrainingPage.swift in Sources */,
 				B609EEF02CC8FD0C00A029E8 /* ImageBasedTask.swift in Sources */,
+				B66669B62D737A920054B993 /* LocationTaskPerformance.swift in Sources */,
 				B6585AD12CCE7D3000B47299 /* ImageProcessingManager.swift in Sources */,
 				B60F8ACD2CBC8AF800268D75 /* VocabularyTrainingModels.swift in Sources */,
 				B60F8AB92CB8196300268D75 /* ScavengerHuntOverviewPage.swift in Sources */,

@@ -41,11 +41,9 @@ class ImageProcessingManager {
         var excludedTasks = ""
         if excludedTaskTypes != [] {
             var typesArray: [String] = []
-            
             for taskType in excludedTaskTypes {
                 typesArray.append(taskType.rawValue.description)
             }
-            
             excludedTasks = "exclude \(typesArray.split(separator: ","))"
         }
         
@@ -75,7 +73,7 @@ class ImageProcessingManager {
     }
         
     func verifyImage(imageUrl: String, searchedObject: String) async throws -> ImageValidationResult? {
-        let imageAnalyser = "asst_UGMnDx0fcYMJNFhEhu6PVDrr"
+        let imageAnalyser = ProdENV().IMAGE_ANALYZER_ASSISTANT_ID
         
         if CommandLine.arguments.contains("--useMockData") {            
             return TestData.imageValidationResult
@@ -207,7 +205,10 @@ class ImageProcessingManager {
         let newThread = try await openAiServiceHelper.service.createThread(parameters: CreateThreadParameters())
         currentThreadID = newThread.id
         
-        try await openAiServiceHelper.sendUserMessageToThread(message: "\(prompt) . create task prompts for it with the language level \(languageLevel).\(excludedTasks)", threadID: currentThreadID)
+        try await openAiServiceHelper.sendUserMessageToThread(
+            message: "\(prompt) . create task prompts for it with the language level \(languageLevel).\(excludedTasks)",
+            threadID: currentThreadID
+        )
 
         let jsonStringResponse = try await openAiServiceHelper.getJsonResponseAfterRun(
             assistantID: imageBasedAssistantID,
@@ -276,70 +277,5 @@ class ImageProcessingManager {
                 }
             }
         }
-    }
-}
-
-struct ImageValidationResult: Codable {
-    let isMatching: Bool
-    let reason: String
-    let confidenceScore: Double
-}
-
-struct InspectImageForVocabularyResult: Codable {
-    let foundSearchedVocabulary: Bool
-    let result: EvaluationStatus
-    let correctedText: String?
-    let points: Double?
-}
-
-enum EvaluationStatus: String, Codable {
-    case correct
-    case wrong
-    case almostCorrect
-    
-    var color: Color {
-        switch self {
-            case.correct: .green
-            case .wrong: .red
-            case .almostCorrect: .orange
-        }
-    }
-    
-    var text: String {
-        switch self {
-            case.correct: "correct ✅"
-            case .wrong: "wrong ❌"
-            case .almostCorrect: "almost correct ⚠️"
-        }
-    }
-}
-
-struct InspectImageForVocabularyHint: Codable {
-    let hint: String
-}
-
-struct ValidateVocabularyInImageResult: Codable {
-    let vocabulary: [VerifiedVocabular]
-}
-
-struct VerifiedVocabular: Codable, Identifiable {
-    var id: String
-    let name: String
-    let isInImage: Bool
-    let improvement: String?
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decode(String.self, forKey: .name)
-        self.isInImage = try container.decode(Bool.self, forKey: .isInImage)
-        self.improvement = try container.decodeIfPresent(String.self, forKey: .improvement)
-        self.id = UUID().uuidString
-    }
-    
-    init(name: String, isInImage: Bool, improvement: String?) {
-        self.name = name
-        self.isInImage = isInImage
-        self.improvement = improvement
-        self.id = UUID().uuidString
     }
 }

@@ -18,7 +18,7 @@ protocol ListeningComprehensionPageViewModel: ObservableObject {
 class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewModel {
     private let prompt: String
     private let service: OpenAIService = OpenAIServiceProvider.shared
-    private let listeningComprehensionManager = ListeningComprehensionManager()
+    private let listeningComprehensionManager = ListeningComprehensionManagerImpl()
     private var taskProcessManager = TaskProcessManager.shared
     
     @Published var isLoading = false
@@ -84,9 +84,15 @@ class ListeningComprehensionPageViewModelImpl: ListeningComprehensionPageViewMod
             
             print(points)
             if isScavengerHuntMode {
-                try await taskProcessManager.updateScavengerHuntState(parameter: parameter, taskType: .listeningComprehension)
+                try await taskProcessManager.updateScavengerHuntState(
+                    parameter: parameter,
+                    taskType: .listeningComprehension
+                )
             } else {
-                try await taskProcessManager.updateTaskPerformance(parameter: parameter, taskType: .listeningComprehension)
+                try await taskProcessManager.updateTaskPerformance(
+                    parameter: parameter,
+                    taskType: .listeningComprehension
+                )
             }
         } catch {
             print("evaluateQuestions error: ", error.localizedDescription)

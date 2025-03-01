@@ -52,7 +52,8 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
     private let openAiServiceHelper = OpenAIManager()
     private let imageProcessingManager = ImageProcessingManager()
     private let firebaseDataManager = FirebaseDataManagerImpl()
-    
+    private let locationManager = LocationManager()
+
     @Published var selectedPhotos: [PhotosPickerItem] = []
     @Published var selectedImage: UIImage? = nil
     @Published var imageBasedTask: ImageBasedTask?
@@ -149,9 +150,11 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
     
     func openCamera() {
         showCamera.toggle()
-        let locationManager = LocationManager()
         let position = locationManager.lastKnownLocation
-        imageCoordinates = Location(latitude: position?.latitude ?? 0, longitude: position?.longitude ?? 0)
+        imageCoordinates = Location(
+            latitude: position?.latitude ?? 0,
+            longitude: position?.longitude ?? 0
+        )
     }
     
     func navigateTo(_ route: Route) {
@@ -159,7 +162,6 @@ class ContextBasedLearningPageViewModelImpl: ContextBasedLearningPageViewModel {
     }
     
     private func extractMetaData(from imageData: Data) {
-        
         guard let source = CGImageSourceCreateWithData(imageData as CFData, nil),
               let metadata = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [String: Any] else {
             print("Failed to extract metadata")

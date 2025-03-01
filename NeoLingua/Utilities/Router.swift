@@ -47,7 +47,7 @@ class Router: ObservableObject  {
     var taskLocation: TaskLocation? = nil
     var scavengerHunt: ScavengerHunt? = nil
     
-    let startEmptyStackViews: [Route] = [
+    private let startEmptyStackViews: [Route] = [
         .loginSignup(.login),
         .loginSignup(.signup),
         .onboardingPage
